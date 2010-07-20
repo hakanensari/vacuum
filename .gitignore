@@ -2,3 +2,4 @@
 .rvmrc
 .bundle
 pkg
+spec/support/amazon.yml
