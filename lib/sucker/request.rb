@@ -80,7 +80,7 @@ module Sucker
     end
 
     def digest
-      OpenSSL::Digest::Digest.new("sha256") rescue nil
+      OpenSSL::Digest::Digest.new("sha256")
     end
 
     def host
@@ -98,7 +98,7 @@ module Sucker
       string = ["GET", host, path, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
 
-      query + "&Signature=" + [hmac].pack("m").chomp
+      query + "&Signature=" + URI.encode([hmac].pack("m").chomp)
     end
 
     def timestamp
