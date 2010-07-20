@@ -9,4 +9,6 @@ module Sucker
   end
 end
 
+require 'cgi'
 require 'sucker/request'
+require 'crack/xml'
