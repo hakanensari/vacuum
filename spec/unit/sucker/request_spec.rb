@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Sucker
   describe "Request" do
-    before(:each) do
+    before do
       @sucker = Sucker.new
     end
 
@@ -136,6 +136,16 @@ module Sucker
       it "upserts a timestamp to the parameters" do
         @sucker.send :timestamp
         @sucker.parameters["Timestamp"].should match /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
+      end
+    end
+    
+    context "#to_h" do
+      before do
+        @sucker.curl.stub!(:body_str).and_return(fixture("single_item_lookup"))
+      end
+      
+      it "should return a hash" do
+        @sucker.to_h.should be_an_instance_of Hash
       end
     end
   end

@@ -45,12 +45,21 @@ module Sucker
     def fetch
       curl.url = uri.to_s
       curl.perform
-      puts curl.body_str
     end
 
     # A helper method that sets the AWS Access Key ID
     def key=(key)
       parameters["AWSAccessKeyId"] = key
+    end
+
+    # Body of response for last request
+    def response
+      curl.body_str
+    end
+
+    # Returns a hash of the response
+    def to_h
+      Crack::XML.parse(response)
     end
 
     # Returns the uri to be queried
@@ -74,7 +83,7 @@ module Sucker
       self.query = parameters.
         sort.
         collect do |k, v|
-          "#{URI.encode(k)}=" + URI.encode(v.is_a?(Array) ? v.join(",") : v)
+          "#{CGI.escape(k)}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v)
         end.
         join("&")
     end
@@ -98,7 +107,7 @@ module Sucker
       string = ["GET", host, path, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
 
-      query + "&Signature=" + URI.encode([hmac].pack("m").chomp)
+      query + "&Signature=" + CGI.escape([hmac].pack("m").chomp)
     end
 
     def timestamp
