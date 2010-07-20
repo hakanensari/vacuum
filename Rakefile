@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.require_path = "lib"
   gemspec.email = "code@papercavalier.com"
   gemspec.homepage = "http://github.com/papercavalier/sucker"
-  gemspec.authors = ["Hakan Ensari"]
+  gemspec.authors = ["Hakan Ensari", "Piotr Laszewski"]
   gemspec.add_dependency "curb", "0.7.7.1"
   gemspec.add_development_dependency "rspec", "2.0.0.beta.17"
 end
