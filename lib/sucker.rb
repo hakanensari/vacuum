@@ -1,5 +1,12 @@
 module Sucker
-  API_VERSION = "2009-11-01"
+  VERSION             = '0.1.0'.freeze
+  AMAZON_API_VERSION  = '2009-11-01'.freeze
+
+  class SuckerError < StandardError; end
+
+  def self.new(args={})
+    Sucker::Request.new(args)
+  end
 end
 
-require File.dirname(__FILE__) + "/sucker/request"
+require 'sucker/request'
