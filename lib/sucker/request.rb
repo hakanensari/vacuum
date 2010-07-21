@@ -4,24 +4,21 @@
 module Sucker
   class Request
     HOSTS = {
-      'US'  => 'ecs.amazonaws.com',
-      'UK'  => 'ecs.amazonaws.co.uk',
-      'DE'  => 'ecs.amazonaws.de',
-      'CA'  => 'ecs.amazonaws.ca',
-      'FR'  => 'ecs.amazonaws.fr',
-      'JP'  => 'ecs.amazonaws.jp' }
+      :us  => 'ecs.amazonaws.com',
+      :uk  => 'ecs.amazonaws.co.uk',
+      :de  => 'ecs.amazonaws.de',
+      :ca  => 'ecs.amazonaws.ca',
+      :fr  => 'ecs.amazonaws.fr',
+      :jp  => 'ecs.amazonaws.jp' }
 
-    # The Amazon locale you wish to query
+    # The Amazon locale to query
     attr_accessor :locale
 
-    # Your Amazon secret access key
+    # The Amazon secret access key
     attr_accessor :secret
 
-    # The hash of parameters you wish to query Amazon with
+    # The hash of parameters to query Amazon with
     attr_accessor :parameters
-
-    # The query, sans signature, passed on to Amazon
-    attr_accessor :query
 
     def initialize(args)
       self.parameters = {
@@ -43,6 +40,8 @@ module Sucker
 
     # Hits Amazon with an API request
     def fetch
+      return nil if !valid?
+
       curl.url = uri.to_s
       curl.perform
     end
@@ -52,35 +51,16 @@ module Sucker
       parameters["AWSAccessKeyId"] = key
     end
 
-    # Body of response for last request
-    def response
-      curl.body_str
-    end
-
     # Returns a hash of the response
     def to_h
-      Crack::XML.parse(response)
-    end
-
-    # Returns the uri to be queried
-    def uri
-      return nil if !valid?
-
-      URI::HTTP.build(
-        :host   => host,
-        :path   => path,
-        :query  => signed_query)
-    end
-
-    # Returns true if request has key, secret, and a valid locale set
-    def valid?
-      !!locale && !!HOSTS[locale] && !!secret && !!parameters["AWSAccessKeyId"]
+      Crack::XML.parse(curl.body_str)
     end
 
     private
 
+    # Escapes parameters and concatenates them into a query string
     def build_query
-      self.query = parameters.
+      parameters.
         sort.
         collect do |k, v|
           "#{CGI.escape(k)}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v)
@@ -93,16 +73,18 @@ module Sucker
     end
 
     def host
-      HOSTS[locale]
+      HOSTS[locale.to_sym]
     end
 
     def path
       "/onca/xml"
     end
 
-    def signed_query
-      timestamp
-      build_query
+    # Returns a signed and timestamped query string
+    def sign_query
+      timestamp_parameters
+
+      query = build_query
 
       string = ["GET", host, path, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
@@ -110,8 +92,21 @@ module Sucker
       query + "&Signature=" + CGI.escape([hmac].pack("m").chomp)
     end
 
-    def timestamp
+    def uri
+      URI::HTTP.build(
+        :host   => host,
+        :path   => path,
+        :query  => sign_query)
+    end
+
+    # Timestamps the parameters
+    def timestamp_parameters
       self.parameters["Timestamp"] = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+    end
+
+    # Returns true if request has key, secret, and a valid locale set
+    def valid?
+      !!locale && !!HOSTS[locale.to_sym] && !!secret && !!parameters["AWSAccessKeyId"]
     end
   end
 end

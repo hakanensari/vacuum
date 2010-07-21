@@ -4,23 +4,21 @@ module Sucker
   describe "Item Lookup" do
     before do
       @sucker = Sucker.new(
-        :locale => "US",
+        :locale => "us",
         :key    => amazon["key"],
         :secret => amazon["secret"])
 
-      @sucker.curl { |curl| curl.verbose = true }
+      # @sucker.curl { |curl| curl.verbose = true }
 
       @sucker.parameters.merge!({
           "Operation"   => "ItemLookup",
-          "IdType"      => "ISBN",
-          "SearchIndex" => "Books" })
+          "IdType"      => "ASIN"})
     end
 
-    context "Single item" do
+    context "single item" do
       before do
         @sucker.parameters.merge!({
-          "ItemId" => "9780485113358"
-        })
+          "ItemId"      => "0816614024" })
         @sucker.fetch
         @item = @sucker.to_h["ItemLookupResponse"]["Items"]["Item"]
       end
@@ -30,7 +28,7 @@ module Sucker
       end
 
       it "includes an ASIN string" do
-        @item["ASIN"].should eql "048511335X"
+        @item["ASIN"].should eql "0816614024"
       end
 
       it "includes the item attributes" do
@@ -38,16 +36,17 @@ module Sucker
       end
     end
 
-    context "Multiple items" do
+    context "multiple items" do
       before do
         @sucker.parameters.merge!({
-          "ItemId" => ["9780485113358", "9780143105824"]
-        })
+          "ItemId"      => ["0816614024", "0143105825"] })
         @sucker.fetch
+        @items = @sucker.to_h["ItemLookupResponse"]["Items"]["Item"]
       end
 
-      it "foos" do
-        pp @sucker.to_h
+      it "returns two items" do
+        @items.should be_an_instance_of Array
+        @items.size.should eql 2
       end
     end
   end
