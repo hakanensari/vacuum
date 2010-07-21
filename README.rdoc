@@ -1,8 +1,0 @@
-=  Sucker
-
-Sucker is a thin Ruby wrapper to the Amazon Product Advertising API.
-
-== Example usage
-
-Hold your horses!
-

@@ -1,0 +1,19 @@
+h1. Sucker
+
+Sucker is a thin Ruby wrapper to the Amazon Product Advertising API. It's built on Curb, which is great for querying Amazon on multiple network ports.
+
+    @sucker = Sucker.new(
+      :locale => "us",
+      :key    => "key",
+      :secret => "secret")
+
+    @sucker.curl { |curl| curl.interface = "eth2" }
+
+    @sucker.parameters.merge!({
+        "Operation"   => "ItemLookup",
+        "IdType"      => "ASIN",
+        "ItemId"      => "0816614024" })
+    @sucker.fetch
+    p @sucker.to_h # Now, do something with that hash!
+
+!http://upload.wikimedia.org/wikipedia/commons/a/af/Vacuum_cleaner.jpg!
