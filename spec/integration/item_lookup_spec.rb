@@ -10,15 +10,14 @@ module Sucker
 
       # @sucker.curl { |curl| curl.verbose = true }
 
-      @sucker.parameters.merge!({
-          "Operation"   => "ItemLookup",
-          "IdType"      => "ASIN"})
+      @sucker << {
+        "Operation"   => "ItemLookup",
+        "IdType"      => "ASIN" }
     end
 
     context "single item" do
       before do
-        @sucker.parameters.merge!({
-          "ItemId"      => "0816614024" })
+        @sucker << { "ItemId" => "0816614024" }
         @sucker.fetch
         @item = @sucker.to_h["ItemLookupResponse"]["Items"]["Item"]
       end
@@ -38,8 +37,7 @@ module Sucker
 
     context "multiple items" do
       before do
-        @sucker.parameters.merge!({
-          "ItemId"      => ["0816614024", "0143105825"] })
+        @sucker << { "ItemId" => ["0816614024", "0143105825"] }
         @sucker.fetch
         @items = @sucker.to_h["ItemLookupResponse"]["Items"]["Item"]
       end

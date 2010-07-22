@@ -10,9 +10,9 @@ module Sucker
 
       # @sucker.curl { |curl| curl.verbose = true }
 
-      @sucker.parameters.merge!({
-          "Operation"   => "SellerListingSearch",
-          "SellerId"    => "A31N271NVIORU3"})
+      @sucker << {
+        "Operation"   => "SellerListingSearch",
+        "SellerId"    => "A31N271NVIORU3" }
       @sucker.fetch
       @listings = @sucker.to_h["SellerListingSearchResponse"]["SellerListings"]
     end

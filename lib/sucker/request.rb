@@ -29,6 +29,11 @@ module Sucker
       args.each { |k, v| send("#{k}=", v) }
     end
 
+    # A helper method that merges a hash into the parameters
+    def <<(hash)
+      self.parameters.merge!(hash)
+    end
+
     # A reusable, configurable cURL object
     def curl
       @curl ||= Curl::Easy.new

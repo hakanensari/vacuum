@@ -16,6 +16,13 @@ module Sucker
         end
       end
 
+      context "#<<" do
+        it "merges a hash into the paramters" do
+          @sucker << { "foo" => "bar" }
+          @sucker.parameters["foo"].should eql "bar"
+        end
+      end
+
       context "#curl" do
         it "returns a cURL object" do
           @sucker.curl.should be_an_instance_of Curl::Easy
