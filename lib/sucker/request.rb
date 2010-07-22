@@ -104,7 +104,6 @@ module Sucker
         :query  => sign_query)
     end
 
-    # Timestamps the parameters
     def timestamp_parameters
       self.parameters["Timestamp"] = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
     end
