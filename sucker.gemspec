@@ -43,19 +43,13 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<crack>, ["= 0.1.8"])
       s.add_runtime_dependency(%q<curb>, ["= 0.7.7.1"])
-      s.add_development_dependency(%q<rspec>, ["= 2.0.0.beta.17"])
-      s.add_development_dependency(%q<ruby-debug>, ["= 0.10.3"])
     else
       s.add_dependency(%q<crack>, ["= 0.1.8"])
       s.add_dependency(%q<curb>, ["= 0.7.7.1"])
-      s.add_dependency(%q<rspec>, ["= 2.0.0.beta.17"])
-      s.add_dependency(%q<ruby-debug>, ["= 0.10.3"])
     end
   else
     s.add_dependency(%q<crack>, ["= 0.1.8"])
     s.add_dependency(%q<curb>, ["= 0.7.7.1"])
-    s.add_dependency(%q<rspec>, ["= 2.0.0.beta.17"])
-    s.add_dependency(%q<ruby-debug>, ["= 0.10.3"])
   end
 end
 
