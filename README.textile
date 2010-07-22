@@ -2,4 +2,44 @@ h1. Sucker
 
 Sucker is a thin Ruby wrapper to the Amazon Product Advertising API. It's built on Curb and Crack.
 
+I wrote this because ruby_aaws feels somewhat bloated and we are too lazy to conjure a straightforward way to run the latter through multiple network interfaces.
+
+h2. Examples
+
+Woo a worker.
+
+bq. @worker = Sucker.new(
+  :locale => "us",
+  :key    => "API KEY",
+  :secret => "API SECRET")
+
+Fiddle with curl.
+
+bq. @worker.curl { |c| c.interface = "eth1" }
+
+Set up a request.
+
+bq. @worker << {
+  "Operation" => "ItemLookup",
+  "IdType"    => "ASIN",
+  "ItemId"    => ["0816614024", "0143105825"] }
+
+Hit the Amazon API.
+
+bq. @worker.fetch
+
+Do something with the response.
+
+bq. pp @worker.to_h
+
+Hit the Amazon API again.
+
+bq. @worker << {
+  "ItemId"  => ["0393329259", "0393317757"] }
+@worker.fetch
+
+Check the integration tests in the spec folder for some more examples.
+
+h2. Tangential Endnote
+
 !http://upload.wikimedia.org/wikipedia/en/7/71/Vacuum_cleaner_1910.JPG!
