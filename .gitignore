@@ -3,3 +3,4 @@
 .bundle
 pkg
 spec/support/amazon.yml
+Gemfile.lock
