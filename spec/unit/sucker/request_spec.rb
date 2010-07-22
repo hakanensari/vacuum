@@ -17,7 +17,7 @@ module Sucker
       end
 
       context "#<<" do
-        it "merges a hash into the paramters" do
+        it "merges a hash into the parameters" do
           @sucker << { "foo" => "bar" }
           @sucker.parameters["foo"].should eql "bar"
         end
