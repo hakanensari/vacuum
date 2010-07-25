@@ -3,23 +3,22 @@ require "spec_helper"
 module Sucker
   describe "Item Lookup" do
     before do
-      @sucker = Sucker.new(
+      @worker = Sucker.new(
         :locale => "us",
         :key    => amazon["key"],
         :secret => amazon["secret"])
 
-      # @sucker.curl { |curl| curl.verbose = true }
+      # @worker.curl { |curl| curl.verbose = true }
 
-      @sucker << {
+      @worker << {
         "Operation"   => "ItemLookup",
         "IdType"      => "ASIN" }
     end
 
     context "single item" do
       before do
-        @sucker << { "ItemId" => "0816614024" }
-        @sucker.fetch
-        @item = @sucker.to_h["ItemLookupResponse"]["Items"]["Item"]
+        @worker << { "ItemId" => "0816614024" }
+        @item = @worker.get["ItemLookupResponse"]["Items"]["Item"]
       end
 
       it "returns an item" do
@@ -37,9 +36,8 @@ module Sucker
 
     context "multiple items" do
       before do
-        @sucker << { "ItemId" => ["0816614024", "0143105825"] }
-        @sucker.fetch
-        @items = @sucker.to_h["ItemLookupResponse"]["Items"]["Item"]
+        @worker << { "ItemId" => ["0816614024", "0143105825"] }
+        @items = @worker.get["ItemLookupResponse"]["Items"]["Item"]
       end
 
       it "returns two items" do
