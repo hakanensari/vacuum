@@ -43,22 +43,20 @@ module Sucker
       @curl
     end
 
-    # Hits Amazon with an API request
-    def fetch
-      return nil if !valid?
+    # Makes a request to Amazon and returns the response as a hash
+    # Todo: Handle errors
+    def get
+      raise ArgumentError, 'Set key, secret, and valid locale' if !valid?
 
       curl.url = uri.to_s
       curl.perform
+
+      Crack::XML.parse(curl.body_str)
     end
 
     # A helper method that sets the AWS Access Key ID
     def key=(key)
       parameters["AWSAccessKeyId"] = key
-    end
-
-    # Returns a hash of the response
-    def to_h
-      Crack::XML.parse(curl.body_str)
     end
 
     private
