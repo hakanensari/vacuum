@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sucker}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A thin Ruby wrapper to the Amazon Product Advertising API}
   s.test_files = [
     "spec/integration/item_lookup_spec.rb",
+     "spec/integration/japan_spec.rb",
      "spec/integration/seller_listing_search_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/amazon_credentials.rb",
