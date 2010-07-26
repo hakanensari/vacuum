@@ -78,7 +78,7 @@ module Sucker
     end
 
     # Returns a signed and timestamped query string
-    def sign_query
+    def build_signed_query
       timestamp_parameters
 
       query = build_query
@@ -94,7 +94,7 @@ module Sucker
       URI::HTTP.build(
         :host   => host,
         :path   => path,
-        :query  => sign_query)
+        :query  => build_signed_query)
     end
 
     def timestamp_parameters

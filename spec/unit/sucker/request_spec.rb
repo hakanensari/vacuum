@@ -94,11 +94,11 @@ module Sucker
         end
       end
 
-      context "#sign_query" do
+      context "#build_signed_query" do
         it "returns a signed query string" do
           @worker.secret = "secret"
           @worker.locale = "us"
-          query = @worker.send :sign_query
+          query = @worker.send :build_signed_query
           query.should match /&Signature=.*/
         end
       end
