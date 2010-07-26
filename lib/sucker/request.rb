@@ -10,6 +10,7 @@ module Sucker
       :ca  => 'ecs.amazonaws.ca',
       :fr  => 'ecs.amazonaws.fr',
       :jp  => 'ecs.amazonaws.jp' }
+    PATH = "/onca/xml"
 
     # The Amazon locale to query
     attr_accessor :locale
@@ -73,10 +74,6 @@ module Sucker
       HOSTS[locale.to_sym]
     end
 
-    def path
-      "/onca/xml"
-    end
-
     # Returns a signed and timestamped query string
     def build_signed_query
       timestamp_parameters
@@ -84,7 +81,7 @@ module Sucker
       query = build_query
 
       digest = OpenSSL::Digest::Digest.new("sha256")
-      string = ["GET", host, path, query].join("\n")
+      string = ["GET", host, PATH, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
 
       query + "&Signature=" + CGI.escape([hmac].pack("m").chomp)
@@ -93,7 +90,7 @@ module Sucker
     def uri
       URI::HTTP.build(
         :host   => host,
-        :path   => path,
+        :path   => PATH,
         :query  => build_signed_query)
     end
 

@@ -88,12 +88,6 @@ module Sucker
         end
       end
 
-      context "#path" do
-        it "returns a path" do
-          @worker.send(:path).should eql "/onca/xml"
-        end
-      end
-
       context "#build_signed_query" do
         it "returns a signed query string" do
           @worker.secret = "secret"
