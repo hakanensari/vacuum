@@ -1,4 +1,7 @@
-require "rspec"
+unless defined?(Bundler)
+  require "rubygems"
+  require "bundler/setup"
+end
 
 require File.expand_path("../../lib/sucker", __FILE__)
 

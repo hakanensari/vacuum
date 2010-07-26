@@ -46,8 +46,6 @@ module Sucker
     # Makes a request to Amazon and returns the response as a hash
     # Todo: Handle errors
     def get
-      raise ArgumentError, 'Set key, secret, and valid locale' if !valid?
-
       curl.url = uri.to_s
       curl.perform
 
@@ -104,11 +102,6 @@ module Sucker
 
     def timestamp_parameters
       self.parameters["Timestamp"] = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
-    end
-
-    # Returns true if request has key, secret, and a valid locale set
-    def valid?
-      !!locale && !!HOSTS[locale.to_sym] && !!secret && !!parameters["AWSAccessKeyId"]
     end
   end
 end

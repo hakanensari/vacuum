@@ -6,63 +6,55 @@ module Sucker
       @worker = Sucker.new
     end
 
-    context "public" do
-      context ".new" do
-        it "sets default parameters" do
-          default_parameters = {
-            "Service" => "AWSECommerceService",
-            "Version" => Sucker::AMAZON_API_VERSION }
-          @worker.parameters.should eql default_parameters
-        end
-      end
-
-      context "#<<" do
-        it "merges a hash into the parameters" do
-          @worker << { "foo" => "bar" }
-          @worker.parameters["foo"].should eql "bar"
-        end
-      end
-
-      context "#curl" do
-        it "returns a cURL object" do
-          @worker.curl.should be_an_instance_of Curl::Easy
-        end
-
-        it "configures the cURL object" do
-          @worker.curl.interface.should be_nil
-
-          @worker.curl do |curl|
-            curl.interface = "eth1"
-          end
-
-          @worker.curl.interface.should eql "eth1"
-        end
-      end
-
-      context "#get" do
-        before do
-          @worker.locale = "us"
-          @worker.key = "key"
-          @worker.secret = "secret"
-
-          # Stub curl
-          curl = @worker.curl
-          curl.stub(:get).and_return(nil)
-          curl.stub!(:body_str).and_return(fixture("single_item_lookup.us"))
-        end
-
-        it "returns a hash" do
-          @worker.get.should be_an_instance_of Hash
-        end
-
-        it "raises an ArgumentError if valid? returns false" do
-          @worker.stub!(:valid?).and_return(false)
-          lambda{ @worker.get }.should raise_error ArgumentError
-        end  
+    context ".new" do
+      it "sets default parameters" do
+        default_parameters = {
+          "Service" => "AWSECommerceService",
+          "Version" => Sucker::AMAZON_API_VERSION }
+        @worker.parameters.should eql default_parameters
       end
     end
 
-    context "private" do
+    context "#<<" do
+      it "merges a hash into the parameters" do
+        @worker << { "foo" => "bar" }
+        @worker.parameters["foo"].should eql "bar"
+      end
+    end
+
+    context "#curl" do
+      it "returns a cURL object" do
+        @worker.curl.should be_an_instance_of Curl::Easy
+      end
+
+      it "configures the cURL object" do
+        @worker.curl.interface.should be_nil
+
+        @worker.curl do |curl|
+          curl.interface = "eth1"
+        end
+
+        @worker.curl.interface.should eql "eth1"
+      end
+    end
+
+    context "#get" do
+      before do
+        @worker.locale = "us"
+        @worker.secret = "secret"
+
+        # Stub curl
+        curl = @worker.curl
+        curl.stub(:get).and_return(nil)
+        curl.stub!(:body_str).and_return(fixture("single_item_lookup.us"))
+      end
+
+      it "returns a hash" do
+        @worker.get.should be_an_instance_of Hash
+      end
+    end
+
+    context "private methods" do
       context "#build_query" do
         it "canonicalizes parameters" do
           query = @worker.send(:build_query)
@@ -130,40 +122,6 @@ module Sucker
           @worker.locale = "us"
           @worker.secret = "secret"
           @worker.send(:uri).should be_an_instance_of URI::HTTP
-        end
-      end
-
-      context "valid?" do
-        it "returns true if key, secret, and a valid locale are set" do
-          @worker.key    = "key"
-          @worker.locale = "us"
-          @worker.secret = "secret"
-          @worker.send(:valid?).should be_true
-        end
-
-        it "returns false if key is not set" do
-          @worker.locale = "us"
-          @worker.secret = "secret"
-          @worker.send(:valid?).should be_false
-        end
-
-        it "returns false if secret is not set" do
-          @worker.locale = "us"
-          @worker.key    = "key"
-          @worker.send(:valid?).should be_false
-        end
-
-        it "returns false if locale is not set" do
-          @worker.key    = "key"
-          @worker.secret = "secret"
-          @worker.send(:valid?).should be_false
-        end
-
-        it "returns false if locale is not valid" do
-          @worker.key    = "key"
-          @worker.locale = "US"
-          @worker.secret = "secret"
-          @worker.send(:valid?).should be_false
         end
       end
     end
