@@ -54,6 +54,13 @@ module Sucker
       end
     end
 
+    context "#key=" do
+      it "sets the Amazon AWS access key in the parameters" do
+        @worker.key = "key"
+        @worker.parameters["AWSAccessKeyId"].should eql "key"
+      end
+    end
+
     context "private methods" do
       context "#build_query" do
         it "canonicalizes parameters" do
@@ -77,13 +84,6 @@ module Sucker
       context "#digest" do
         it "returns a digest object" do
           @worker.send(:digest).should be_an_instance_of OpenSSL::Digest::Digest
-        end
-      end
-
-      context "#key=" do
-        it "sets the Amazon AWS access key in the parameters" do
-          @worker.key = "key"
-          @worker.parameters["AWSAccessKeyId"].should eql "key"
         end
       end
 
