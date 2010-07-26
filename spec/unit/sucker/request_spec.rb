@@ -81,12 +81,6 @@ module Sucker
         end
       end
 
-      context "#digest" do
-        it "returns a digest object" do
-          @worker.send(:digest).should be_an_instance_of OpenSSL::Digest::Digest
-        end
-      end
-
       context "#host" do
         it "returns a host" do
           @worker.locale = "us"

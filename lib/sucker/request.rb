@@ -69,10 +69,6 @@ module Sucker
         join("&")
     end
 
-    def digest
-      OpenSSL::Digest::Digest.new("sha256")
-    end
-
     def host
       HOSTS[locale.to_sym]
     end
@@ -87,6 +83,7 @@ module Sucker
 
       query = build_query
 
+      digest = OpenSSL::Digest::Digest.new("sha256")
       string = ["GET", host, path, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
 
