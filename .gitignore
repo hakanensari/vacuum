@@ -3,5 +3,4 @@
 .bundle
 pkg
 spec/support/amazon.yml
-Gemfile.lock
 .rake_tasks~
