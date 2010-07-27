@@ -45,7 +45,6 @@ module Sucker
     end
 
     # Makes a request to Amazon and returns the response as a hash
-    # Todo: Handle errors
     def get
       curl.url = uri.to_s
       curl.perform
