@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Sucker
-  describe "Item Lookup" do
+  describe "Item lookup" do
     before do
       @worker = Sucker.new(
         :locale => "us",

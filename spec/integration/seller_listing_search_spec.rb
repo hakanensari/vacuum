@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Sucker
-  describe "Seller Listing Search" do
+  describe "Seller listing search" do
     before do
       @worker = Sucker.new(
         :locale => "us",

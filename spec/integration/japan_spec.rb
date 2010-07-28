@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Sucker
-  describe "Japan" do
+  describe "A Japanese request" do
     before do
       @worker = Sucker.new(
         :locale => "jp",
