@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    columnize (0.3.1)
     crack (0.1.8)
     curb (0.7.7.1)
     diff-lcs (1.1.2)
@@ -12,7 +11,6 @@ GEM
       git (>= 1.2.5)
       rubyforge (>= 2.0.0)
     json_pure (1.4.3)
-    linecache (0.43)
     rake (0.8.7)
     rspec (2.0.0.beta.19)
       rspec-core (= 2.0.0.beta.19)
@@ -22,11 +20,6 @@ GEM
     rspec-expectations (2.0.0.beta.19)
       diff-lcs (>= 1.1.2)
     rspec-mocks (2.0.0.beta.19)
-    ruby-debug (0.10.3)
-      columnize (>= 0.1)
-      ruby-debug-base (~> 0.10.3.0)
-    ruby-debug-base (0.10.3)
-      linecache (>= 0.3)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
 
@@ -40,4 +33,3 @@ DEPENDENCIES
   jeweler
   rake
   rspec (~> 2.0.0.beta.19)
-  ruby-debug
