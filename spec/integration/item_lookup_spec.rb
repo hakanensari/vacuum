@@ -11,8 +11,11 @@ module Sucker
       # @worker.curl { |curl| curl.verbose = true }
 
       @worker << {
-        "Operation"   => "ItemLookup",
-        "IdType"      => "ASIN" }
+        "Operation"     => "ItemLookup",
+        "IdType"        => "ASIN",
+        "Condition"     => "All",
+        "MerchantId"    => "All",
+        "ResponseGroup" => "OfferFull" }
     end
 
     context "single item" do
