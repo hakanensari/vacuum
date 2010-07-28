@@ -36,4 +36,6 @@ Hit Amazon again.
       "ItemId"  => ["0393329259", "0393317757"] }
     @worker.get
 
-Check the integration specs for some more examples.
+For some more examples, check the integration specs.
+
+The unit specs should run out of the box, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in the spec/support folder. Of course, bundle install first.
