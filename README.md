@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a thin Ruby wrapper to the Amazon Product Advertising API. It runs on Curb and Crack.
+Sucker is a thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on Curb and Crack and supports __everything__ in the API.
 
 ![Sucker](http://upload.wikimedia.org/wikipedia/en/7/71/Vacuum_cleaner_1910.JPG)
 
