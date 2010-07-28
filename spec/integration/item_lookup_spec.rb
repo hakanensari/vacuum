@@ -15,7 +15,7 @@ module Sucker
         "IdType"        => "ASIN",
         "Condition"     => "All",
         "MerchantId"    => "All",
-        "ResponseGroup" => "OfferFull" }
+        "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
     end
 
     context "single item" do
@@ -32,8 +32,9 @@ module Sucker
         @item["ASIN"].should eql "0816614024"
       end
 
-      it "includes the item attributes" do
+      it "includes requested response groups" do
         @item["ItemAttributes"].should be_an_instance_of Hash
+        @item["Offers"].should be_an_instance_of Hash
       end
     end
 
