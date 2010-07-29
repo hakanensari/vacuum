@@ -41,4 +41,4 @@ Hit Amazon again.
 
 For some more examples, check the integration specs.
 
-The unit specs should run out of the box, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in the spec/support folder. Of course, bundle install first.
+The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in the spec/support folder.
