@@ -1,7 +1,6 @@
-# = Sucker
-# Sucker is a thin Ruby wrapper to the {Amazon Product Advertising API}[http://docs.amazonwebservices.com/AWSECommerceService/latest/DG/].
-#
 module Sucker
+
+  # A wrapper around the API request
   class Request
     HOSTS = {
       :us  => 'ecs.amazonaws.com',

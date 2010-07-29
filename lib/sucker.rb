@@ -3,6 +3,8 @@ require "crack/xml"
 require "curb"
 require "sucker/request"
 
+# = Sucker
+# Sucker is a thin Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
   AMAZON_API_VERSION  = "2009-11-01"
 
