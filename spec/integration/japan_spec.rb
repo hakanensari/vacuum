@@ -16,7 +16,7 @@ module Sucker
     context "single item" do
       before do
         @worker << { "ItemId" => "0816614024" }
-        @item = @worker.get["ItemLookupResponse"]["Items"]["Item"]
+        @item = @worker.get.to_h["ItemLookupResponse"]["Items"]["Item"]
       end
 
       it "returns an item" do

@@ -13,7 +13,7 @@ module Sucker
       @worker << {
         "Operation"   => "SellerListingSearch",
         "SellerId"    => "A31N271NVIORU3" }
-      @listings = @worker.get["SellerListingSearchResponse"]["SellerListings"]
+      @listings = @worker.get.to_h["SellerListingSearchResponse"]["SellerListings"]
     end
 
     it "returns page count" do

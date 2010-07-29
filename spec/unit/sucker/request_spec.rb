@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Sucker
-  describe "Request" do
+  describe Request do
     before do
       @worker = Sucker.new
     end
@@ -43,14 +43,13 @@ module Sucker
         @worker.locale = "us"
         @worker.secret = "secret"
 
-        # Stub curl
         curl = @worker.curl
         curl.stub(:get).and_return(nil)
         curl.stub!(:body_str).and_return(fixture("single_item_lookup.us"))
       end
 
-      it "returns a hash" do
-        @worker.get.should be_an_instance_of Hash
+      it "returns a Response object" do
+        @worker.get.should be_an_instance_of Response
       end
     end
 

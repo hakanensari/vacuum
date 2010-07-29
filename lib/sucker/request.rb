@@ -43,12 +43,12 @@ module Sucker
       @curl
     end
 
-    # Makes a request to Amazon and returns the response as a hash
+    # Performs the request and returns a response object
     def get
       curl.url = uri.to_s
       curl.perform
 
-      Crack::XML.parse(curl.body_str)
+      Response.new(curl)
     end
 
     # A helper method that sets the AWS Access Key ID

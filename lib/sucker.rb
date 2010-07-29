@@ -2,6 +2,7 @@ require "cgi"
 require "crack/xml"
 require "curb"
 require "sucker/request"
+require "sucker/response"
 
 # = Sucker
 # Sucker is a thin Ruby wrapper to the Amazon Product Advertising API.

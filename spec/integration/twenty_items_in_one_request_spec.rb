@@ -26,7 +26,7 @@ module Sucker
         "ItemLookup.1.ItemId" => @asins[0, 10],
         "ItemLookup.2.ItemId" => @asins[10, 10] }
 
-      @items = @worker.get["ItemLookupResponse"]["Items"].map { |items| items["Item"] }.flatten!
+      @items = @worker.get.to_h["ItemLookupResponse"]["Items"].map { |items| items["Item"] }.flatten!
     end
 
     it "returns 20 items" do
