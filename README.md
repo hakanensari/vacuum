@@ -10,31 +10,34 @@ Examples
 
 Set up a worker.
 
-    @worker = Sucker.new(
+    worker = Sucker.new(
       :locale => "us",
       :key    => "API KEY",
       :secret => "API SECRET")
 
 Fiddle with curl.
 
-    @worker.curl { |c| c.interface = "eth1" }
+    worker.curl { |c| c.interface = "eth1" }
 
 Set up a request.
 
-    @worker << {
+    worker << {
       "Operation" => "ItemLookup",
       "IdType"    => "ASIN",
       "ItemId"    => ["0816614024", "0143105825"] }
 
 Hit Amazon and do something with the response.
 
-    pp @worker.get["ItemLookupResponse"]["Items"]["Item"]
+    response = worker.get
+    p response.code
+    p response.time
+    p response.to_h["ItemLookupResponse"]["Items"]["Item"]
 
 Hit Amazon again.
 
-    @worker << {
+    worker << {
       "ItemId"  => ["0393329259", "0393317757"] }
-    @worker.get
+    response = worker.get
 
 For some more examples, check the integration specs.
 
