@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sucker}
-  s.version = "0.3.0"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-07-29}
+  s.date = %q{2010-07-30}
   s.description = %q{Sucker is a thin Ruby wrapper to the Amazon Product Advertising API.}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
     "LICENSE",
      "lib/sucker.rb",
      "lib/sucker/request.rb",
-     "lib/sucker/response.rb"
+     "lib/sucker/response.rb",
+     "lib/sucker/stub.rb"
   ]
   s.homepage = %q{http://github.com/papercavalier/sucker}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -34,9 +35,10 @@ Gem::Specification.new do |s|
      "spec/integration/twenty_items_in_one_request_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/amazon_credentials.rb",
-     "spec/support/curb_stubber.rb",
+     "spec/support/sucker.rb",
      "spec/unit/sucker/request_spec.rb",
      "spec/unit/sucker/response_spec.rb",
+     "spec/unit/sucker/stub_spec.rb",
      "spec/unit/sucker_spec.rb"
   ]
 
