@@ -48,12 +48,12 @@ Testing
 
 To fake web requests, I do the following:
 
-In a file such as `spec/support/sucker.rb`, I prep things:
+In a file such as `spec/support/sucker.rb`, I prep:
 
     require "sucker/stub"
     Sucker.fixtures_path = File.dirname(__FILE__) + "/../fixtures"
 
-Then, in the spec, I set up a worker and stub the worker:
+In the spec, I set up a worker and then stub it:
 
     Sucker.stub(@worker)
 
