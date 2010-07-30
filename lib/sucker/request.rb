@@ -64,7 +64,7 @@ module Sucker
         merge(timestamp).
         sort.
         collect do |k, v|
-          "#{CGI.escape(k)}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v)
+          "#{k}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v)
         end.
         join("&")
     end
