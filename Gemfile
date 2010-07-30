@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "bundler", "~>1.0.0.rc.1"
+gem "bundler", "~>1.0.0.rc.2"
 gem "crack"
 gem "curb"
 gem "jeweler"

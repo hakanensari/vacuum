@@ -29,7 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.0.0.rc.1)
+  bundler (~> 1.0.0.rc.2)
   crack
   curb
   jeweler
