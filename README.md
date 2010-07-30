@@ -31,14 +31,35 @@ Hit Amazon and do something with the response.
     response = worker.get
     p response.code
     p response.time
-    p response.to_h["ItemLookupResponse"]["Items"]["Item"]
+    p response.body
+    
+    response.to_h["ItemLookupResponse"]["Items"]["Item"].each { ... }
 
 Hit Amazon again.
 
     worker << {
-      "ItemId"  => ["0393329259", "0393317757"] }
+      "ItemId"  => 10.more.asins }
     response = worker.get
 
-For some more examples, check the integration specs.
+For more examples, check the integration specs.
+
+Testing
+-------
+
+To fake web requests, I do the following:
+
+In a file such as `spec/support/sucker.rb`, I prep things:
+
+    require "sucker/stub"
+    Sucker.fixtures_path = File.dirname(__FILE__) + "/../fixtures"
+
+Then, in the spec, I set up a worker and stub the worker:
+
+    Sucker.stub(@worker)
+
+The first time you run the spec, the worker will perform the actual web request and cache the response. Subsequent requests are then mocked with the cached response.
+
+Specs
+-----
 
 The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in the spec/support folder.
