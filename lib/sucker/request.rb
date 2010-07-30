@@ -58,9 +58,10 @@ module Sucker
 
     private
 
-    # Escapes parameters and concatenates them into a query string
+    # Timestamps parameters and concatenates them into a query string
     def build_query
       parameters.
+        merge(timestamp).
         sort.
         collect do |k, v|
           "#{CGI.escape(k)}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v)
@@ -74,8 +75,6 @@ module Sucker
 
     # Returns a signed and timestamped query string
     def build_signed_query
-      timestamp_parameters
-
       query = build_query
 
       digest = OpenSSL::Digest::Digest.new("sha256")
@@ -92,8 +91,8 @@ module Sucker
         :query  => build_signed_query)
     end
 
-    def timestamp_parameters
-      self.parameters["Timestamp"] = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+    def timestamp
+      { "Timestamp" => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ') }
     end
   end
 end

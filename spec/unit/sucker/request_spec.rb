@@ -14,7 +14,7 @@ module Sucker
         default_parameters = {
           "Service" => "AWSECommerceService",
           "Version" => Sucker::AMAZON_API_VERSION }
-        @worker.parameters.should eql default_parameters
+        @worker.parameters.should include default_parameters
       end
     end
 
@@ -53,8 +53,8 @@ module Sucker
 
     context "#key=" do
       it "sets the Amazon AWS access key in the parameters" do
-        @worker.key = "key"
-        @worker.parameters["AWSAccessKeyId"].should eql "key"
+        @worker.key = "foo"
+        @worker.parameters["AWSAccessKeyId"].should eql "foo"
       end
     end
 
@@ -62,19 +62,19 @@ module Sucker
       context "#build_query" do
         it "canonicalizes parameters" do
           query = @worker.send(:build_query)
-          query.should eql "Service=AWSECommerceService&Version=#{Sucker::AMAZON_API_VERSION}"
+          query.should match /Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
         end
 
         it "sorts parameters" do
-          @worker.parameters["Foo"] = "bar"
+          @worker.parameters["AAA"] = "foo"
           query = @worker.send(:build_query)
-          query.should match /^Foo=bar/
+          query.should match /^AAA=foo/
         end
 
         it "converts a parameter whose value is an array to a string" do
           @worker.parameters["Foo"] = ["bar", "baz"]
           query = @worker.send(:build_query)
-          query.should match /^Foo=bar%2Cbaz/
+          query.should match /Foo=bar%2Cbaz/
         end
       end
 
@@ -92,10 +92,9 @@ module Sucker
         end
       end
 
-      context "#timestamp_parameters" do
-        it "upserts a timestamp to the parameters" do
-          @worker.send :timestamp_parameters
-          @worker.parameters["Timestamp"].should match /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
+      context "#timestamp" do
+        it "returns a timestamp" do
+          @worker.send(:timestamp)["Timestamp"].should match /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
         end
       end
 
