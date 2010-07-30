@@ -41,7 +41,7 @@ Hit Amazon again.
       "ItemId"  => 10.more.asins }
     response = worker.get
 
-For more examples, check the integration specs.
+Check the integration specs for more examples.
 
 Testing
 -------
@@ -62,4 +62,4 @@ The first time you run the spec, the worker will perform the actual web request 
 Specs
 -----
 
-The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in the spec/support folder.
+The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
