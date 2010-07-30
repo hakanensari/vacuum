@@ -16,6 +16,8 @@ module Sucker
         "Condition"     => "All",
         "MerchantId"    => "All",
         "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
+
+      Sucker.stub(@worker)
     end
 
     context "single item" do

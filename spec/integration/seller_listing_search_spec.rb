@@ -13,6 +13,9 @@ module Sucker
       @worker << {
         "Operation"   => "SellerListingSearch",
         "SellerId"    => "A31N271NVIORU3" }
+
+      Sucker.stub(@worker)
+
       @listings = @worker.get.to_h["SellerListingSearchResponse"]["SellerListings"]
     end
 

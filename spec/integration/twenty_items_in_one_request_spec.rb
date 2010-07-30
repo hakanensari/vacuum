@@ -26,6 +26,8 @@ module Sucker
         "ItemLookup.1.ItemId" => @asins[0, 10],
         "ItemLookup.2.ItemId" => @asins[10, 10] }
 
+      Sucker.stub(@worker)
+
       @items = @worker.get.to_h["ItemLookupResponse"]["Items"].map { |items| items["Item"] }.flatten!
     end
 

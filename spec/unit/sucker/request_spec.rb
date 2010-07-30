@@ -3,7 +3,10 @@ require "spec_helper"
 module Sucker
   describe Request do
     before do
-      @worker = Sucker.new
+      @worker = Sucker.new(
+        :locale => "us",
+        :key    => "key",
+        :secret => "secret")
     end
 
     context ".new" do
@@ -40,16 +43,11 @@ module Sucker
 
     context "#get" do
       before do
-        @worker.locale = "us"
-        @worker.secret = "secret"
-
-        curl = @worker.curl
-        curl.stub(:get).and_return(nil)
-        curl.stub!(:body_str).and_return(fixture("single_item_lookup.us"))
+        Sucker.stub(@worker)
       end
 
       it "returns a Response object" do
-        @worker.get.should be_an_instance_of Response
+        @worker.get.class.ancestors.should include Response
       end
     end
 
@@ -82,15 +80,13 @@ module Sucker
 
       context "#host" do
         it "returns a host" do
-          @worker.locale = "us"
-          @worker.send(:host).should eql "ecs.amazonaws.com"
+          @worker.locale = "fr"
+          @worker.send(:host).should eql "ecs.amazonaws.fr"
         end
       end
 
       context "#build_signed_query" do
         it "returns a signed query string" do
-          @worker.secret = "secret"
-          @worker.locale = "us"
           query = @worker.send :build_signed_query
           query.should match /&Signature=.*/
         end
@@ -105,9 +101,6 @@ module Sucker
 
       context "#uri" do
         it "returns the URI with which to query Amazon" do
-          @worker.key    = "key"
-          @worker.locale = "us"
-          @worker.secret = "secret"
           @worker.send(:uri).should be_an_instance_of URI::HTTP
         end
       end

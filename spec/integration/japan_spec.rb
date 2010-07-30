@@ -11,6 +11,8 @@ module Sucker
       @worker << {
         "Operation"   => "ItemLookup",
         "IdType"      => "ASIN" }
+
+      Sucker.stub(@worker)
     end
 
     context "single item" do
