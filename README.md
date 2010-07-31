@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on Curb and Crack and supports __everything__ in the API.
+Sucker is a thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on Curb and XmlSimple and supports __everything__ in the API.
 
 ![Sucker](http://upload.wikimedia.org/wikipedia/en/7/71/Vacuum_cleaner_1910.JPG)
 
@@ -33,7 +33,7 @@ Hit Amazon and do something with the response.
     p response.time
     p response.body
     
-    response.to_h["ItemLookupResponse"]["Items"]["Item"].each { ... }
+    response.to_h["Items"]["Item"].each { ... }
 
 Hit Amazon again.
 
@@ -59,7 +59,9 @@ In the spec, I set up a worker and then stub it:
 
 The first time you run the spec, the worker will perform the actual web request and cache the response. Subsequent requests are then mocked with the cached response.
 
-Specs
+Notes
 -----
 
-The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
+* The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
+
+* Version 0.5.0 replaces Crack with XmlSimple, which results in a slightly different hash output. Fix up your code accordingly.
