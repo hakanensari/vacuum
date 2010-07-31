@@ -11,7 +11,7 @@ module Sucker
     end
 
     def to_h
-      Crack::XML.parse(body)
+      XmlSimple.xml_in(body, { "ForceArray" => false })
     end
   end
 end

@@ -5,7 +5,7 @@ module Sucker
     before do
       curl = Sucker.new.curl
       curl.stub(:get).and_return(nil)
-      curl.stub!(:body_str).and_return("foo")
+      curl.stub!(:body_str).and_return("<foo bar='baz' />")
       curl.stub!(:response_code).and_return(200)
       curl.stub!(:total_time).and_return(1.0)
       @response = Response.new(curl)

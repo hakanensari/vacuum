@@ -16,7 +16,7 @@ module Sucker
 
       Sucker.stub(@worker)
 
-      @listings = @worker.get.to_h["SellerListingSearchResponse"]["SellerListings"]
+      @listings = @worker.get.to_h["SellerListings"]
     end
 
     it "returns page count" do

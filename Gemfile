@@ -1,10 +1,10 @@
 source "http://rubygems.org"
 
 gem "bundler", "~>1.0.0.rc.2"
-gem "crack"
 gem "curb"
 gem "jeweler"
 gem "looksee"
 gem "rake"
 gem "rspec", "~>2.0.0.beta.19"
 gem "wirble"
+gem "xml-simple"

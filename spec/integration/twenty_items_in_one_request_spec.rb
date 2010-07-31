@@ -28,7 +28,7 @@ module Sucker
 
       Sucker.stub(@worker)
 
-      @items = @worker.get.to_h["ItemLookupResponse"]["Items"].map { |items| items["Item"] }.flatten!
+      @items = @worker.get.to_h["Items"].map { |items| items["Item"] }.flatten!
     end
 
     it "returns 20 items" do
