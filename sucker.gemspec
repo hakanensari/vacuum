@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sucker}
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-07-30}
+  s.date = %q{2010-07-31}
   s.description = %q{Sucker is a thin Ruby wrapper to the Amazon Product Advertising API.}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
@@ -47,15 +47,15 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<crack>, ["= 0.1.8"])
-      s.add_runtime_dependency(%q<curb>, ["= 0.7.7.1"])
+      s.add_runtime_dependency(%q<xml-simple>, [">= 1.0.12"])
+      s.add_runtime_dependency(%q<curb>, [">= 0.7.7.1"])
     else
-      s.add_dependency(%q<crack>, ["= 0.1.8"])
-      s.add_dependency(%q<curb>, ["= 0.7.7.1"])
+      s.add_dependency(%q<xml-simple>, [">= 1.0.12"])
+      s.add_dependency(%q<curb>, [">= 0.7.7.1"])
     end
   else
-    s.add_dependency(%q<crack>, ["= 0.1.8"])
-    s.add_dependency(%q<curb>, ["= 0.7.7.1"])
+    s.add_dependency(%q<xml-simple>, [">= 1.0.12"])
+    s.add_dependency(%q<curb>, [">= 0.7.7.1"])
   end
 end
 
