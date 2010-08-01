@@ -13,8 +13,8 @@ end
 
 Jeweler::Tasks.new do |gemspec|
   gemspec.name = "sucker"
-  gemspec.summary = "A thin Ruby wrapper to the Amazon Product Advertising API"
-  gemspec.description = "Sucker is a thin Ruby wrapper to the Amazon Product Advertising API."
+  gemspec.summary = "A paper-thin Ruby wrapper to the Amazon Product Advertising API"
+  gemspec.description = "A paper-thin Ruby wrapper to the Amazon Product Advertising API"
   gemspec.files = Dir.glob("lib/**/*") + %w{LICENSE README.rdoc}
   gemspec.require_path = "lib"
   gemspec.email = "code@papercavalier.com"
