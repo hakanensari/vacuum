@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on Curb and XmlSimple and supports __everything__ in the API.
+Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and supports __everything__ in the API.
 
 ![Sucker](http://upload.wikimedia.org/wikipedia/en/7/71/Vacuum_cleaner_1910.JPG)
 
@@ -24,7 +24,7 @@ Set up a request.
     worker << {
       "Operation" => "ItemLookup",
       "IdType"    => "ASIN",
-      "ItemId"    => ["0816614024", "0143105825"] }
+      "ItemId"    => asin_batch
 
 Hit Amazon and do something with the response.
 
@@ -37,8 +37,7 @@ Hit Amazon and do something with the response.
 
 Hit Amazon again.
 
-    worker << {
-      "ItemId"  => 10.more.asins }
+    worker << { "ItemId"  => another_asin_batch }
     response = worker.get
 
 Check the integration specs for more examples.
@@ -46,18 +45,17 @@ Check the integration specs for more examples.
 Testing
 -------
 
-To fake web requests, I do the following:
-
-In a file such as `spec/support/sucker.rb`, I prep:
+To fake web requests, create `spec/support/sucker.rb` and:
 
     require "sucker/stub"
     Sucker.fixtures_path = File.dirname(__FILE__) + "/../fixtures"
 
-In the spec, I set up a worker and then stub it:
+Then, in your spec, stub the worker:
 
+    @worker = Sucker.new(some_hash)
     Sucker.stub(@worker)
 
-The first time you run the spec, the worker will perform the actual web request and cache the response. Subsequent requests are then mocked with the cached response.
+The first time you run the spec, Sucker will perform the actual web request and cache the response. Then, it will stub subsequent requests with the cached response.
 
 Notes
 -----
