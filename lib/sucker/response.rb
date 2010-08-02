@@ -11,7 +11,29 @@ module Sucker
     end
 
     def to_h
-      XmlSimple.xml_in(body, { "ForceArray" => false })
+      doc = Nokogiri::XML(body)
+      content_to_string(doc.to_hash)
+    end
+
+    alias_method :to_hash, :to_h
+
+    private
+
+    def content_to_string(node)
+      case node
+      when Array 
+        node.map { |el| content_to_string(el) }
+      when Hash
+        if node.keys.size == 1 && node["__content__"]
+          node["__content__"]
+        else
+          node.inject({}) do |el, key_value|
+            el.merge({ key_value.first => content_to_string(key_value.last) })
+          end
+        end
+      else
+        node
+      end
     end
   end
 end
