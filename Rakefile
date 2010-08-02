@@ -20,7 +20,8 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.email = "code@papercavalier.com"
   gemspec.homepage = "http://github.com/papercavalier/sucker"
   gemspec.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  gemspec.add_dependency "xml-simple", ">= 1.0.12"
+  gemspec.add_dependency "activesupport", ">= 3.0.0.rc"
+  gemspec.add_dependency "nokogiri", ">= 1.4.3.1"
   gemspec.add_dependency "curb", ">= 0.7.7.1"
 end
 
