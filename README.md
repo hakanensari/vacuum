@@ -63,8 +63,3 @@ Notes
 * The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
 
 * Version 0.6.0 now has Active Support's Nokogiri-based `to_hash` under the hood. After some meddling, it does what it's supposed to do and is blazing fast. Fix up your code accordingly.
-
-                              user     system      total        real
-    Crack                 0.830000   0.010000   0.840000 (  0.871951)
-    SimpleXml             2.470000   0.050000   2.520000 (  2.560045)
-    AS + Nokogiri         0.440000   0.010000   0.450000 (  0.450201)
