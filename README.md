@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and supports __everything__ in the API.
+Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and Nokogiri and supports __everything__ in the API.
 
 ![Sucker](http://upload.wikimedia.org/wikipedia/en/7/71/Vacuum_cleaner_1910.JPG)
 
@@ -33,7 +33,7 @@ Hit Amazon and do something with the response.
     p response.time
     p response.body
     
-    response.to_h["Items"]["Item"].each { ... }
+    response.to_h["ItemLookupResponse"]["Items"]["Item"].each { ... }
 
 Hit Amazon again.
 
@@ -62,4 +62,9 @@ Notes
 
 * The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
 
-* Version 0.5.0 replaces Crack with XmlSimple, which results in a slightly different hash output. Fix up your code accordingly.
+* Version 0.6.0 now has Active Support's Nokogiri-based `to_hash` under the hood. After some meddling, it does what it's supposed to do and is blazing fast. Fix up your code accordingly.
+
+                              user     system      total        real
+    Crack                 0.830000   0.010000   0.840000 (  0.871951)
+    SimpleXml             2.470000   0.050000   2.520000 (  2.560045)
+    AS + Nokogiri         0.440000   0.010000   0.450000 (  0.450201)
