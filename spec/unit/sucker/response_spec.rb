@@ -5,7 +5,7 @@ module Sucker
     before do
       curl = Sucker.new.curl
       curl.stub(:get).and_return(nil)
-      curl.stub!(:body_str).and_return("<foo bar='baz' />")
+      curl.stub!(:body_str).and_return('<?xml version="1.0" ?><books><book><creator role="author">Gilles Deleuze</author><title>A Thousand Plateaus</title></book><book><creator role="author">Gilles Deleuze</author><title>Anti-Oedipus</title></book></books>')
       curl.stub!(:response_code).and_return(200)
       curl.stub!(:total_time).and_return(1.0)
       @response = Response.new(curl)
@@ -28,6 +28,10 @@ module Sucker
     context "to_h" do
       it "returns a hash" do
         @response.to_h.should be_an_instance_of Hash
+      end
+
+      it "converts a content hash to string" do
+        @response.to_h["books"]["book"].first["title"].should be_an_instance_of String
       end
     end
   end
