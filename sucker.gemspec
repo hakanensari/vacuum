@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A paper-thin Ruby wrapper to the Amazon Product Advertising API}
   s.test_files = [
     "spec/benchmark/to_hash_implementations.rb",
+     "spec/integration/france_spec.rb",
      "spec/integration/item_lookup_spec.rb",
      "spec/integration/japan_spec.rb",
      "spec/integration/seller_listing_search_spec.rb",
