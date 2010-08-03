@@ -1,7 +1,9 @@
+# encoding: utf-8
+
 require "spec_helper"
 
 module Sucker
-  describe "Item lookup" do
+  describe "Un lookup français" do
     before do
       @worker = Sucker.new(
         :locale => "fr",
@@ -44,7 +46,6 @@ module Sucker
       before do
         @worker << { "ItemId" => ["0816614024", "0143105825"] }
         @items = @worker.get.to_h["ItemLookupResponse"]["Items"]["Item"]
-        pp @items
       end
 
       it "returns two items" do
