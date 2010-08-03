@@ -14,7 +14,7 @@ module Sucker
     def stub(request)
       request.instance_eval do
         self.class.send :define_method, :fixture do
-          filename = Digest::MD5.hexdigest(uri.to_s)
+          filename = Digest::MD5.hexdigest(host + parameters.values.flatten.join)
           "#{Sucker.fixtures_path}/#{filename}.xml"
         end
 

@@ -47,9 +47,15 @@ module Sucker
           end
 
           it "generates unique fixtures across venues" do
-            us_fixture = @worker.fixture
+            first_fixture = @worker.fixture
             @worker.locale = "fr"
-            @worker.fixture.should_not eql us_fixture
+            @worker.fixture.should_not eql first_fixture
+          end
+
+          it "reuses fixture regardless of signature" do
+            first_fixture = @worker.fixture
+            @worker.stub!(:timestamp).and_return({ "Timestamp" => "foo" })
+            @worker.fixture.should eql first_fixture
           end
         end
       end
