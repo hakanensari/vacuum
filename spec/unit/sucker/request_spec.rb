@@ -76,6 +76,18 @@ module Sucker
           query = @worker.send(:build_query)
           query.should match /Foo=bar%2Cbaz/
         end
+
+        it "handles integer parameter values" do
+          @worker.parameters["Foo"] = 1
+          query = @worker.send(:build_query)
+          query.should match /Foo=1/
+        end
+
+        it "handles floating-point parameter values" do
+          @worker.parameters["Foo"] = 1.0
+          query = @worker.send(:build_query)
+          query.should match /Foo=1/
+        end
       end
 
       context "#host" do
