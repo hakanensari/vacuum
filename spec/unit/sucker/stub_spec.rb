@@ -45,6 +45,12 @@ module Sucker
           it "generates a path for the fixture" do
             @worker.fixture.should match /.*\/[0-9a-f]{32}\.xml$/
           end
+
+          it "generates unique fixtures across venues" do
+            us_fixture = @worker.fixture
+            @worker.locale = "fr"
+            @worker.fixture.should_not eql us_fixture
+          end
         end
       end
     end
