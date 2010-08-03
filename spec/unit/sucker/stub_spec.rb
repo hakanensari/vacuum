@@ -42,31 +42,8 @@ module Sucker
 
       context "defines:" do
         context "#fixture" do
-          it "ignores odd numbers" do
-            @worker << { "Foo" => "13579" }
-            @worker.fixture.should_not match /[^\/]*[13579][^\/]*xml$/
-          end
-
-          it "does not ignore odd numbers" do
-            @worker << { "Foo" => "24680" }
-            (0..8).step(2) do |odd_no|
-              @worker.fixture.should match Regexp.new(odd_no.to_s)
-            end
-          end
-
-          it "ignores vowels" do
-            @worker << { "Foo" => "aeiou" }
-            @worker.fixture.should_not match /[^\/]*[aeiou][^\/]*xml$/
-          end
-
-          it "does not ignore consonants" do
-            @worker << { "Foo" =>  ("a".."z").to_a.join }
-            @worker.fixture.should include(("a".."z").to_a.join.gsub(/[aeiou]/, ""))
-          end
-
-          it "ignores non-alphanumeric characters" do
-            @worker << { "Foo" => ";+*&!~" }
-            @worker.fixture.should_not match /[;+*&!~]/
+          it "generates a path for the fixture" do
+            @worker.fixture.should match /.*\/[0-9a-f]{32}\.xml$/
           end
         end
       end

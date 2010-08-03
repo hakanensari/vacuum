@@ -1,6 +1,7 @@
+require "active_support/xml_mini/nokogiri"
 require "cgi"
 require "curb"
-require "active_support/xml_mini/nokogiri"
+require 'digest/md5'
 require "sucker/request"
 require "sucker/response"
 

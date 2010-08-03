@@ -14,12 +14,7 @@ module Sucker
     def stub(request)
       request.instance_eval do
         self.class.send :define_method, :fixture do
-          filename = parameters.
-            values.
-            flatten.
-            join.
-            gsub(/(?:[aeiou13579]|[^\w])+/i, '')[0, 251]
-
+          filename = Digest::MD5.hexdigest(parameters.values.flatten.join)
           "#{Sucker.fixtures_path}/#{filename}.xml"
         end
 
