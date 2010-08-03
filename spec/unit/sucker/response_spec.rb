@@ -33,6 +33,10 @@ module Sucker
       it "converts a content hash to string" do
         @response.to_h["books"]["book"].first["title"].should be_an_instance_of String
       end
+
+      it "is aliased as to_hash" do
+        @response.to_hash.should eql @response.to_h
+      end
     end
   end
 end
