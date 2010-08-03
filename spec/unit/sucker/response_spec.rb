@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "spec_helper"
 
 module Sucker
@@ -36,6 +37,21 @@ module Sucker
 
       it "is aliased as to_hash" do
         @response.to_hash.should eql @response.to_h
+      end
+
+      it "renders French" do
+        @response.body = "<Title>L'archéologie du savoir</Title>"
+        @response.to_h["Title"].should eql "L'archéologie du savoir"
+      end
+
+      it "renders German" do
+        @response.body = "<Title>Kafka: Für eine kleine Literatur</Title>"
+        @response.to_h["Title"].should eql "Kafka: Für eine kleine Literatur"
+      end
+
+      it "renders Japanese" do
+        @response.body = "<Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title>"
+        @response.to_h["Title"].should eql "スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則"
       end
     end
   end

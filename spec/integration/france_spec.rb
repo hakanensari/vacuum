@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require "spec_helper"
 
 module Sucker
@@ -24,16 +22,12 @@ module Sucker
 
     context "single item" do
       before do
-        @worker << { "ItemId" => "0816614024" }
+        @worker << { "ItemId" => "2070119874" }
         @item = @worker.get.to_h["ItemLookupResponse"]["Items"]["Item"]
       end
 
       it "returns an item" do
         @item.should be_an_instance_of Hash
-      end
-
-      it "includes an ASIN string" do
-        @item["ASIN"].should eql "0816614024"
       end
 
       it "includes requested response groups" do

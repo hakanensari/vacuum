@@ -18,12 +18,13 @@ module Sucker
 
     context "single item" do
       before do
-        @worker << { "ItemId" => "0816614024" }
+        @worker << { "ItemId" => "482224816X" }
         @item = @worker.get.to_h["ItemLookupResponse"]["Items"]["Item"]
       end
 
       it "returns an array of items" do
         @item.should be_an_instance_of Hash
+        pp @item
       end
     end
   end
