@@ -9,8 +9,9 @@ module Sucker
         :secret => amazon["secret"])
 
       @worker << {
-        "Operation"   => "ItemLookup",
-        "IdType"      => "ASIN" }
+        "Operation"     => "ItemLookup",
+        "IdType"        => "ASIN",
+        "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
 
       Sucker.stub(@worker)
     end
