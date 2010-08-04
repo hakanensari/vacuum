@@ -1,13 +1,10 @@
 source "http://rubygems.org"
 
-if RUBY_VERSION.include?("1.8")
-  gem "jeweler"
-end
-
 gem "activesupport", "~>3.0.0.rc"
 gem "bundler", "~>1.0.0.rc.3"
 gem "curb"
 gem "crack"
+gem "jeweler"
 gem "looksee"
 gem "nokogiri"
 gem "rake"
