@@ -1,0 +1,2 @@
+rvm --create use ree@sucker
+rvm wrapper ree@sucker textmate
