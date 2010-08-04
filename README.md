@@ -63,3 +63,5 @@ Notes
 * The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
 
 * Version 0.6.0 now has Active Support's Nokogiri-based `to_hash` under the hood. After some meddling, it does what it's supposed to do and is blazing fast. Fix up your code accordingly.
+
+* To test specs against all rubies on your system , run `./rake_rubies.sh spec:progress`.
