@@ -24,7 +24,6 @@ module Sucker
 
       it "returns an array of items" do
         @item.should be_an_instance_of Hash
-        pp @item
       end
     end
   end
