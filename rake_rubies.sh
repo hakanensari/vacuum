@@ -9,4 +9,4 @@ for RUBY in $RUBIES; do
 done
 
 sh ./.rvmrc > /dev/null
-bundle install > /dev/null
+
