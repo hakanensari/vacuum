@@ -47,7 +47,7 @@ module Sucker
       end
 
       it "returns a Response object" do
-        @worker.get.class.ancestors.should include Response
+        @worker.get.class.ancestors.should include Sucker::Response
       end
     end
 

@@ -9,7 +9,7 @@ module Sucker
       curl.stub!(:body_str).and_return('<?xml version="1.0" ?><books><book><creator role="author">Gilles Deleuze</author><title>A Thousand Plateaus</title></book><book><creator role="author">Gilles Deleuze</author><title>Anti-Oedipus</title></book></books>')
       curl.stub!(:response_code).and_return(200)
       curl.stub!(:total_time).and_return(1.0)
-      @response = Response.new(curl)
+      @response = Sucker::Response.new(curl)
     end
 
     context ".new" do
