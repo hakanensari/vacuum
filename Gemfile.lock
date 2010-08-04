@@ -33,7 +33,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.0.0.rc)
-  bundler (~> 1.0.0.rc.2)
+  bundler (~> 1.0.0.rc.3)
   crack
   curb
   jeweler
