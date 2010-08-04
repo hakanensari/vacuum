@@ -1,7 +1,6 @@
 require "rubygems"
 require "bundler/setup"
 
-require "jeweler"
 require "rspec/core/rake_task"
 
 task :default => :spec
