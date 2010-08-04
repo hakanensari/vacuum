@@ -3,10 +3,18 @@ require "bundler/setup"
 
 require "rspec/core/rake_task"
 
-task :default => :spec
+desc "Benchmark to_hash implementations"
+task "benchmark:to_hash" do
+  require "spec/benchmark/to_hash_implementations"
+end
 
 desc "Run all specs in spec directory"
 RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = "spec/**/*_spec.rb"
+end
+
+RSpec::Core::RakeTask.new('spec:progress') do |spec|
+  spec.spec_opts = %w(--format progress)
   spec.pattern = "spec/**/*_spec.rb"
 end
 
@@ -30,3 +38,4 @@ if RUBY_VERSION.include?("1.8")
   Jeweler::GemcutterTasks.new
 end
 
+task :default => :spec
