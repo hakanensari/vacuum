@@ -15,7 +15,7 @@ module Sucker
       request.instance_eval do
         self.class.send :define_method, :fixture do
           values = parameters.
-            reject{ |k, v| %w{AWSAccessKeyId Service}.include? k }.
+            reject { |k, v| %w{AWSAccessKeyId Service}.include? k }.
             values.
             flatten.
             join
