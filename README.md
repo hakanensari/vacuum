@@ -42,26 +42,23 @@ Hit Amazon again.
 
 Check the integration specs for more examples.
 
-Testing
--------
+Stubbing
+--------
 
-To fake web requests, create `spec/support/sucker.rb` and:
+To stub web requests in your specs, create `spec/support/sucker_helper.rb`:
 
     require "sucker/stub"
+    
     Sucker.fixtures_path = File.dirname(__FILE__) + "/../fixtures"
 
-Then, in your spec, stub the worker:
+In your spec, you can now stub the worker:
 
     @worker = Sucker.new(some_hash)
     Sucker.stub(@worker)
 
-The first time you run the spec, Sucker will perform the actual web request and cache the response. Then, it will stub subsequent requests with the cached response.
+The first time you run the spec, Sucker will perform the actual request. Following requests will use a cached response.
 
-Notes
------
+Compatibility
+-------------
 
-* The unit specs should run out of the box after you `bundle install`, but the integration specs require you to create [an amazon.yml file with valid credentials](http://github.com/papercavalier/sucker/blob/master/spec/support/amazon.yml.example) in `spec/support`.
-
-* Version 0.6.0 now has Active Support's Nokogiri-based `to_hash` under the hood. After some meddling, it does what it's supposed to do and is blazing fast. Fix up your code accordingly.
-
-* To test specs against all rubies on your system , run `./rake_rubies.sh spec:progress`.
+Specs pass against Ruby 1.8.7, 1.9.1, 1.9.2, and REE.
