@@ -39,6 +39,11 @@ module Sucker
         @response.to_hash.should eql @response.to_h
       end
 
+      it "caches hash" do
+        hash = @response.to_h
+        @response.instance_variable_get(:@hash).should eql hash
+      end
+
       it "renders French" do
         @response.body = "<Title>L'archéologie du savoir</Title>"
         @response.to_h["Title"].should eql "L'archéologie du savoir"
