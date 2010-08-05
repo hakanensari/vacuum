@@ -14,7 +14,13 @@ module Sucker
     def stub(request)
       request.instance_eval do
         self.class.send :define_method, :fixture do
-          filename = Digest::MD5.hexdigest(host + parameters.values.flatten.join)
+          values = parameters.
+            reject{ |k, v| %w{AWSAccessKeyId Service}.
+            include? k }.
+            values.
+            flatten.
+            join
+          filename = Digest::MD5.hexdigest(host + values)
           "#{Sucker.fixtures_path}/#{filename}.xml"
         end
 
