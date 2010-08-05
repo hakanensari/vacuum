@@ -1,11 +1,18 @@
 require "rubygems"
 require "bundler/setup"
+require "fileutils"
 require "jeweler"
 require "rspec/core/rake_task"
 
 desc "Benchmark to_hash implementations"
 task "benchmark:to_hash" do
   require File.dirname(__FILE__) + "/spec/benchmark/to_hash_implementations"
+end
+
+desc "Clear fixtures"
+task "spec:clear" do
+  path = File.dirname(__FILE__) + "/spec/fixtures/*.xml"
+  FileUtils.rm(Dir.glob(path))
 end
 
 desc "Run all specs in spec directory"
