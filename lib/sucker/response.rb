@@ -10,6 +10,8 @@ module Sucker
       self.time = curl.total_time
     end
 
+    # Hashifies XML document. Optionally, parses for a node name and returns a collection
+    # of the hashified nodes.
     def to_h(path=nil)
       if path
         xml.xpath("//xmlns:#{path}").map { |node| content_to_string(node.to_hash[path]) }
