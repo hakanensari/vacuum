@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sucker}
-  s.version = "0.6.6"
+  s.version = "0.7.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-08-05}
+  s.date = %q{2010-08-06}
   s.description = %q{A paper-thin Ruby wrapper to the Amazon Product Advertising API}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A paper-thin Ruby wrapper to the Amazon Product Advertising API}
   s.test_files = [
     "spec/benchmark/to_hash_implementations.rb",
+     "spec/integration/errors_spec.rb",
      "spec/integration/france_spec.rb",
      "spec/integration/item_lookup_spec.rb",
      "spec/integration/japan_spec.rb",
