@@ -10,7 +10,7 @@ task "benchmark:to_hash" do
 end
 
 desc "Clear fixtures"
-task "spec:clear" do
+task "spec:refix" do
   path = File.dirname(__FILE__) + "/spec/fixtures/*.xml"
   FileUtils.rm(Dir.glob(path))
 end
