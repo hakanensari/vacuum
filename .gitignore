@@ -3,5 +3,4 @@
 .bundle
 pkg
 spec/support/amazon.yml
-spec/fixtures/*xml
 .rake_tasks~

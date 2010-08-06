@@ -39,25 +39,29 @@ module Sucker
 
         @worker.get.body.should eql "bar"
       end
+    end
 
-      context "defines:" do
-        context "#fixture" do
-          it "generates a path for the fixture" do
-            @worker.fixture.should match /.*\/[0-9a-f]{32}\.xml$/
-          end
+    context "#fixture" do
+      it "generates a path for the fixture" do
+        @worker.fixture.should match /.*\/[0-9a-f]{32}\.xml$/
+      end
 
-          it "generates unique fixtures across venues" do
-            first_fixture = @worker.fixture
-            @worker.locale = "fr"
-            @worker.fixture.should_not eql first_fixture
-          end
+      it "generates unique fixtures across venues" do
+        first_fixture = @worker.fixture
+        @worker.locale = "fr"
+        @worker.fixture.should_not eql first_fixture
+      end
 
-          it "reuses fixture regardless of signature" do
-            first_fixture = @worker.fixture
-            @worker.stub!(:timestamp).and_return({ "Timestamp" => "foo" })
-            @worker.fixture.should eql first_fixture
-          end
-        end
+      it "generates the same fixture regardless of signature" do
+        first_fixture = @worker.fixture
+        @worker.stub!(:timestamp).and_return({ "Timestamp" => "foo" })
+        @worker.fixture.should eql first_fixture
+      end
+
+      it "generates the same fixture regardless of key" do
+        first_fixture = @worker.fixture
+        @worker.key = "foo"
+        @worker.fixture.should eql first_fixture
       end
     end
   end

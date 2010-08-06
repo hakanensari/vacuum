@@ -11,8 +11,7 @@ module Sucker
     end
 
     def to_h
-      doc = Nokogiri::XML(body)
-      content_to_string(doc.to_hash)
+      @hash ||= content_to_string(Nokogiri::XML(body).to_hash)
     end
 
     alias :to_hash :to_h
