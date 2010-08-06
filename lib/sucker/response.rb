@@ -2,7 +2,7 @@ module Sucker
 
   # A wrapper around the cURL response
   class Response
-    attr_accessor :body, :code, :time
+    attr_accessor :body, :code, :time, :xml
 
     def initialize(curl)
       self.body = curl.body_str
@@ -10,11 +10,19 @@ module Sucker
       self.time = curl.total_time
     end
 
-    def to_h
-      @hash ||= content_to_string(Nokogiri::XML(body).to_hash)
+    def to_h(path=nil)
+      if path
+        xml.xpath("//xmlns:#{path}").map { |node| content_to_string(node.to_hash[path]) }
+      else
+        content_to_string(xml.to_hash)
+      end
     end
 
     alias :to_hash :to_h
+
+    def xml
+      @xml ||= Nokogiri::XML(body)
+    end
 
     private
 

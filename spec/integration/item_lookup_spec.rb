@@ -23,7 +23,8 @@ module Sucker
     context "single item" do
       before do
         @worker << { "ItemId" => "0816614024" }
-        @item = @worker.get.to_h["ItemLookupResponse"]["Items"]["Item"]
+        @response = @worker.get
+        @item = @response.to_h("Item").first
       end
 
       it "returns an item" do
@@ -38,12 +39,16 @@ module Sucker
         @item["ItemAttributes"].should be_an_instance_of Hash
         @item["Offers"].should be_an_instance_of Hash
       end
+
+      it "returns no errors" do
+        @response.to_h("Error").should be_empty
+      end
     end
 
     context "multiple items" do
       before do
         @worker << { "ItemId" => ["0816614024", "0143105825"] }
-        @items = @worker.get.to_h["ItemLookupResponse"]["Items"]["Item"]
+        @items = @worker.get.to_h("Item")
       end
 
       it "returns two items" do

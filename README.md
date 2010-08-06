@@ -22,18 +22,23 @@ Fiddle with curl.
 Set up a request.
 
     worker << {
-      "Operation" => "ItemLookup",
-      "IdType"    => "ASIN",
-      "ItemId"    => asin_batch
+      "Operation"     => "ItemLookup",
+      "IdType"        => "ASIN",
+      "ItemId"        => asin_batch,
+      "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
 
 Hit Amazon and do something with the response.
 
     response = worker.get
-    p response.code
-    p response.time
-    p response.body
+
+    # Response internals
+    p response.code,
+      response.time,
+      response.body,
+      response.xml
     
-    response.to_h["ItemLookupResponse"]["Items"]["Item"].each { ... }
+    response.to_h("Item").each { |book| do_something }
+    response.to_h("Error").each { |error| p error["Message"] }
 
 Hit Amazon again.
 

@@ -4,12 +4,17 @@ require "spec_helper"
 module Sucker
   describe Response do
     before do
-      curl = Sucker.new.curl
-      curl.stub(:get).and_return(nil)
-      curl.stub!(:body_str).and_return('<?xml version="1.0" ?><books><book><creator role="author">Gilles Deleuze</author><title>A Thousand Plateaus</title></book><book><creator role="author">Gilles Deleuze</author><title>Anti-Oedipus</title></book></books>')
-      curl.stub!(:response_code).and_return(200)
-      curl.stub!(:total_time).and_return(1.0)
-      @response = Sucker::Response.new(curl)
+      @asins = ["0816614024", "0143105825"]
+      worker = Sucker.new(
+        :locale => "us",
+        :key    => amazon["key"],
+        :secret => amazon["secret"])
+      worker << {
+          "Operation"     => "ItemLookup",
+          "IdType"        => "ASIN",
+          "ResponseGroup" => ["ItemAttributes", "OfferFull"],
+          "ItemId"        => @asins }
+      @response = worker.get
     end
 
     context ".new" do
@@ -26,22 +31,29 @@ module Sucker
       end
     end
 
-    context "to_h" do
+    context "#xml" do
+      it "returns a Nokogiri document" do
+        @response.xml.should be_an_instance_of Nokogiri::XML::Document
+      end
+    end
+
+    context "#to_h" do
       it "returns a hash" do
         @response.to_h.should be_an_instance_of Hash
       end
 
       it "converts a content hash to string" do
-        @response.to_h["books"]["book"].first["title"].should be_an_instance_of String
+        @response.body = "<book><title>A Thousand Plateaus</title></book>"
+        @response.to_h["book"]["title"].should be_an_instance_of String
       end
 
       it "is aliased as to_hash" do
         @response.to_hash.should eql @response.to_h
       end
 
-      it "caches hash" do
-        hash = @response.to_h
-        @response.instance_variable_get(:@hash).should eql hash
+      it "parses document for a node name and returns a collection of hashified nodes" do
+        response = @response.to_hash("ItemAttributes")
+        response.map { |book| book["ISBN"] }.should eql @asins
       end
 
       it "renders French" do
