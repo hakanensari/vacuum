@@ -19,7 +19,7 @@ module Sucker
     context "single item" do
       before do
         @worker << { "ItemId" => "482224816X" }
-        @item = @worker.get.to_h("Item").first
+        @item = @worker.get.to_hash("Item").first
       end
 
       it "returns an array of items" do

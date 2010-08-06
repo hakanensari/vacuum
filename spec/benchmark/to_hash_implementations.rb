@@ -34,5 +34,5 @@ response = worker.get
 Benchmark.bm(100) do |x|
   x.report("Crack") { Crack::XML.parse(response.body) }
   x.report("SimpleXml") { XmlSimple.xml_in(response.body, { "ForceArray" => false }) }
-  x.report("AS + Nokogiri")  { response.to_h }
+  x.report("AS + Nokogiri")  { response.to_hash }
 end

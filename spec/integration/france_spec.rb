@@ -24,7 +24,7 @@ module Sucker
     context "single item" do
       before do
         @worker << { "ItemId" => "2070119874" }
-        @item = @worker.get.to_h("Item").first
+        @item = @worker.get.to_hash("Item").first
       end
 
       it "returns an item" do
@@ -40,7 +40,7 @@ module Sucker
     context "multiple items" do
       before do
         @worker << { "ItemId" => ["0816614024", "0143105825"] }
-        @items = @worker.get.to_h("Item")
+        @items = @worker.get.to_hash("Item")
       end
 
       it "returns two items" do
