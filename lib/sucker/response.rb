@@ -10,17 +10,16 @@ module Sucker
       self.time = curl.total_time
     end
 
-    # Hashifies XML document. Optionally, parses for a node name and returns a collection
-    # of the hashified nodes.
-    def to_h(path=nil)
+    # Hashifies the entire XML document or a collection of nodes.
+    def to_hash(path=nil)
       if path
-        xml.xpath("//xmlns:#{path}").map { |node| content_to_string(node.to_hash[path]) }
+        xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
       else
-        content_to_string(xml.to_hash)
+        strip_content(xml.to_hash)
       end
     end
 
-    alias :to_hash :to_h
+    alias :to_h :to_hash
 
     def xml
       @xml ||= Nokogiri::XML(body)
@@ -28,16 +27,16 @@ module Sucker
 
     private
 
-    def content_to_string(node)
+    def strip_content(node)
       case node
       when Array 
-        node.map { |el| content_to_string(el) }
+        node.map { |el| strip_content(el) }
       when Hash
         if node.keys.size == 1 && node["__content__"]
           node["__content__"]
         else
-          node.inject({}) do |el, key_value|
-            el.merge({ key_value.first => content_to_string(key_value.last) })
+          node.inject({}) do |coll, key_value|
+            coll.merge({ key_value.first => strip_content(key_value.last) })
           end
         end
       else
