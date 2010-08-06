@@ -27,18 +27,23 @@ Set up a request.
       "ItemId"        => asin_batch,
       "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
 
-Hit Amazon and do something with the response.
+Hit Amazon.
 
     response = worker.get
 
-    # Response internals
+View the internals of the response object.
+
     p response.code,
       response.time,
       response.body,
       response.xml
     
-    response.to_h("Item").each { |book| do_something }
-    response.to_h("Error").each { |error| p error["Message"] }
+Hashify the entire document or a particular node.
+
+    pp response.to_hash
+    
+    response.to_hash("Item").each { |book| do_something }
+    response.to_hash("Error").each { |error| do_something }
 
 Hit Amazon again.
 
