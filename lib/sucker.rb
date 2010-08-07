@@ -8,7 +8,7 @@ require "sucker/response"
 # = Sucker
 # Sucker is a paper-thin Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
-  $KCODE = "u" if RUBY_VERSION.include?("1.8")
+  $KCODE = "u" if RUBY_VERSION < "1.9"
 
   AMAZON_API_VERSION = "2010-06-01"
 
