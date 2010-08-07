@@ -1,6 +1,6 @@
 module Sucker
 
-  # A wrapper around the cURL response
+  # A Nokogiri-driven wrapper around the cURL response
   class Response
     attr_accessor :body, :code, :time, :xml
 
@@ -10,18 +10,19 @@ module Sucker
       self.time = curl.total_time
     end
 
-    # Returns a collection of hashified nodes
+    # Queries an xpath and returns a collection of hashified matches 
     def node(path)
       xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
     end
 
-    # Hashifies the entire XML document
+    # Hashifies XML document or node
     def to_hash
       strip_content(xml.to_hash)
     end
 
     alias :to_h :to_hash
 
+    # The XML document
     def xml
       @xml ||= Nokogiri::XML(body)
     end
