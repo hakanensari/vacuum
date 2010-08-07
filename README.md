@@ -11,9 +11,10 @@ Examples
 Set up a worker.
 
     worker = Sucker.new(
-      :locale => "us",
-      :key    => "API KEY",
-      :secret => "API SECRET")
+      :locale         => "us",
+      :key            => "API KEY",
+      :secret         => "API SECRET",
+      :associate_tag  => "ASSOCIATE TAG")
 
 Fiddle with curl.
 
@@ -38,12 +39,12 @@ View the internals of the response object.
       response.body,
       response.xml
     
-Hashify the entire document or a particular node.
+Work on the entire document or a particular node.
 
     pp response.to_hash
     
-    response.to_hash("Item").each { |book| do_something }
-    response.to_hash("Error").each { |error| do_something }
+    response.node("Item").each { |book| do_something }
+    response.node("Error").each { |error| do_something }
 
 Hit Amazon again.
 
