@@ -25,6 +25,13 @@ module Sucker
       end
     end
 
+    context "#associate_tag=" do
+      it "sets the associate tag in the parameters" do
+        @worker.associate_tag = "foo"
+        @worker.parameters["AssociateTag"].should eql "foo"
+      end
+    end
+
     context "#curl" do
       it "returns a cURL object" do
         @worker.curl.should be_an_instance_of Curl::Easy

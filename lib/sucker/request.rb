@@ -34,6 +34,11 @@ module Sucker
       self.parameters.merge!(hash)
     end
 
+    # A helper method that sets the associate tag
+    def associate_tag=(token)
+      parameters["AssociateTag"] = token
+    end
+
     # A reusable, configurable cURL object
     def curl
       @curl ||= Curl::Easy.new
@@ -52,8 +57,8 @@ module Sucker
     end
 
     # A helper method that sets the AWS Access Key ID
-    def key=(key)
-      parameters["AWSAccessKeyId"] = key
+    def key=(token)
+      parameters["AWSAccessKeyId"] = token
     end
 
     private
