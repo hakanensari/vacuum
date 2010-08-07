@@ -28,7 +28,7 @@ module Sucker
 
       Sucker.stub(@worker)
 
-      @items = @worker.get.to_hash("Item")
+      @items = @worker.get.node("Item")
     end
 
     it "returns 20 items" do

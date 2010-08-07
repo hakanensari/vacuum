@@ -24,7 +24,7 @@ module Sucker
       before do
         @worker << { "ItemId" => "0816614024" }
         @response = @worker.get
-        @item = @response.to_hash("Item").first
+        @item = @response.node("Item").first
       end
 
       it "returns an item" do
@@ -41,14 +41,15 @@ module Sucker
       end
 
       it "returns no errors" do
-        @response.to_hash("Error").should be_empty
+        @response.node("Error").should be_empty
+        @response.node("Error").should be_an_instance_of Array
       end
     end
 
     context "multiple items" do
       before do
         @worker << { "ItemId" => ["0816614024", "0143105825"] }
-        @items = @worker.get.to_hash("Item")
+        @items = @worker.get.node("Item")
       end
 
       it "returns two items" do

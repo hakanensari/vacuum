@@ -10,13 +10,14 @@ module Sucker
       self.time = curl.total_time
     end
 
-    # Hashifies the entire XML document or a collection of nodes.
-    def to_hash(path=nil)
-      if path
-        xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
-      else
-        strip_content(xml.to_hash)
-      end
+    # Returns a collection of hashified nodes
+    def node(path)
+      xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
+    end
+
+    # Hashifies the entire XML document
+    def to_hash
+      strip_content(xml.to_hash)
     end
 
     alias :to_h :to_hash

@@ -16,7 +16,7 @@ module Sucker
 
       Sucker.stub(@worker)
 
-      @listings = @worker.get.to_hash("SellerListings").first
+      @listings = @worker.get.node("SellerListings").first
     end
 
     it "returns page count" do

@@ -37,6 +37,18 @@ module Sucker
       end
     end
 
+    context "#node" do
+      it "returns a collection of hashified nodes" do
+        response = @response.node("ItemAttributes")
+        response.map { |book| book["ISBN"] }.should eql @asins
+      end
+
+      it "returns an empty array if there are no matches" do
+        response = @response.node("Foo")
+        response.should eql []
+      end
+    end
+
     context "#to_hash" do
       it "returns a hash" do
         @response.to_hash.should be_an_instance_of Hash
@@ -50,11 +62,6 @@ module Sucker
       it "is aliased as to_h" do
         @response.should respond_to :to_h
         @response.to_h.should eql @response.to_hash
-      end
-
-      it "parses document for a node name and returns a collection of hashified nodes" do
-        response = @response.to_hash("ItemAttributes")
-        response.map { |book| book["ISBN"] }.should eql @asins
       end
 
       it "renders French" do

@@ -17,7 +17,7 @@ module Sucker
 
       @worker << { "ItemId" => "0816614024" }
       @response = @worker.get
-      @item = @response.to_hash("Item").first
+      @item = @response.node("Item").first
     end
 
     it "has an ASIN" do

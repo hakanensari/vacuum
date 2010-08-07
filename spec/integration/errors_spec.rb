@@ -25,13 +25,13 @@ module Sucker
     end
 
     it "returns two errors" do
-      errors = @response.to_hash("Error")
+      errors = @response.node("Error")
       errors.size.should eql 2
       errors.first["Message"].should include "not a valid value"
     end
 
     it "returns one item" do
-      items = @response.to_hash("ItemAttributes")
+      items = @response.node("ItemAttributes")
       items.size.should eql 1
     end
   end
