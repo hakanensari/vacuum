@@ -16,8 +16,7 @@ module Sucker
       Sucker.stub(@worker)
 
       @worker << { "ItemId" => "0816614024" }
-      @response = @worker.get
-      @item = @response.node("Item").first
+      @item = @worker.get.node("Item").first
     end
 
     it "has an ASIN" do
