@@ -41,15 +41,14 @@ View the internals of the response object.
     
 Work on the entire document or a particular node.
 
-    pp response.to_hash
-    
-    response.node("Item").each { |book| do_something }
-    response.node("Error").each { |error| do_something }
+    pp response.to_hash,
+       response.node("Item"),
+       response.node("Error")
 
 Hit Amazon again.
 
     worker << { "ItemId"  => another_asin_batch }
-    response = worker.get
+    pp worker.get.node("Item")
 
 Check the integration specs for more examples.
 
