@@ -13,8 +13,7 @@ Set up a worker.
     worker = Sucker.new(
       :locale         => "us",
       :key            => "API KEY",
-      :secret         => "API SECRET",
-      :associate_tag  => "ASSOCIATE TAG")
+      :secret         => "API SECRET")
 
 Fiddle with curl.
 
