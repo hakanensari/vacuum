@@ -44,7 +44,7 @@ Work on the entire document or a particular node.
        response.node("Item"),
        response.node("Error")
 
-Hit Amazon again.
+Have the worker fetch another batch of items in a more DSL-y way.
 
     worker << { "ItemId"  => another_asin_batch }
     pp worker.get.node("Item")
