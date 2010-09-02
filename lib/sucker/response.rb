@@ -10,12 +10,12 @@ module Sucker
       self.time = curl.total_time
     end
 
-    # Queries an xpath and returns a collection of hashified matches 
+    # Queries an xpath and returns result as an array of hashes
     def node(path)
       xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
     end
 
-    # Hashifies XML document or node
+    # Parses the response into a simple hash
     def to_hash
       strip_content(xml.to_hash)
     end

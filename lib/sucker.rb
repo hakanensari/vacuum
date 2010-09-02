@@ -10,7 +10,7 @@ require "sucker/response"
 module Sucker
   AMAZON_API_VERSION = "2010-06-01".freeze
 
-
+  # Instantiates a new Sucker::Request
   def self.new(args={})
     Sucker::Request.new(args)
   end
