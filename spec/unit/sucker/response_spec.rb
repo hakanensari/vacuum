@@ -59,11 +59,6 @@ module Sucker
         @response.to_hash["book"]["title"].should be_an_instance_of String
       end
 
-      it "is aliased as to_h" do
-        @response.should respond_to :to_h
-        @response.to_h.should eql @response.to_hash
-      end
-
       it "renders French" do
         @response.body = "<Title>L'archéologie du savoir</Title>"
         @response.to_hash["Title"].should eql "L'archéologie du savoir"

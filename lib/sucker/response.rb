@@ -20,8 +20,6 @@ module Sucker
       strip_content(xml.to_hash)
     end
 
-    alias :to_h :to_hash
-
     # The XML document
     def xml
       @xml ||= Nokogiri::XML(body)
