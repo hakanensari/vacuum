@@ -1,2 +1,2 @@
-rvm --create use ree@sucker
-rvm wrapper ree@sucker textmate
+rvm --create use 1.9.2@sucker
+rvm wrapper 1.9.2@sucker textmate
