@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sucker}
-  s.version = "0.7.1"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-08-07}
+  s.date = %q{2010-09-02}
   s.description = %q{A paper-thin Ruby wrapper to the Amazon Product Advertising API}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
@@ -29,8 +29,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A paper-thin Ruby wrapper to the Amazon Product Advertising API}
   s.test_files = [
-    "spec/benchmark/to_hash_implementations.rb",
-     "spec/integration/errors_spec.rb",
+    "spec/integration/errors_spec.rb",
      "spec/integration/france_spec.rb",
      "spec/integration/images_spec.rb",
      "spec/integration/item_lookup_spec.rb",
@@ -51,18 +50,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0.rc"])
-      s.add_runtime_dependency(%q<nokogiri>, [">= 1.4.3.1"])
-      s.add_runtime_dependency(%q<curb>, [">= 0.7.7.1"])
+      s.add_runtime_dependency(%q<activesupport>, ["~> 3.0.0"])
+      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.0"])
+      s.add_runtime_dependency(%q<curb>, ["~> 0.7.0"])
     else
-      s.add_dependency(%q<activesupport>, [">= 3.0.0.rc"])
-      s.add_dependency(%q<nokogiri>, [">= 1.4.3.1"])
-      s.add_dependency(%q<curb>, [">= 0.7.7.1"])
+      s.add_dependency(%q<activesupport>, ["~> 3.0.0"])
+      s.add_dependency(%q<nokogiri>, ["~> 1.4.0"])
+      s.add_dependency(%q<curb>, ["~> 0.7.0"])
     end
   else
-    s.add_dependency(%q<activesupport>, [">= 3.0.0.rc"])
-    s.add_dependency(%q<nokogiri>, [">= 1.4.3.1"])
-    s.add_dependency(%q<curb>, [">= 0.7.7.1"])
+    s.add_dependency(%q<activesupport>, ["~> 3.0.0"])
+    s.add_dependency(%q<nokogiri>, ["~> 1.4.0"])
+    s.add_dependency(%q<curb>, ["~> 0.7.0"])
   end
 end
 
