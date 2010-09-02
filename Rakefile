@@ -4,11 +4,6 @@ require "fileutils"
 require "jeweler"
 require "rspec/core/rake_task"
 
-desc "Benchmark to_hash implementations"
-task "benchmark:to_hash" do
-  require File.dirname(__FILE__) + "/spec/benchmark/to_hash_implementations"
-end
-
 desc "Clear fixtures"
 task "spec:refix" do
   path = File.dirname(__FILE__) + "/spec/fixtures/*.xml"
@@ -17,11 +12,6 @@ end
 
 desc "Run all specs in spec directory"
 RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = "spec/**/*_spec.rb"
-end
-
-RSpec::Core::RakeTask.new('spec:progress') do |spec|
-  spec.spec_opts = %w(--format progress)
   spec.pattern = "spec/**/*_spec.rb"
 end
 
