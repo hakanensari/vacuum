@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and Nokogiri and supports __everything__ in the API.
+Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and Nokogiri and supports __everything in the API__.
 
 ![Sucker](http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg/540px-FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg)
 
@@ -15,12 +15,15 @@ Set up a worker.
       :key            => "API KEY",
       :secret         => "API SECRET")
 
-Fiddle with curl.
+Optionally, fiddle with curl. Say you want to use multiple network interfaces to query Amazon:
 
     worker.curl { |c| c.interface = "eth1" }
 
 Set up a request.
 
+    asin_batch = %w{
+      0816614024 0143105825 0485113600 0816616779 0942299078
+      0816614008 144006654X 0486400360 0486417670 087220474X }
     worker << {
       "Operation"     => "ItemLookup",
       "IdType"        => "ASIN",
@@ -38,18 +41,23 @@ View the internals of the response object.
       response.body,
       response.xml
     
-Work on the entire document or a particular node.
+Here is the response parsed into a simple hash:
 
-    pp response.to_hash,
+    pp response.to_hash
+
+But you will probably be more interested particular nodes:
+
        response.node("Item"),
        response.node("Error")
 
-Have the worker fetch another batch of items in a more DSL-y way.
+Fetch another ASIN in a more DSL-y way.
 
-    worker << { "ItemId"  => another_asin_batch }
+    worker << { "ItemId"  => "0486454398" }
     pp worker.get.node("Item")
 
 Check the integration specs for more examples.
+
+Ultimately, you should rely on the API documentation to build your queries.
 
 Stubbing
 --------
@@ -67,7 +75,18 @@ In your spec, you can now stub the worker:
 
 The first time you run the spec, Sucker will perform the actual request. Following requests will use a cached response.
 
+Active Support
+--------------
+Sucker::Response relies on the Nokogiri implementation of the XmlMini parser in Active Support (~> 3.0).
+
+In a non-Rails environment, that merely means requiring twenty-something lines of code from Active Support.
+
 Compatibility
 -------------
 
-Specs pass against Ruby 1.8.7, 1.9.1, 1.9.2, and REE.
+Specs pass against Ruby 1.8.7, 1.9.2, and REE.
+
+Todo
+----
+
+* See if I can do away with the stub class and use something like VCR in its place.
