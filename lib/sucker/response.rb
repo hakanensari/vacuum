@@ -2,7 +2,7 @@ module Sucker
 
   # A Nokogiri-driven wrapper around the cURL response
   class Response
-    attr_accessor :body, :code, :time, :xml
+    attr_accessor :body, :code, :time
 
     def initialize(curl)
       self.body = curl.body_str
