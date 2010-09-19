@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and Nokogiri and supports __everything in the API__.
+Sucker is a paper-thin Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and Nokogiri and supports __the entire API__.
 
 ![Sucker](http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg/540px-FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg)
 
@@ -15,7 +15,7 @@ Set up a worker.
       :key            => "API KEY",
       :secret         => "API SECRET")
 
-Optionally, fiddle with curl. Say you want to use multiple network interfaces to query Amazon:
+Optionally, fiddle with curl. Say you want to query Amazon through a different network interface:
 
     worker.curl { |c| c.interface = "eth1" }
 
@@ -75,18 +75,12 @@ In your spec, you can now stub the worker:
 
 The first time you run the spec, Sucker will perform the actual request. Following requests will use a cached response.
 
-Active Support
---------------
-Sucker::Response relies on the Nokogiri implementation of the XmlMini parser in Active Support (~> 3.0).
-
-In a non-Rails environment, that merely means requiring twenty-something lines of code from Active Support.
-
 Compatibility
 -------------
 
-Specs pass against Ruby 1.8.7, 1.9.2, and REE.
+Specs pass against Ruby 1.8.7 and 1.9.2.
 
 Todo
 ----
 
-* See if I can do away with the stub class and use something like VCR in its place.
+* Rip out the Stub class and use VCR instead once Webmock gets a cURL adapter.
