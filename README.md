@@ -45,7 +45,7 @@ Here is the response parsed into a simple hash:
 
     pp response.to_hash
 
-But you will probably be more interested particular nodes:
+You will probably be more interested in particular nodes:
 
        response.node("Item"),
        response.node("Error")
