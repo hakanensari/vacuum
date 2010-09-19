@@ -1,11 +1,17 @@
-require "active_support/xml_mini/nokogiri"
 require "cgi"
 require "curb"
 require "digest/md5"
+require "nokogiri"
 require "sucker/request"
 require "sucker/response"
 require "uri"
 
+if Gem.available?("activesupport", ">= 2.3.2")
+  require "active_support/xml_mini/nokogiri"
+else
+  require "sucker/active_support/core_ext/object/blank"
+  require "sucker/active_support/xml_mini/nokogiri"
+end
 
 # = Sucker
 # Sucker is a paper-thin Ruby wrapper to the Amazon Product Advertising API.
