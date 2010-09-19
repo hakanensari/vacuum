@@ -2,7 +2,17 @@ require "rubygems"
 require "bundler/setup"
 require "fileutils"
 require "jeweler"
+require "rake/rdoctask"
 require "rspec/core/rake_task"
+require "sdoc"
+
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = "doc"
+  rdoc.options << "-f" << "shtml"
+  rdoc.options << "-x" << "active_support"
+  rdoc.options << "-x" << "spec"
+  rdoc.template = "direct"
+end
 
 desc "Clear fixtures"
 task "spec:refix" do
