@@ -8,8 +8,8 @@ module Sucker
       :de  => 'ecs.amazonaws.de',
       :ca  => 'ecs.amazonaws.ca',
       :fr  => 'ecs.amazonaws.fr',
-      :jp  => 'ecs.amazonaws.jp' }.freeze
-    PATH = "/onca/xml".freeze
+      :jp  => 'ecs.amazonaws.jp' }
+    PATH = "/onca/xml"
 
     # The Amazon locale to query
     attr_accessor :locale

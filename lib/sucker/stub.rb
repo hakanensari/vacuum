@@ -1,8 +1,6 @@
 module Sucker
 
-  # Stubs Sucker::Response to run specs offline. Ideally, I'd like to use
-  # a general-purpose stubber for Curb but last time I checked, there was
-  # none.
+  # Stubs Sucker::Response to run specs offline.
   class MockResponse < Response
     def initialize(mock_response_body)
       self.body = mock_response_body

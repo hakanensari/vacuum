@@ -16,7 +16,7 @@ end
 # = Sucker
 # Sucker is a paper-thin Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
-  AMAZON_API_VERSION = "2010-06-01".freeze
+  AMAZON_API_VERSION = "2010-06-01"
 
   # Instantiates a new Sucker::Request
   def self.new(args={})
