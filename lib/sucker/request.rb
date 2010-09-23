@@ -41,11 +41,8 @@ module Sucker
 
     # A reusable, configurable cURL object
     def curl
-      @curl ||= Curl::Easy.new
-
-      yield @curl if block_given?
-
-      @curl
+      yield curl_object if block_given?
+      curl_object
     end
 
     # Performs the request and returns a response object
@@ -72,6 +69,10 @@ module Sucker
           "#{k}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v.to_s)
         end.
         join("&")
+    end
+
+    def curl_object
+      @curl ||= Curl::Easy.new
     end
 
     def host
