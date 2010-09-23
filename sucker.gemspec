@@ -5,19 +5,20 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sucker}
-  s.version = "0.9.0"
+  s.version = "0.9.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-09-19}
+  s.date = %q{2010-09-23}
   s.description = %q{A paper-thin Ruby wrapper to the Amazon Product Advertising API}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.md"
+     "README.markdown"
   ]
   s.files = [
     "LICENSE",
+     "README.markdown",
      "lib/sucker.rb",
      "lib/sucker/active_support/core_ext/object/blank.rb",
      "lib/sucker/active_support/xml_mini/nokogiri.rb",
@@ -25,7 +26,7 @@ Gem::Specification.new do |s|
      "lib/sucker/response.rb",
      "lib/sucker/stub.rb"
   ]
-  s.homepage = %q{http://github.com/papercavalier/sucker}
+  s.homepage = %q{http://gloss.papercavalier.com/sucker}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
@@ -36,6 +37,7 @@ Gem::Specification.new do |s|
      "spec/integration/images_spec.rb",
      "spec/integration/item_lookup_spec.rb",
      "spec/integration/japan_spec.rb",
+     "spec/integration/related_items_spec.rb",
      "spec/integration/seller_listing_search_spec.rb",
      "spec/integration/twenty_items_in_one_request_spec.rb",
      "spec/spec_helper.rb",
