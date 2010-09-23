@@ -21,10 +21,10 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.name = "sucker"
   gemspec.summary = "A paper-thin Ruby wrapper to the Amazon Product Advertising API"
   gemspec.description = "A paper-thin Ruby wrapper to the Amazon Product Advertising API"
-  gemspec.files = Dir.glob("lib/**/*") + %w{LICENSE README.rdoc}
+  gemspec.files = Dir.glob("lib/**/*") + %w{LICENSE README.markdown}
   gemspec.require_path = "lib"
   gemspec.email = "code@papercavalier.com"
-  gemspec.homepage = "http://github.com/papercavalier/sucker"
+  gemspec.homepage = "http://gloss.papercavalier.com/sucker"
   gemspec.authors = ["Hakan Ensari", "Piotr Laszewski"]
   gemspec.add_dependency "nokogiri", "~> 1.4.0"
   gemspec.add_dependency "curb", "~> 0.7.0"
