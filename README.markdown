@@ -15,9 +15,9 @@ Set up a worker.
       :key            => "API KEY",
       :secret         => "API SECRET")
 
-Optionally, fiddle with curl. Say you want to query Amazon through a different network interface:
+Optionally, fiddle with cURL. Say you want to query Amazon through a different network interface:
 
-    worker.curl { |c| c.interface = "eth1" }
+    worker.curl { |c| c.interface = "eth0:0" }
 
 Set up a request.
 
@@ -41,7 +41,7 @@ View the internals of the response object.
       response.body,
       response.xml
     
-Here is the response parsed into a simple hash:
+The response parsed into a simple hash:
 
     pp response.to_hash
 
@@ -55,9 +55,9 @@ Fetch another ASIN in a more DSL-y way.
     worker << { "ItemId"  => "0486454398" }
     pp worker.get.node("Item")
 
-Check the integration specs for more examples.
+Repeat ad infinitum.
 
-Ultimately, you should rely on the API documentation to build your queries.
+Check the integration specs for more examples and then dive into API documentation.
 
 Stubbing
 --------
@@ -83,4 +83,4 @@ Specs pass against Ruby 1.8.7 and 1.9.2.
 Todo
 ----
 
-* Rip out the Stub class and use VCR instead once Webmock gets a cURL adapter.
+* Rip out the Stub class and use VCR instead once someone writes up a Curb adaptor for Webmock.
