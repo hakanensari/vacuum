@@ -32,5 +32,4 @@ loop do
     resp.node("ItemAttributes").first["ISBN"] rescue puts(resp.body)
     puts Time.now
   end
-  end
 end
