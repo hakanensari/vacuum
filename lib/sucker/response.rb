@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Sucker
 
   # A Nokogiri-driven wrapper around the cURL response

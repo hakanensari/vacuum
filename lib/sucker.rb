@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "active_support/xml_mini/nokogiri"
 require "cgi"
 require "curb"

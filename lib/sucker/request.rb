@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Sucker
 
   # A wrapper around the API request
