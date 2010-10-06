@@ -5,6 +5,7 @@ require "digest/md5"
 require "nokogiri"
 require "sucker/request"
 require "sucker/response"
+require "sucker/version"
 require "uri"
 
 # = Sucker
