@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    sucker (0.9.1)
+      activesupport (>= 2.3.2)
+      curb (~> 0.7.0)
+      nokogiri (~> 1.4.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -30,12 +38,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (= 3.0.0)
-  bundler
-  curb
-  nokogiri
+  activesupport (>= 2.3.2)
+  curb (~> 0.7.0)
+  nokogiri (~> 1.4.0)
   rake
   rdiscount
-  rspec (~> 2.0.0.rc)
+  rspec (= 2.0.0.rc)
   sdoc-helpers
+  sucker!
   throttler
