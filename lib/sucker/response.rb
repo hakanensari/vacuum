@@ -21,6 +21,10 @@ module Sucker
       strip_content(xml.to_hash)
     end
 
+    def valid?
+      code == 200
+    end
+
     # The XML document
     def xml
       @xml ||= Nokogiri::XML(body)
