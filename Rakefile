@@ -28,7 +28,6 @@ namespace :gem do
     system "git tag -a #{Sucker::VERSION} -m 'Tagging #{Sucker::VERSION}'"
     puts "Pushing to Github..."
     system "git push --tags"
-    puts "Pushing to rubygems.org..."
     system "gem push sucker-#{Sucker::VERSION}.gem"
   end
 end
