@@ -6,3 +6,4 @@ pkg
 spec/support/amazon.yml
 .rake_tasks~
 spec/fixtures/*xml
+*.gem

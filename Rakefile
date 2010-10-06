@@ -1,10 +1,9 @@
-require "rubygems"
 require "bundler/setup"
 
 require "fileutils"
-require "jeweler"
 require "rspec/core/rake_task"
 require "sdoc_helpers"
+require File.dirname(__FILE__) + "/lib/sucker/version"
 
 desc "Clear fixtures"
 task "spec:refix" do
@@ -17,19 +16,21 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
 end
 
-Jeweler::Tasks.new do |gemspec|
-  gemspec.name = "sucker"
-  gemspec.summary = "A paper-thin Ruby wrapper to the Amazon Product Advertising API"
-  gemspec.description = "A paper-thin Ruby wrapper to the Amazon Product Advertising API"
-  gemspec.files = Dir.glob("lib/**/*") + %w{LICENSE README.markdown}
-  gemspec.require_path = "lib"
-  gemspec.email = "code@papercavalier.com"
-  gemspec.homepage = "http://gloss.papercavalier.com/sucker"
-  gemspec.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  gemspec.add_dependency "nokogiri", "~> 1.4.0"
-  gemspec.add_dependency "curb", "~> 0.7.0"
-end
+namespace :gem do
+  desc "Build gem"
+  task :build do
+    system "gem build sucker.gemspec"
+  end
 
-Jeweler::GemcutterTasks.new
+  desc "Release gem"
+  task :release => :build do
+    puts "Tagging #{Sucker::VERSION}..."
+    system "git tag -a #{Sucker::VERSION} -m 'Tagging #{Sucker::VERSION}'"
+    puts "Pushing to Github..."
+    system "git push --tags"
+    puts "Pushing to rubygems.org..."
+    system "gem push sucker-#{Sucker::VERSION}.gem"
+  end
+end
 
 task :default => :spec
