@@ -2,7 +2,6 @@
 require "active_support/xml_mini/nokogiri"
 require "curb"
 require "digest/md5"
-require "nokogiri"
 require "sucker/request"
 require "sucker/response"
 require "sucker/version"
