@@ -1,3 +1,5 @@
+# http://github.com/papercavalier/sucker/issues#issue/2
+
 require "spec_helper"
 
 module Sucker
@@ -17,7 +19,7 @@ module Sucker
     end
 
     it "works for Orwell" do
-      @worker.get.node("TotalPages").should_not be_nil
+      @worker.get.should be_valid
     end
 
     it "works for George Orwell, too" do
@@ -25,7 +27,9 @@ module Sucker
         "Operation"     => "ItemSearch",
         "SearchIndex"   => "Books",
         "Author"        => "George Orwell" }
-      @worker.get.node("TotalPages").should_not be_nil
+      response = @worker.get
+      response.should be_valid
+      response.node("TotalPages").first.should be_an_instance_of String
     end
   end
 end
