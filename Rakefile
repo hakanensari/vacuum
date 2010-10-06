@@ -25,7 +25,7 @@ namespace :gem do
   desc "Release gem"
   task :release => :build do
     puts "Tagging #{Sucker::VERSION}..."
-    system "git tag -a #{Sucker::VERSION} -m 'Tagging #{Sucker::VERSION}'"
+    system "git tag -a v#{Sucker::VERSION} -m 'Tagging v#{Sucker::VERSION}'"
     puts "Pushing to Github..."
     system "git push --tags"
     system "gem push sucker-#{Sucker::VERSION}.gem"
