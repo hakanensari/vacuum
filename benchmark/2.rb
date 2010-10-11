@@ -11,26 +11,25 @@ require "throttler"
 
 include Throttler
 
-asins = %w{
-  0816614024 0143105825 0485113600 0816616779 0942299078
-  1844674282 0745640974 0745646441 0826489540 1844672972 }
-  
 loop do
-  worker = Sucker.new(
-    :locale => "us",
-    :key    => amazon["key"],
-    :secret => amazon["secret"])
+  start = Time.now.to_i
+  asins_fixture.each_slice(10) do |batch|
+    worker = Sucker.new(
+      :locale => "us",
+      :key    => amazon["key"],
+      :secret => amazon["secret"])
 
-  worker << {
-    "Operation"     => "ItemLookup",
-    "IdType"        => "ASIN",
-    "ResponseGroup" => ["ItemAttributes"],
-    "ItemId"        => asins }
+    worker << {
+      "Operation"     => "ItemLookup",
+      "IdType"        => "ASIN",
+      "ResponseGroup" => ["ItemAttributes"],
+      "ItemId"        => batch }
 
-  throttle("bm", pause) do
-    resp = worker.get
-    resp.node("ItemAttributes").first["ISBN"] rescue puts(resp.body)
-    puts Time.now
+    throttle("bm", pause) do
+      resp = worker.get
+      resp.node("ItemAttributes").first["ISBN"] rescue puts(resp.body)
+      puts Time.now
+    end
   end
-  end
+  puts "1000 ASINs in #{(Time.now.to_i - start)}"
 end

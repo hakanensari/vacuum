@@ -1,11 +1,2 @@
 source "http://rubygems.org"
-
-gem "bundler"
-gem "curb"
-gem "jeweler"
-gem "nokogiri"
-gem "rake"
-gem "rdiscount"
-gem "rspec", "~>2.0.0.beta.22"
-gem "sdoc-helpers"
-gem "throttler"
+gemspec

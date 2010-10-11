@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Sucker
 
   # A Nokogiri-driven wrapper around the cURL response
@@ -18,6 +19,10 @@ module Sucker
     # Parses the response into a simple hash
     def to_hash
       strip_content(xml.to_hash)
+    end
+
+    def valid?
+      code == 200
     end
 
     # The XML document

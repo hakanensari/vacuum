@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Sucker
 
   # A wrapper around the API request
@@ -41,8 +42,9 @@ module Sucker
 
     # A reusable, configurable cURL object
     def curl
-      yield curl_object if block_given?
-      curl_object
+      @curl ||= Curl::Easy.new
+      yield @curl if block_given?
+      @curl
     end
 
     # Performs the request and returns a response object
@@ -66,13 +68,18 @@ module Sucker
         merge(timestamp).
         sort.
         collect do |k, v|
-          "#{k}=" + CGI.escape(v.is_a?(Array) ? v.join(",") : v.to_s)
+          "#{k}=" + escape(v.is_a?(Array) ? v.join(",") : v.to_s)
         end.
         join("&")
     end
 
-    def curl_object
-      @curl ||= Curl::Easy.new
+    def escape(string)
+
+      # Shamelessly plagiarized from ruby_aaws, which in turn plagiarizes
+      # from the Ruby CGI library. All to please Amazon.
+      string.gsub( /([^a-zA-Z0-9_.~-]+)/ ) do
+        '%' + $1.unpack( 'H2' * $1.bytesize ).join( '%' ).upcase
+      end
     end
 
     def host
@@ -87,7 +94,7 @@ module Sucker
       string = ["GET", host, PATH, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
 
-      query + "&Signature=" + CGI.escape([hmac].pack("m").chomp)
+      query + "&Signature=" + escape([hmac].pack("m").chomp)
     end
 
     def uri

@@ -74,5 +74,16 @@ module Sucker
         @response.to_hash["Title"].should eql "スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則"
       end
     end
+
+    context "#valid?" do
+      it "returns true if the HTTP status is OK" do
+        @response.should be_valid
+      end
+
+      it "returns false if the HTTP status is not OK" do
+        @response.code = 403
+        @response.should_not be_valid
+      end
+    end
   end
 end

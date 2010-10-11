@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Sucker
 
   # Stubs Sucker::Response to run specs offline.
