@@ -1,6 +1,3 @@
-# A word of caution: It seems Amazon will deprecate multiple requests
-# on October 15 2010. We're petitioning them not to.
-
 require "spec_helper"
 
 module Sucker
