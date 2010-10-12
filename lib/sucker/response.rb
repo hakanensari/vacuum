@@ -21,6 +21,7 @@ module Sucker
       strip_content(xml.to_hash)
     end
 
+    # Checks if the HTTP response is OK
     def valid?
       code == 200
     end
@@ -35,13 +36,13 @@ module Sucker
     def strip_content(node)
       case node
       when Array 
-        node.map { |el| strip_content(el) }
+        node.map { |child| strip_content(child) }
       when Hash
         if node.keys.size == 1 && node["__content__"]
           node["__content__"]
         else
-          node.inject({}) do |coll, key_value|
-            coll.merge({ key_value.first => strip_content(key_value.last) })
+          node.inject({}) do |attributes, key_value|
+            attributes.merge({ key_value.first => strip_content(key_value.last) })
           end
         end
       else

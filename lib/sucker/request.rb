@@ -30,7 +30,7 @@ module Sucker
       args.each { |k, v| send("#{k}=", v) }
     end
 
-    # A helper method that merges a hash into the parameters
+    # A helper method that merges a hash into existing parameters
     def <<(hash)
       self.parameters.merge!(hash)
     end
