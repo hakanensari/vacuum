@@ -10,7 +10,7 @@ require "uri"
 # = Sucker
 # Sucker is a Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
-  AMAZON_API_VERSION = "2010-06-01"
+  AMAZON_API_VERSION = "2010-09-01"
 
   def self.new(args={})
     Sucker::Request.new(args)
