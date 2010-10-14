@@ -2,7 +2,6 @@
 require "bundler"
 require "rspec/core/rake_task"
 require "sdoc_helpers"
-require File.dirname(__FILE__) + "/lib/sucker/version"
 
 Bundler::GemHelper.install_tasks
 
