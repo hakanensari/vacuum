@@ -19,7 +19,7 @@ Optionally, fiddle with cURL. Say you want to query Amazon through a different n
 
     worker.curl { |c| c.interface = "eth0:0" }
 
-Set up a request.
+Now, set up a request.
 
     asin_batch = %w{
       0816614024 0143105825 0485113600 0816616779 0942299078
