@@ -4,7 +4,6 @@ require "curb"
 require "digest/md5"
 require "sucker/request"
 require "sucker/response"
-require "sucker/version"
 require "uri"
 
 # = Sucker
