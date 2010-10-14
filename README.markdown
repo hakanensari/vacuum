@@ -66,7 +66,9 @@ Check the [integration specs](http://github.com/papercavalier/sucker/tree/master
 Stubbing
 --------
 
-Use [VCR](http://github.com/myronmarston/vcr). [This](http://github.com/papercavalier/sucker/blob/master/spec/support/sucker.rb) is my RSpec helper.
+Use [VCR](http://github.com/myronmarston/vcr) to stub your requests. [This file](http://github.com/papercavalier/sucker/blob/master/spec/support/vcr.rb) should help you set up VCR with RSpec.
+
+Don't match requests on URI. The parameters include a timestamp, so each URI is unique.
 
 Compatibility
 -------------
