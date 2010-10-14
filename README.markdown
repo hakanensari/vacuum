@@ -45,11 +45,11 @@ Confirm response is valid.
 
     response.valid?
 
-The response parsed into a simple hash:
+Cast response as a hash:
 
     pp response.to_hash
 
-You will probably be more interested in particular nodes:
+Grab a node:
 
        response.node("Item"),
        response.node("Error")
@@ -61,30 +61,14 @@ Fetch another ASIN in a more DSL-y way.
 
 Repeat ad infinitum.
 
-Check the integration specs for more examples and then dive into API documentation.
+Check the [integration specs](http://github.com/papercavalier/sucker/tree/master/spec/integration/) for more examples and then dive into the [API docs](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
 
 Stubbing
 --------
 
-To stub web requests in your specs, create `spec/support/sucker_helper.rb`:
-
-    require "sucker/stub"
-    
-    Sucker.fixtures_path = File.dirname(__FILE__) + "/../fixtures"
-
-In your spec, you can now stub the worker:
-
-    @worker = Sucker.new(some_hash)
-    Sucker.stub(@worker)
-
-The first time you run the spec, Sucker will perform the actual request. Following requests will use a cached response.
+Use [VCR](http://github.com/myronmarston/vcr). [This](http://github.com/papercavalier/sucker/blob/master/spec/support/sucker.rb) is my RSpec helper.
 
 Compatibility
 -------------
 
 Specs pass against Ruby 1.8.7 and 1.9.2.
-
-Todo
-----
-
-* Rip out the Stub class and use VCR instead once someone writes up a Curb adaptor for Webmock.
