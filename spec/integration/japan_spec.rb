@@ -1,30 +1,27 @@
+# encoding: utf-8
 require "spec_helper"
 
 module Sucker
   describe "A Japanese request" do
-    before do
-      @worker = Sucker.new(
+    use_vcr_cassette "integration/japan", :record => :new_episodes
+
+    let(:item) do
+      worker = Sucker.new(
         :locale => "jp",
         :key    => amazon["key"],
         :secret => amazon["secret"])
 
-      @worker << {
+      worker << {
         "Operation"     => "ItemLookup",
         "IdType"        => "ASIN",
-        "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
-
-      Sucker.stub(@worker)
+        "ResponseGroup" => ["ItemAttributes", "OfferFull"],
+        "ItemId"        => "482224816X" }
+      worker.get.node("Item").first
     end
 
-    context "single item" do
-      before do
-        @worker << { "ItemId" => "482224816X" }
-        @item = @worker.get.node("Item").first
-      end
-
-      it "returns an array of items" do
-        @item.should be_an_instance_of Hash
-      end
+    it "returns an array of items" do
+      item.should be_an_instance_of Hash
+      item["ItemAttributes"]["Binding"].should eql "単行本（ソフトカバー）"
     end
   end
 end

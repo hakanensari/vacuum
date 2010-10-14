@@ -1,5 +1,5 @@
 # encoding: utf-8
-module Sucker
+module Sucker #:nodoc
 
   # A Nokogiri-driven wrapper around the cURL response
   class Response

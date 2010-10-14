@@ -1,31 +1,30 @@
+# encoding: utf-8
 require "spec_helper"
 
 module Sucker
   describe "Seller listing search" do
-    before do
-      @worker = Sucker.new(
+    use_vcr_cassette "integration/seller_listings_search", :record => :new_episodes
+
+    let(:listings) do
+      worker = Sucker.new(
         :locale => "us",
         :key    => amazon["key"],
         :secret => amazon["secret"])
 
-      # @worker.curl { |curl| curl.verbose = true }
-
-      @worker << {
+      worker << {
         "Operation"   => "SellerListingSearch",
         "SellerId"    => "A31N271NVIORU3" }
 
-      Sucker.stub(@worker)
-
-      @listings = @worker.get.node("SellerListings").first
+      worker.get.node("SellerListings").first
     end
 
     it "returns page count" do
-      @listings["TotalPages"].to_i.should be > 0
+      listings["TotalPages"].to_i.should be > 0
     end
 
     it "returns listings" do
-      @listings["SellerListing"].size.should be > 0
-      @listings["SellerListing"].first.has_key?("Price").should be_true
+      listings["SellerListing"].size.should be > 0
+      listings["SellerListing"].first.has_key?("Price").should be_true
     end
   end
 end

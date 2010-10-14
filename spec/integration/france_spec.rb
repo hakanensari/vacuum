@@ -2,51 +2,33 @@
 require "spec_helper"
 
 module Sucker
-  describe "Un lookup français" do
-    before do
-      @worker = Sucker.new(
+  describe "A French lookup" do
+    use_vcr_cassette "integration/france", :record => :new_episodes
+
+    let(:item) do
+      worker = Sucker.new(
         :locale => "fr",
         :key    => amazon["key"],
         :secret => amazon["secret"])
 
-      # @worker.curl { |curl| curl.verbose = true }
-
-      @worker << {
+      worker << {
         "Operation"     => "ItemLookup",
         "IdType"        => "ASIN",
         "Condition"     => "All",
         "MerchantId"    => "All",
-        "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
-
-      Sucker.stub(@worker)
+        "ResponseGroup" => ["ItemAttributes", "OfferFull"],
+        "ItemId"        => "2070119874" }
+      worker.get.node("Item").first
     end
 
-    context "single item" do
-      before do
-        @worker << { "ItemId" => "2070119874" }
-        @item = @worker.get.node("Item").first
-      end
-
-      it "returns an item" do
-        @item.should be_an_instance_of Hash
-      end
-
-      it "includes requested response groups" do
-        @item["ItemAttributes"].should be_an_instance_of Hash
-        @item["Offers"].should be_an_instance_of Hash
-      end
+    it "returns an item" do
+      item.should be_an_instance_of Hash
     end
 
-    context "multiple items" do
-      before do
-        @worker << { "ItemId" => ["0816614024", "0143105825"] }
-        @items = @worker.get.node("Item")
-      end
-
-      it "returns two items" do
-        @items.should be_an_instance_of Array
-        @items.size.should eql 2
-      end
+    it "includes requested response groups" do
+      item["ItemAttributes"].should be_an_instance_of Hash
+      item["Offers"].should be_an_instance_of Hash
+      item["ItemAttributes"]["Binding"].should eql "Broché"
     end
   end
 end
