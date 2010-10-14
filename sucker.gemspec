@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", ["~> 2.0.0"])
   s.add_development_dependency("throttler", "~> 0.2.1")
   s.add_development_dependency("sdoc-helpers", "~> 0.1.4")
-  s.add_development_dependency("vcr", "~> 1.1.2")
+  s.add_development_dependency("vcr", "~> 1.2.0")
   s.add_development_dependency("webmock", "~> 1.4.0")
 
   s.files         = Dir.glob("lib/**/*") + %w(LICENSE README.markdown)
