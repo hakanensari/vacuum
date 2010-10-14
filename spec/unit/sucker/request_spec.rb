@@ -13,8 +13,8 @@ module Sucker
       it "sets default parameters" do
         default_parameters = {
           "Service" => "AWSECommerceService",
-          "Version" => Sucker::AMAZON_API_VERSION }
         @worker.parameters.should include default_parameters
+          "Version" => Sucker::CURRENT_AMAZON_API_VERSION }
       end
     end
 
@@ -22,6 +22,16 @@ module Sucker
       it "merges a hash into the parameters" do
         @worker << { "foo" => "bar" }
         @worker.parameters["foo"].should eql "bar"
+    context "api_version" do
+      it "has a default value" do
+        worker.api_version.should_not be_nil
+      end
+    end
+
+    context "#api_version=" do
+      it "sets the Amazon API version" do
+        worker.api_version = "foo"
+        worker.api_version.should eql "foo"
       end
     end
 

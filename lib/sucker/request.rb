@@ -1,5 +1,5 @@
 # encoding: utf-8
-module Sucker
+module Sucker #:nodoc
 
   # A wrapper around the API request
   class Request
@@ -24,7 +24,7 @@ module Sucker
     def initialize(args)
       self.parameters = {
         "Service" => "AWSECommerceService",
-        "Version" => Sucker::AMAZON_API_VERSION
+        "Version" => api_version
       }
 
       args.each { |k, v| send("#{k}=", v) }
@@ -33,6 +33,16 @@ module Sucker
     # A helper method that merges a hash into existing parameters
     def <<(hash)
       self.parameters.merge!(hash)
+    end
+
+    # Gets Amazon API version.
+    def api_version
+      @api_version ||= CURRENT_AMAZON_API_VERSION
+    end
+
+    # Set Amazon API version.
+    def api_version=(version)
+      @api_version = version
     end
 
     # A helper method that sets the associate tag
