@@ -5,5 +5,5 @@ docs
 pkg
 spec/support/amazon.yml
 .rake_tasks~
-spec/fixtures/*xml
+spec/fixtures/cassette_library
 *.gem
