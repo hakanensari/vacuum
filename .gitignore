@@ -7,3 +7,4 @@ spec/support/amazon.yml
 .rake_tasks~
 spec/fixtures/cassette_library
 *.gem
+*.rbc
