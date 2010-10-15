@@ -15,7 +15,7 @@ Set up a worker.
       :key            => "API KEY",
       :secret         => "API SECRET")
 
-Optionally, fiddle with cURL. Say you want to query Amazon through a different network interface:
+Optionally, fiddle with cURL. Say you want to query Amazon through a different network interface.
 
     worker.curl { |c| c.interface = "eth0:0" }
 
@@ -45,13 +45,13 @@ Confirm response is valid.
 
     response.valid?
 
-Cast response as a hash:
+Cast response as a hash.
 
     pp response.to_hash
 
-Grab a node:
+Grab a node.
 
-       response.node("Item"),
+    pp response.node("Item"),
        response.node("Error")
 
 Fetch another ASIN in a more DSL-y way.
@@ -68,9 +68,9 @@ Stubbing
 
 Use [VCR](http://github.com/myronmarston/vcr) to stub your requests. [This file](http://github.com/papercavalier/sucker/blob/master/spec/support/vcr.rb) should help you set up VCR with RSpec.
 
-Don't match requests on URI. The parameters include a timestamp, so each URI is unique.
+Don't match requests on URI. The parameters include a timestamp that results in each URI being unique.
 
 Compatibility
 -------------
 
-Specs pass against Ruby 1.8.7 and 1.9.2.
+Specs pass against Ruby 1.8.7, Ruby 1.9.2, and Rubinius 1.1.
