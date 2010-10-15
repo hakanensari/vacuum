@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 # http://github.com/papercavalier/sucker/issues#issue/2
 
 require "spec_helper"

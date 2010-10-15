@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Sucker #:nodoc
 
   # A wrapper around the API request

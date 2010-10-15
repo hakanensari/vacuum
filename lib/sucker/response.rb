@@ -1,9 +1,16 @@
-# encoding: utf-8
 module Sucker #:nodoc
 
   # A Nokogiri-driven wrapper around the cURL response
   class Response
-    attr_accessor :body, :code, :time
+
+    # The response body
+    attr_accessor :body
+
+    # The HTTP status code of the response
+    attr_accessor :code
+
+    # Transaction time in seconds for request
+    attr_accessor :time
 
     def initialize(curl)
       self.body = curl.body_str
