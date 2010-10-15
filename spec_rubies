@@ -1,2 +1,2 @@
-rvm ree@sucker,1.9.2@sucker exec bundle install
-rvm ree@sucker,1.9.2@sucker rake
+rvm rbx@sucker,ree@sucker,1.9.2@sucker exec bundle install
+rvm rbx@sucker,ree@sucker,1.9.2@sucker rake
