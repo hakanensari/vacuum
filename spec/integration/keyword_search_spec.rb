@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Sucker
   describe "Keyword Search" do
-    use_vcr_cassette "integration/keyword_search", :record => :all
+    use_vcr_cassette "integration/keyword_search", :record => :new_episodes
 
     let(:worker) do
       worker = Sucker.new(
@@ -18,15 +18,10 @@ module Sucker
     end
 
     it "returns matches" do
-      response = worker.get
-      response.node("Item").each do |item|
+      items  = worker.get.node("Item")
+      items.size.should > 0
+      items.each do |item|
         item["ItemAttributes"]["Title"].should_not be_nil
-
-        puts "*****************************"
-        pp item["ItemAttributes"]
-        puts item["ItemAttributes"]["Author"]
-        puts item["ItemAttributes"]["Title"]
-        puts "*****************************"
       end
     end
   end
