@@ -20,7 +20,7 @@ module Sucker #:nodoc
 
     # Queries an xpath and returns result as an array of hashes
     #
-    # For instance, to get all items in an ItemLookup query:
+    # For instance, to get all items in an item lookup query:
     #
     #   response = worker.get
     #   response.node("Item").each { |item| ... }

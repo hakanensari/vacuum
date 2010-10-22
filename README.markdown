@@ -11,9 +11,9 @@ Examples
 Set up a worker.
 
     worker = Sucker.new(
-      :locale         => "us",
-      :key            => "API KEY",
-      :secret         => "API SECRET")
+      :locale => "us",
+      :key    => "API KEY",
+      :secret => "API SECRET")
 
 Prep a request.
 
@@ -32,13 +32,12 @@ Perform the request.
 
 Debug.
 
-    if response.valid?
-      p response.code,
-        response.time,
-        response.body,
-        response.xml,
-        response.to_hash
-    end
+    p response.valid?,
+      response.code,
+      response.time,
+      response.body,
+      response.xml,
+      response.to_hash
 
 You performed an item lookup. Iterate over all items and errors.
 
