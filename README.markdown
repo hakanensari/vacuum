@@ -40,7 +40,7 @@ Debug.
         response.to_hash
     end
 
-Say you performed an item lookup. Iterate over all items and errors.
+You performed an item lookup. Iterate over all items and errors.
 
     response.node("Item").each { |item| ... }
     response.node("Error").each { |error| ... }
