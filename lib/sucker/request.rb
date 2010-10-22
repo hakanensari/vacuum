@@ -37,6 +37,14 @@ module Sucker #:nodoc
     end
 
     # A helper method that merges a hash into existing parameters
+    #
+    #   worker = Sucker.new
+    #   worker << {
+    #     "Operation"     => "ItemLookup",
+    #     "IdType"        => "ASIN",
+    #     "ItemId"        => "0816614024",
+    #     "ResponseGroup" => "ItemAttributes" }
+    #
     def <<(hash)
       self.parameters.merge!(hash)
     end
