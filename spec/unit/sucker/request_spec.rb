@@ -27,16 +27,10 @@ module Sucker
       end
     end
 
-    context "api_version" do
-      it "has a default value" do
-        worker.api_version.should_not be_nil
-      end
-    end
-
-    context "#api_version=" do
+    context "#version=" do
       it "sets the Amazon API version" do
-        worker.api_version = "foo"
-        worker.api_version.should eql "foo"
+        worker.version = "foo"
+        worker.parameters["Version"].should eql "foo"
       end
     end
 
