@@ -30,7 +30,7 @@ module Sucker #:nodoc
     def initialize(args)
       self.parameters = {
         "Service" => "AWSECommerceService",
-        "Version" => api_version
+        "Version" => CURRENT_AMAZON_API_VERSION
       }
 
       args.each { |k, v| send("#{k}=", v) }
@@ -39,16 +39,6 @@ module Sucker #:nodoc
     # A helper method that merges a hash into existing parameters
     def <<(hash)
       self.parameters.merge!(hash)
-    end
-
-    # Gets Amazon API version.
-    def api_version
-      @api_version ||= CURRENT_AMAZON_API_VERSION
-    end
-
-    # Set Amazon API version.
-    def api_version=(version)
-      @api_version = version
     end
 
     # Sets the associate tag
@@ -90,6 +80,15 @@ module Sucker #:nodoc
     #
     def key=(token)
       parameters["AWSAccessKeyId"] = token
+    end
+
+    # Sets Amazon API version.
+    #
+    #   worker = Sucker.new
+    #   worker.version = '"2010-06-01"'
+    #
+    def version=(version)
+      self.parameters["Version"] = version
     end
 
     private
