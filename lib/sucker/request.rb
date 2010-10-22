@@ -93,7 +93,7 @@ module Sucker #:nodoc
     # Sets Amazon API version.
     #
     #   worker = Sucker.new
-    #   worker.version = '"2010-06-01"'
+    #   worker.version = '2010-06-01'
     #
     def version=(version)
       self.parameters["Version"] = version
