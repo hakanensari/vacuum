@@ -19,27 +19,46 @@ module Sucker #:nodoc
     end
 
     # Queries an xpath and returns result as an array of hashes
+    #
+    # For instance, to get all items in an ItemLookup query:
+    #
+    #   response = worker.get
+    #   response.node("Item").each { |item| ... }
+    #
     def node(path)
       xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
     end
 
     # Parses the response into a simple hash
+    #
+    #   response = worker.get
+    #   response.to_hash
+    #
     def to_hash
       strip_content(xml.to_hash)
     end
 
     # Checks if the HTTP response is OK
+    #
+    #    response = worker.get
+    #    p response.valid?
+    #    => true
+    #
     def valid?
       code == 200
     end
 
     # The XML document
+    #
+    #    response = worker.get
+    #    response.xml
     def xml
       @xml ||= Nokogiri::XML(body)
     end
 
     private
 
+    # Let's massage the somewhat-verbose XML Mini hash into better shape
     def strip_content(node)
       case node
       when Array 

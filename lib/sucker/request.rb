@@ -20,6 +20,13 @@ module Sucker #:nodoc
     # The hash of parameters to query Amazon with
     attr_accessor :parameters
 
+    # Initializes a request object
+    #
+    #   worker = Sucker.new(
+    #     :locale => "us",
+    #     :key    => "API KEY",
+    #     :secret => "API SECRET")
+    #
     def initialize(args)
       self.parameters = {
         "Service" => "AWSECommerceService",
@@ -44,12 +51,20 @@ module Sucker #:nodoc
       @api_version = version
     end
 
-    # A helper method that sets the associate tag
+    # Sets the associate tag
+    #
+    #   worker = Sucker.new
+    #   worker.associate_tag = 'foo-bar'
+    #
     def associate_tag=(token)
       parameters["AssociateTag"] = token
     end
 
-    # A reusable, configurable cURL object
+    # A configurable curl object
+    #
+    #   worker = Sucker.new
+    #   worker.curl { |c| c.interface = "eth1" }
+    #
     def curl
       @curl ||= Curl::Easy.new
       yield @curl if block_given?
@@ -57,6 +72,10 @@ module Sucker #:nodoc
     end
 
     # Performs the request and returns a response object
+    #
+    #   worker = Sucker.new
+    #   response = worker.get
+    #
     def get
       curl.url = uri.to_s
       curl.perform
@@ -64,7 +83,11 @@ module Sucker #:nodoc
       Response.new(curl)
     end
 
-    # A helper method that sets the AWS Access Key ID
+    # Sets the AWS Access Key ID
+    #
+    #   worker = Sucker.new
+    #   worker.key = 'foo'
+    #
     def key=(token)
       parameters["AWSAccessKeyId"] = token
     end
@@ -82,19 +105,6 @@ module Sucker #:nodoc
         join("&")
     end
 
-    def escape(string)
-
-      # Shamelessly plagiarized from ruby_aaws, which in turn plagiarizes
-      # from the Ruby CGI library. All to please Amazon.
-      string.gsub( /([^a-zA-Z0-9_.~-]+)/ ) do
-        '%' + $1.unpack( 'H2' * $1.bytesize ).join( '%' ).upcase
-      end
-    end
-
-    def host
-      HOSTS[locale.to_sym]
-    end
-
     # Returns a signed and timestamped query string
     def build_signed_query
       query = build_query
@@ -104,6 +114,17 @@ module Sucker #:nodoc
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
 
       query + "&Signature=" + escape([hmac].pack("m").chomp)
+    end
+
+    # Plagiarized from the Ruby CGI library via ruby_aaws
+    def escape(string)
+      string.gsub( /([^a-zA-Z0-9_.~-]+)/ ) do
+        '%' + $1.unpack( 'H2' * $1.bytesize ).join( '%' ).upcase
+      end
+    end
+
+    def host
+      HOSTS[locale.to_sym]
     end
 
     def uri
