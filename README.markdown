@@ -1,9 +1,9 @@
 Sucker
 ======
 
-Sucker is a Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on cURL and the Nokogiri implementation of the XML Mini module in Active Support. It is blazing fast and supports __the entire API__.
+Sucker is a Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on [curb](http://github.com/taf2/curb) and the Nokogiri implementation of the XML Mini module in Active Support. It is blazing fast and supports __the entire API__.
 
-![Sucker](http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg/540px-FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg)
+![Sucker](http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg/480px-FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg)
 
 Examples
 --------
@@ -15,11 +15,7 @@ Set up a worker.
       :key            => "API KEY",
       :secret         => "API SECRET")
 
-Optionally, fiddle with cURL. Say you want to query Amazon through a different network interface.
-
-    worker.curl { |c| c.interface = "eth0:0" }
-
-Now, set up a request.
+Prep a request.
 
     asin_batch = %w{
       0816614024 0143105825 0485113600 0816616779 0942299078
@@ -30,38 +26,35 @@ Now, set up a request.
       "ItemId"        => asin_batch,
       "ResponseGroup" => ["ItemAttributes", "OfferFull"] }
 
-Hit Amazon.
+Perform the request.
 
     response = worker.get
 
-View the internals of the response object.
+Debug.
 
-    p response.code,
-      response.time,
-      response.body,
-      response.xml
+    if response.valid?
+      p response.code,
+        response.time,
+        response.body,
+        response.xml,
+        response.to_hash
+    end
 
-Confirm response is valid.
+Say you performed an item lookup. Iterate over all items and errors.
 
-    response.valid?
+    response.node("Item").each { |item| ... }
+    response.node("Error").each { |error| ... }
 
-Cast response as a hash.
-
-    pp response.to_hash
-
-Grab a node.
-
-    pp response.node("Item"),
-       response.node("Error")
-
-Fetch another ASIN in a more DSL-y way.
+Perform a new request in a more DSL-y way.
 
     worker << { "ItemId"  => "0486454398" }
-    pp worker.get.node("Item")
+    worker.get.node("Item").each { |item| ... }
 
 Repeat ad infinitum.
 
-Check the [integration specs](http://github.com/papercavalier/sucker/tree/master/spec/integration/) for more examples and then dive into the [API docs](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
+Check the [integration specs](http://github.com/papercavalier/sucker/tree/master/spec/integration/) for more examples. In particullar, see [twenty items](http://github.com/papercavalier/sucker/tree/master/spec/integration/twenty_items_spec.rb) and [multiple locales](http://github.com/papercavalier/sucker/tree/master/spec/integration/multiple_locales_spec.rb) for advanced usage.
+
+Finally, dive into the [API docs](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html) to construct your own queries.
 
 Stubbing
 --------
