@@ -12,7 +12,7 @@ module Sucker
 
       worker << {
         "Operation"   => "SellerListingSearch",
-        "SellerId"    => "A31N271NVIORU3" }
+        "SellerId"    => "A2JYSO6W6KEP83" }
 
       worker.get.node("SellerListings").first
     end
