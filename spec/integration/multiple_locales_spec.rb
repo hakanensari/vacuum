@@ -27,11 +27,10 @@ module Sucker
         end
       end
 
-      bindings = []
-      threads.each do |thread|
+      bindings = threads.map do |thread|
         thread.join
         item = thread[:response].node("Item").first
-        bindings << item["ItemAttributes"]["Binding"]
+        item["ItemAttributes"]["Binding"]
       end
 
       bindings.uniq.should =~ %w{ Paperback Taschenbuch Broché ペーパーバック }
