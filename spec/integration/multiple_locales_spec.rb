@@ -11,8 +11,6 @@ module Sucker
       params = {
         "Operation"     => "ItemLookup",
         "IdType"        => "ASIN",
-        "Condition"     => "All",
-        "MerchantId"    => "All",
         "ResponseGroup" => "ItemAttributes",
         "ItemId"        => "0816614024" }
 
