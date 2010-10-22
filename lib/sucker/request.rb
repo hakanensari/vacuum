@@ -90,7 +90,7 @@ module Sucker #:nodoc
       parameters["AWSAccessKeyId"] = token
     end
 
-    # Sets Amazon API version.
+    # Sets the Amazon API version
     #
     #   worker = Sucker.new
     #   worker.version = '2010-06-01'
