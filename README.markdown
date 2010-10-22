@@ -52,7 +52,7 @@ Perform a new request in a more DSL-y way.
 
 Repeat ad infinitum.
 
-Check the [integration specs](http://github.com/papercavalier/sucker/tree/master/spec/integration/) for more examples. In particullar, see [twenty items](http://github.com/papercavalier/sucker/tree/master/spec/integration/twenty_items_spec.rb) and [multiple locales](http://github.com/papercavalier/sucker/tree/master/spec/integration/multiple_locales_spec.rb) for advanced usage.
+Check the [integration specs](http://github.com/papercavalier/sucker/tree/master/spec/integration/) for more examples. In particular, see [twenty items](http://github.com/papercavalier/sucker/tree/master/spec/integration/twenty_items_spec.rb) and [multiple locales](http://github.com/papercavalier/sucker/tree/master/spec/integration/multiple_locales_spec.rb) for advanced usage.
 
 Finally, dive into the [API docs](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html) to construct your own queries.
 
