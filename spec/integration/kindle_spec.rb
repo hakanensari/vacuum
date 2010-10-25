@@ -3,7 +3,7 @@ require "spec_helper"
 module Sucker
   describe "Kindle" do
     context "Book index" do
-      use_vcr_cassette "integration/kindle", :record => :all
+      use_vcr_cassette "integration/kindle", :record => :new_episodes
 
       let(:items) do
         worker = Sucker.new(
@@ -24,7 +24,7 @@ module Sucker
     end
 
     context "Kindle store index" do
-      use_vcr_cassette "integration/kindle_2", :record => :all
+      use_vcr_cassette "integration/kindle_2", :record => :new_episodes
 
       let(:items) do
         worker = Sucker.new(
