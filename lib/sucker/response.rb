@@ -31,7 +31,7 @@ module Sucker #:nodoc
       node
     end
 
-    def node(path) #:nodoc
+    def node(path) # :nodoc:
       warn "[DEPRECATION] `node` is deprecated.  Use `find` instead."
       find(path)
     end
