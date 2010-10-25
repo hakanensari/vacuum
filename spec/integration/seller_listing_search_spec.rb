@@ -14,7 +14,7 @@ module Sucker
         "Operation"   => "SellerListingSearch",
         "SellerId"    => "A2JYSO6W6KEP83" }
 
-      worker.get.node("SellerListings").first
+      worker.get.find("SellerListings").first
     end
 
     it "returns page count" do

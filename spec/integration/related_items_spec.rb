@@ -23,8 +23,8 @@ module Sucker
       it "finds parent and related items" do
         worker << { "ItemId" => "0415246334" }
         response = worker.get
-        response.node("RelatedItem").size.should eql 1
-        parent_asin = response.node("RelatedItem").first["Item"]["ASIN"]
+        response.find("RelatedItem").size.should eql 1
+        parent_asin = response.find("RelatedItem").first["Item"]["ASIN"]
       end
     end
 
@@ -34,7 +34,7 @@ module Sucker
       it "finds related items" do
         worker << { "ItemId" => "B000ASPUES" }
         response = worker.get
-        response.node("RelatedItem").size.should > 1
+        response.find("RelatedItem").size.should > 1
       end
     end
   end

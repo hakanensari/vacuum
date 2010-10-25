@@ -15,7 +15,7 @@ module Sucker
         "IdType"        => "ASIN",
         "ResponseGroup" => "Images",
         "ItemId"        => "0816614024" }
-      worker.get.node("Item").first
+      worker.get.find("Item").first
     end
 
     it "has an ASIN" do

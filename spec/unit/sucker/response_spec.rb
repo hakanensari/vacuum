@@ -40,15 +40,24 @@ module Sucker
       end
     end
 
-    context "#node" do
-      it "returns a collection of hashified nodes" do
-        node = response.node("ItemAttributes")
+    context "#find" do
+      it "returns an array of matching nodes" do
+        node = response.find("ItemAttributes")
         node.map { |book| book["ISBN"] }.should eql asins
       end
 
       it "returns an empty array if there are no matches" do
-        node = response.node("Foo")
+        node = response.find("Foo")
         node.should eql []
+      end
+
+      it "yields to a block if given one" do
+        has_yielded = false
+        response.find("ItemAttributes") do |item|
+          has_yielded = true
+          item.should be_an_instance_of Hash
+        end
+        has_yielded.should be_true
       end
     end
 

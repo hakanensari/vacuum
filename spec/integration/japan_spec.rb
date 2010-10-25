@@ -16,7 +16,7 @@ module Sucker
         "IdType"        => "ASIN",
         "ResponseGroup" => ["ItemAttributes", "OfferFull"],
         "ItemId"        => "482224816X" }
-      worker.get.node("Item").first
+      worker.get.find("Item").first
     end
 
     it "returns an array of items" do

@@ -27,7 +27,7 @@ module Sucker
 
       bindings = threads.map do |thread|
         thread.join
-        item = thread[:response].node("Item").first
+        item = thread[:response].find("Item").first
         item["ItemAttributes"]["Binding"]
       end
 

@@ -31,7 +31,7 @@ module Sucker
 
       response = worker.get
       response.should be_valid
-      response.node("TotalPages").first.should be_an_instance_of String
+      response.find("TotalPages").first.should be_an_instance_of String
     end
   end
 end

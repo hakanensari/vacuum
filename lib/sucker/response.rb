@@ -18,15 +18,22 @@ module Sucker #:nodoc
       self.time = curl.total_time
     end
 
-    # Queries an xpath and returns result as an array of hashes
+    # Queries an xpath and returns an array of matching nodes
     #
-    # For instance, to get all items in an item lookup query:
+    # Will yield each match if a block is is given
     #
     #   response = worker.get
-    #   response.node("Item").each { |item| ... }
+    #   response.find("Item") { |item| ... }
     #
-    def node(path)
-      xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
+    def find(path)
+      node = xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
+      node.each { |e| yield e } if block_given?
+      node
+    end
+
+    def node(path) #:nodoc
+      warn "[DEPRECATION] `node` is deprecated.  Use `find` instead."
+      find(path)
     end
 
     # Parses the response into a simple hash
@@ -58,7 +65,7 @@ module Sucker #:nodoc
 
     private
 
-    # Let's massage the somewhat-verbose XML Mini hash into better shape
+    # Let's massage that hash
     def strip_content(node)
       case node
       when Array 

@@ -23,13 +23,13 @@ module Sucker
     end
 
     it "returns two errors" do
-      errors = response.node("Error")
+      errors = response.find("Error")
       errors.size.should eql 2
       errors.first["Message"].should include "not a valid value"
     end
 
     it "returns one item" do
-      items = response.node("ItemAttributes")
+      items = response.find("ItemAttributes")
       items.size.should eql 1
     end
   end

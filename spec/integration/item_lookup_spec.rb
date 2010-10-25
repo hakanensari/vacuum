@@ -25,7 +25,7 @@ module Sucker
         worker.get
       end
 
-      let(:item) { response.node("Item").first }
+      let(:item) { response.find("Item").first }
 
       it "returns an item" do
         item.should be_an_instance_of Hash
@@ -41,8 +41,8 @@ module Sucker
       end
 
       it "returns no errors" do
-        response.node("Error").should be_empty
-        response.node("Error").should be_an_instance_of Array
+        response.find("Error").should be_empty
+        response.find("Error").should be_an_instance_of Array
       end
     end
 
@@ -51,7 +51,7 @@ module Sucker
 
       let(:items) do
         worker << { "ItemId" => ["0816614024", "0143105825"] }
-        worker.get.node("Item")
+        worker.get.find("Item")
       end
 
       it "returns two items" do

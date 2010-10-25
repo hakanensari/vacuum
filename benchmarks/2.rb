@@ -27,7 +27,7 @@ loop do
 
     throttle("bm", pause) do
       resp = worker.get
-      resp.node("ItemAttributes").first["ISBN"] rescue puts(resp.body)
+      resp.find("ItemAttributes").first["ISBN"] rescue puts(resp.body)
       puts Time.now
     end
   end

@@ -19,7 +19,7 @@ module Sucker
 
     it "returns alternate versions" do
       response = worker.get
-      alternate_versions = response.node("AlternateVersion")
+      alternate_versions = response.find("AlternateVersion")
       alternate_versions.should be_an_instance_of Array
       alternate_versions.first.should have_key "ASIN"
     end

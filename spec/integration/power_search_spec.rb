@@ -26,7 +26,7 @@ module Sucker
     end
 
     it "returns matches" do
-      items  = worker.get.node("Item")
+      items  = worker.get.find("Item")
       items.size.should > 0
       items.each do |item|
         item["ItemAttributes"]["Title"].should_not be_nil

@@ -18,7 +18,7 @@ module Sucker
         "MerchantId"    => "All",
         "ResponseGroup" => ["ItemAttributes", "OfferFull"],
         "ItemId"        => "2070119874" }
-      worker.get.node("Item").first
+      worker.get.find("Item").first
     end
 
     it "returns an item" do
