@@ -20,7 +20,7 @@ module Sucker #:nodoc
 
     # Queries an xpath and returns an array of matching nodes
     #
-    # Will yield each match if a block is is given
+    # Will yield each match if a block is given
     #
     #   response = worker.get
     #   response.find("Item") { |item| ... }
