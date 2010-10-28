@@ -73,7 +73,7 @@ module Sucker
       
       context "when there are no matches" do
 
-        it "returns an empty array if there are no matches" do
+        it "returns an empty array" do
           node = response.find("Foo")
           node.should eql []
         end
