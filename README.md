@@ -58,7 +58,7 @@ Stubbing
 
 Use [VCR](http://github.com/myronmarston/vcr) to stub your requests.
 
-Caveat: Match URIs on host only and create a new cassette for each stubbed query. [This is how I do it](http://github.com/papercavalier/sucker/blob/master/spec/support/vcr.rb).
+Caveat: Match URIs on host only and create a new cassette for each query. [This is how I do it](http://github.com/papercavalier/sucker/blob/master/spec/support/vcr.rb).
 
 Compatibility
 -------------
