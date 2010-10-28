@@ -36,7 +36,7 @@ module Sucker #:nodoc
       args.each { |k, v| send("#{k}=", v) }
     end
 
-    # A helper method that merges a hash into existing parameters
+    # Merges a hash into existing parameters
     #
     #   worker = Sucker.new
     #   worker << {
