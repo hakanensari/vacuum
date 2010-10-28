@@ -81,6 +81,17 @@ module Sucker #:nodoc
       Response.new(curl)
     end
 
+    # Similar to get but raises an error if response is not valid
+    def get!
+      response = get
+
+      unless response.valid?
+        raise ResponseError, response.inspect
+      end
+
+      response
+    end
+
     # Sets the AWS Access Key ID
     #
     #   worker = Sucker.new

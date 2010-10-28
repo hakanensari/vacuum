@@ -58,8 +58,18 @@ module Sucker
     end
 
     context "#get" do
-      it "returns a Response object" do
-        worker.get.class.ancestors.should include Sucker::Response
+      it "returns a response" do
+        worker.get.class.ancestors.should include Response
+      end
+    end
+
+    context "#get!" do
+      it "raises if response is not valid" do
+        worker << {
+          "Operation"     => "ItemLookup",
+          "IdType"        => "ASIN",
+          "ItemId"        => "0816614024" }
+        lambda { worker.get! }.should raise_error ResponseError
       end
     end
 

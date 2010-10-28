@@ -83,4 +83,6 @@ module Sucker #:nodoc
       end
     end
   end
+
+  class ResponseError < StandardError; end
 end
