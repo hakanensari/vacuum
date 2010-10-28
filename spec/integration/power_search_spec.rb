@@ -9,7 +9,9 @@ require "spec_helper"
 # isbn: 0446394319 or 0306806819 or 1567993850
 
 module Sucker
+
   describe "Power search" do
+
     use_vcr_cassette "integration/power_search", :record => :new_episodes
 
     let(:worker) do
@@ -31,6 +33,9 @@ module Sucker
       items.each do |item|
         item["ItemAttributes"]["Title"].should_not be_nil
       end
+
     end
+
   end
+
 end

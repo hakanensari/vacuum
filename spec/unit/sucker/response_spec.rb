@@ -2,7 +2,9 @@
 require "spec_helper"
 
 module Sucker
+
   describe Response do
+
     use_vcr_cassette "unit/sucker/response", :record => :new_episodes
 
     let(:asins) { ["0816614024", "0143105825"] }
@@ -20,48 +22,68 @@ module Sucker
       worker.get
     end
 
-    context ".new" do
-      it "sets the response body" do
+    describe ".new" do
+
+      it "initializes the response body" do
         response.body.should be_an_instance_of String
       end
 
-      it "sets the response code" do
+      it "initializes the response code" do
         response.code.should == 200
       end
 
-      it "sets the response time" do
+      it "initializes the response time" do
         response.time.should be_an_instance_of Float
       end
     end
 
-    context "#xml" do
+    describe "#xml" do
+
       it "returns a Nokogiri document" do
         response.xml.should be_an_instance_of Nokogiri::XML::Document
       end
+
     end
 
-    context "#find" do
-      it "returns an array of matching nodes" do
-        node = response.find("ItemAttributes")
-        node.map { |book| book["ISBN"] }.should eql asins
-      end
+    describe "#find" do
 
-      it "returns an empty array if there are no matches" do
-        node = response.find("Foo")
-        node.should eql []
-      end
+      context "when given a block" do
 
-      it "yields to a block if given one" do
-        has_yielded = false
-        response.find("ItemAttributes") do |item|
-          has_yielded = true
-          item.should be_an_instance_of Hash
+        it "yields" do
+          has_yielded = false
+
+          response.find("ItemAttributes") do |item|
+            has_yielded = true
+            item.should be_an_instance_of Hash
+          end
+
+          has_yielded.should be_true
         end
-        has_yielded.should be_true
+
       end
+
+      context "when there are matches" do
+
+        it "returns an array of matching nodes" do
+          node = response.find("ItemAttributes")
+          node.map { |book| book["ISBN"] }.should eql asins
+        end
+
+      end
+      
+      context "when there are no matches" do
+
+        it "returns an empty array if there are no matches" do
+          node = response.find("Foo")
+          node.should eql []
+        end
+
+      end
+
     end
 
-    context "#to_hash" do
+    describe "#to_hash" do
+
       it "returns a hash" do
         response.to_hash.should be_an_instance_of Hash
       end
@@ -85,17 +107,30 @@ module Sucker
         response.body = "<Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title>"
         response.to_hash["Title"].should eql "スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則"
       end
+
     end
 
-    context "#valid?" do
-      it "returns true if the HTTP status is OK" do
-        response.should be_valid
+    describe "#valid?" do
+
+      context "when HTTP status is OK" do
+
+        it "returns true" do
+          response.should be_valid
+        end
+
       end
 
-      it "returns false if the HTTP status is not OK" do
-        response.code = 403
-        response.should_not be_valid
+      context "when HTTP status is not OK" do
+
+        it "returns false" do
+          response.code = 403
+          response.should_not be_valid
+        end
+
       end
+
     end
+
   end
+
 end

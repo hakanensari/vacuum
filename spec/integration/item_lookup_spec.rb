@@ -1,7 +1,9 @@
 require "spec_helper"
 
 module Sucker
+
   describe "Item lookup" do
+
     let(:worker) do
       worker = Sucker.new(
         :locale => "us",
@@ -17,7 +19,8 @@ module Sucker
       worker
     end
 
-    context "single item" do
+    context "when a single item is requested" do
+
       use_vcr_cassette "integration/item_lookup/single", :record => :new_episodes
 
       let(:response) do
@@ -44,9 +47,11 @@ module Sucker
         response.find("Error").should be_empty
         response.find("Error").should be_an_instance_of Array
       end
+
     end
 
-    context "multiple items" do
+    context "when multiple items are requested" do
+
       use_vcr_cassette "integration/item_lookup/multiple", :record => :new_episodes
 
       let(:items) do
@@ -54,10 +59,13 @@ module Sucker
         worker.get.find("Item")
       end
 
-      it "returns two items" do
+      it "returns more than one item" do
         items.should be_an_instance_of Array
         items.size.should eql 2
       end
+
     end
+
   end
+
 end

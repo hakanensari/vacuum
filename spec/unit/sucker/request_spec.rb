@@ -1,7 +1,9 @@
 require "spec_helper"
 
 module Sucker
+
   describe Request do
+
     use_vcr_cassette "unit/sucker/request", :record => :new_episodes
 
     let(:worker) do
@@ -11,59 +13,66 @@ module Sucker
         :secret => "secret")
     end
 
-    context ".new" do
+    describe ".new" do
+
       it "sets default parameters" do
         default_parameters = {
           "Service" => "AWSECommerceService",
           "Version" => Sucker::CURRENT_AMAZON_API_VERSION }
         worker.parameters.should include default_parameters
       end
+
     end
 
-    context "#<<" do
+    describe "#<<" do
+
       it "merges a hash into the parameters" do
         worker << { "foo" => "bar" }
         worker.parameters["foo"].should eql "bar"
       end
+
     end
 
-    context "#version=" do
+    describe "#version=" do
+
       it "sets the Amazon API version" do
         worker.version = "foo"
         worker.parameters["Version"].should eql "foo"
       end
+
     end
 
-    context "#associate_tag=" do
+    describe "#associate_tag=" do
+
       it "sets the associate tag in the parameters" do
         worker.associate_tag = "foo"
         worker.parameters["AssociateTag"].should eql "foo"
       end
+
     end
 
-    context "#curl" do
-      it "returns a cURL object" do
+    describe "#curl" do
+
+      it "returns curl" do
         worker.curl.should be_an_instance_of Curl::Easy
       end
 
-      it "configures the cURL object" do
-        worker.curl.interface.should be_nil
+      context "when given a block" do
 
-        worker.curl do |curl|
-          curl.interface = "eth1"
+        it "yields curl" do
+          worker.curl.interface.should be_nil
+
+          worker.curl { |curl| curl.interface = "eth1" }
+
+          worker.curl.interface.should eql "eth1"
         end
 
-        worker.curl.interface.should eql "eth1"
       end
+
     end
 
-    context "#get" do
-      it "returns a response" do
-        worker.get.class.ancestors.should include Response
-      end
-    end
+    describe "#get!" do
 
-    context "#get!" do
       it "raises if response is not valid" do
         worker << {
           "Operation"     => "ItemLookup",
@@ -71,17 +80,30 @@ module Sucker
           "ItemId"        => "0816614024" }
         lambda { worker.get! }.should raise_error ResponseError
       end
+
     end
 
-    context "#key=" do
+    describe "#get" do
+
+      it "returns a response" do
+        worker.get.class.ancestors.should include Response
+      end
+
+    end
+
+    describe "#key=" do
+
       it "sets the Amazon AWS access key in the parameters" do
         worker.key = "foo"
         worker.parameters["AWSAccessKeyId"].should eql "foo"
       end
+
     end
 
     context "private methods" do
-      context "#build_query" do
+
+      describe "#build_query" do
+
         it "canonicalizes parameters" do
           query = worker.send(:build_query)
           query.should match /Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
@@ -110,33 +132,45 @@ module Sucker
           query = worker.send(:build_query)
           query.should match /Foo=1/
         end
+
       end
 
-      context "#host" do
+      describe "#host" do
+
         it "returns a host" do
           worker.locale = "fr"
           worker.send(:host).should eql "ecs.amazonaws.fr"
         end
+
       end
 
-      context "#build_signed_query" do
+      describe "#build_signed_query" do
+
         it "returns a signed query string" do
           query = worker.send :build_signed_query
           query.should match /&Signature=.*/
         end
+
       end
 
-      context "#timestamp" do
+      describe "#timestamp" do
+
         it "returns a timestamp" do
           worker.send(:timestamp)["Timestamp"].should match /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
         end
+
       end
 
-      context "#uri" do
+      describe "#uri" do
+
         it "returns the URI with which to query Amazon" do
           worker.send(:uri).should be_an_instance_of URI::HTTP
         end
+
       end
+
     end
+
   end
+
 end

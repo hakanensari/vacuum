@@ -1,7 +1,9 @@
 require "spec_helper"
 
 module Sucker
-  describe "Errors" do
+
+  describe "Item lookup" do
+
     use_vcr_cassette "integration/errors", :record => :new_episodes
 
     let(:response) do
@@ -22,15 +24,17 @@ module Sucker
       worker.get
     end
 
-    it "returns two errors" do
+    it "returns found items" do
+      items = response.find("ItemAttributes")
+      items.size.should eql 1
+    end
+
+    it "returns errors" do
       errors = response.find("Error")
       errors.size.should eql 2
       errors.first["Message"].should include "not a valid value"
     end
 
-    it "returns one item" do
-      items = response.find("ItemAttributes")
-      items.size.should eql 1
-    end
   end
+
 end

@@ -1,7 +1,9 @@
 require "spec_helper"
 
 module Sucker
+
   describe "Keyword Search" do
+
     use_vcr_cassette "integration/keyword_search", :record => :new_episodes
 
     let(:worker) do
@@ -23,6 +25,9 @@ module Sucker
       items.each do |item|
         item["ItemAttributes"]["Title"].should_not be_nil
       end
+
     end
+
   end
+
 end

@@ -2,6 +2,7 @@ require "spec_helper"
 
 module Sucker
   describe "Seller listing search" do
+
     use_vcr_cassette "integration/seller_listings_search", :record => :new_episodes
 
     let(:listings) do
@@ -25,5 +26,7 @@ module Sucker
       listings["SellerListing"].size.should be > 0
       listings["SellerListing"].first.has_key?("Price").should be_true
     end
+
   end
+
 end
