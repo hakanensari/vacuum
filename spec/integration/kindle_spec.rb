@@ -14,7 +14,7 @@ module Sucker
           "Operation"     => "ItemSearch",
           "SearchIndex"   => "Books",
           "Power"         => "deleuze binding:kindle",
-          "ResponseGroup" => ["ItemAttributes"] }
+          "ResponseGroup" => "ItemAttributes" }
         worker.get.find("Item")
       end
 
@@ -35,7 +35,7 @@ module Sucker
           "Operation"     => "ItemSearch",
           "SearchIndex"   => "KindleStore",
           "Keywords"      => "deleuze",
-          "ResponseGroup" => ["ItemAttributes", "OfferSummary"] }
+          "ResponseGroup" => "ItemAttributes" }
         worker.get.find("Item")
       end
 
