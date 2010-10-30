@@ -1,4 +1,4 @@
-module Sucker #:nodoc
+module Sucker #:nodoc:
 
   # A wrapper around the API request
   class Request

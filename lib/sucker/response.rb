@@ -1,4 +1,4 @@
-module Sucker #:nodoc
+module Sucker #:nodoc:
 
   # A Nokogiri-driven wrapper around the cURL response
   class Response

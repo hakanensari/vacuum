@@ -1,3 +1,3 @@
-module Sucker #:nodoc
+module Sucker #:nodoc:
   VERSION = "1.0.0.beta.4"
 end
