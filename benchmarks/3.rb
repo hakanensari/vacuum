@@ -1,13 +1,14 @@
 # Some basic threading with multiple venues. Will use only one ASIN.
 
-require File.expand_path("../../spec/spec_helper", __FILE__)
+require File.expand_path("../bm_helper", __FILE__)
+
 require "throttler"
 include Throttler
 
 pause = 1
 
 asins = ["0816614024"]
-  
+
 loop do
 
   # Since the throttles in the threads do not block this loop, we'd like

@@ -6,9 +6,9 @@
 
 pause = 1
 
-require File.expand_path("../../spec/spec_helper", __FILE__)
-require "throttler"
+require File.expand_path("../bm_helper", __FILE__)
 
+require "throttler"
 include Throttler
 
 loop do
