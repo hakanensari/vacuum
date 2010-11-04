@@ -7,8 +7,6 @@ include Throttler
 
 start_time = Time.now
 
-resp = nil
-
 calls = {
   :errors     => 0,
   :timestamps => [] }
@@ -24,15 +22,17 @@ worker << {
   "ResponseGroup" => ["ItemAttributes"] }
 
 puts "key: #{amazon["key"]}"
-puts "associate tag: #{amazon["associate]}"
+puts "associate tag: #{amazon["associate"]}"
 
 asins_fixture.each do |asin|
   worker << { "ItemId" => asin }
-  throttle('bm', 1) { resp = worker.get }
-  if resp.valid?
-    calls[:timestamps].push(Time.now)
-  else
-    calls[:errors] += 1
+  throttle('bm', 1) do
+    resp = worker.get
+    if resp.valid?
+      calls[:timestamps].push(Time.now)
+    else
+      calls[:errors] += 1
+    end
   end
 
   # Print calls every minute
