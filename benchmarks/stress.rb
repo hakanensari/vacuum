@@ -1,6 +1,6 @@
 # Stress-test Amazons over a single IP
 
-# So we print average of last x seconds
+# So we print average of last x seconds or so
 frequency = 60
 
 require File.expand_path("../bm_helper", __FILE__)
@@ -14,7 +14,7 @@ calls = {}
 start_time = Time.now
 count = 0
 
-asins_fixture.each_slice(10) do |asins|
+asins_fixture.each_slice(1) do |asins|
   threads = locales.map do |locale|
 
     # Initialize counter
