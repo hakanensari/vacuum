@@ -100,12 +100,11 @@ module Sucker
 			context "when a block is given" do
 
   			it "yields each match to a block and maps returned values" do
-          result = response.map("ItemAttributes") do |item|
-            item.should be_an_instance_of Hash
-						"foo"
-          end
+          # Collect EANs
+          eans = response.map("ItemAttributes") { |item| item["EAN"] }
 
-          result.uniq.should eql ["foo"]
+          eans.should be_an_instance_of Array
+          eans.each { |ean| ean.match(/^[0-9]{13}$/).should be_true }
         end
 
       end
