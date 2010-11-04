@@ -43,9 +43,13 @@ Iterate over items in your item lookup.
 
     response.each("Item") { |item| ... }
 
-Iterate over errors.
+Map errors to a block.
 
     errors = response.map("Error") { |error| ... }
+
+Or simply get a hash of matching items.
+
+    items = response.find("Item")
 
 Repeat ad infinitum.
 
