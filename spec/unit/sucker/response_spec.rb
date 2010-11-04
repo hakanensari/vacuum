@@ -47,21 +47,6 @@ module Sucker
 
     describe "#find" do
 
-      context "when given a block" do
-
-        it "yields" do
-          has_yielded = false
-
-          response.find("ItemAttributes") do |item|
-            has_yielded = true
-            item.should be_an_instance_of Hash
-          end
-
-          has_yielded.should be_true
-        end
-
-      end
-
       context "when there are matches" do
 
         it "returns an array of matching nodes" do
@@ -70,7 +55,7 @@ module Sucker
         end
 
       end
-      
+
       context "when there are no matches" do
 
         it "returns an empty array" do
@@ -81,6 +66,60 @@ module Sucker
       end
 
     end
+
+		describe "#each" do
+
+			context "when a block is given" do
+
+  			it "yields each match to a block" do
+          has_yielded = false
+
+          response.each("ItemAttributes") do |item|
+            has_yielded = true
+            item.should be_an_instance_of Hash
+          end
+
+          has_yielded.should be_true
+        end
+
+      end
+
+			context "when no block is given" do
+
+				it "raises error" do
+					lambda { response.each("ItemAttributes") }.should raise_error(LocalJumpError)
+				end
+
+			end
+
+		end
+
+
+		describe "#map" do
+
+			context "when a block is given" do
+
+  			it "yields each match to a block and maps returned values" do
+          result = response.map("ItemAttributes") do |item|
+            item.should be_an_instance_of Hash
+						"foo"
+          end
+
+          result.uniq.should eql ["foo"]
+        end
+
+      end
+
+			context "when no block is given" do
+
+				it "raises error" do
+					lambda { response.map("ItemAttributes") }.should raise_error(LocalJumpError)
+				end
+
+			end
+
+		end
+
 
     describe "#to_hash" do
 

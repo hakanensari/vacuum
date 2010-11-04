@@ -18,17 +18,29 @@ module Sucker #:nodoc:
       self.time = curl.total_time
     end
 
+		# A shorthand that yields each match to a block
+		#
+		#   worker.get.each("Item") { |item| process(item) }
+		#
+		def each(path)
+			find(path).each { |node| yield node }
+		end
+
     # Queries an xpath and returns an array of matching nodes
     #
-    # Will yield each match if a block is given
-    #
     #   response = worker.get
-    #   response.find("Item") { |item| ... }
+    #   response.find("Item").each { |item| ... }
     #
     def find(path)
-      node = xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
-      node.each { |e| yield e } if block_given?
-      node
+      xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
+    end
+
+		# A shorthand that yields matches to a block and collects returned values
+		#
+		#   descriptions = worker.get.map("Item") { |item| build_description(item) }
+		#
+		def map(path)
+			find(path).map { |e| yield e }
     end
 
     def node(path) # :nodoc:
