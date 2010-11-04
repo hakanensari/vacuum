@@ -41,11 +41,11 @@ Debug.
 
 Iterate over items in your item lookup.
 
-    response.find("Item")  { |item| ... }
+    response.each("Item") { |item| ... }
 
 Iterate over errors.
 
-    response.find("Error") { |error| ... }
+    errors = response.map("Error") { |error| ... }
 
 Repeat ad infinitum.
 
@@ -64,3 +64,6 @@ Compatibility
 -------------
 
 Specs pass against Ruby 1.8.7, Ruby 1.9.2, and Rubinius 1.1.
+
+Sucker works seamlessly with or without Rails.
+
