@@ -23,7 +23,7 @@ module Sucker #:nodoc:
     #   worker.get.each("Item") { |item| process(item) }
     #
     def each(path)
-      find(path).each { |node| yield node }
+      find(path).each { |e| yield e }
     end
 
     # Queries an xpath and returns an array of matching nodes
@@ -32,7 +32,7 @@ module Sucker #:nodoc:
     #   response.find("Item").each { |item| ... }
     #
     def find(path)
-      xml.xpath("//xmlns:#{path}").map { |node| strip_content(node.to_hash[path]) }
+      xml.xpath("//xmlns:#{path}").map { |e| strip_content(e.to_hash[path]) }
     end
 
     # A shorthand that yields matches to a block and collects returned values
