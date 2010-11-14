@@ -11,10 +11,10 @@ timestamps = {
   :fr => [],
   :jp => []
 }
-started_at = Time.now
-printed_at = started_at
+
 print "Enter batch size: "
 batch_size = STDIN.gets.to_i
+printed_at = Time.now
 
 asins_fixture.each_slice(batch_size) do |asins|
   threads = timestamps.keys.map do |locale|
@@ -66,7 +66,7 @@ asins_fixture.each_slice(batch_size) do |asins|
       average = (values.
         select { |ts| printed_at - ts < 60.0 }.size / 60.0).
         round(3)
-      puts [locale.to_s, values.size, average].
+      puts [locale, values.size, average].
         map { |w| w.to_s.center(10) }.join(' | ')
     end
   end
