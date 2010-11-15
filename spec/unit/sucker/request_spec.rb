@@ -54,12 +54,17 @@ module Sucker
     describe "#curl" do
 
       it "returns curl" do
+        pending "this should return a config proxy that I can use with both Easy
+        and Multi. Curl itself, be it Easy or Multi, we should create anew with
+        each request. Reusing Curl is problematic when threading."
+
         worker.curl.should be_an_instance_of Curl::Easy
       end
 
       context "when given a block" do
 
         it "yields curl" do
+          pending "it should yield the config proxy."
           worker.curl.interface.should be_nil
 
           worker.curl { |curl| curl.interface = "eth1" }
@@ -74,6 +79,8 @@ module Sucker
     describe "#get!" do
 
       it "raises if response is not valid" do
+        pending "remove this method"
+
         worker << {
           "Operation"     => "ItemLookup",
           "IdType"        => "ASIN",
@@ -91,13 +98,36 @@ module Sucker
 
     end
 
+    describe "#get_all_locales" do
+
+      it "returns an array of responses"
+
+      context "when given a block" do
+
+        it "yields responses"
+
+      end
+    end
+
     describe "#key=" do
 
-      it "sets the Amazon AWS access key in the parameters" do
-        worker.key = "foo"
-        worker.parameters["AWSAccessKeyId"].should eql "foo"
+      context "when passed a string" do
+
+        it "sets the Amazon AWS access key in the parameters" do
+          worker.key = "foo"
+          worker.parameters["AWSAccessKeyId"].should eql "foo"
+        end
+
       end
 
+      context "when passed a hash" do
+
+        it "sets the Amazon AWS access keys in the parameters" do
+          pending "for those with throttled accounts who want to query multiple
+          locales"
+        end
+
+      end
     end
 
     context "private methods" do
