@@ -18,13 +18,12 @@ Gem::Specification.new do |s|
   s.add_dependency("nokogiri", ["~> 1.4.0"])
   s.add_dependency("curb", ["~> 0.7.0"])
 
-  s.add_development_dependency("rake", "~> 0.8.7")
   s.add_development_dependency("rdiscount", "~> 1.6.5")
-  s.add_development_dependency("rspec", ["~> 2.0.0"])
+  s.add_development_dependency("rspec", ["~> 2.1.0"])
   s.add_development_dependency("throttler", "~> 0.2.1")
   s.add_development_dependency("sdoc-helpers", "~> 0.1.4")
-  s.add_development_dependency("vcr", "~> 1.2.0")
-  s.add_development_dependency("webmock", "~> 1.4.0")
+  s.add_development_dependency("vcr", "~> 1.3.1")
+  s.add_development_dependency("webmock", "~> 1.6.1")
 
   s.files         = Dir.glob("lib/**/*") + %w(LICENSE README.md CHANGELOG.md)
   s.test_files    = Dir.glob("spec/**/*")
