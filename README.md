@@ -1,9 +1,9 @@
 Sucker
 ======
 
-Sucker is a Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on [curb](http://github.com/taf2/curb) and [the Nokogiri implementation of the XML Mini module](http://github.com/rails/rails/blob/master/activesupport/lib/active_support/xml_mini/nokogiri.rb) in Active Support. It's fast and supports __the entire API__.
+Sucker is a minimal Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on [curb](http://github.com/taf2/curb) and [the Nokogiri implementation of the XML Mini module](http://github.com/rails/rails/blob/master/activesupport/lib/active_support/xml_mini/nokogiri.rb) in Active Support. It's fast and supports __the entire API__.
 
-![Sucker](http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg/480px-FEMA_-_32011_-_FEMA_Joint_Field_Office_%28JFO%29_preparation_in_Ohio.jpg)
+![Electrolux](http://github.com/papercavalier/peddler/raw/master/electrolux.jpg)
 
 Examples
 --------
@@ -62,7 +62,7 @@ Stubbing
 
 Use [VCR](http://github.com/myronmarston/vcr) to stub your requests.
 
-Caveat: Match URIs on host only and create a new cassette for each query. [This is how I do it](http://github.com/papercavalier/sucker/blob/master/spec/support/vcr.rb).
+Caveat: Match URIs on host only and create a new cassette for each query. [This is how my VCR helper looks like.](http://github.com/papercavalier/sucker/blob/master/spec/support/vcr.rb).
 
 Compatibility
 -------------
