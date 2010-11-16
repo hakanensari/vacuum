@@ -1,3 +1,5 @@
+require "active_support/xml_mini/nokogiri"
+
 module Sucker #:nodoc:
 
   # A Nokogiri-driven wrapper around the cURL response
@@ -12,10 +14,14 @@ module Sucker #:nodoc:
     # Transaction time in seconds for request
     attr_accessor :time
 
+    # The request URI
+    attr_accessor :uri
+
     def initialize(curl)
       self.body = curl.body_str
       self.code = curl.response_code
       self.time = curl.total_time
+      self.uri  = curl.url
     end
 
     # A shorthand that yields each match to a block

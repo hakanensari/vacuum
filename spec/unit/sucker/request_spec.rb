@@ -42,50 +42,51 @@ module Sucker
 
     end
 
-    describe "#associate_tag=" do
+    describe "#associate_tag" do
 
-      it "sets the associate tag in the parameters" do
-        worker.associate_tag = "foo"
-        worker.parameters["AssociateTag"].should eql "foo"
+      it "returns the associate tag for the current locale" do
+        worker.instance_variable_set(:@associate_tags, { :us => 'foo-bar'})
+
+        worker.associate_tag.should eql 'foo-bar'
+      end
+
+      it "returns nil if an associate tag is not set for the current locale" do
+        worker.associate_tag.should eql nil
       end
 
     end
 
-    describe "#curl" do
+    describe "#associate_tags=" do
 
-      it "returns curl" do
-        pending "this should return a config proxy that I can use with both Easy
-        and Multi. Curl itself, be it Easy or Multi, we should create anew with
-        each request. Reusing Curl is problematic when threading."
+      it "sets associate tags for the locales" do
+        tags = {
+          :us => 'foo',
+          :uk => 'bar',
+          :de => 'baz',
+          :ca => 'foo',
+          :fr => 'bar',
+          :jp => 'baz' }
+        worker.associate_tags = tags
 
-        worker.curl.should be_an_instance_of Curl::Easy
+        worker.instance_variable_get(:@associate_tags).should eql tags
+      end
+
+    end
+
+    describe "#curl_opts" do
+
+      it "returns options for curl" do
+        worker.curl_opts.should be_an_instance_of Hash
       end
 
       context "when given a block" do
 
-        it "yields curl" do
-          pending "it should yield the config proxy."
-          worker.curl.interface.should be_nil
+        it "yields options for curl" do
+          worker.curl_opts { |c| c.interface = "eth1" }
 
-          worker.curl { |curl| curl.interface = "eth1" }
-
-          worker.curl.interface.should eql "eth1"
+          worker.curl_opts[:interface].should eql "eth1"
         end
 
-      end
-
-    end
-
-    describe "#get!" do
-
-      it "raises if response is not valid" do
-        pending "remove this method"
-
-        worker << {
-          "Operation"     => "ItemLookup",
-          "IdType"        => "ASIN",
-          "ItemId"        => "0816614024" }
-        lambda { worker.get! }.should raise_error ResponseError
       end
 
     end
@@ -96,70 +97,119 @@ module Sucker
         worker.get.class.ancestors.should include Response
       end
 
+      it "raises an argument error if no key is provided" do
+        worker.key = nil
+        expect do
+          worker.get
+        end.to raise_error(/AWS access key missing/)
+      end
+
+      it "raises an argument error if no locale is provided" do
+        worker.locale = nil
+        expect do
+          worker.get
+        end.to raise_error(/Locale missing/)
+      end
     end
 
-    describe "#get_all_locales" do
+    describe "#get_all" do
 
-      it "returns an array of responses"
+      it "returns an array of responses" do
+        responses = worker.get_all
+
+        responses.should be_an_instance_of Array
+        responses.each { |resp| resp.should be_an_instance_of Response }
+      end
 
       context "when given a block" do
 
-        it "yields responses"
+        it "yields responses" do
+          count = 0
+          worker.get_all do |resp|
+            resp.should be_an_instance_of Response
+            count += 1
+          end
 
+          count.should eql Request::HOSTS.size
+        end
       end
+    end
+
+    describe "#key" do
+
+      it "returns the Amazon AWS access key for the current locale" do
+        worker.instance_variable_set(:@keys, { :us => 'foo' })
+
+        worker.key.should eql 'foo'
+      end
+
     end
 
     describe "#key=" do
 
-      context "when passed a string" do
+      it "sets a global Amazon AWS access key" do
+        worker.key = "foo"
+        keys = worker.instance_variable_get(:@keys)
 
-        it "sets the Amazon AWS access key in the parameters" do
-          worker.key = "foo"
-          worker.parameters["AWSAccessKeyId"].should eql "foo"
-        end
-
+        keys.size.should eql Request::HOSTS.size
+        keys.values.uniq.should eql ["foo"]
       end
 
-      context "when passed a hash" do
+    end
 
-        it "sets the Amazon AWS access keys in the parameters" do
-          pending "for those with throttled accounts who want to query multiple
-          locales"
-        end
+    describe "#keys=" do
 
+      it "sets distinct Amazon AWS access keys for the locales" do
+        keys = {
+          :us => 'foo',
+          :uk => 'bar',
+          :de => 'baz',
+          :ca => 'foo',
+          :fr => 'bar',
+          :jp => 'baz' }
+        worker.keys = keys
+
+        worker.instance_variable_get(:@keys).should eql keys
       end
+
     end
 
     context "private methods" do
 
       describe "#build_query" do
 
+        let(:query) { worker.send(:build_query) }
+
         it "canonicalizes parameters" do
-          query = worker.send(:build_query)
           query.should match /Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
+        end
+
+        it "includes the key for the current locale" do
+          worker.instance_variable_set(:@keys, { :us => 'foo' })
+          query.should include 'AWSAccessKeyId=foo'
+        end
+
+        it "includes a timestamp" do
+          query.should include 'Timestamp='
         end
 
         it "sorts parameters" do
           worker.parameters["AAA"] = "foo"
-          query = worker.send(:build_query)
           query.should match /^AAA=foo/
         end
 
         it "converts a parameter whose value is an array to a string" do
           worker.parameters["Foo"] = ["bar", "baz"]
-          query = worker.send(:build_query)
           query.should match /Foo=bar%2Cbaz/
         end
 
         it "handles integer parameter values" do
           worker.parameters["Foo"] = 1
-          query = worker.send(:build_query)
           query.should match /Foo=1/
         end
 
         it "handles floating-point parameter values" do
           worker.parameters["Foo"] = 1.0
-          query = worker.send(:build_query)
           query.should match /Foo=1/
         end
 

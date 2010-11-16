@@ -5,11 +5,36 @@ module Sucker
 
   describe "Item lookup" do
 
-    context "when using threads to search multiple locales" do
+    use_vcr_cassette "integration/multiple_locales", :record => :new_episodes
 
-      use_vcr_cassette "integration/multiple_locales", :record => :new_episodes
+    context "when using Curl::Multi to search all locales simultaneously" do
 
-      it "returns matches across all locales" do
+      it "returns matches for all locales" do
+        worker = Sucker.new(
+          :key    => amazon["key"],
+          :secret => amazon["secret"])
+        worker << {
+          "Operation"     => "ItemLookup",
+          "IdType"        => "ASIN",
+          "ResponseGroup" => "ItemAttributes",
+          "ItemId"        => "0816614024" }
+
+        bindings = worker.get_all.map do |response|
+          item = response.find("Item").first
+          item["ItemAttributes"]["Binding"]
+        end
+
+        bindings.uniq.should =~ %w{ Paperback Taschenbuch Broché ペーパーバック }
+
+      end
+
+    end
+
+    context "when using threads to search all locales simultaneously" do
+
+      # Leaving this spec here for reference purposes. Use approach in above spec.
+
+      it "returns matches for all locales" do
         locales = %w{us uk de ca fr jp}
 
         params = {

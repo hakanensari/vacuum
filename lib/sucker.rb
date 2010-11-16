@@ -1,8 +1,5 @@
-require "active_support/xml_mini/nokogiri"
-require "curb"
 require "sucker/request"
 require "sucker/response"
-require "uri"
 
 # = Sucker
 #

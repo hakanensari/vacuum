@@ -1,3 +1,7 @@
+require "curb"
+require "ostruct"
+require "uri"
+
 module Sucker #:nodoc:
 
   # A wrapper around the API request
@@ -49,56 +53,125 @@ module Sucker #:nodoc:
       self.parameters.merge!(hash)
     end
 
-    # Sets the associate tag
+    # Returns the associate tag for the current locale
+    def associate_tag
+      @associate_tags[locale.to_sym] rescue nil
+    end
+
+    # Sets the associate tag for the current locale
     #
     #   worker = Sucker.new
     #   worker.associate_tag = 'foo-bar'
     #
     def associate_tag=(token)
-      parameters["AssociateTag"] = token
+      @associate_tags = HOSTS.keys.inject({}) do |tags, loc|
+        tags[loc] = token
+        tags
+      end
     end
 
-    # A configurable curl object
+    # Sets associate tags for all locales
+    #
+    #    tags = {
+    #      :us => 'foo-bar-10',
+    #      :uk => 'foo-bar-20',
+    #      :de => 'foo-bar-30',
+    #      ... }
+    #
+    #    worker = Sucker.new
+    #    worker.associate_tags = tags
+    #
+    def associate_tags=(tokens)
+      @associate_tags = tokens
+    end
+
+    # Returns options for curl and yields them if given a block
     #
     #   worker = Sucker.new
     #   worker.curl { |c| c.interface = "eth1" }
     #
-    def curl
-      @curl ||= Curl::Easy.new
-      yield @curl if block_given?
-      @curl
+    def curl_opts
+      @curl_opts ||= CurlOptions.new
+      yield @curl_opts if block_given?
+
+      @curl_opts.marshal_dump
     end
 
-    # Performs the request and returns a response object
+    # Performs a request and returns a response
     #
     #   worker = Sucker.new
     #   response = worker.get
     #
     def get
-      curl.url = uri.to_s
-      curl.perform
+      raise ArgumentError.new "Locale missing"         unless locale
+      raise ArgumentError.new "AWS access key missing" unless key
+
+      curl = Curl::Easy.perform(uri.to_s) do |easy|
+        curl_opts.each { |k, v| easy.send(k, v) }
+      end
 
       Response.new(curl)
     end
 
-    # Similar to get but raises an error if response is not valid
-    def get!
-      response = get
+    # Performs a request for all locales, returns an array of responses, and
+    # yields them if given a block
+    #
+    #    worker = Sucker.new
+    #
+    #    # This blocks until all requests are complete
+    #    responses = worker.get_all
+    #
+    #    # This does not block
+    #    worker.get_all do |response|
+    #      process_response
+    #    end
+    #
+    def get_all
+      uris = HOSTS.keys.map do |locale|
+        self.locale = locale
+        uri.to_s
+      end
+      responses = []
 
-      unless response.valid?
-        raise ResponseError, response.inspect
+      Curl::Multi.get(uris, curl_opts) do |curl|
+        response = Response.new(curl)
+        yield response if block_given?
+        responses << response
       end
 
-      response
+      responses
     end
 
-    # Sets the AWS Access Key ID
+    # Returns the AWS access key for the current locale
+    def key
+      @keys[locale.to_sym]
+    end
+
+    # Sets a global AWS access key ID
     #
     #   worker = Sucker.new
     #   worker.key = 'foo'
     #
     def key=(token)
-      parameters["AWSAccessKeyId"] = token
+      @keys = HOSTS.keys.inject({}) do |keys, locale|
+        keys[locale] = token
+        keys
+      end
+    end
+
+    # Sets distinct AWS access keys for the locales
+    #
+    #   keys = {
+    #     :us => 'foo',
+    #     :uk => 'bar',
+    #     :de => 'baz',
+    #     ... }
+    #
+    #   worker = Sucker.new
+    #   worker.keys = keys
+    #
+    def keys=(tokens)
+      @keys = tokens
     end
 
     # Sets the Amazon API version
@@ -116,6 +189,8 @@ module Sucker #:nodoc:
     def build_query
       parameters.
         merge(timestamp).
+        merge({ "AWSAccessKeyId" => key }).
+        merge({ "AssociateTag"   => associate_tag }).
         sort.
         collect do |k, v|
           "#{k}=" + escape(v.is_a?(Array) ? v.join(",") : v.to_s)
@@ -156,4 +231,7 @@ module Sucker #:nodoc:
       { "Timestamp" => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ') }
     end
   end
+
+  # Curl options
+  class CurlOptions < OpenStruct; end
 end
