@@ -9,7 +9,7 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.0.1)
+    activesupport (3.0.2)
     addressable (2.2.2)
     crack (0.1.8)
     curb (0.7.8)
