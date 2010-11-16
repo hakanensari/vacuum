@@ -3,7 +3,7 @@ Sucker
 
 Sucker is a minimal Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on [curb](http://github.com/taf2/curb) and [the Nokogiri implementation of the XML Mini module](http://github.com/rails/rails/blob/master/activesupport/lib/active_support/xml_mini/nokogiri.rb) in Active Support. It's fast and supports __the entire API__.
 
-![Electrolux](http://github.com/papercavalier/peddler/raw/master/electrolux.jpg)
+![Electrolux](http://github.com/papercavalier/sucker/raw/master/electrolux.jpg)
 
 Examples
 --------
