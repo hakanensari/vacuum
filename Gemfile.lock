@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sucker (1.0.0)
+    sucker (1.1.0)
       activesupport (>= 2.3.2)
       curb (~> 0.7.0)
       nokogiri (~> 1.4.0)
