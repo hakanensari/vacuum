@@ -1,34 +1,25 @@
-Version 1.0.0
+Version 1.1.0
 =============
 
-Release date: 2010-11-04
+* Removed Request#get!. Bloat.
+* Added Request#get_all to fetch responses from all venues
+  simultaneously.
+* Added Request#associate_tags= to set associate tags for all locales.
+* Added Request#keys= to set distinct keys for locales.
+* Request#get validates presence of key and locale.
 
-Added
------
+Version 1.0.0
+=============
 
 * Added #each and #map to Response. #find no longer yields.
 
 Version 1.0.0.beta4
 ===================
 
-Release date: 2010-10-28
-
-Added
------
-
 * Sucker::Request#get! raises an error if response is not valid.
 
 Version 1.0.0.beta3
 ===================
 
-Release date: 2010-10-25
-
-Added
------
-
 * Sucker::Response#find yields to a block if given one.
-
-Deprecated
-----------
-
 * Renamed #node to #find
