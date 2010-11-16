@@ -113,8 +113,8 @@ module Sucker #:nodoc:
       Response.new(curl)
     end
 
-    # Performs a request for all locales, returns an array of responses, and
-    # yields them if given a block
+    # Performs a request for all locales, returns an array of responses, and yields
+    # them if given a block
     #
     #    worker = Sucker.new
     #
