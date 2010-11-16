@@ -15,7 +15,7 @@ GEM
     curb (0.7.8)
     diff-lcs (1.1.2)
     json (1.4.6)
-    nokogiri (1.4.3.1)
+    nokogiri (1.4.4)
     rdiscount (1.6.5)
     rdoc (2.4.3)
     rspec (2.1.0)
