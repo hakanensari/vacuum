@@ -67,7 +67,7 @@ Caveat: Match URIs on host only and create a new cassette for each query. [This 
 Compatibility
 -------------
 
-Specs pass against Ruby 1.8.7, Ruby 1.9.2, and Rubinius 1.1.
+Specs pass against Ruby 1.8.7 and Ruby 1.9.2.
 
 Sucker works seamlessly with or without Rails.
 
