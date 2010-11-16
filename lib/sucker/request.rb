@@ -91,7 +91,7 @@ module Sucker #:nodoc:
     #   worker.curl { |c| c.interface = "eth1" }
     #
     def curl_opts
-      @curl_opts ||= CurlOptions.new
+      @curl_opts ||= OpenStruct.new
       yield @curl_opts if block_given?
 
       @curl_opts.marshal_dump
@@ -231,7 +231,4 @@ module Sucker #:nodoc:
       { "Timestamp" => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ') }
     end
   end
-
-  # Curl options
-  class CurlOptions < OpenStruct; end
 end
