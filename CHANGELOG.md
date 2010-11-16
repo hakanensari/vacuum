@@ -7,6 +7,7 @@ Version 1.1.0
 * Added Request#associate_tags= to set associate tags for all locales.
 * Added Request#keys= to set distinct keys for locales.
 * Request#get validates presence of key and locale.
+* Renamed Request#curl to Request#curl_opts.
 
 Version 1.0.0
 =============
