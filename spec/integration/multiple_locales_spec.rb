@@ -32,7 +32,7 @@ module Sucker
 
     context "when using threads to search all locales simultaneously" do
 
-      # Leaving this spec here for reference purposes. Use approach in above spec.
+      # Use this approach to be able to throttle requests individually.
 
       it "returns matches for all locales" do
         locales = %w{us uk de ca fr jp}
