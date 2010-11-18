@@ -1,3 +1,8 @@
+1.1.3
+=====
+
+* Fixed bug where curl_opts was not setting options on the curl object
+
 1.1.2
 =====
 
