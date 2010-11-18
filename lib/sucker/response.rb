@@ -86,7 +86,7 @@ module Sucker #:nodoc:
     # Let's massage that hash
     def strip_content(node)
       case node
-      when Array 
+      when Array
         node.map { |child| strip_content(child) }
       when Hash
         if node.keys.size == 1 && node["__content__"]
