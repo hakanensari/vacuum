@@ -124,6 +124,16 @@ module Sucker
         end.to raise_error(/Locale missing/)
       end
 
+      it "sets options on curl" do
+        easy = mock
+        easy.should_receive(:interface=).once.with("eth1")
+        Curl::Easy.stub!(:perform).and_yield(easy)
+        Response.should_receive(:new).once
+
+        worker.curl_opts { |c| c.interface = 'eth1' }
+        worker.get
+      end
+
     end
 
     describe "#get_all" do

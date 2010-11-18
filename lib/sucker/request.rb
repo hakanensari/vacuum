@@ -112,7 +112,7 @@ module Sucker #:nodoc:
       raise ArgumentError.new "AWS access key missing" unless key
 
       curl = Curl::Easy.perform(uri.to_s) do |easy|
-        curl_opts.each { |k, v| easy.send(k, v) }
+        curl_opts.each { |k, v| easy.send("#{k}=", v) }
       end
 
       Response.new(curl)
