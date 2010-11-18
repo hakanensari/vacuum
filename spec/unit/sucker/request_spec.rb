@@ -56,6 +56,19 @@ module Sucker
 
     end
 
+    describe "#associate_tag=" do
+
+      it "sets the associate tag for the current locale" do
+        worker.associate_tag = "foo-bar"
+        associate_tags = worker.instance_variable_get(:@associate_tags)
+
+        associate_tags.keys.size.should eql 1
+        associate_tags[:us].should eql 'foo-bar'
+        worker.associate_tag.should eql 'foo-bar'
+      end
+
+    end
+
     describe "#associate_tags=" do
 
       it "sets associate tags for the locales" do

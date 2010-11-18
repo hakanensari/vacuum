@@ -64,13 +64,13 @@ module Sucker #:nodoc:
     #   worker.associate_tag = 'foo-bar'
     #
     def associate_tag=(token)
-      @associate_tags = HOSTS.keys.inject({}) do |tags, loc|
-        tags[loc] = token
-        tags
-      end
+      @associate_tags ||= {}
+      @associate_tags[locale.to_sym] = token
     end
 
     # Sets associate tags for all locales
+    #
+    # You need a distinct associate tag for each locale.
     #
     #    tags = {
     #      :us => 'foo-bar-10',
@@ -166,7 +166,11 @@ module Sucker #:nodoc:
 
     # Sets distinct AWS access keys for the locales
     #
-    #   keys = {
+    # You can use the same key on multiple venues. Caveat: Calls against (1) the US
+    # and Canada and (2) the UK, France, and Germany count against the same call
+    # rate quota.
+    #
+    #    #   keys = {
     #     :us => 'foo',
     #     :uk => 'bar',
     #     :de => 'baz',
