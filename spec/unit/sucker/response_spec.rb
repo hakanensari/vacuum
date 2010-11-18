@@ -39,6 +39,7 @@ module Sucker
       it "initializes the request URI" do
         response.uri.should be_an_instance_of String
       end
+
     end
 
     describe "#xml" do
@@ -73,9 +74,9 @@ module Sucker
 
     describe "#each" do
 
-    	context "when a block is given" do
+      context "when a block is given" do
 
-      	it "yields each match to a block" do
+        it "yields each match to a block" do
           has_yielded = false
 
           response.each("ItemAttributes") do |item|
@@ -88,22 +89,24 @@ module Sucker
 
       end
 
-    	context "when no block is given" do
+      context "when no block is given" do
 
-    		it "raises error" do
-    			lambda { response.each("ItemAttributes") }.should raise_error(LocalJumpError)
-    		end
+        it "raises error" do
+          expect do
+            response.each("ItemAttributes")
+          end.to raise_error(LocalJumpError)
+        end
 
-    	end
+      end
 
     end
 
 
     describe "#map" do
 
-    	context "when a block is given" do
+      context "when a block is given" do
 
-      	it "yields each match to a block and maps returned values" do
+        it "yields each match to a block and maps returned values" do
           # Collect EANs
           eans = response.map("ItemAttributes") { |item| item["EAN"] }
 
@@ -113,13 +116,15 @@ module Sucker
 
       end
 
-    	context "when no block is given" do
+      context "when no block is given" do
 
-    		it "raises error" do
-    			lambda { response.map("ItemAttributes") }.should raise_error(LocalJumpError)
-    		end
+        it "raises error" do
+          expect do
+            response.map("ItemAttributes")
+          end.to raise_error(LocalJumpError)
+        end
 
-    	end
+      end
 
     end
 
