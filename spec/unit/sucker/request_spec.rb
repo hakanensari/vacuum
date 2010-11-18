@@ -123,6 +123,7 @@ module Sucker
           worker.get
         end.to raise_error(/Locale missing/)
       end
+
     end
 
     describe "#get_all" do
@@ -145,7 +146,9 @@ module Sucker
 
           count.should eql Request::HOSTS.size
         end
+
       end
+
     end
 
     describe "#key" do
