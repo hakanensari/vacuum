@@ -1,3 +1,7 @@
+1.1.2
+=====
+
+* Fixed seemingly benign bug in Request#associate_tag=.
 1.1.1
 =====
 
