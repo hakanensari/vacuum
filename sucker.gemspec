@@ -24,6 +24,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency("sdoc-helpers", "~> 0.1.4")
   s.add_development_dependency("vcr", "~> 1.3.1")
   s.add_development_dependency("webmock", "~> 1.6.1")
+  if RUBY_VERSION.include?("1.9")
+    s.add_development_dependency "ruby-debug19", "~> 0.11.0"
+  elsif RUBY_VERSION.include?("1.8")
+    s.add_development_dependency "ruby-debug", "~> 0.10.0"
+  end
 
   s.files         = Dir.glob("lib/**/*") + %w(LICENSE README.md CHANGELOG.md)
   s.test_files    = Dir.glob("spec/**/*")
