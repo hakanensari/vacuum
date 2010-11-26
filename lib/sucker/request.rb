@@ -93,7 +93,7 @@ module Sucker #:nodoc:
     # Returns options for curl and yields them if given a block
     #
     #   worker = Sucker.new
-    #   worker.curl { |c| c.interface = "eth1" }
+    #   worker.curl_opts { |c| c.interface = "eth1" }
     #
     def curl_opts
       @curl_opts ||= OpenStruct.new
