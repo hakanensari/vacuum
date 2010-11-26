@@ -3,6 +3,8 @@ require "throttler"
 
 include Throttler
 
+trap('INT') { exit 0 }
+
 timestamps = {
   :us => [],
   :uk => [],
@@ -53,7 +55,7 @@ asins_fixture.each_slice(batch_size) do |asins|
   threads.map do |thread|
 
     # I expect the thread to complete in two seconds
-    next unless thread.join(2.0)
+    next unless thread.join(1.0)
 
     timestamp = thread[:timestamp]
     if timestamp
@@ -61,8 +63,8 @@ asins_fixture.each_slice(batch_size) do |asins|
     end
   end
 
-  # Print rates every 10 seconds
-  if Time.now - printed_at > 10.0
+  # Print rates every 5 seconds
+  if Time.now - printed_at > 5.0
     puts Time.now.strftime("%H:%M:%S").center(38, '-')
     printed_at = Time.now
     timestamps.each do |locale, values|
