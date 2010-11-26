@@ -15,6 +15,8 @@ timestamps = {
 print "Enter batch size: "
 batch_size = STDIN.gets.to_i
 printed_at = Time.now
+print "Enter interface: "
+interface = STDIN.gets
 
 asins_fixture.each_slice(batch_size) do |asins|
   threads = timestamps.keys.map do |locale|
@@ -23,6 +25,7 @@ asins_fixture.each_slice(batch_size) do |asins|
         :locale => locale,
         :key    => amazon["key"],
         :secret => amazon["secret"])
+      worker.curl_opts { |c| c.interface = interface } if interface
       worker << {
         "Operation"                       => "ItemLookup",
         "ItemLookup.Shared.IdType"        => "ASIN",
