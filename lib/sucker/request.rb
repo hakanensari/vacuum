@@ -55,7 +55,7 @@ module Sucker #:nodoc:
 
     # Returns the associate tag for the current locale
     def associate_tag
-      @associate_tags[locale.to_sym] rescue nil
+      associate_tags[locale.to_sym] rescue nil
     end
 
     # Sets the associate tag for the current locale
@@ -64,8 +64,12 @@ module Sucker #:nodoc:
     #   worker.associate_tag = 'foo-bar'
     #
     def associate_tag=(token)
+      associate_tags[locale.to_sym] = token
+    end
+
+    # Gets the associate tags for all locales
+    def associate_tags
       @associate_tags ||= {}
-      @associate_tags[locale.to_sym] = token
     end
 
     # Sets associate tags for all locales
