@@ -1,3 +1,4 @@
+require "openssl"
 require "curb"
 require "ostruct"
 require "uri"
