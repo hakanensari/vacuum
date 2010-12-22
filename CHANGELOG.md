@@ -1,3 +1,10 @@
+1.1.4
+=====
+
+* Required openssl library as I've heard a couple of complaints about
+  their systems complaining when it is not explicitly required. Can't
+  reproduce this locally though.
+
 1.1.3
 =====
 
