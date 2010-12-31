@@ -132,10 +132,6 @@ module Sucker #:nodoc:
     #    end
     #
     def get_all
-      uris = HOSTS.keys.map do |locale|
-        self.locale = locale
-        uri.to_s
-      end
       responses = []
 
       Curl::Multi.get(uris, curl_opts) do |curl|
@@ -234,6 +230,13 @@ module Sucker #:nodoc:
         :host   => host,
         :path   => PATH,
         :query  => build_signed_query)
+    end
+
+    def uris
+      HOSTS.keys.map do |locale|
+        self.locale = locale
+        uri.to_s
+      end
     end
 
     def timestamp
