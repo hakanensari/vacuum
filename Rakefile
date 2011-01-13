@@ -1,6 +1,5 @@
 require "bundler"
 require "rspec/core/rake_task"
-require "sdoc_helpers"
 
 Bundler::GemHelper.install_tasks
 
