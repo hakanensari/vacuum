@@ -107,6 +107,9 @@ module Sucker #:nodoc:
     #   worker = Sucker.new
     #   response = worker.get
     #
+    #   response = worker.get(:us, :uk, :de)
+    #
+    #   response = worker.get(:all)
     def get
       raise ArgumentError.new "Locale missing"         unless locale
       raise ArgumentError.new "AWS access key missing" unless key
@@ -116,35 +119,6 @@ module Sucker #:nodoc:
       end
 
       Response.new(curl)
-    end
-
-    # Performs a request for all locales, returns an array of responses, and yields
-    # them if given a block
-    #
-    #    worker = Sucker.new
-    #
-    #    # This blocks until all requests are complete
-    #    responses = worker.get_all
-    #
-    #    # This does not block
-    #    worker.get_all do |response|
-    #      process_response
-    #    end
-    #
-    def get_all
-      uris = HOSTS.keys.map do |locale|
-        self.locale = locale
-        uri.to_s
-      end
-      responses = []
-
-      Curl::Multi.get(uris, curl_opts) do |curl|
-        response = Response.new(curl)
-        yield response if block_given?
-        responses << response
-      end
-
-      responses
     end
 
     # Returns the AWS access key for the current locale
@@ -223,6 +197,25 @@ module Sucker #:nodoc:
       string.gsub( /([^a-zA-Z0-9_.~-]+)/ ) do
         '%' + $1.unpack( 'H2' * $1.bytesize ).join( '%' ).upcase
       end
+    end
+
+    def get_current_venue
+    end
+
+    def get_multiple_venues
+      uris = HOSTS.keys.map do |locale|
+        self.locale = locale
+        uri.to_s
+      end
+      responses = []
+
+      Curl::Multi.get(uris, curl_opts) do |curl|
+        response = Response.new(curl)
+        yield response if block_given?
+        responses << response
+      end
+
+      responses
     end
 
     def host
