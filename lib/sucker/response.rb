@@ -49,11 +49,6 @@ module Sucker #:nodoc:
       find(path).map { |e| yield e }
     end
 
-    def node(path) # :nodoc:
-      warn "[DEPRECATION] `node` is deprecated.  Use `find` instead."
-      find(path)
-    end
-
     # Parses the response into a simple hash
     #
     #   response = worker.get
