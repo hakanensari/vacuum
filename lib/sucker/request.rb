@@ -123,6 +123,13 @@ module Sucker #:nodoc:
       end
     end
 
+    def get_all # :nodoc:
+      ActiveSupport::Deprecation.warn <<-EOM
+        `get_all` is deprecated. Please use `get(:all) instead.
+      EOM
+      get(:all)
+    end
+
     # Returns the AWS access key for the current locale
     def key
       raise ArgumentError.new "AWS access key missing" unless @keys[locale]
