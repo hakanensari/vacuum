@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Sucker
   describe Request do
-    use_vcr_cassette "unit/sucker/request", :record => :none
+    use_vcr_cassette "unit/sucker/request", :record => :new_episodes
 
     let(:worker) do
       Sucker.new(
