@@ -5,7 +5,6 @@ VCR.config do |c|
   c.default_cassette_options = {
     :record             => :none,
     :match_requests_on  => [:host] }
-
   c.stub_with :webmock
 end
 
