@@ -15,9 +15,6 @@ module Sucker #:nodoc:
       :jp  => 'ecs.amazonaws.jp' }
     PATH = "/onca/xml"
 
-    # The Amazon locale to query
-    attr_accessor :locale
-
     # The Amazon secret access key
     attr_accessor :secret
 
@@ -27,7 +24,7 @@ module Sucker #:nodoc:
     # Initializes a request object
     #
     #   worker = Sucker.new(
-    #     :locale => "us",
+    #     :locale => :us,
     #     :key    => "API KEY",
     #     :secret => "API SECRET")
     #
@@ -110,23 +107,30 @@ module Sucker #:nodoc:
     #   response = worker.get(:us, :uk, :de)
     #
     #   response = worker.get(:all)
-    def get
-      raise ArgumentError.new "Locale missing"         unless locale
-      raise ArgumentError.new "AWS access key missing" unless key
-
-      curl = Curl::Easy.perform(uri.to_s) do |easy|
-        curl_opts.each { |k, v| easy.send("#{k}=", v) }
+    def get(*requested_locales)
+      case requested_locales.count
+      when 0
+        get_current_locale
+      when 1
+        requested_locale = requested_locales.first
+        if requested_locale == :all
+          get_multiple_locales(locales)
+        else
+          get_locale(requested_locale)
+        end
+      else
+        get_multiple_locales(requested_locales)
       end
-
-      Response.new(curl)
     end
 
     # Returns the AWS access key for the current locale
     def key
-      @keys[locale.to_sym]
+      raise ArgumentError.new "AWS access key missing" unless @keys[locale]
+
+      @keys[locale]
     end
 
-    # Sets a global AWS access key ID
+    # Sets a global AWS access key
     #
     #   worker = Sucker.new
     #   worker.key = 'foo'
@@ -144,7 +148,7 @@ module Sucker #:nodoc:
     # and Canada and (2) the UK, France, and Germany count against the same call
     # rate quota.
     #
-    #    #   keys = {
+    #   keys = {
     #     :us => 'foo',
     #     :uk => 'bar',
     #     :de => 'baz',
@@ -155,6 +159,23 @@ module Sucker #:nodoc:
     #
     def keys=(tokens)
       @keys = tokens
+    end
+
+    def locale
+      raise ArgumentError.new "Locale not set" unless @locale
+
+      @locale
+    end
+
+    # Sets the current Amazon locale
+    #
+    # Valid values are :us, :uk, :de, :ca, :fr, and :jp.
+    def locale=(new_locale)
+      new_locale = new_locale.to_sym
+
+      raise ArgumentError.new "Invalid locale" unless locales.include? new_locale
+
+      @locale = new_locale
     end
 
     # Sets the Amazon API version
@@ -199,11 +220,21 @@ module Sucker #:nodoc:
       end
     end
 
-    def get_current_venue
+    def get_current_locale
+      curl = Curl::Easy.perform(uri.to_s) do |easy|
+        curl_opts.each { |k, v| easy.send("#{k}=", v) }
+      end
+
+      Response.new(curl)
     end
 
-    def get_multiple_venues
-      uris = HOSTS.keys.map do |locale|
+    def get_locale(new_locale)
+      self.locale = new_locale
+      get_current_locale
+    end
+
+    def get_multiple_locales(requested_locales)
+      uris = requested_locales.map do |locale|
         self.locale = locale
         uri.to_s
       end
@@ -220,6 +251,10 @@ module Sucker #:nodoc:
 
     def host
       HOSTS[locale.to_sym]
+    end
+
+    def locales
+      @locales ||= HOSTS.keys
     end
 
     def uri
