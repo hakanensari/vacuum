@@ -38,29 +38,6 @@ module Sucker
       end
     end
 
-    describe "#xml" do
-      it "returns a Nokogiri document" do
-        response.xml.should be_an_instance_of Nokogiri::XML::Document
-      end
-    end
-
-    describe "#find" do
-      context "when there are matches" do
-
-        it "returns an array of matching nodes" do
-          node = response.find("ItemAttributes")
-          node.map { |book| book["ISBN"] }.should eql asins
-        end
-      end
-
-      context "when there are no matches" do
-        it "returns an empty array" do
-          node = response.find("Foo")
-          node.should eql []
-        end
-      end
-    end
-
     describe "#each" do
       context "when a block is given" do
         it "yields each match to a block" do
@@ -84,6 +61,40 @@ module Sucker
       end
     end
 
+    context "when response contains errors" do
+      before do
+        response.body = "<?xml version=\"1.0\" ?><ItemLookupResponse xmlns=\"http://webservices.amazon.com/AWSECommerceService/2010-09-01\"><Errors><Error>foo</Error><Error>bar</Error></Errors>"
+      end
+
+      describe "#errors" do
+        it "returns an array of errors" do
+          response.errors.count.should eql 2
+        end
+      end
+
+      describe "#has_errors?" do
+        it "returns true if the response has errors" do
+          response.should have_errors
+        end
+      end
+    end
+
+    describe "#find" do
+      context "when there are matches" do
+
+        it "returns an array of matching nodes" do
+          node = response.find("ItemAttributes")
+          node.map { |book| book["ISBN"] }.should eql asins
+        end
+      end
+
+      context "when there are no matches" do
+        it "returns an empty array" do
+          node = response.find("Foo")
+          node.should eql []
+        end
+      end
+    end
 
     describe "#map" do
       context "when a block is given" do
@@ -143,6 +154,12 @@ module Sucker
           response.code = 403
           response.should_not be_valid
         end
+      end
+    end
+
+    describe "#xml" do
+      it "returns a Nokogiri document" do
+        response.xml.should be_an_instance_of Nokogiri::XML::Document
       end
     end
   end
