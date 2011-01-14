@@ -3,7 +3,7 @@ require "spec_helper"
 
 module Sucker
   describe Response do
-    use_vcr_cassette "unit/sucker/response", :record => :new_episodes
+    use_vcr_cassette "spec/sucker/response", :record => :new_episodes
 
     let(:asins) { ["0816614024", "0143105825"] }
 
