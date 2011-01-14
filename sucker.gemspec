@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   s.add_dependency("nokogiri", ["~> 1.4.0"])
   s.add_dependency("curb", ["~> 0.7.0"])
 
+  s.add_development_dependency("cucumber", "~> 0.10.0")
+  s.add_development_dependency("relish", "~> 0.2.0")
   s.add_development_dependency("rspec", ["~> 2.4.0"])
   s.add_development_dependency("throttler", "~> 0.2.1")
   s.add_development_dependency("vcr", "~> 1.5.0")
