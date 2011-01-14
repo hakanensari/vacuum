@@ -112,8 +112,7 @@ module Sucker #:nodoc:
       when 0
         get_current_locale
       when 1
-        requested_locale = requested_locales.first
-        if requested_locale == :all
+        if requested_locales.first == :all
           get_multiple_locales(locales)
         else
           get_locale(requested_locale)
