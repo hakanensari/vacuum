@@ -124,9 +124,7 @@ module Sucker #:nodoc:
     end
 
     def get_all # :nodoc:
-      ActiveSupport::Deprecation.warn <<-EOM
-        `get_all` is deprecated. Please use `get(:all) instead.
-      EOM
+      warn "[DEPRECATION] `get_all` is deprecated. Please use `get(:all) instead."
       get(:all)
     end
 
