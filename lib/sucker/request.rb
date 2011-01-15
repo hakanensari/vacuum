@@ -1,6 +1,6 @@
-require "curb"
-require "ostruct"
-require "uri"
+require 'curb'
+require 'ostruct'
+require 'uri'
 
 module Sucker #:nodoc:
 
@@ -18,9 +18,6 @@ module Sucker #:nodoc:
     # The Amazon secret access key
     attr_accessor :secret
 
-    # The hash of parameters to query Amazon with
-    attr_accessor :parameters
-
     # Initializes a request object
     #
     #   worker = Sucker.new(
@@ -29,15 +26,10 @@ module Sucker #:nodoc:
     #     :secret => "API SECRET")
     #
     def initialize(args)
-      self.parameters = {
-        "Service" => "AWSECommerceService",
-        "Version" => CURRENT_AMAZON_API_VERSION
-      }
-
       args.each { |k, v| send("#{k}=", v) }
     end
 
-    # Merges a hash into existing parameters
+    # Merges a hash into the existing parameters
     #
     #   worker = Sucker.new
     #   worker << {
@@ -72,7 +64,6 @@ module Sucker #:nodoc:
     #    tags = {
     #      :us => 'foo-bar-10',
     #      :uk => 'foo-bar-20',
-    #      :de => 'foo-bar-30',
     #      ... }
     #
     #    worker = Sucker.new
@@ -99,21 +90,30 @@ module Sucker #:nodoc:
     #   worker = Sucker.new
     #   response = worker.get
     #
-    #   response = worker.get(:us, :uk, :de)
+    #   responses = worker.get :us, :uk, :de
     #
-    #   response = worker.get(:all)
-    def get(*requested_locales)
-      case requested_locales.count
+    #   responses = worker.get :all
+    def get(*args)
+      case args.count
+
       when 0
-        get_current_locale
-      when 1
-        if requested_locales.first == :all
-          get_multiple_locales(locales)
-        else
-          get_locale(requested_locale)
+        curl = Curl::Easy.perform(uri.to_s) do |easy|
+          curl_opts.each { |k, v| easy.send("#{k}=", v) }
         end
+        Response.new(curl)
+
+      when 1
+        arg = args.first
+        if arg == :all
+          get_multi locales
+        else
+          self.locale = arg
+          get
+        end
+
       else
-        get_multiple_locales(requested_locales)
+        get_multi args
+
       end
     end
 
@@ -135,7 +135,7 @@ module Sucker #:nodoc:
     #   worker.key = 'foo'
     #
     def key=(token)
-      @keys = HOSTS.keys.inject({}) do |keys, locale|
+      @keys = locales.inject({}) do |keys, locale|
         keys[locale] = token
         keys
       end
@@ -177,63 +177,32 @@ module Sucker #:nodoc:
       @locale = new_locale
     end
 
+    # The parameters to query Amazon with
+    def parameters
+      @parameters ||= Parameters.new
+    end
+
     # Sets the Amazon API version
     #
     #   worker = Sucker.new
     #   worker.version = '2010-06-01'
     #
     def version=(version)
-      self.parameters["Version"] = version
+      self.parameters['Version'] = version
     end
 
     private
 
-    # Timestamps parameters and concatenates them into a query string
-    def build_query
-      parameters.
-        merge(timestamp).
-        merge({ "AWSAccessKeyId" => key }).
-        merge({ "AssociateTag"   => associate_tag }).
-        sort.
-        collect do |k, v|
-          "#{k}=" + escape(v.is_a?(Array) ? v.join(",") : v.to_s)
-        end.
-        join("&")
-    end
-
     # Returns a signed and timestamped query string
     def build_signed_query
-      query = build_query
-
-      digest = OpenSSL::Digest::Digest.new("sha256")
-      string = ["GET", host, PATH, query].join("\n")
-      hmac = OpenSSL::HMAC.digest(digest, secret, string)
-
-      query + "&Signature=" + escape([hmac].pack("m").chomp)
+      parameters.
+        merge({ 'AWSAccessKeyId' => key }).
+        merge({ 'AssociateTag'   => associate_tag }).
+        sign(host, PATH, secret)
     end
 
-    # Plagiarized from the Ruby CGI library via ruby_aaws
-    def escape(string)
-      string.gsub( /([^a-zA-Z0-9_.~-]+)/ ) do
-        '%' + $1.unpack( 'H2' * $1.bytesize ).join( '%' ).upcase
-      end
-    end
-
-    def get_current_locale
-      curl = Curl::Easy.perform(uri.to_s) do |easy|
-        curl_opts.each { |k, v| easy.send("#{k}=", v) }
-      end
-
-      Response.new(curl)
-    end
-
-    def get_locale(new_locale)
-      self.locale = new_locale
-      get_current_locale
-    end
-
-    def get_multiple_locales(requested_locales)
-      uris = requested_locales.map do |locale|
+    def get_multi(locales)
+      uris = locales.map do |locale|
         self.locale = locale
         uri.to_s
       end
@@ -249,7 +218,7 @@ module Sucker #:nodoc:
     end
 
     def host
-      HOSTS[locale.to_sym]
+      HOSTS[locale]
     end
 
     def locales
@@ -261,10 +230,6 @@ module Sucker #:nodoc:
         :host   => host,
         :path   => PATH,
         :query  => build_signed_query)
-    end
-
-    def timestamp
-      { "Timestamp" => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ') }
     end
   end
 end

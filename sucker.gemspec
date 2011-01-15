@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "sucker"
 
   s.add_dependency("activesupport", ">= 2.3.2")
+  s.add_dependency("i18n", "~> 0.5.0")
   s.add_dependency("nokogiri", ["~> 1.4.0"])
   s.add_dependency("curb", ["~> 0.7.0"])
 
