@@ -82,11 +82,6 @@ module Sucker #:nodoc:
       @associate_tags = tokens
     end
 
-    def curl
-      warn "[DEPRECATION] `curl` is deprecated. Use `curl_opts` instead."
-      curl_opts
-    end
-
     # Returns options for curl and yields them if given a block
     #
     #   worker = Sucker.new
