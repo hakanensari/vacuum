@@ -1,28 +1,32 @@
 Feature: Item lookup
-  In order fetch item attributes from Amazon
-  As a developer using Sucker
-  I want to execute an item lookup.
+  As a worker I want to look up items.
 
   Background:
-    Given I set up a worker
+    Given a worker
 
-  Scenario: Single item lookup
+  Scenario: Look up a single item
     Given I add the following parameters:
-      | Operation | ItemLookup |
-      | IdType    | ASIN       |
-      | ItemId    | 0816614024 |
-    When I "get"
-    Then the response should have 1 "item"
+      """
+      Operation : ItemLookup
+      IdType    : ASIN
+      ItemId    : 0816614024
+      """
+    When I get
+    Then the response should have 1 item
 
-  Scenario: Multiple item lookup
+  Scenario: Look up two items
     Given I add the following parameters:
-      | Operation | ItemLookup             |
-      | IdType    | ASIN                   |
-      | ItemId    | 0816614024, 0143105825 |
-    When I "get"
-    Then the response should have 2 "items"
+      """
+      Operation : ItemLookup
+      IdType    : ASIN
+      ItemId    : 0816614024, 0143105825
+      """
+    When I get
+    Then the response should have 2 items
 
+  @wip
   Scenario: Batch request
     Given I add the following parameters:
-      | Operation | ItemLookup |
-
+      """
+      Operation : ItemLookup
+      """
