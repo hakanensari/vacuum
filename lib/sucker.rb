@@ -1,4 +1,4 @@
-require 'sucker/string_helpers'
+require 'sucker/helpers'
 require 'sucker/parameters'
 require 'sucker/request'
 require 'sucker/response'

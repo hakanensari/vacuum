@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 module Sucker
-  describe StringHelpers do
+  describe Helpers do
     let(:klass) do
       class Klass
-        include StringHelpers
+        include Helpers
       end.new
     end
 

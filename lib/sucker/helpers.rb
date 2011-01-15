@@ -1,7 +1,7 @@
-require 'active_support/core_ext/string/inflections'
+require 'active_support/inflector'
 
 module Sucker
-  module StringHelpers #:nodoc: all
+  module Helpers #:nodoc: all
     def camelize(key)
       key.is_a?(Symbol) ? key.to_s.camelize : key
     end

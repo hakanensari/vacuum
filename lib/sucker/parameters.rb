@@ -2,7 +2,7 @@ require 'openssl'
 
 module Sucker
   class Parameters < Hash #:nodoc: all
-    include StringHelpers
+    include Helpers
 
     def initialize
       self.store 'Service', 'AWSECommerceService'
