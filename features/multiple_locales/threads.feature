@@ -1,9 +1,6 @@
 Feature: Threads
   A worker queries multiple locales using threads.
 
-  Background:
-    Given a worker
-
   Scenario: Query all locales
       When I run:
       """
