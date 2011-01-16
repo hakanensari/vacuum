@@ -11,7 +11,7 @@ Feature: Item lookup
       IdType    : ASIN
       ItemId    : 0816614024
       """
-    When I get
+    When the worker gets
     Then the response should have 1 item
 
   Scenario: Look up two items
@@ -21,7 +21,7 @@ Feature: Item lookup
       IdType    : ASIN
       ItemId    : 0816614024, 0143105825
       """
-    When I get
+    When the worker gets
     Then the response should have 2 items
 
   Scenario: Batch request
@@ -35,7 +35,7 @@ Feature: Item lookup
       ItemLookup.1.ItemId             : 0816614024
       ItemLookup.2.ItemId             : 0143105825
       """
-    When I get
+    When the worker gets
     Then the response should have 2 items
 
   Scenario: Errors
@@ -45,7 +45,7 @@ Feature: Item lookup
       IdType    : ASIN
       ItemId    : 0816614024, 0007218095
       """
-    When I get
+    When the worker gets
     Then the response should have 1 item
     And the response should have 1 error
     And the message of the error should be:
@@ -62,7 +62,7 @@ Feature: Item lookup
       IdType    : ASIN
       ItemId    : 482224816X
       """
-    When I get
+    When the worker gets
     Then the response should have 1 item
     And the title of the item should be:
       """
@@ -77,7 +77,7 @@ Feature: Item lookup
       ItemId        : 0394751221
       ResponseGroup : Images
       """
-    When I get
+    When the worker gets
     Then the response should have 1 image set
     And the image set should contain a swatch image
     And the image set should contain a small image
@@ -94,7 +94,7 @@ Feature: Item lookup
       ItemId        : 0679753354
       ResponseGroup : AlternateVersions
       """
-    When I get
+    When the worker gets
     Then the response should have 1 item
     And the response should have more than 1 alternate versions
 
@@ -108,7 +108,7 @@ Feature: Item lookup
       RelationshipType : AuthorityTitle
       ItemId           : 0415246334
       """
-    When I get
+    When the worker gets
     Then the response should have 1 related item
 
   Scenario: Related items response group for an authority title
@@ -121,5 +121,5 @@ Feature: Item lookup
       RelationshipType : AuthorityTitle
       ItemId           : B000ASPUES
       """
-    When I get
+    When the worker gets
     Then the response should have more than 1 related items

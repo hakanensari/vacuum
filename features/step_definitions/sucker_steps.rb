@@ -19,7 +19,7 @@ Given /^I add the following parameters:$/ do |string|
   end
 end
 
-When /^I get$/ do
+When /^the worker gets$/ do
   params = @worker.parameters
   item_ids =
     params["ItemId"] ||
