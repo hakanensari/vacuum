@@ -12,7 +12,8 @@ Feature: Item lookup
       ItemId    : 0816614024
       """
     When the worker gets
-    Then the response should have 1 item
+    Then the response should be valid
+    And the response should have 1 item
 
   Scenario: Look up two items
     Given I add the following parameters:
@@ -36,7 +37,8 @@ Feature: Item lookup
       ItemLookup.2.ItemId             : 0143105825
       """
     When the worker gets
-    Then the response should have 2 items
+    Then the response should be valid
+    And the response should have 2 items
 
   Scenario: Errors
     Given I add the following parameters:
@@ -46,7 +48,8 @@ Feature: Item lookup
       ItemId    : 0816614024, 0007218095
       """
     When the worker gets
-    Then the response should have 1 item
+    Then the response should be valid
+    And the response should have 1 item
     And the response should have 1 error
     And the message of the error should be:
       """
@@ -63,7 +66,8 @@ Feature: Item lookup
       ItemId    : 482224816X
       """
     When the worker gets
-    Then the response should have 1 item
+    Then the response should be valid
+    And the response should have 1 item
     And the title of the item should be:
       """
       スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則
@@ -78,7 +82,8 @@ Feature: Item lookup
       ResponseGroup : Images
       """
     When the worker gets
-    Then the response should have 1 image set
+    Then the response should be valid
+    And the response should have 1 image set
     And the image set should contain a swatch image
     And the image set should contain a small image
     And the image set should contain a thumbnail image
@@ -95,7 +100,8 @@ Feature: Item lookup
       ResponseGroup : AlternateVersions
       """
     When the worker gets
-    Then the response should have 1 item
+    Then the response should be valid
+    And the response should have 1 item
     And the response should have more than 1 alternate versions
 
   Scenario: Related items response group for a regular item
@@ -122,4 +128,5 @@ Feature: Item lookup
       ItemId           : B000ASPUES
       """
     When the worker gets
-    Then the response should have more than 1 related items
+    Then the response should be valid
+    And the response should have more than 1 related items

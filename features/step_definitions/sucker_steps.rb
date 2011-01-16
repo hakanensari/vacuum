@@ -13,21 +13,45 @@ Given /^I add the following parameters:$/ do |string|
   rows = string.split("\n")
 
   @worker << rows.inject({}) do |hash, row|
-    key, value = row.split(':')
-    hash[key.strip] = value.strip.gsub(/\s/, '')
+    fields = row.split(':')
+    key = fields.shift
+    value = fields.join(':')
+    hash[key.strip] = value.strip.gsub(/,\s+/, ',')
     hash
   end
 end
 
-When /^the worker gets$/ do
+When /^the worker gets(| all)$/ do |locales|
   params = @worker.parameters
-  item_ids =
+  unique_query =
+    params["Author"] ||
+    params["Power"] ||
+    params["Keywords"] ||
+    params["Author"] ||
+    params["SellerId"] ||
     params["ItemId"] ||
     params["ItemLookup.1.ItemId"] + "," + params["ItemLookup.2.ItemId"]
-  cassette_name = item_ids.parameterize
+  cassette_name = unique_query.parameterize
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
-    @response = @worker.get
+    case locales.strip
+    when ''
+      @response = @worker.get
+    when 'all'
+      @responses = @worker.get :all
+    end
   end
+end
+
+Then /^there should be (\d+) responses$/ do |count|
+  @responses.count.should eql count
+end
+
+Then /^the response should be valid$/ do
+  @response.should be_valid
+end
+
+Then /^the responses should be valid$/ do
+  @responses.each { |resp| resp.should be_valid }
 end
 
 Then /^the response should have (\d+) (.+)$/ do |count, object|
@@ -53,6 +77,15 @@ Then /^the (.+) of the (.+) should be:$/ do |attribute, object, string|
   @it = instance_variable_get("@#{node_name}")
 
   recursive_find_by_key(@it, key).should eql string.tr("\n", ' ')
+end
+
+Then /^the (.+) of each (.+) should be:$/ do |attribute, object, string|
+  node_name = object.tr(' ', '_').camelize
+  key = attribute.camelize
+  @they =@response.find(node_name)
+  @they.each do |it|
+    recursive_find_by_key(it, key).should eql string.tr("\n", ' ')
+  end
 end
 
 Then /^the (.+) should contain an? (.+)$/ do |parent, child|
