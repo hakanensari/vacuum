@@ -96,7 +96,7 @@ Feature: Item lookup
       """
     When I get
     Then the response should have 1 item
-    And the response should have 9 alternate versions
+    And the response should have more than 1 alternate versions
 
   Scenario: Related items response group for a regular item
     Given I add the following parameters:
