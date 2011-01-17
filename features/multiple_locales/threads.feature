@@ -12,7 +12,7 @@ Feature: Threads
         "ItemId"    => "0816614024" }
       locales = Sucker.new.send :locales
 
-      @threads = locales.map do |locale|
+      threads = locales.map do |locale|
         Thread.new do
           worker = Sucker.new(
             :locale => locale,
@@ -23,7 +23,7 @@ Feature: Threads
         end
       end
 
-      @responses = @threads.map do |thread|
+      @responses = threads.map do |thread|
         thread.join
         thread[:response]
       end
