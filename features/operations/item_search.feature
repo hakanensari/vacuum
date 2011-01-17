@@ -1,5 +1,6 @@
 Feature: Item search
-  A worker searches for items.
+  As a worker  
+  I want to search for items.
 
   Background:
     Given a worker

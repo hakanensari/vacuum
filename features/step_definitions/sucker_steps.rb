@@ -1,3 +1,7 @@
+Given /^Ruby ([\d.]+)$/ do |version|
+  RUBY_VERSION.include? version
+end
+
 Given /^a worker$/ do
    @worker = Sucker.new(
      :locale => :us,
@@ -21,6 +25,10 @@ Given /^I add the following parameters:$/ do |string|
   end
 end
 
+Given /^I am playing a VCR cassette called "([^"]*)"$/ do |cassette_name|
+  @cassette_name = cassette_name
+end
+
 When /^the worker gets(| all)$/ do |locales|
   params = @worker.parameters
   unique_query =
@@ -30,6 +38,7 @@ When /^the worker gets(| all)$/ do |locales|
     params["Author"] ||
     params["SellerId"] ||
     params["ItemId"] ||
+    params[:item_id] ||
     params["ItemLookup.1.ItemId"] + "," + params["ItemLookup.2.ItemId"]
   cassette_name = unique_query.parameterize
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
@@ -40,6 +49,24 @@ When /^the worker gets(| all)$/ do |locales|
       @responses = @worker.get :all
     end
   end
+end
+
+When /^I run:$/ do |string|
+  eval string
+end
+
+When /^I tape:$/ do |string|
+  VCR.use_cassette(@cassette_name, :record => :new_episodes) do
+    eval(string)
+  end
+end
+
+Then /^the following should be true:$/ do |string|
+  eval(string).should be_true
+end
+
+Then /^the following should be false:$/ do |string|
+  eval(string).should be_false
 end
 
 Then /^there should be (\d+) responses$/ do |count|

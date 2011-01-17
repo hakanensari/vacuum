@@ -1,15 +1,16 @@
 Feature: Threads
-  A worker queries multiple locales using threads.
+  As a worker  
+  I want to query multiple locales using threads.
 
   Scenario: Query all locales
-      When I run:
+      Given I am playing a VCR cassette called "0816614024"
+      When I tape:
       """
       params = {
         "Operation" => "ItemLookup",
         "IdType"    => "ASIN",
         "ItemId"    => "0816614024" }
-      }
-      locales = Sucker.new.locales
+      locales = Sucker.new.send :locales
 
       @threads = locales.map do |locale|
         Thread.new do
@@ -22,13 +23,12 @@ Feature: Threads
         end
       end
 
-      """
-      Then the following should be true:
-      """
-      responses = @threads.map do |thread|
+      @responses = @threads.map do |thread|
         thread.join
         thread[:response]
       end
-
-      responses.count == 6
+      """
+      Then the following should be true:
+      """
+      @responses.count == 6
       """

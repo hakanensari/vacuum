@@ -1,5 +1,6 @@
 Feature: Seller listing search
-  A worker searches seller listings.
+  As a worker  
+  I want to search seller listings.
 
   Background:
     Given a worker

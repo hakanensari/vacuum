@@ -1,5 +1,6 @@
 Feature: Curl::Multi
-  A worker queries multiple locales using Curl::Multi.
+  As a worker  
+  I want to query multiple locales using Curl::Multi.
 
   Background:
     Given a worker

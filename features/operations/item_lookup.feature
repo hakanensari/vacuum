@@ -1,5 +1,6 @@
 Feature: Item lookup
-  A worker looks up items.
+  As a worker  
+  I want to look up items.
 
   Background:
     Given a worker
