@@ -1,4 +1,5 @@
 require "bundler"
+require 'cucumber/rake/task'
 require "rspec/core/rake_task"
 
 Bundler::GemHelper.install_tasks
@@ -8,4 +9,8 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
 end
 
-task :default => :spec
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty"
+end
+
+task :default => [:spec, :features]
