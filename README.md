@@ -1,7 +1,9 @@
 Sucker
 ======
 
-Sucker is a minimal Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It runs on [cURL](http://github.com/taf2/curb) and [Nokogiri](http://github.com/rails/rails/blob/master/activesupport/lib/active_support/xml_mini/nokogiri.rb). It's fast and supports __the entire API__.
+Sucker is a [cURL-](http://github.com/taf2/curb) and [Nokogiri-](http://github.com/rails/rails/blob/master/activesupport/lib/active_support/xml_mini/nokogiri.rb)driven Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
+
+It's fast and supports __the entire API__.
 
 ![Electrolux](https://github.com/papercavalier/sucker/raw/master/electrolux.jpg)
 
@@ -29,7 +31,7 @@ Get a response.
 
 Parse.
 
-    items = response.map("Item") do |item|
+    books = response.map("Item") do |item|
       # parse
     end
 
