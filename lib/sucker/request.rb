@@ -1,7 +1,6 @@
-require "curb"
-require "openssl"
-require "ostruct"
-require "uri"
+require 'curb'
+require 'openssl'
+require 'uri'
 
 module Sucker #:nodoc:
 
@@ -16,39 +15,25 @@ module Sucker #:nodoc:
       :jp  => 'ecs.amazonaws.jp' }
     PATH = "/onca/xml"
 
-    # The Amazon locale to query
-    attr_accessor :locale
-
     # The Amazon secret access key
     attr_accessor :secret
-
-    # The hash of parameters to query Amazon with
-    attr_accessor :parameters
 
     # Initializes a request object
     #
     #   worker = Sucker.new(
-    #     :locale => "us",
     #     :key    => "API KEY",
     #     :secret => "API SECRET")
     #
     def initialize(args)
-      self.parameters = {
-        "Service" => "AWSECommerceService",
-        "Version" => CURRENT_AMAZON_API_VERSION
-      }
-
       args.each { |k, v| send("#{k}=", v) }
     end
 
-    # Merges a hash into existing parameters
+    # Merges a hash into the existing parameters
     #
-    #   worker = Sucker.new
     #   worker << {
-    #     "Operation"     => "ItemLookup",
-    #     "IdType"        => "ASIN",
-    #     "ItemId"        => "0816614024",
-    #     "ResponseGroup" => "ItemAttributes" }
+    #     "Operation" => "ItemLookup",
+    #     "IdType"    => "ASIN",
+    #     "ItemId"    => "0816614024" }
     #
     def <<(hash)
       self.parameters.merge!(hash)
@@ -56,12 +41,11 @@ module Sucker #:nodoc:
 
     # Returns the associate tag for the current locale
     def associate_tag
-      associate_tags[locale.to_sym] rescue nil
+      @associate_tags[locale.to_sym] rescue ''
     end
 
     # Sets the associate tag for the current locale
     #
-    #   worker = Sucker.new
     #   worker.associate_tag = 'foo-bar'
     #
     def associate_tag=(token)
@@ -80,10 +64,8 @@ module Sucker #:nodoc:
     #    tags = {
     #      :us => 'foo-bar-10',
     #      :uk => 'foo-bar-20',
-    #      :de => 'foo-bar-30',
     #      ... }
     #
-    #    worker = Sucker.new
     #    worker.associate_tags = tags
     #
     def associate_tags=(tokens)
@@ -92,7 +74,6 @@ module Sucker #:nodoc:
 
     # Returns options for curl and yields them if given a block
     #
-    #   worker = Sucker.new
     #   worker.curl_opts { |c| c.interface = "eth1" }
     #
     def curl_opts
@@ -104,57 +85,56 @@ module Sucker #:nodoc:
 
     # Performs a request and returns a response
     #
-    #   worker = Sucker.new
     #   response = worker.get
     #
-    def get
-      raise ArgumentError.new "Locale missing"         unless locale
-      raise ArgumentError.new "AWS access key missing" unless key
+    # Optionally, pass one or more locales to query specific locales or `:all`
+    # to query all locales.
+    #
+    #   responses = worker.get(:us)
+    #
+    #   responses = worker.get(:all)
+    #
+    def get(*args)
+      case args.count
 
-      curl = Curl::Easy.perform(uri.to_s) do |easy|
-        curl_opts.each { |k, v| easy.send("#{k}=", v) }
+      when 0
+        curl = Curl::Easy.perform(uri.to_s) do |easy|
+          curl_opts.each { |k, v| easy.send("#{k}=", v) }
+        end
+        Response.new(curl)
+
+      when 1
+        arg = args.first
+        if arg == :all
+          get_multi locales
+        else
+          self.locale = arg
+          get
+        end
+
+      else
+        get_multi args
       end
-
-      Response.new(curl)
     end
 
-    # Performs a request for all locales, returns an array of responses, and yields
-    # them if given a block
-    #
-    #    worker = Sucker.new
-    #
-    #    # This blocks until all requests are complete
-    #    responses = worker.get_all
-    #
-    #    # This does not block
-    #    worker.get_all do |response|
-    #      process_response
-    #    end
-    #
-    def get_all
-      responses = []
-
-      Curl::Multi.get(uris, curl_opts) do |curl|
-        response = Response.new(curl)
-        yield response if block_given?
-        responses << response
-      end
-
-      responses
+    def get_all # :nodoc:
+      warn "[DEPRECATION] `get_all` is deprecated. Please use `get(:all) instead."
+      get(:all)
     end
 
     # Returns the AWS access key for the current locale
     def key
-      @keys[locale.to_sym]
+      raise ArgumentError.new "AWS access key missing" unless @keys[locale]
+
+      @keys[locale]
     end
 
-    # Sets a global AWS access key ID
+    # Sets a global AWS access key
     #
-    #   worker = Sucker.new
     #   worker.key = 'foo'
     #
     def key=(token)
-      @keys = HOSTS.keys.inject({}) do |keys, locale|
+      @keys = locales.inject({}) do |keys, locale|
         keys[locale] = token
         keys
       end
@@ -166,63 +146,95 @@ module Sucker #:nodoc:
     # and Canada and (2) the UK, France, and Germany count against the same call
     # rate quota.
     #
-    #    #   keys = {
+    #   keys = {
     #     :us => 'foo',
     #     :uk => 'bar',
-    #     :de => 'baz',
     #     ... }
     #
-    #   worker = Sucker.new
     #   worker.keys = keys
     #
     def keys=(tokens)
       @keys = tokens
     end
 
+    def locale
+      raise ArgumentError.new "Locale not set" unless @locale
+
+      @locale
+    end
+
+    # Sets the current Amazon locale
+    #
+    # Valid values are :us, :uk, :de, :ca, :fr, and :jp.
+    def locale=(new_locale)
+      new_locale = new_locale.to_sym
+
+      raise ArgumentError.new "Invalid locale" unless locales.include? new_locale
+
+      @locale = new_locale
+    end
+
+    # The parameters to query Amazon with
+    def parameters
+      @parameters ||= Parameters.new
+    end
+
     # Sets the Amazon API version
     #
-    #   worker = Sucker.new
     #   worker.version = '2010-06-01'
     #
     def version=(version)
-      self.parameters["Version"] = version
+      self.parameters['Version'] = version
     end
 
     private
 
-    # Timestamps parameters and concatenates them into a query string
     def build_query
       parameters.
-        merge(timestamp).
-        merge({ "AWSAccessKeyId" => key }).
-        merge({ "AssociateTag"   => associate_tag }).
+        normalize.
+        merge({ 'AWSAccessKeyId' => key }).
+        merge({ 'AssociateTag'   => associate_tag }).
         sort.
-        collect do |k, v|
-          "#{k}=" + escape(v.is_a?(Array) ? v.join(",") : v.to_s)
-        end.
-        join("&")
+        map do |k, v|
+          "#{k}=" + escape(v)
+        end.join('&')
     end
 
-    # Returns a signed and timestamped query string
     def build_signed_query
       query = build_query
 
-      digest = OpenSSL::Digest::Digest.new("sha256")
-      string = ["GET", host, PATH, query].join("\n")
+      digest = OpenSSL::Digest::Digest.new('sha256')
+      string = ['GET', host, PATH, query].join("\n")
       hmac = OpenSSL::HMAC.digest(digest, secret, string)
+      signature = escape([hmac].pack('m').chomp)
 
-      query + "&Signature=" + escape([hmac].pack("m").chomp)
+      query + '&Signature=' + signature
     end
 
-    # Plagiarized from the Ruby CGI library via ruby_aaws
-    def escape(string)
-      string.gsub( /([^a-zA-Z0-9_.~-]+)/ ) do
-        '%' + $1.unpack( 'H2' * $1.bytesize ).join( '%' ).upcase
+    def escape(value)
+      value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
+        '%' + $1.unpack('H2' * $1.bytesize).join('%').upcase
       end
     end
 
+    def get_multi(locales)
+      responses = []
+
+      Curl::Multi.get(uris, curl_opts) do |curl|
+        response = Response.new(curl)
+        yield response if block_given?
+        responses << response
+      end
+
+      responses
+    end
+
     def host
-      HOSTS[locale.to_sym]
+      HOSTS[locale]
+    end
+
+    def locales
+      @locales ||= HOSTS.keys
     end
 
     def uri
@@ -233,14 +245,10 @@ module Sucker #:nodoc:
     end
 
     def uris
-      HOSTS.keys.map do |locale|
+      locales.map do |locale|
         self.locale = locale
         uri.to_s
       end
-    end
-
-    def timestamp
-      { "Timestamp" => Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ') }
     end
   end
 end

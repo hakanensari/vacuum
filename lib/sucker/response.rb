@@ -32,6 +32,11 @@ module Sucker #:nodoc:
       find(path).each { |e| yield e }
     end
 
+    # Returns an array of errors in the reponse
+    def errors
+      find("Error")
+    end
+
     # Queries an xpath and returns an array of matching nodes
     #
     #   response = worker.get
@@ -39,6 +44,11 @@ module Sucker #:nodoc:
     #
     def find(path)
       xml.xpath("//xmlns:#{path}").map { |e| strip_content(e.to_hash[path]) }
+    end
+
+    # Returns true if response contains errors
+    def has_errors?
+      errors.count > 0
     end
 
     # A shorthand that yields matches to a block and collects returned values
