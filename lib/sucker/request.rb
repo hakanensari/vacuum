@@ -1,5 +1,6 @@
 require 'curb'
 require 'openssl'
+require 'ostruct'
 require 'uri'
 
 module Sucker #:nodoc:
