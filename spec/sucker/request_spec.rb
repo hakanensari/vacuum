@@ -32,8 +32,8 @@ module Sucker
         worker.associate_tag.should eql 'foo-bar'
       end
 
-      it "returns nil if no associate tag is set for the current locale" do
-        worker.associate_tag.should eql nil
+      it "returns blank if no associate tag is set for the current locale" do
+        worker.associate_tag.should be_blank
       end
     end
 
@@ -194,6 +194,25 @@ module Sucker
 
     # private
 
+    describe "#build_query" do
+      let(:query) do
+        worker.send(:build_query)
+      end
+
+      it "canonicalizes query" do
+        query.should match /Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
+      end
+
+      it "includes a timestamp" do
+        query.should include 'Timestamp'
+      end
+
+      it "sorts query" do
+        worker.parameters["A"] = "foo"
+        query.should match /^A=foo/
+      end
+    end
+
     describe "#build_signed_query" do
       let(:query) { worker.send(:build_signed_query) }
 
@@ -205,6 +224,17 @@ module Sucker
       it "includes the associate tag for the current locale" do
         worker.associate_tag = 'foo'
         query.should include 'AssociateTag=foo'
+      end
+
+      it "returns a signed query string" do
+        query = worker.send :build_signed_query
+        query.should include 'Signature='
+      end
+    end
+
+    describe "#escape" do
+      it "URL-encodes a string" do
+        worker.send(:escape, 'foo,bar').should eql "foo%2Cbar"
       end
     end
 
@@ -234,13 +264,6 @@ module Sucker
       it "returns a host" do
         worker.locale = "fr"
         worker.send(:host).should eql "ecs.amazonaws.fr"
-      end
-    end
-
-    describe "#build_signed_query" do
-      it "returns a signed query string" do
-        query = worker.send :build_signed_query
-        query.should match /&Signature=.*/
       end
     end
 

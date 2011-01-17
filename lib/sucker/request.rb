@@ -1,5 +1,5 @@
 require 'curb'
-require 'ostruct'
+require 'openssl'
 require 'uri'
 
 module Sucker #:nodoc:
@@ -21,7 +21,6 @@ module Sucker #:nodoc:
     # Initializes a request object
     #
     #   worker = Sucker.new(
-    #     :locale => :us,
     #     :key    => "API KEY",
     #     :secret => "API SECRET")
     #
@@ -31,12 +30,10 @@ module Sucker #:nodoc:
 
     # Merges a hash into the existing parameters
     #
-    #   worker = Sucker.new
     #   worker << {
-    #     "Operation"     => "ItemLookup",
-    #     "IdType"        => "ASIN",
-    #     "ItemId"        => "0816614024",
-    #     "ResponseGroup" => "ItemAttributes" }
+    #     "Operation" => "ItemLookup",
+    #     "IdType"    => "ASIN",
+    #     "ItemId"    => "0816614024" }
     #
     def <<(hash)
       self.parameters.merge!(hash)
@@ -44,12 +41,11 @@ module Sucker #:nodoc:
 
     # Returns the associate tag for the current locale
     def associate_tag
-      @associate_tags[locale.to_sym] rescue nil
+      @associate_tags[locale.to_sym] rescue ''
     end
 
     # Sets the associate tag for the current locale
     #
-    #   worker = Sucker.new
     #   worker.associate_tag = 'foo-bar'
     #
     def associate_tag=(token)
@@ -66,7 +62,6 @@ module Sucker #:nodoc:
     #      :uk => 'foo-bar-20',
     #      ... }
     #
-    #    worker = Sucker.new
     #    worker.associate_tags = tags
     #
     def associate_tags=(tokens)
@@ -75,7 +70,6 @@ module Sucker #:nodoc:
 
     # Returns options for curl and yields them if given a block
     #
-    #   worker = Sucker.new
     #   worker.curl_opts { |c| c.interface = "eth1" }
     #
     def curl_opts
@@ -87,12 +81,15 @@ module Sucker #:nodoc:
 
     # Performs a request and returns a response
     #
-    #   worker = Sucker.new
     #   response = worker.get
     #
-    #   responses = worker.get :us, :uk, :de
+    # Optionally, pass one or more locales to query specific locales or `:all`
+    # to query all locales.
     #
-    #   responses = worker.get :all
+    #   responses = worker.get(:us)
+    #
+    #   responses = worker.get(:all)
+    #
     def get(*args)
       case args.count
 
@@ -131,7 +128,6 @@ module Sucker #:nodoc:
 
     # Sets a global AWS access key
     #
-    #   worker = Sucker.new
     #   worker.key = 'foo'
     #
     def key=(token)
@@ -150,10 +146,8 @@ module Sucker #:nodoc:
     #   keys = {
     #     :us => 'foo',
     #     :uk => 'bar',
-    #     :de => 'baz',
     #     ... }
     #
-    #   worker = Sucker.new
     #   worker.keys = keys
     #
     def keys=(tokens)
@@ -184,7 +178,6 @@ module Sucker #:nodoc:
 
     # Sets the Amazon API version
     #
-    #   worker = Sucker.new
     #   worker.version = '2010-06-01'
     #
     def version=(version)
@@ -193,12 +186,32 @@ module Sucker #:nodoc:
 
     private
 
-    # Returns a signed and timestamped query string
-    def build_signed_query
+    def build_query
       parameters.
+        normalize.
         merge({ 'AWSAccessKeyId' => key }).
         merge({ 'AssociateTag'   => associate_tag }).
-        sign(host, PATH, secret)
+        sort.
+        map do |k, v|
+          "#{k}=" + escape(v)
+        end.join('&')
+    end
+
+    def build_signed_query
+      query = build_query
+
+      digest = OpenSSL::Digest::Digest.new('sha256')
+      string = ['GET', host, PATH, query].join("\n")
+      hmac = OpenSSL::HMAC.digest(digest, secret, string)
+      signature = escape([hmac].pack('m').chomp)
+
+      query + '&Signature=' + signature
+    end
+
+    def escape(value)
+      value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
+        '%' + $1.unpack('H2' * $1.bytesize).join('%').upcase
+      end
     end
 
     def get_multi(locales)

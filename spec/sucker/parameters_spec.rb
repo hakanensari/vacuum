@@ -18,35 +18,43 @@ module Sucker
       it "sets `Version`" do
         parameters.should have_key "Version"
       end
-    end
 
-    describe "#build" do
-      it "canonicalizes query" do
-        parameters.build.should match /Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
-      end
-
-      it "includes a timestamp" do
-        parameters.build.should include 'Timestamp'
-      end
-
-      it "sorts query" do
-        parameters["A"] = "foo"
-        parameters.build.should match /^A=foo/
-      end
-    end
-
-    describe "#sign" do
-      it "signs the query" do
-        signed_query = parameters.sign('http://example.com', '/', 'secret')
-        signed_query.should include 'Signature'
-      end
-    end
-
-    describe "#timestamp!" do
-      it "timestamps the query" do
-        parameters.send(:timestamp!)
+      it "set `Timestamp`" do
         parameters.should have_key "Timestamp"
-        parameters["Timestamp"].should match /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
+      end
+    end
+
+    describe "#normalize" do
+      it "casts keys to string" do
+        parameters[:Foo] = 0
+        normalized = parameters.normalize
+
+        normalized.should have_key "Foo"
+        normalized.should_not have_key :foo
+      end
+
+      it "camelizes keys" do
+        parameters["foo_bar"] = 0
+        normalized = parameters.normalize
+
+        normalized.should have_key "FooBar"
+        normalized.should_not have_key "foo_bar"
+      end
+
+      it "casts numeric values to string" do
+        parameters["Foo"] = 1
+        parameters.normalize["Foo"].should eql "1"
+      end
+
+      it "converts array values to string" do
+        parameters["Foo"] = ['bar', 'baz']
+        parameters.normalize["Foo"].should eql 'bar,baz'
+      end
+    end
+
+    describe "#timestamp" do
+      it "generates a timestamp" do
+        parameters.send(:timestamp).should match /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
       end
     end
   end

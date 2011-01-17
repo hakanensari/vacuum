@@ -15,7 +15,6 @@ module Sucker
       worker << {
           "Operation"     => "ItemLookup",
           "IdType"        => "ASIN",
-          "ResponseGroup" => ["ItemAttributes", "OfferFull"],
           "ItemId"        => asins }
       worker.get
     end
@@ -83,8 +82,7 @@ module Sucker
       context "when there are matches" do
 
         it "returns an array of matching nodes" do
-          node = response.find("ItemAttributes")
-          node.map { |book| book["ISBN"] }.should eql asins
+          response.find("ASIN").should eql asins
         end
       end
 
@@ -99,11 +97,9 @@ module Sucker
     describe "#map" do
       context "when a block is given" do
         it "yields each match to a block and maps returned values" do
-          # Collect EANs
-          eans = response.map("ItemAttributes") { |item| item["EAN"] }
+          titles = response.map("ItemAttributes") { |item| item["Title"] }
 
-          eans.should be_an_instance_of Array
-          eans.each { |ean| ean.match(/^[0-9]{13}$/).should be_true }
+          titles.count.should eql 2
         end
       end
 

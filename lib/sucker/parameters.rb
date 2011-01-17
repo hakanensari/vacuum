@@ -1,34 +1,28 @@
-require 'openssl'
+require 'active_support/inflector'
 
 module Sucker
-  class Parameters < Hash #:nodoc: all
-    include Helpers
+  class Parameters < Hash
+    API_VERSION = '2010-11-01'
+    SERVICE     = 'AWSECommerceService'
 
-    def initialize
-      self.store 'Service', 'AWSECommerceService'
-      self.store 'Version', CURRENT_AMAZON_API_VERSION
+    def initialize #:nodoc
+      self.store 'Service',   SERVICE
+      self.store 'Version',   API_VERSION
+      self.store 'Timestamp', timestamp
     end
 
-    def build
-      timestamp!
-
-      sort.
-      map do |k, v|
-        "#{ camelize(k) }=" + escape(stringify(v))
-      end.join('&')
+    def normalize
+      inject({}) do |h, kv|
+        k, v = kv
+        h[k.to_s.camelize] = v.is_a?(Array) ? v.join(',') : v.to_s
+        h
+      end
     end
 
-    def sign(host, path, secret)
-      query = build
-      digest = OpenSSL::Digest::Digest.new('sha256')
-      string = ['GET', host, path, query].join("\n")
-      hmac = OpenSSL::HMAC.digest(digest, secret, string)
+    private
 
-      query + '&Signature=' + escape([hmac].pack('m').chomp)
-    end
-
-    def timestamp!
-      store 'Timestamp', Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+    def timestamp
+      Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
     end
   end
 end
