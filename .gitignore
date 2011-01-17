@@ -9,3 +9,4 @@ spec/support/amazon.yml
 spec/fixtures/cassette_library
 *.gem
 *.rbc
+NERD_tree*
