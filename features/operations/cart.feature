@@ -10,7 +10,7 @@ Feature: Remote cart
     Given the following parameters:
       """
       Operation             : CartCreate
-      Item.1.OfferListingId : WSReoMTNALmhJ3mGNmN%2F2qM5STM7XztgIbIq98B9udGTQ4i6%2BLF9vUkV2WtpuSLH5GOBdGViiaw3ua7d7dvZ5A7XW61Bp5El1qkYbnlEjZR7NBmVenMkDRcoVc%2FUWl2kiozSiltYkEs%3D
+      Item.1.OfferListingId : offer-listing-id
       Item.1.Quantity       : 1
       """
     When the worker gets a response
