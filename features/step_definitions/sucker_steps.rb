@@ -1,7 +1,3 @@
-Given /^Ruby ([\d.]+)$/ do |version|
-  RUBY_VERSION.include? version
-end
-
 Given /^a worker$/ do
    @worker = Sucker.new(
      :locale => :us,
@@ -64,16 +60,8 @@ Then /^the following should be false:$/ do |string|
   eval(string).should be_false
 end
 
-Then /^there should be (\d+) responses$/ do |count|
-  @responses.count.should eql count
-end
-
 Then /^the response should be valid$/ do
   @response.should be_valid
-end
-
-Then /^the responses should be valid$/ do
-  @responses.each { |resp| resp.should be_valid }
 end
 
 Then /^the response should have (\d+) (.+)$/ do |count, object|
