@@ -37,7 +37,7 @@ module Sucker #:nodoc:
     #     :key    => 'API KEY',
     #     :secret => 'API SECRET')
     #
-    def initialize(args)
+    def initialize(args={})
       args.each { |k, v| send("#{k}=", v) }
     end
 
