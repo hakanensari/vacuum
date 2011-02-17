@@ -32,12 +32,13 @@ end
 When /^the worker gets a response$/ do
   params = @worker.parameters.normalize
   unique =
-    params['Author']   ||
-    params['Power']    ||
-    params['Keywords'] ||
-    params['Author']   ||
-    params['SellerId'] ||
-    params['ItemId']   ||
+    params['Author']                ||
+    params['Power']                 ||
+    params['Keywords']              ||
+    params['Author']                ||
+    params['SellerId']              ||
+    params['ItemId']                ||
+    params['Item.1.OfferListingId'] ||
     params['ItemLookup.1.ItemId'] + ',' + params['ItemLookup.2.ItemId']
   cassette_name = unique.parameterize
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
