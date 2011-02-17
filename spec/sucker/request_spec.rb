@@ -19,9 +19,18 @@ module Sucker
     end
 
     describe '#get' do
-      context 'when no argument is passed' do
-        it 'returns a response' do
-          worker.get.class.ancestors.should include Response
+      it 'returns a response' do
+        worker.get.class.ancestors.should include Response
+      end
+
+      context 'when local IP is specified' do
+        before do
+          worker.local_ip = '192.168.0.1'
+        end
+
+        it 'routes request through that IP' do
+          pending('Figure out how to test this')
+          worker.get
         end
       end
     end
@@ -81,12 +90,6 @@ module Sucker
       it 'returns a host' do
         worker.locale = :fr
         worker.send(:host).should eql 'ecs.amazonaws.fr'
-      end
-    end
-
-    describe '#uri' do
-      it 'returns the URI with which to query Amazon' do
-        worker.send(:uri).should be_an_instance_of URI::HTTP
       end
     end
   end
