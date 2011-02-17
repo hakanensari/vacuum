@@ -49,7 +49,7 @@ module Sucker #:nodoc:
     #     'ItemId'    => '0816614024' }
     #
     def <<(hash)
-      self.parameters.merge!(hash)
+      parameters.merge!(hash)
     end
 
     # Performs a request and returns a response
@@ -73,7 +73,7 @@ module Sucker #:nodoc:
     #   worker.version = '2010-06-01'
     #
     def version=(version)
-      self.parameters['Version'] = version
+      parameters['Version'] = version
     end
 
     private
@@ -81,8 +81,8 @@ module Sucker #:nodoc:
     def build_query
       parameters.
         normalize.
-        merge({ 'AWSAccessKeyId' => key }).
-        merge({ 'AssociateTag'   => associate_tag.to_s }).
+        merge({ 'AWSAccessKeyId' => key,
+                'AssociateTag'   => associate_tag.to_s }).
         sort.
         map { |k, v| "#{k}=" + escape(v) }.
         join('&')
