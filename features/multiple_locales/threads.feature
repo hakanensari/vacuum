@@ -1,8 +1,9 @@
 Feature: Threads
-  As a worker  
-  I want to query multiple locales using threads.
+  As a user  
+  I want to thread queries to multiple Amazon locales  
+  Because that data has some business value to me.
 
-  Scenario: Query all locales
+  Scenario: Query all six Amazon locales
       Given I am playing a VCR cassette called "0816614024"
       When I tape:
       """
@@ -10,14 +11,16 @@ Feature: Threads
         "Operation" => "ItemLookup",
         "IdType"    => "ASIN",
         "ItemId"    => "0816614024" }
-      locales = Sucker.new.send :locales
+
+      worker = Sucker.new(
+        :key    => amazon["key"],
+        :secret => amazon["secret"])
+
+      locales = Sucker::Request::HOSTS.keys
 
       threads = locales.map do |locale|
         Thread.new do
-          worker = Sucker.new(
-            :locale => locale,
-            :key    => amazon["key"],
-            :secret => amazon["secret"])
+          worker.locale = locale
           worker << params
           Thread.current[:response] = worker.get
         end

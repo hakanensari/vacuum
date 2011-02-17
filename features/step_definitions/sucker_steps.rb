@@ -9,11 +9,11 @@ Given /^a worker$/ do
      :secret => amazon['secret'])
 end
 
-Given /^I set the (\w+) to "([^"]*)"$/ do |attribute, locale|
-  @worker.send "#{attribute}=", locale
+Given /^the locale is "([^']*)"$/ do |value|
+  @worker.locale = value.to_sym
 end
 
-Given /^I add the following parameters:$/ do |string|
+Given /^the following parameters:$/ do |string|
   rows = string.split("\n")
 
   @worker << rows.inject({}) do |hash, row|
@@ -25,29 +25,23 @@ Given /^I add the following parameters:$/ do |string|
   end
 end
 
-Given /^I am playing a VCR cassette called "([^"]*)"$/ do |cassette_name|
+Given /^I am playing a VCR cassette called "([^']*)"$/ do |cassette_name|
   @cassette_name = cassette_name
 end
 
-When /^the worker gets(| all)$/ do |locales|
-  params = @worker.parameters
-  unique_query =
-    params["Author"] ||
-    params["Power"] ||
-    params["Keywords"] ||
-    params["Author"] ||
-    params["SellerId"] ||
-    params["ItemId"] ||
-    params[:item_id] ||
-    params["ItemLookup.1.ItemId"] + "," + params["ItemLookup.2.ItemId"]
-  cassette_name = unique_query.parameterize
+When /^the worker gets a response$/ do
+  params = @worker.parameters.normalize
+  unique =
+    params['Author']   ||
+    params['Power']    ||
+    params['Keywords'] ||
+    params['Author']   ||
+    params['SellerId'] ||
+    params['ItemId']   ||
+    params['ItemLookup.1.ItemId'] + ',' + params['ItemLookup.2.ItemId']
+  cassette_name = unique.parameterize
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
-    case locales.strip
-    when ''
-      @response = @worker.get
-    when 'all'
-      @responses = @worker.get :all
-    end
+    @response = @worker.get
   end
 end
 

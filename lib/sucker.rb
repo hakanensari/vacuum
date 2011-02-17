@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'sucker/parameters'
 require 'sucker/request'
 require 'sucker/response'
@@ -11,8 +13,8 @@ module Sucker
   #
   #   worker = Sucker.new(
   #     :locale => :us,
-  #     :key    => "API KEY",
-  #     :secret => "API SECRET")
+  #     :key    => 'API KEY',
+  #     :secret => 'API SECRET')
   #
   def self.new(args={})
     Sucker::Request.new(args)

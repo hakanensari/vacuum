@@ -1,21 +1,25 @@
+# encoding: utf-8
+
 require 'active_support/inflector'
 
-module Sucker
-  class Parameters < Hash
+module Sucker #:nodoc:
+
+  class Parameters < Hash #:nodoc:
     API_VERSION = '2010-11-01'
     SERVICE     = 'AWSECommerceService'
 
-    def initialize #:nodoc
+    def initialize
       self.store 'Service',   SERVICE
       self.store 'Version',   API_VERSION
       self.store 'Timestamp', timestamp
     end
 
     def normalize
-      inject({}) do |h, kv|
-        k, v = kv
-        h[k.to_s.camelize] = v.is_a?(Array) ? v.join(',') : v.to_s
-        h
+      inject({}) do |hash, key_value|
+        key, value = key_value
+        value = value.is_a?(Array) ? value.join(',') : value.to_s
+        hash[key.to_s.camelize] = value
+        hash
       end
     end
 

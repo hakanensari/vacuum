@@ -1,8 +1,10 @@
-require "active_support/xml_mini/nokogiri"
+# encoding: utf-8
+
+require 'active_support/xml_mini/nokogiri'
 
 module Sucker #:nodoc:
 
-  # A Nokogiri-driven wrapper around the cURL response
+  # A Nokogiri-based wrapper around the response
   class Response
 
     # The response body
@@ -11,36 +13,20 @@ module Sucker #:nodoc:
     # The HTTP status code of the response
     attr_accessor :code
 
-    # Transaction time in seconds for request
-    attr_accessor :time
-
-    # The request URI
-    attr_accessor :uri
-
-    def initialize(curl)
-      self.body = curl.body_str
-      self.code = curl.response_code
-      self.time = curl.total_time
-      self.uri  = curl.url
-    end
-
-    # A shorthand that yields each match to a block
-    #
-    #   worker.get.each("Item") { |item| process(item) }
-    #
-    def each(path)
-      find(path).each { |e| yield e }
+    def initialize(response)
+      self.body = response.body
+      self.code = response.code
     end
 
     # Returns an array of errors in the reponse
     def errors
-      find("Error")
+      find('Error')
     end
 
     # Queries an xpath and returns an array of matching nodes
     #
     #   response = worker.get
-    #   response.find("Item").each { |item| ... }
+    #   items = response.find('Item')
     #
     def find(path)
       xml.xpath("//xmlns:#{path}").map { |e| strip_content(e.to_hash[path]) }
@@ -51,15 +37,7 @@ module Sucker #:nodoc:
       errors.count > 0
     end
 
-    # A shorthand that yields matches to a block and collects returned values
-    #
-    #   descriptions = worker.get.map("Item") { |item| build_description(item) }
-    #
-    def map(path)
-      find(path).map { |e| yield e }
-    end
-
-    # Parses the response into a simple hash
+    # Parses response into a simple hash
     #
     #   response = worker.get
     #   response.to_hash
@@ -75,7 +53,7 @@ module Sucker #:nodoc:
     #    => true
     #
     def valid?
-      code == 200
+      code == '200'
     end
 
     # The XML document
@@ -88,14 +66,14 @@ module Sucker #:nodoc:
 
     private
 
-    # Let's massage that hash
+    # Massage hash
     def strip_content(node)
       case node
       when Array
         node.map { |child| strip_content(child) }
       when Hash
-        if node.keys.size == 1 && node["__content__"]
-          node["__content__"]
+        if node.keys.size == 1 && node['__content__']
+          node['__content__']
         else
           node.inject({}) do |attributes, key_value|
             attributes.merge({ key_value.first => strip_content(key_value.last) })
