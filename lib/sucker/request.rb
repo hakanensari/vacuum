@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'net/http'
+require 'openssl'
 require 'uri'
 
 module Sucker #:nodoc:
