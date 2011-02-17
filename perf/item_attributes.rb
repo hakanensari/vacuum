@@ -18,7 +18,7 @@ batch_size = ARGV[0].to_i
 batch_size = 20 if batch_size == 0
 
 printed_at = Time.now
-interface = ARGV[1]
+local_ip = ARGV[1]
 
 asins_fixture.each_slice(batch_size) do |asins|
   threads = timestamps.keys.map do |locale|
@@ -27,7 +27,7 @@ asins_fixture.each_slice(batch_size) do |asins|
         :locale => locale,
         :key    => amazon["key"],
         :secret => amazon["secret"])
-      worker.curl_opts { |c| c.interface = interface } unless interface !~ /\S/
+      worker.local_ip = local_ip unless local_ip !~ /\S/
       worker << {
         "Operation"                       => "ItemLookup",
         "ItemLookup.Shared.IdType"        => "ASIN",

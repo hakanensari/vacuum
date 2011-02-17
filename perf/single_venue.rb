@@ -7,7 +7,7 @@ trap('INT') { exit 0 }
 
 locale    = ARGV[0]
 locale    = "us" if locale == ""
-interface = ARGV[1]
+local_ip = ARGV[1]
 
 loop do
   asins_fixture.each_slice(20) do |asins|
@@ -16,7 +16,7 @@ loop do
         :locale => locale,
         :key    => amazon["key"],
         :secret => amazon["secret"])
-      worker.curl_opts { |c| c.interface = interface } unless interface !~ /\S/
+      worker.local_ip = local_ip unless local_ip !~ /\S/
       worker << {
         "Operation"                       => "ItemLookup",
         "ItemLookup.Shared.IdType"        => "ASIN",
