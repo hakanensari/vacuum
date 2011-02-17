@@ -1,0 +1,26 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://ecs.amazonaws.com:80/onca/xml?AWSAccessKeyId=0ZVSQ33MDFPQS8H2PM02&AssociateTag=&IdType=ASIN&ItemId=B000ASPUES&Operation=ItemLookup&RelationshipType=AuthorityTitle&ResponseGroup=RelatedItems&Service=AWSECommerceService&Signature=yk17cGCK3IWUwT8gsHrsAk17oLeDatxeWJLsj6m2lhw=&Timestamp=2011-02-17T12:46:52Z&Version=2010-11-01
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Thu, 17 Feb 2011 12:46:52 GMT
+      server: 
+      - Server
+      content-type: 
+      - text/xml;charset=UTF-8
+      vary: 
+      - Accept-Encoding,User-Agent
+      nncoection: 
+      - close
+      transfer-encoding: 
+      - chunked
+    body: <?xml version="1.0" encoding="UTF-8"?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2010-11-01"><OperationRequest><HTTPHeaders><Header Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>05Y90ZY1YDMTWQB05A6F</RequestId><Arguments><Argument Name="RelationshipType" Value="AuthorityTitle"></Argument><Argument Name="AssociateTag"></Argument><Argument Name="ItemId" Value="B000ASPUES"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument><Argument Name="Signature" Value="yk17cGCK3IWUwT8gsHrsAk17oLeDatxeWJLsj6m2lhw="></Argument><Argument Name="ResponseGroup" Value="RelatedItems"></Argument><Argument Name="Operation" Value="ItemLookup"></Argument><Argument Name="IdType" Value="ASIN"></Argument><Argument Name="AWSAccessKeyId" Value="0ZVSQ33MDFPQS8H2PM02"></Argument><Argument Name="Timestamp" Value="2011-02-17T12:46:52Z"></Argument><Argument Name="Version" Value="2010-11-01"></Argument></Arguments><RequestProcessingTime>0.0373139381408691</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>ASIN</IdType><ItemId>B000ASPUES</ItemId><ResponseGroup>RelatedItems</ResponseGroup><RelationshipType>AuthorityTitle</RelationshipType></ItemLookupRequest></Request><Item><ASIN>B000ASPUES</ASIN><RelatedItems><Relationship>Children</Relationship><RelationshipType>AuthorityTitle</RelationshipType><RelatedItemCount>11</RelatedItemCount><RelatedItemPageCount>2</RelatedItemPageCount><RelatedItemPage>1</RelatedItemPage><RelatedItem><Item><ASIN>B003QGCMFG</ASIN></Item></RelatedItem><RelatedItem><Item><ASIN>B000FA5YU6</ASIN></Item></RelatedItem><RelatedItem><Item><ASIN>0415246334</ASIN></Item></RelatedItem><RelatedItem><Item><ASIN>020307291X</ASIN></Item></RelatedItem></RelatedItems></Item></Items></ItemLookupResponse>
+    http_version: "1.1"
