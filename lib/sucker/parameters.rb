@@ -15,10 +15,10 @@ module Sucker #:nodoc:
     end
 
     def normalize
-      inject({}) do |hash, key_value|
-        key, value = key_value
-        value = value.is_a?(Array) ? value.join(',') : value.to_s
-        hash[key.to_s.camelize] = value
+      inject({}) do |hash, kv|
+        k, v = kv
+        v = v.is_a?(Array) ? v.join(',') : v.to_s
+        hash[k.to_s.camelize] = v
         hash
       end
     end

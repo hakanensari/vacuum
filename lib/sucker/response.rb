@@ -75,8 +75,9 @@ module Sucker #:nodoc:
         if node.keys.size == 1 && node['__content__']
           node['__content__']
         else
-          node.inject({}) do |attributes, key_value|
-            attributes.merge({ key_value.first => strip_content(key_value.last) })
+          node.inject({}) do |attributes, kv|
+            k, v = kv
+            attributes.merge({ k => strip_content(v) })
           end
         end
       else

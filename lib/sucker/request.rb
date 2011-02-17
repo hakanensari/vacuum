@@ -84,9 +84,8 @@ module Sucker #:nodoc:
         merge({ 'AWSAccessKeyId' => key }).
         merge({ 'AssociateTag'   => associate_tag.to_s }).
         sort.
-        map do |k, v|
-          "#{k}=" + escape(v)
-        end.join('&')
+        map { |k, v| "#{k}=" + escape(v) }.
+        join('&')
     end
 
     def build_signed_query
