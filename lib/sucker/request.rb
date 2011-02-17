@@ -142,12 +142,5 @@ module Sucker #:nodoc:
         :path   => '/onca/xml',
         :query  => build_signed_query)
     end
-
-    def uris
-      locales.map do |locale|
-        self.locale = locale
-        uri.to_s
-      end
-    end
   end
 end
