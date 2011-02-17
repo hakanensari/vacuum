@@ -17,6 +17,6 @@ module Sucker
   #     :secret => 'API SECRET')
   #
   def self.new(args={})
-    Sucker::Request.new(args)
+    Request.new(args)
   end
 end
