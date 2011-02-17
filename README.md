@@ -8,7 +8,7 @@ It's fast and supports __the entire API__.
 ![Electrolux](https://github.com/papercavalier/sucker/raw/master/electrolux.jpg)
 
 
-2.0.0.pre
+1.3.0.pre
 ---------
 This release has major changes under the hood.
 
