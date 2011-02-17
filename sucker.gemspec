@@ -19,16 +19,11 @@ Gem::Specification.new do |s|
   s.add_dependency('nokogiri', ['~> 1.4.0'])
 
   s.add_development_dependency('cucumber', '~> 0.10.0')
-  s.add_development_dependency('relish', '~> 0.2.0')
-  s.add_development_dependency('rspec', ['~> 2.4.0'])
+  s.add_development_dependency('relish', '~> 0.2.1')
+  s.add_development_dependency('rspec', ['~> 2.5.0'])
   s.add_development_dependency('throttler', '~> 0.2.1')
-  s.add_development_dependency('vcr', '~> 1.5.0')
+  s.add_development_dependency('vcr', '~> 1.6.0')
   s.add_development_dependency('webmock', '~> 1.6.2')
-  if RUBY_VERSION.include?('1.9')
-    s.add_development_dependency 'ruby-debug19', '~> 0.11.0'
-  elsif RUBY_VERSION.include?('1.8')
-    s.add_development_dependency 'ruby-debug', '~> 0.10.0'
-  end
 
   s.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md CHANGELOG.md)
   s.test_files    = Dir.glob('spec/**/*')
