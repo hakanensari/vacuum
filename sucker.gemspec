@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('vcr', '~> 1.6.0')
   s.add_development_dependency('webmock', '~> 1.6.2')
 
-  s.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md CHANGELOG.md)
+  s.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
   s.test_files    = Dir.glob('spec/**/*')
   s.require_paths = ['lib']
 end
