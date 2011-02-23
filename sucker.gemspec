@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('activesupport', '~> 3.0.0')
   s.add_dependency('i18n', '~> 0.5.0')
-  s.add_dependency('nokogiri', ['~> 1.4.0'])
+  s.add_dependency('nokogiri', ['~> 1.5.0.beta.4'])
 
   s.add_development_dependency('cucumber', '~> 0.10.0')
   s.add_development_dependency('relish', '~> 0.2.1')
