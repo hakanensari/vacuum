@@ -63,6 +63,12 @@ module Sucker
       end
     end
 
+    describe '#[]' do
+      it 'is an alias of #find' do
+        response['Foo'].should eql response.find('Foo')
+      end
+    end
+
     describe '#to_hash' do
       it 'returns a hash' do
         response.to_hash.should be_a Hash
