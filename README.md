@@ -53,7 +53,7 @@ Monkey-patch that Net::HTTP
 
 Amazon limits calls to a venue to one per second per IP address.
 
-If your server has multiple local interfaces, do the following:
+If your server has multiple local interfaces, do:
 
     your_ips.each do |ip|
       Thread.new do
