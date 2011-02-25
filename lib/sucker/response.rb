@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'sucker/parameters'
 require 'sucker/response/hash'
 
 module Sucker
