@@ -22,17 +22,6 @@ module Sucker
       it 'returns a response' do
         worker.get.class.ancestors.should include Response
       end
-
-      context 'when local IP is specified' do
-        before do
-          worker.local_ip = '192.168.0.1'
-        end
-
-        it 'routes request through that IP' do
-          pending('Figure out how to test this')
-          worker.get
-        end
-      end
     end
 
     describe '#version=' do

@@ -1,18 +1,19 @@
 Sucker
 ======
 
-Sucker is a [Nokogiri-](http://github.com/rails/rails/blob/master/activesupport/lib/active_support/xml_mini/nokogiri.rb)based Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
+Sucker is a Nokogiri-based Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
 
-It's fast and supports __the entire API__.
+It's minimalist and fast. It supports __the entire API__.
 
 ![Electrolux](https://github.com/papercavalier/sucker/raw/master/electrolux.jpg)
 
+Trim fat
+--------
+1.3.0.pre has major changes under the hood.
 
-1.3.0.pre
----------
-This release has major changes under the hood.
+Active Support and Curb are no more.
 
-I replaced curb with Net::HTTP to make the library JRuby compatible and edited out some nonessential code. Check [here](http://rdoc.info/github/papercavalier/sucker/master/frames) to see what's left.
+I edited out some nonessential methods. Check [here](http://rdoc.info/github/papercavalier/sucker/master/frames) to see what's left.
 
 Usage
 -----
@@ -32,13 +33,13 @@ Build a request.
       "ItemId"        => '0816614024',
       "ResponseGroup" => 'ItemAttributes' }
 
-Get a response.
+Literally, get a response.
 
     response = worker.get
 
-Consume.
+Time for some business logic.
 
-    items = response.find('Item') if response.valid?
+    items = response['Item'] if response.valid?
 
 Repeat ad infinitum.
 
@@ -47,27 +48,37 @@ Repeat ad infinitum.
 [Read the API.](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html)
 
 
-Multiple local IPs
-------------------
+Monkey-patch that Net::HTTP
+---------------------------
 
-Amazon limits calls to a venue to one per second per IP. If you have
-multiple interfaces set up and want to use all to query Amazon, just do:
+Amazon limits calls to a venue to one per second per IP address.
 
-    worker.local_ip = '75.80.85.90'
-    worker.get # This request will route through the above IP
+If your server has multiple local interfaces, do the following:
+
+    your_ips.each do |ip|
+      Thread.new do
+        worker.local_ip = ip
+        worker.get
+      end
+    end
+
+Throttle calls
+----------------
+
+Use [Throttler](https://github.com/papercavalier/throttler) to throttle calls to one per second per IP address. Let me know if you figure out a more elegant solution.
 
 More concise syntax
 -------------------
 
-If you are on Ruby 1.9, try:
+If you are on Ruby 1.9, do:
 
     worker << {
       operation: 'ItemLookup',
       id_type:   'ASIN',
       item_id:   '0816614024' }
 
-Stubbing
---------
+Stub
+----
 
 Use [VCR](http://github.com/myronmarston/vcr).
 
@@ -78,7 +89,9 @@ Compatibility
 
 Specs pass against Ruby 1.8.7, Ruby 1.9.2, JRuby 1.5.6, and Rubinius 1.2.1.
 
-Morale of the story
+Morale(s) of the story
 -------------------
 
 Don't overabstract a spaghetti API.
+
+Fancy a DSL? Write your own on top of this.

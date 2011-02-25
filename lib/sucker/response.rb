@@ -1,10 +1,10 @@
-# encoding: utf-8
+require 'nokogiri'
+require 'sucker/parameters'
+require 'sucker/response/hash'
 
-require 'active_support/xml_mini/nokogiri'
+module Sucker
 
-module Sucker #:nodoc:
-
-  # A Nokogiri-based wrapper around the response
+  # A wrapper around the response
   class Response
 
     # The response body
@@ -29,8 +29,10 @@ module Sucker #:nodoc:
     #   items = response.find('Item')
     #
     def find(path)
-      xml.xpath("//xmlns:#{path}").map { |e| strip_content(e.to_hash[path]) }
+      xml.xpath("//xmlns:#{path}").map { |element| Hash.from_xml(element) }
     end
+
+    alias_method :[], :find
 
     # Returns true if response contains errors
     def has_errors?
@@ -38,12 +40,8 @@ module Sucker #:nodoc:
     end
 
     # Parses response into a simple hash
-    #
-    #   response = worker.get
-    #   response.to_hash
-    #
     def to_hash
-      strip_content(xml.to_hash)
+      Hash.from_xml(xml)
     end
 
     # Checks if the HTTP response is OK
@@ -62,27 +60,6 @@ module Sucker #:nodoc:
     #    response.xml
     def xml
       @xml ||= Nokogiri::XML(body)
-    end
-
-    private
-
-    # Massage hash
-    def strip_content(node)
-      case node
-      when Array
-        node.map { |child| strip_content(child) }
-      when Hash
-        if node.keys.size == 1 && node['__content__']
-          node['__content__']
-        else
-          node.inject({}) do |attributes, kv|
-            k, v = kv
-            attributes.merge({ k => strip_content(v) })
-          end
-        end
-      else
-        node
-      end
     end
   end
 end

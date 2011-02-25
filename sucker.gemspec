@@ -14,11 +14,11 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'sucker'
 
-  s.add_dependency('activesupport', '~> 3.0.0')
-  s.add_dependency('i18n', '~> 0.5.0')
   s.add_dependency('nokogiri', ['~> 1.4.0'])
 
+  s.add_development_dependency('activesupport', '~> 3.0.0')
   s.add_development_dependency('cucumber', '~> 0.10.0')
+  s.add_development_dependency('i18n', '~> 0.5.0')
   s.add_development_dependency('relish', '~> 0.2.1')
   s.add_development_dependency('rspec', ['~> 2.5.0'])
   s.add_development_dependency('throttler', '~> 0.2.1')

@@ -1,9 +1,7 @@
-# encoding: utf-8
-
 require 'net/http'
 require 'openssl'
 
-module Sucker #:nodoc:
+module Sucker
 
   # A wrapper around the API request
   class Request

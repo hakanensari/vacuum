@@ -65,26 +65,11 @@ module Sucker
 
     describe '#to_hash' do
       it 'returns a hash' do
-        response.to_hash.should be_an_instance_of Hash
+        response.to_hash.should be_a Hash
       end
 
-      it 'converts a content hash to string' do
-        response.body = '<book><title>A Thousand Plateaus</title></book>'
-        response.to_hash['book']['title'].should be_an_instance_of String
-      end
-
-      it 'renders French' do
-        response.body = "<Title>L'archéologie du savoir</Title>"
-        response.to_hash['Title'].should eql "L'archéologie du savoir"
-      end
-
-      it 'renders German' do
-        response.body = '<Title>Kafka: Für eine kleine Literatur</Title>'
-        response.to_hash['Title'].should eql 'Kafka: Für eine kleine Literatur'
-      end
-
-      it 'renders Japanese' do
-        response.body = '<Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title>'
+      it 'renders non-ASCII characters' do
+        response.body = '<ItemAttributes><Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title></ItemAttributes>'
         response.to_hash['Title'].should eql 'スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則'
       end
     end

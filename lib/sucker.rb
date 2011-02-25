@@ -1,6 +1,5 @@
 # encoding: utf-8
 
-require 'sucker/parameters'
 require 'sucker/request'
 require 'sucker/response'
 
