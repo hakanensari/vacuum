@@ -89,8 +89,8 @@ Compatibility
 
 Specs pass against Ruby 1.8.7, Ruby 1.9.2, JRuby 1.5.6, and Rubinius 1.2.1.
 
-Morale(s) of the story
--------------------
+Moral(s) of the story
+------------------
 
 Don't overabstract a spaghetti API.
 
