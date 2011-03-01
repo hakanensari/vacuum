@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'sucker/response/hash'
+require 'sucker/hash'
 
 module Sucker
 

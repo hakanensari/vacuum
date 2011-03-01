@@ -1,6 +1,6 @@
 require 'net/http'
 require 'openssl'
-require 'sucker/request/parameters'
+require 'sucker/parameters'
 
 module Sucker
 
