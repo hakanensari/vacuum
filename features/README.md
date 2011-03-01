@@ -1,4 +1,4 @@
 Sucker
 ======
 
-![Electrolux](https://github.com/papercavalier/sucker/raw/master/electrolux.jpg)
+![Electrolux](https://github.com/papercavalier/sucker/raw/master/hoover.jpg)
