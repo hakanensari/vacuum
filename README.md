@@ -35,7 +35,7 @@ Do something with it.
 
 Repeat ad infinitum.
 
-Read [the Sucker API](http://rdoc.info/github/papercavalier/sucker/master/frames).
+Read further [here](http://rdoc.info/github/papercavalier/sucker/master/frames) and [here](http://relishapp.com/papercavalier/sucker).
 
 Multiple IPs
 ------------
