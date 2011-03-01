@@ -14,7 +14,10 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'sucker'
 
-  s.add_dependency('nokogiri', ['~> 1.4.0'])
+  s.add_dependency('nokogiri', '~> 1.4.0')
+  if RUBY_PLATFORM == 'java'
+    s.add_dependency('jruby-openssl', '~> 0.7.3')
+  end
 
   s.add_development_dependency('activesupport', '~> 3.0.0')
   s.add_development_dependency('cucumber', '~> 0.10.0')
