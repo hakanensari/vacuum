@@ -48,6 +48,29 @@ module Sucker
       end
     end
 
+    describe "#each" do
+      context "when a block is given" do
+        it "yields each match to a block" do
+          has_yielded = false
+
+          response.each("ItemAttributes") do |item|
+            has_yielded = true
+            item.should be_an_instance_of Hash
+          end
+
+          has_yielded.should be_true
+        end
+      end
+
+      context "when no block is given" do
+        it "raises error" do
+          expect do
+            response.each("ItemAttributes")
+          end.to raise_error(LocalJumpError)
+        end
+      end
+    end
+
     describe '#find' do
       context 'when there are matches' do
         it 'returns an array of matching nodes' do
@@ -59,6 +82,24 @@ module Sucker
         it 'returns an empty array' do
           node = response.find('Foo')
           node.should eql []
+        end
+      end
+    end
+
+    describe "#map" do
+      context "when a block is given" do
+        it "yields each match to a block and maps returned values" do
+          titles = response.map("ItemAttributes") { |item| item["Title"] }
+
+          titles.count.should eql 2
+        end
+      end
+
+      context "when no block is given" do
+        it "raises error" do
+          expect do
+            response.map("ItemAttributes")
+          end.to raise_error(LocalJumpError)
         end
       end
     end

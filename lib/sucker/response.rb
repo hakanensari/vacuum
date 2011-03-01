@@ -17,6 +17,14 @@ module Sucker
       self.code = response.code
     end
 
+    # A shorthand that yields each match to a block
+    #
+    #   response.each('Item') { |item| process_item(item) }
+    #
+    def each(path)
+      find(path).each { |match| yield match }
+    end
+
     # Returns an array of errors in the reponse
     def errors
       find('Error')
@@ -24,7 +32,6 @@ module Sucker
 
     # Queries an xpath and returns an array of matching nodes
     #
-    #   response = worker.get
     #   items = response.find('Item')
     #
     def find(path)
@@ -36,6 +43,14 @@ module Sucker
     # Returns true if response contains errors
     def has_errors?
       errors.count > 0
+    end
+
+    # A shorthand that yields matches to a block and collects returned values
+    #
+    #   descriptions = response.map('Item') { |item| build_description(item) }
+    #
+    def map(path)
+      find(path).map { |match| yield match }
     end
 
     # Parses response into a simple hash
