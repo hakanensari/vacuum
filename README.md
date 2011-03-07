@@ -10,7 +10,7 @@ Sucker is fast and supports __the entire Amazon API__.
 Usage
 -----
 
-Read the [API](http://aws.amazon.com/archives/Product%20Advertising%20API).
+Read the [API](http://aws.amazon.com/archives/Product%20Advertising%20API). Jump to the __Operations__ section if in a hurry.
 
 Set up.
 
