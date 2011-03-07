@@ -10,30 +10,53 @@ Sucker is fast and supports __the entire Amazon API__.
 Usage
 -----
 
+Read the [API](http://aws.amazon.com/archives/Product%20Advertising%20API).
+
 Set up.
 
-    worker = Sucker.new(
+    worker = Sucker.new \
       :locale => :us,
-      :key    => 'API KEY',
-      :secret => 'API SECRET')
+      :key    => api_key,
+      :secret => api_secret
 
 Build a request.
 
     worker << {
       'Operation'     => 'ItemLookup',
       'IdType'        => 'ASIN',
-      'ItemId'        => '0816614024',
+      'ItemId'        => 10.asins,
       'ResponseGroup' => 'ItemAttributes' }
 
 Get a response.
 
     response = worker.get
 
-Do something with it.
+Do something.
 
-    items = response['Item'] if response.valid? # and so on
+    if response.valid?
+      response.each('Item') do |item|
+        pp item
+      end
+    end
 
 Repeat ad infinitum.
+
+The following are all valid ways to query a response:
+
+    response.find('Item')
+    response['Item']
+    response.each('Item') { |item| ... }
+    items = response.map('Item') { |item| ... }
+
+To dig further into the response:
+
+    p response.valid?,
+      response.body,
+      response.code,
+      response.errors,
+      response.has_errors?,
+      response.to_hash,
+      response.xml
 
 Read further [here](http://rdoc.info/github/papercavalier/sucker/master/frames) and [here](http://relishapp.com/papercavalier/sucker).
 
@@ -42,7 +65,7 @@ Multiple IPs
 
 Amazon limits calls to a venue to one per second per IP address.
 
-If your server has multiple local interfaces, use them simultaneously like so:
+If your server has multiple local interfaces, route your requests like so:
 
     your_ips.each do |ip|
       Thread.new do
@@ -50,6 +73,8 @@ If your server has multiple local interfaces, use them simultaneously like so:
         worker.get
       end
     end
+
+Also, consider using [this library](https://github.com/papercavalier/throttler).
 
 Stubbing in Tests
 -----------------
