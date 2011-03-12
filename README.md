@@ -63,8 +63,8 @@ Read further [here](http://rdoc.info/github/papercavalier/sucker/master/frames) 
 API Usage
 ---------
 
-I have a growing cottage industry of gems we use to manage our
-consumption of the Amazon API.
+We have a home-grown collection that helps us manage our (relatively heavy)
+use of the Amazon API.
 
 * [Multiplex](http://github.com/papercavalier/multiplex) binds a request
   to a specified local IP.
@@ -91,8 +91,10 @@ A hypothetical setup:
     end
 
 We prefer to use [Resque](http://github.com/defunkt/resque) to manage
-multiple requests. Generally, four or five workers per venue per IP
-should provide optimum throughput.
+multiple requests.
+
+Generally, four or five workers per locale per IP proves enough to provide
+optimum throughput.
 
 Stubbing in Tests
 -----------------
