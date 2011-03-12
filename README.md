@@ -31,11 +31,11 @@ Get a response.
 
     response = worker.get
 
-Do something.
+Fulfill a business value.
 
     if response.valid?
       response.each('Item') do |item|
-        pp item
+        consume item
       end
     end
 
@@ -43,12 +43,12 @@ Repeat ad infinitum.
 
 The following are all valid ways to query a response:
 
-    response.find('Item')
-    response['Item']
-    response.each('Item') { |item| ... }
+    items = response.find('Item')
+    items = response['Item']
     items = response.map('Item') { |item| ... }
+    response.each('Item') { |item| ... }
 
-To dig further into the response:
+To dig further into the response object:
 
     p response.valid?,
       response.body,
@@ -60,21 +60,39 @@ To dig further into the response:
 
 Read further [here](http://rdoc.info/github/papercavalier/sucker/master/frames) and [here](http://relishapp.com/papercavalier/sucker).
 
-Multiple IPs
-------------
+API Usage
+---------
 
-Amazon limits calls to a venue to one per second per IP address.
+I have a growing cottage industry of gems we use to manage our
+consumption of the Amazon API.
 
-If your server has multiple local interfaces, route your requests like so:
+* [Multiplex](http://github.com/papercavalier/multiplex) binds a request
+  to a specified local IP.
+* [Throttler](http://github.com/papercavalier/throttler) throttles
+  requests to a venue to one per second per IP.
 
-    your_ips.each do |ip|
+
+A hypothetical setup:
+
+    require 'multiplex'
+    require 'throttler'
+
+    ips.each do |ip|
       Thread.new do
-        worker.local_ip = ip
-        worker.get
+        scope = "#{ip}-#{locale}"
+        Throttler.throttle(scope) do
+          Net::HTTP.bind ip do
+            # Set up worker
+            response = worker.get
+            # Consume response
+          end
+        end
       end
     end
 
-Also, consider using [this library](https://github.com/papercavalier/throttler).
+We prefer to use [Resque](http://github.com/defunkt/resque) to manage
+multiple requests. Generally, four or five workers per venue per IP
+should provide optimum throughput.
 
 Stubbing in Tests
 -----------------
