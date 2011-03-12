@@ -20,9 +20,6 @@ module Sucker
     # Your AWS access key
     attr_accessor :key
 
-    # Local IP to route the request through
-    attr_accessor :local_ip
-
     # Amazon locale
     attr_accessor :locale
 
@@ -55,12 +52,11 @@ module Sucker
     #   response = worker.get
     #
     def get
-      response = bind_to local_ip do
-        Net::HTTP.start(host) do |http|
-          query = build_signed_query
-          http.get("/onca/xml?#{query}")
-        end
+      response = Net::HTTP.start(host) do |http|
+        query = build_signed_query
+        http.get("/onca/xml?#{query}")
       end
+
       Response.new(response)
     end
 
@@ -78,37 +74,6 @@ module Sucker
     end
 
     private
-
-    # I am gently monkey-patching TCPSocket here to be able to bind the request
-    # to a local IP if specified, emulating cURL's interface option. Once a
-    # request is made, I reverse the patch, leaving TCPSOcket in its original
-    # state.
-    def bind_to(local_ip)
-      if local_ip
-        TCPSocket.instance_eval do
-          (class << self; self; end).instance_eval do
-            alias_method :original_open, :open
-
-            define_method(:open) do |conn_address, conn_port|
-              original_open(conn_address, conn_port, local_ip)
-            end
-          end
-        end
-      end
-
-      return_value = yield
-
-      if local_ip
-        TCPSocket.instance_eval do
-          (class << self; self; end).instance_eval do
-            alias_method :open, :original_open
-            remove_method :original_open
-          end
-        end
-      end
-
-      return_value
-    end
 
     def build_query
       parameters.
