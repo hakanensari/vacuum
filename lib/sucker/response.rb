@@ -3,13 +3,13 @@ require 'sucker/hash'
 
 module Sucker
 
-  # A wrapper around the response
+  # A wrapper around the API response.
   class Response
 
-    # The response body
+    # The response body.
     attr_accessor :body
 
-    # The HTTP status code of the response
+    # The HTTP status code of the response.
     attr_accessor :code
 
     def initialize(response)
@@ -17,7 +17,7 @@ module Sucker
       self.code = response.code
     end
 
-    # A shorthand that yields each match to a block
+    # A shorthand that yields each match to a block.
     #
     #   response.each('Item') { |item| process_item(item) }
     #
@@ -25,12 +25,12 @@ module Sucker
       find(path).each { |match| yield match }
     end
 
-    # Returns an array of errors in the reponse
+    # Returns an array of errors in the reponse.
     def errors
       find('Error')
     end
 
-    # Queries an xpath and returns an array of matching nodes
+    # Queries an xpath and returns an array of matching nodes.
     #
     #   items = response.find('Item')
     #
@@ -40,25 +40,26 @@ module Sucker
 
     alias_method :[], :find
 
-    # Returns true if response contains errors
+    # Returns true if the response contains errors.
     def has_errors?
       errors.count > 0
     end
 
-    # A shorthand that yields matches to a block and collects returned values
+    # A shorthand that yields matches to a block and collects
+    # returned values.
     #
-    #   descriptions = response.map('Item') { |item| build_description(item) }
+    #   items = response.map('Item') { |item| # do something }
     #
     def map(path)
       find(path).map { |match| yield match }
     end
 
-    # Parses response into a simple hash
+    # Parses the response into a simple hash.
     def to_hash
       Hash.from_xml(xml)
     end
 
-    # Checks if the HTTP response is OK
+    # Checks if the HTTP response is OK.
     #
     #    response = worker.get
     #    p response.valid?
@@ -68,7 +69,7 @@ module Sucker
       code == '200'
     end
 
-    # The XML document
+    # The XML document.
     #
     #    response = worker.get
     #    response.xml

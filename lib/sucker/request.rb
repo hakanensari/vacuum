@@ -4,7 +4,7 @@ require 'sucker/parameters'
 
 module Sucker
 
-  # A wrapper around the API request
+  # A wrapper around the API request.
   class Request
     HOSTS = {
       :us  => 'ecs.amazonaws.com',
@@ -14,19 +14,21 @@ module Sucker
       :fr  => 'ecs.amazonaws.fr',
       :jp  => 'ecs.amazonaws.jp' }
 
-    # Your Amazon associate tag
+    # The Amazon associate tag.
     attr_accessor :associate_tag
 
-    # Your AWS access key
+    # The Amazon Web Services access key.
     attr_accessor :key
 
-    # Amazon locale
+    # The Amazon locale.
     attr_accessor :locale
 
-    # Your AWS secret
+    # The Amazon Web Services secret.
     attr_accessor :secret
 
-    # Initializes a request object
+    # Initializes a request object.
+    #
+    # Takes an optional hash of attribute and value pairs.
     #
     #   worker = Sucker.new(
     #     :key    => 'API KEY',
@@ -36,7 +38,7 @@ module Sucker
       args.each { |k, v| send("#{k}=", v) }
     end
 
-    # Merges a hash into the existing parameters
+    # Merges a hash into the existing parameters.
     #
     #   worker << {
     #     'Operation' => 'ItemLookup',
@@ -47,7 +49,7 @@ module Sucker
       parameters.merge!(hash)
     end
 
-    # Performs a request and returns a response
+    # Performs a request and returns a response object.
     #
     #   response = worker.get
     #
@@ -60,12 +62,12 @@ module Sucker
       Response.new(response)
     end
 
-    # The parameters to query Amazon with
+    # The query parameters.
     def parameters
       @parameters ||= Parameters.new
     end
 
-    # Sets the Amazon API version
+    # Sets the Amazon API version.
     #
     #   worker.version = '2010-06-01'
     #

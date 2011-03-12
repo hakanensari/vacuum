@@ -1,7 +1,14 @@
 module Sucker
+
   class Hash < ::Hash
     class << self
 
+      # Builds a hash from a Nokogiri XML document.
+      #
+      # In earlier versions of Sucker, I was relying on the XML Mini
+      # Nokogiri module in Active Support. This method essentially
+      # accomplishes the same.
+      #
       # Based on https://gist.github.com/335286
       def from_xml(xml)
         case xml
