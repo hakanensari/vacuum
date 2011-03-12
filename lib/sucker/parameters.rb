@@ -1,11 +1,10 @@
 module Sucker
   class Parameters < ::Hash
-    API_VERSION = '2010-11-01'
-    SERVICE     = 'AWSECommerceService'
+    CURRENT_API_VERSION = '2010-11-01'
 
     def initialize
-      self.store 'Service',   SERVICE
-      self.store 'Version',   API_VERSION
+      self.store 'Service',   'AWSECommerceService'
+      self.store 'Version',   CURRENT_API_VERSION
       self.store 'Timestamp', timestamp
     end
 
