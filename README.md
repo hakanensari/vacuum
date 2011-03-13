@@ -63,14 +63,13 @@ Read further [here](http://rdoc.info/github/papercavalier/sucker/master/frames) 
 API Usage
 ---------
 
-We have a home-grown collection that helps us manage our (relatively heavy)
-use of the Amazon API.
+We have a home-grown collection of gems that help us manage our
+(relatively heavy) use of the Amazon API.
 
-* [Multiplex](http://github.com/papercavalier/multiplex) binds a request
-  to a specified local IP.
+* [Multiplex](http://github.com/papercavalier/multiplex) binds a
+  request to a specified local IP.
 * [Throttler](http://github.com/papercavalier/throttler) throttles
   requests to a venue to one per second per IP.
-
 
 A hypothetical setup:
 
