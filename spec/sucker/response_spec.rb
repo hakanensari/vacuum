@@ -66,7 +66,7 @@ module Sucker
         it "raises error" do
           expect do
             response.each("ItemAttributes")
-          end.to raise_error(LocalJumpError)
+          end.to raise_error(NoMethodError)
         end
       end
     end
@@ -99,7 +99,7 @@ module Sucker
         it "raises error" do
           expect do
             response.map("ItemAttributes")
-          end.to raise_error(LocalJumpError)
+          end.to raise_error(NoMethodError)
         end
       end
     end
