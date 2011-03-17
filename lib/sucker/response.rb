@@ -41,7 +41,6 @@ module Sucker
         Hash.from_xml(element)
       end
     end
-
     alias_method :[], :find
 
     # Returns true if the response contains errors.
