@@ -17,25 +17,29 @@ module Sucker
       self.code = response.code
     end
 
-    # A shorthand that yields each match to a block.
+    # A shorthand that queries for a specified attribute and yields to a given
+    # block each matching document.
     #
     #   response.each('Item') { |item| process_item(item) }
     #
-    def each(path)
-      find(path).each { |match| yield match }
+    def each(path, &block)
+      find(path).each { |match| block.call(match) }
     end
 
-    # Returns an array of errors in the reponse.
+    # Returns an array of errors in the response.
     def errors
       find('Error')
     end
 
-    # Queries an xpath and returns an array of matching nodes.
+    # Queries for a specified attribute and returns an array of matching
+    # documents.
     #
     #   items = response.find('Item')
     #
-    def find(path)
-      xml.xpath("//xmlns:#{path}").map { |element| Hash.from_xml(element) }
+    def find(attribute)
+      xml.xpath("//xmlns:#{attribute}").map do |element|
+        Hash.from_xml(element)
+      end
     end
 
     alias_method :[], :find
@@ -45,13 +49,13 @@ module Sucker
       errors.count > 0
     end
 
-    # A shorthand that yields matches to a block and collects
-    # returned values.
+    # A shorthand that queries for a specifed attribute, yields to a given
+    # block matching documents, and collects final values.
     #
     #   items = response.map('Item') { |item| # do something }
     #
-    def map(path)
-      find(path).map { |match| yield match }
+    def map(path, &block)
+      find(path).map { |match| block.call(match) }
     end
 
     # Parses the response into a simple hash.
@@ -62,7 +66,7 @@ module Sucker
     # Checks if the HTTP response is OK.
     #
     #    response = worker.get
-    #    p response.valid?
+    #    response.valid?
     #    => true
     #
     def valid?
@@ -73,6 +77,7 @@ module Sucker
     #
     #    response = worker.get
     #    response.xml
+    #
     def xml
       @xml ||= Nokogiri::XML(body)
     end
