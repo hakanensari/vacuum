@@ -19,15 +19,6 @@ Gem::Specification.new do |s|
     s.add_dependency('jruby-openssl', '~> 0.7.3')
   end
 
-  s.add_development_dependency('activesupport', '~> 3.0.0')
-  s.add_development_dependency('cucumber', '~> 0.10.0')
-  s.add_development_dependency('i18n', '~> 0.5.0')
-  s.add_development_dependency('relish', '~> 0.2.1')
-  s.add_development_dependency('rspec', ['~> 2.5.0'])
-  s.add_development_dependency('throttler', '~> 0.2.1')
-  s.add_development_dependency('vcr', '~> 1.6.0')
-  s.add_development_dependency('webmock', '~> 1.6.2')
-
   s.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
   s.test_files    = Dir.glob('spec/**/*')
   s.require_paths = ['lib']
