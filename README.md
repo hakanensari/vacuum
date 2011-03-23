@@ -10,7 +10,7 @@ Sucker is fast and supports __the entire Amazon API__.
 Usage
 -----
 
-Read the [API](http://aws.amazon.com/archives/Product%20Advertising%20API). Jump to the __Operations__ section if in a hurry.
+Read the [API](http://aws.amazon.com/archives/Product%20Advertising%20API). Skip to the __Operations__ section if in a hurry.
 
 Set up.
 
@@ -58,13 +58,13 @@ To dig further into the response object:
       response.to_hash,
       response.xml
 
-Read further [here](http://rdoc.info/github/papercavalier/sucker/master/frames) and [here](http://relishapp.com/papercavalier/sucker).
+Browse the Sucker API [here](http://rdoc.info/github/papercavalier/sucker/master/frames). To see more advanced examples such as twenty-item batch requests and remote cart manipulation, read [here](http://relishapp.com/papercavalier/sucker).
 
-API Usage
----------
+Managing calls
+--------------
 
 We have a home-grown collection of gems that help us manage our
-(relatively heavy) use of the Amazon API.
+calls to the Amazon API.
 
 * [Multiplex](http://github.com/papercavalier/multiplex) binds a
   request to a specified local IP.
@@ -77,8 +77,10 @@ A hypothetical setup:
     require 'throttler'
 
     ips.each do |ip|
+
       Thread.new do
         scope = "#{ip}-#{locale}"
+
         Throttler.throttle(scope) do
           Net::HTTP.bind ip do
             # Set up worker
@@ -86,7 +88,9 @@ A hypothetical setup:
             # Consume response
           end
         end
+
       end
+
     end
 
 We prefer to use [Resque](http://github.com/defunkt/resque) to manage
