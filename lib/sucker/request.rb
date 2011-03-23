@@ -105,7 +105,7 @@ module Sucker
     end
 
     def host
-      HOSTS[locale]
+      HOSTS[locale.to_sym]
     end
   end
 end
