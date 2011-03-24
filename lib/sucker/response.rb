@@ -69,7 +69,7 @@ module Sucker
     #    => true
     #
     def valid?
-      code == '200'
+      code == 200
     end
 
     # The XML document.
@@ -78,7 +78,7 @@ module Sucker
     #    response.xml
     #
     def xml
-      @xml ||= Nokogiri::XML(body)
+      @xml ||= Nokogiri::XML(body.content)
     end
   end
 end

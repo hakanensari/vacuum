@@ -1,4 +1,4 @@
-require 'net/http'
+require 'httpclient'
 require 'openssl'
 require 'sucker/parameters'
 
@@ -31,11 +31,18 @@ module Sucker
     # Takes an optional hash of attribute and value pairs.
     #
     #   worker = Sucker.new(
-    #     :key    => 'API KEY',
-    #     :secret => 'API SECRET')
+    #     :locale        => :us,
+    #     :key           => a_key,
+    #     :secret        => a_secret,
+    #     :associate_tag => a_tag)
     #
     def initialize(args={})
       args.each { |k, v| send("#{k}=", v) }
+    end
+
+    # The HTTP adapter.
+    def adapter
+      @adapter ||= HTTPClient.new
     end
 
     # Merges a hash into the existing parameters.
@@ -54,11 +61,7 @@ module Sucker
     #   response = worker.get
     #
     def get
-      response = Net::HTTP.start(host) do |http|
-        query = build_signed_query
-        http.get("/onca/xml?#{query}")
-      end
-
+      response = adapter.get(uri)
       Response.new(response)
     end
 
@@ -106,6 +109,13 @@ module Sucker
 
     def host
       HOSTS[locale.to_sym]
+    end
+
+    def uri
+      URI::HTTP.build(
+        :host   => host,
+        :path   => '/onca/xml',
+        :query  => build_signed_query)
     end
   end
 end
