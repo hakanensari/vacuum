@@ -14,10 +14,10 @@ Read the [API](http://aws.amazon.com/archives/Product%20Advertising%20API). Skip
 
 Set up.
 
-    worker = Sucker.new \
-      :locale => :us,
-      :key    => api_key,
-      :secret => api_secret
+    worker = Sucker.new(
+      :locale        => :us,
+      :key           => a_key,
+      :secret        => a_secret)
 
 Build a request.
 
