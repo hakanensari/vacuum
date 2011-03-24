@@ -1,11 +1,13 @@
 source 'http://rubygems.org'
 gemspec
 
-gem 'activesupport', '~> 3.0.0'
-gem 'cucumber', '~> 0.10.0'
-gem 'i18n', '~> 0.5.0'
-gem 'relish', '~> 0.2.2'
-gem 'rspec', '~> 2.5.0'
-gem 'throttler', '~> 0.2.1'
-gem 'vcr', '~> 1.7.0'
-gem 'webmock', '~> 1.6.2'
+gem 'activesupport'
+gem 'cucumber'
+gem 'i18n'
+gem 'relish'
+gem 'rspec'
+gem 'ruby-debug', :platform => :mri_18
+gem 'ruby-debug19', :platform => :mri_19, :require => 'ruby-debug'
+gem 'throttler'
+gem 'vcr'
+gem 'webmock'
