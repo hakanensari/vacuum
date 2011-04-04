@@ -11,6 +11,12 @@ module Sucker
         :secret => 'secret')
     end
 
+    describe ".locales" do
+      it "returns available locales" do
+        Request.locales.should =~ [:us, :uk, :de, :ca, :fr, :jp]
+      end
+    end
+
     describe '#<<' do
       it 'merges a hash into the existing parameters' do
         worker << { 'foo' => 'bar' }

@@ -14,6 +14,11 @@ module Sucker
       :fr  => 'ecs.amazonaws.fr',
       :jp  => 'ecs.amazonaws.jp' }
 
+    # Available Amazon locales.
+    def self.locales
+      @locales ||= HOSTS.keys
+    end
+
     # The Amazon associate tag.
     attr_accessor :associate_tag
 
