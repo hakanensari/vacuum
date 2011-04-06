@@ -1,0 +1,26 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://ecs.amazonaws.com:80/onca/xml?AWSAccessKeyId=0ZVSQ33MDFPQS8H2PM02&AssociateTag=&IdType=ASIN&ItemId=0679753354&Operation=ItemLookup&RelationshipType=AuthorityTitle&ResponseGroup=RelatedItems&Service=AWSECommerceService&Signature=x6u555+dhNmeLufllXKU47rJcPnIYWPEKH3xTMNosNI=&Timestamp=2011-04-06T11:31:47Z&Version=2010-11-01
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Wed, 06 Apr 2011 11:31:47 GMT
+      server: 
+      - Server
+      content-type: 
+      - text/xml;charset=UTF-8
+      vary: 
+      - Accept-Encoding,User-Agent
+      nncoection: 
+      - close
+      transfer-encoding: 
+      - chunked
+    body: <?xml version="1.0" encoding="UTF-8"?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2010-11-01"><OperationRequest><HTTPHeaders><Header Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>1SQ3V8BHQKQQ6QAZKBZ0</RequestId><Arguments><Argument Name="RelationshipType" Value="AuthorityTitle"></Argument><Argument Name="AssociateTag"></Argument><Argument Name="ItemId" Value="0679753354"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument><Argument Name="Signature" Value="x6u555+dhNmeLufllXKU47rJcPnIYWPEKH3xTMNosNI="></Argument><Argument Name="ResponseGroup" Value="RelatedItems"></Argument><Argument Name="Operation" Value="ItemLookup"></Argument><Argument Name="IdType" Value="ASIN"></Argument><Argument Name="AWSAccessKeyId" Value="0ZVSQ33MDFPQS8H2PM02"></Argument><Argument Name="Timestamp" Value="2011-04-06T11:31:47Z"></Argument><Argument Name="Version" Value="2010-11-01"></Argument></Arguments><RequestProcessingTime>0.0226449966430664</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>ASIN</IdType><ItemId>0679753354</ItemId><ResponseGroup>RelatedItems</ResponseGroup><RelationshipType>AuthorityTitle</RelationshipType></ItemLookupRequest></Request><Item><ASIN>0679753354</ASIN><RelatedItems><Relationship>Parents</Relationship><RelationshipType>AuthorityTitle</RelationshipType><RelatedItemCount>1</RelatedItemCount><RelatedItemPageCount>1</RelatedItemPageCount><RelatedItemPage>1</RelatedItemPage><RelatedItem><Item><ASIN>B000B1BO1C</ASIN></Item></RelatedItem></RelatedItems></Item></Items></ItemLookupResponse>
+    http_version: "1.1"

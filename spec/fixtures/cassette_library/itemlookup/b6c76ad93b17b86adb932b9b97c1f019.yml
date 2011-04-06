@@ -1,0 +1,26 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://ecs.amazonaws.jp:80/onca/xml?AWSAccessKeyId=0ZVSQ33MDFPQS8H2PM02&AssociateTag=&IdType=ASIN&ItemId=482224816X&Operation=ItemLookup&Service=AWSECommerceService&Signature=CR9EkiH2+lTEsasEYa7dL6KRLUew8J0m/AcqT8wxyeo=&Timestamp=2011-04-06T11:16:34Z&Version=2010-11-01
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Wed, 06 Apr 2011 11:16:35 GMT
+      server: 
+      - Server
+      content-type: 
+      - text/xml;charset=UTF-8
+      vary: 
+      - Accept-Encoding,User-Agent
+      nncoection: 
+      - close
+      transfer-encoding: 
+      - chunked
+    body: "<?xml version=\"1.0\" ?><ItemLookupResponse xmlns=\"http://webservices.amazon.com/AWSECommerceService/2010-11-01\"><OperationRequest><HTTPHeaders><Header Name=\"UserAgent\" Value=\"Ruby\"></Header></HTTPHeaders><RequestId>c5e8cb4a-fdca-4c70-b50b-1652ddf37a7b</RequestId><Arguments><Argument Name=\"Operation\" Value=\"ItemLookup\"></Argument><Argument Name=\"Service\" Value=\"AWSECommerceService\"></Argument><Argument Name=\"AssociateTag\"></Argument><Argument Name=\"Version\" Value=\"2010-11-01\"></Argument><Argument Name=\"Signature\" Value=\"CR9EkiH2+lTEsasEYa7dL6KRLUew8J0m/AcqT8wxyeo=\"></Argument><Argument Name=\"ItemId\" Value=\"482224816X\"></Argument><Argument Name=\"IdType\" Value=\"ASIN\"></Argument><Argument Name=\"AWSAccessKeyId\" Value=\"0ZVSQ33MDFPQS8H2PM02\"></Argument><Argument Name=\"Timestamp\" Value=\"2011-04-06T11:16:34Z\"></Argument></Arguments><RequestProcessingTime>0.0463860000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><Condition>New</Condition><DeliveryMethod>Ship</DeliveryMethod><IdType>ASIN</IdType><MerchantId>Amazon</MerchantId><OfferPage>1</OfferPage><ItemId>482224816X</ItemId><ResponseGroup>Small</ResponseGroup><ReviewPage>1</ReviewPage><ReviewSort>-SubmissionDate</ReviewSort><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>482224816X</ASIN><DetailPageURL>http://www.amazon.co.jp/%E3%82%B9%E3%83%86%E3%82%A3%E3%83%BC%E3%83%96%E3%83%BB%E3%82%B8%E3%83%A7%E3%83%96%E3%82%BA-%E9%A9%9A%E7%95%B0%E3%81%AE%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3%E2%80%95%E4%BA%BA%E3%80%85%E3%82%92%E6%83%B9%E3%81%8D%E3%81%A4%E3%81%91%E3%82%8B18%E3%81%AE%E6%B3%95%E5%89%87-%E3%82%AB%E3%83%BC%E3%83%9E%E3%82%A4%E3%83%B3%E3%83%BB%E3%82%AC%E3%83%AD/dp/482224816X%3FSubscriptionId%3D0ZVSQ33MDFPQS8H2PM02%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D482224816X</DetailPageURL><ItemLinks><ItemLink><Description>Add To Wishlist</Description><URL>http://www.amazon.co.jp/gp/registry/wishlist/add-item.html%3Fasin.0%3D482224816X%26SubscriptionId%3D0ZVSQ33MDFPQS8H2PM02%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D482224816X</URL></ItemLink><ItemLink><Description>Tell A Friend</Description><URL>http://www.amazon.co.jp/gp/pdp/taf/482224816X%3FSubscriptionId%3D0ZVSQ33MDFPQS8H2PM02%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D482224816X</URL></ItemLink><ItemLink><Description>All Customer Reviews</Description><URL>http://www.amazon.co.jp/review/product/482224816X%3FSubscriptionId%3D0ZVSQ33MDFPQS8H2PM02%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D482224816X</URL></ItemLink><ItemLink><Description>All Offers</Description><URL>http://www.amazon.co.jp/gp/offer-listing/482224816X%3FSubscriptionId%3D0ZVSQ33MDFPQS8H2PM02%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D5143%26creativeASIN%3D482224816X</URL></ItemLink></ItemLinks><ItemAttributes><Author>\xE3\x82\xAB\xE3\x83\xBC\xE3\x83\x9E\xE3\x82\xA4\xE3\x83\xB3\xE3\x83\xBB\xE3\x82\xAC\xE3\x83\xAD</Author><Creator Role=\"\xE3\x81\x9D\xE3\x81\xAE\xE4\xBB\x96\">\xE5\xA4\x96\xE6\x9D\x91\xE4\xBB\x81 \xE8\xA7\xA3\xE8\xAA\xAC</Creator><Creator Role=\"\xE7\xBF\xBB\xE8\xA8\xB3\">\xE4\xBA\x95\xE5\x8F\xA3\xE8\x80\x95\xE4\xBA\x8C</Creator><Manufacturer>\xE6\x97\xA5\xE7\xB5\x8CBP\xE7\xA4\xBE</Manufacturer><ProductGroup>Book</ProductGroup><Title>\xE3\x82\xB9\xE3\x83\x86\xE3\x82\xA3\xE3\x83\xBC\xE3\x83\x96\xE3\x83\xBB\xE3\x82\xB8\xE3\x83\xA7\xE3\x83\x96\xE3\x82\xBA \xE9\xA9\x9A\xE7\x95\xB0\xE3\x81\xAE\xE3\x83\x97\xE3\x83\xAC\xE3\x82\xBC\xE3\x83\xB3\xE2\x80\x95\xE4\xBA\xBA\xE3\x80\x85\xE3\x82\x92\xE6\x83\xB9\xE3\x81\x8D\xE3\x81\xA4\xE3\x81\x91\xE3\x82\x8B18\xE3\x81\xAE\xE6\xB3\x95\xE5\x89\x87</Title></ItemAttributes></Item></Items></ItemLookupResponse>"
+    http_version: "1.1"
