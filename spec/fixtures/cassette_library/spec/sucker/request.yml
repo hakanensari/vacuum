@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction 
   request: !ruby/struct:VCR::Request 
     method: :get
-    uri: http://ecs.amazonaws.com:80/onca/xml?AWSAccessKeyId=key&AssociateTag=&Service=AWSECommerceService&Signature=FgjzkV75NM8eJv2Bpl8pj3j+y/a8QNwSlwrYgJgGF9s=&Timestamp=2011-02-17T11:55:53Z&Version=2010-11-01
+    uri: http://ecs.amazonaws.com:80/onca/xml?AWSAccessKeyId=key&AssociateTag=&Service=AWSECommerceService&Signature=T8UVnbr8mVovMeUBQNddEHRfCBCGZnoNt7xKM0QwCWE=&Timestamp=2011-04-04T22:54:13Z&Version=2010-11-01
     body: 
     headers: 
   response: !ruby/struct:VCR::Response 
@@ -11,13 +11,13 @@
       message: OK
     headers: 
       date: 
-      - Thu, 17 Feb 2011 11:55:53 GMT
+      - Mon, 04 Apr 2011 22:54:13 GMT
       server: 
       - Server
       x-amz-id-1: 
-      - 18602B1C1V75TMSMFS2H
+      - 0VR34BN3AF872DQJX8F4
       x-amz-id-2: 
-      - 7lHWs8KypbjeedCbJBz4LWH8B3iKTa3QJBlpEUgyEa4=
+      - GceQEQ2ty5ALf+AGiiTOVLnfZ+Y1ZPzeObq8gIxb7JI=
       nncoection: 
       - close
       - close

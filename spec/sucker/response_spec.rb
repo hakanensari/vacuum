@@ -22,7 +22,7 @@ module Sucker
 
     describe '.new' do
       it 'initializes the response body' do
-        response.body.should be_an_instance_of HTTP::Message::Body
+        response.body.should be_an_instance_of String
       end
 
       it 'initializes the response code' do
@@ -32,9 +32,7 @@ module Sucker
 
     context 'when response contains errors' do
       before do
-        mock_body = mock
-        mock_body.stub!(:content).and_return("<?xml version=\"1.0\" ?><ItemLookupResponse xmlns=\"http://webservices.amazon.com/AWSECommerceService/2010-09-01\"><Errors><Error>foo</Error><Error>bar</Error></Errors>")
-        response.body = mock_body
+        response.body = "<?xml version=\"1.0\" ?><ItemLookupResponse xmlns=\"http://webservices.amazon.com/AWSECommerceService/2010-09-01\"><Errors><Error>foo</Error><Error>bar</Error></Errors>"
       end
 
       describe '#errors' do
@@ -118,9 +116,7 @@ module Sucker
       end
 
       it 'renders non-ASCII characters' do
-        mock_body = mock
-        mock_body.stub!(:content).and_return('<ItemAttributes><Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title></ItemAttributes>')
-        response.body = mock_body
+        response.body = '<ItemAttributes><Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title></ItemAttributes>'
         response.to_hash['Title'].should eql 'スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則'
       end
     end

@@ -1,6 +1,8 @@
-require 'httpclient'
+require 'httpi'
 require 'openssl'
 require 'sucker/parameters'
+
+HTTPI.log = false
 
 module Sucker
 
@@ -45,11 +47,6 @@ module Sucker
       args.each { |k, v| send("#{k}=", v) }
     end
 
-    # The HTTP adapter.
-    def adapter
-      @adapter ||= HTTPClient.new
-    end
-
     # Merges a hash into the existing parameters.
     #
     #   worker << {
@@ -65,8 +62,8 @@ module Sucker
     #
     #   response = worker.get
     #
-    def get
-      response = adapter.get(uri)
+    def get(adapter = nil, &block)
+      response = HTTPI.get(uri.to_s, block)
       Response.new(response)
     end
 

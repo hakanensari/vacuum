@@ -78,7 +78,7 @@ module Sucker
     #    response.xml
     #
     def xml
-      @xml ||= Nokogiri::XML(body.content)
+      @xml ||= Nokogiri::XML(body)
     end
   end
 end
