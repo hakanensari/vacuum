@@ -62,8 +62,18 @@ module Sucker
     #
     #   response = worker.get
     #
+    # Takes an optional adapter, which can be one of the following:
+    #
+    # * `:net_http`
+    #
+    # * `:curb`
+    #
+    # * `:httpclient`
+    #
+    # If given a block, it yields the HTTP client before executing the GET
+    # request.
+    #
     def get(adapter = nil, &block)
-      response = HTTPI.get(uri.to_s, block)
       response = HTTPI.get(uri.to_s, adapter, &block)
       Response.new(response)
     end
