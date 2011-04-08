@@ -64,6 +64,7 @@ module Sucker
     #
     def get(adapter = nil, &block)
       response = HTTPI.get(uri.to_s, block)
+      response = HTTPI.get(uri.to_s, adapter, &block)
       Response.new(response)
     end
 
