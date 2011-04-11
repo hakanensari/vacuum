@@ -1,6 +1,6 @@
 Feature: Adapters
   As an API consumer  
-  I want to choose my HTTP adapter
+  I want to choose my HTTP adapter  
   Because that has some business value.
 
   Scenario: Default to Net::HTTP
