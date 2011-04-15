@@ -26,7 +26,7 @@ loop do
       if resp.valid?
         puts "#{Time.now.strftime("%H:%M:%S")}"
       else
-        puts resp.body, resp.to_hash
+        puts resp.body, resp.errors
       end
     end
 
