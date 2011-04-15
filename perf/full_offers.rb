@@ -1,7 +1,4 @@
-require File.expand_path("../bm_helper", __FILE__)
-require "throttler"
-
-include Throttler
+require File.expand_path('../helper', __FILE__)
 
 trap('INT') { exit 0 }
 
@@ -40,14 +37,12 @@ asins_fixture.each_slice(batch_size) do |asins|
         worker << { "ItemLookup.2.ItemId" => asins[10, 10] }
       end
 
-      throttle("bm#{locale}", 1.0) do
-        resp = worker.get
-        Thread.current[:locale] = locale
-        if resp.valid?
-          Thread.current[:timestamp] = Time.now
-        else
-          p resp.body
-        end
+      resp = worker.get
+      Thread.current[:locale] = locale
+      if resp.valid?
+        Thread.current[:timestamp] = Time.now
+      else
+        p resp.body
       end
     end
   end
