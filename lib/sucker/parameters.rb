@@ -3,9 +3,7 @@ module Sucker
     CURRENT_API_VERSION = '2010-11-01'
 
     def initialize
-      self.store 'Service',   'AWSECommerceService'
-      self.store 'Version',   CURRENT_API_VERSION
-      self.store 'Timestamp', timestamp
+      store_basic_info
     end
 
     # Ensures all keys and values are strings and camelizes former.
@@ -18,7 +16,19 @@ module Sucker
       end
     end
 
+    def merge! hash
+      clear
+      store_basic_info
+      super
+    end
+
     private
+
+    def store_basic_info
+      self.store 'Service',   'AWSECommerceService'
+      self.store 'Version',   CURRENT_API_VERSION
+      self.store 'Timestamp', timestamp
+    end
 
     def timestamp
       Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
