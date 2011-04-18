@@ -83,6 +83,14 @@ module Sucker
       @parameters ||= Parameters.new
     end
 
+    # Resets parameters and returns itself.
+    def reset
+      parameters.clear
+      parameters.set_up
+
+      self
+    end
+
     # Sets the Amazon API version.
     #
     #   worker.version = '2010-06-01'

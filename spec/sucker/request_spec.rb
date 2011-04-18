@@ -30,6 +30,20 @@ module Sucker
       end
     end
 
+    describe "#reset" do
+      it "returns parameters to a pristine state" do
+        worker << { 'foo' => 'bar' }
+        worker.reset
+
+        worker.parameters.should have_key 'Service'
+        worker.parameters.should_not have_key 'foo'
+      end
+
+      it "returns the request object" do
+        worker.reset.should be_a Request
+      end
+    end
+
     describe '#version=' do
       it 'sets the Amazon API version' do
         worker.version = 'foo'

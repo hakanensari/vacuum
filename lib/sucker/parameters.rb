@@ -3,6 +3,10 @@ module Sucker
     CURRENT_API_VERSION = '2010-11-01'
 
     def initialize
+      set_up
+    end
+
+    def set_up
       self.store 'Service',   'AWSECommerceService'
       self.store 'Version',   CURRENT_API_VERSION
       self.store 'Timestamp', timestamp
