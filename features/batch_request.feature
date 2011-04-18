@@ -32,7 +32,7 @@ Feature: Batch request
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @worker.get(:net_http)
       """
     Then I expect:
       """

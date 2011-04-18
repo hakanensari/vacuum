@@ -22,7 +22,7 @@ Feature: Item lookup
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @worker.get(:net_http)
       """
     Then I expect:
       """
@@ -39,7 +39,7 @@ Feature: Item lookup
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @worker.get(:net_http)
       """
     Then I expect:
       """
@@ -59,7 +59,7 @@ Feature: Item lookup
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @worker.get(:net_http)
       """
     Then I expect:
       """
