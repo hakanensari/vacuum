@@ -16,9 +16,9 @@ Feature: Kindle search
     Given the following:
       """
       @worker << {
-        :operation    => 'ItemSearch',
-        :search_index => 'Books',
-				:power        => 'deleuze binding:kindle',
+        :operation      => 'ItemSearch',
+        :search_index   => 'Books',
+				:power          => 'deleuze binding:kindle',
 				:response_group => 'ItemAttributes, Offers' }
       """
     When I tape:
