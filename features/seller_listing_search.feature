@@ -37,7 +37,7 @@ Feature: Seller listing search
       """
     When I tape:
       """
-      @response = @worker.get(:net_http)
+      @response = @worker.get
       """
     Then I expect:
       """

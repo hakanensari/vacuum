@@ -19,7 +19,7 @@ Feature: Threads
       threads = Sucker::Request.locales.map do |locale|
         Thread.new do
           @worker.locale = locale
-          Thread.current[:response] = @worker.get(:net_http)
+          Thread.current[:response] = @worker.get
         end
       end
 

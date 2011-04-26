@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'sucker'
 
-  s.add_dependency('httpi', '~> 0.9.2')
+  s.add_dependency('httpclient', '~> 2.2.0.2')
   s.add_dependency('nokogiri', '~> 1.4.0')
   if RUBY_PLATFORM == 'java'
     s.add_dependency('jruby-openssl', '~> 0.7.3')

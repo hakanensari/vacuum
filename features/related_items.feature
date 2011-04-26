@@ -24,7 +24,7 @@ Feature: Related items
       """
     When I tape:
       """
-      @response = @worker.get(:net_http)
+      @response = @worker.get
       """
     Then I expect:
       """
@@ -43,7 +43,7 @@ Feature: Related items
       """
     When I tape:
       """
-      @response = @worker.get(:net_http)
+      @response = @worker.get
       """
     Then I expect:
       """
