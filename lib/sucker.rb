@@ -8,7 +8,7 @@ module Sucker
 
   # Initializes a request object.
   #
-  #   worker = Sucker.new(
+  #   request = Sucker.new(
   #     :locale => :us,
   #     :key    => api_key,
   #     :secret => api_secret)

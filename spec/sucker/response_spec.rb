@@ -9,15 +9,15 @@ module Sucker
     let(:asins) { ['0816614024', '0143105825'] }
 
     let(:response) do
-      worker = Sucker.new(
+      request = Sucker.new(
         :locale => :us,
         :key    => amazon['key'],
         :secret => amazon['secret'])
-      worker << {
+      request << {
           'Operation' => 'ItemLookup',
           'IdType'    => 'ASIN',
           'ItemId'    => asins }
-      worker.get
+      request.get
     end
 
     describe '.new' do

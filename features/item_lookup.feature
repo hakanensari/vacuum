@@ -6,7 +6,7 @@ Feature: Item lookup
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,14 +15,14 @@ Feature: Item lookup
   Scenario: Single item
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',
         :item_id   => '0816614024' }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """
@@ -32,14 +32,14 @@ Feature: Item lookup
   Scenario: Error
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',
         :item_id   => '0007218095' }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """
@@ -51,15 +51,15 @@ Feature: Item lookup
   Scenario: Non-latin text
     Given the following:
       """
-      @worker.locale = :jp
-      @worker << {
+      @request.locale = :jp
+      @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',
         :item_id   => '482224816X' }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

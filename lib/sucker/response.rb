@@ -64,7 +64,7 @@ module Sucker
 
     # Checks if the HTTP response is OK.
     #
-    #    response = worker.get
+    #    response = request.get
     #    response.valid?
     #    => true
     #
@@ -74,7 +74,7 @@ module Sucker
 
     # The XML document.
     #
-    #    response = worker.get
+    #    response = request.get
     #    response.xml
     #
     def xml

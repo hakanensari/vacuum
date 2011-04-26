@@ -4,7 +4,7 @@ module Sucker
   describe Request do
     use_vcr_cassette 'spec/sucker/request', :record => :new_episodes
 
-    let(:worker) do
+    let(:request) do
       Sucker.new(
         :locale => :us,
         :key    => 'key',
@@ -19,41 +19,41 @@ module Sucker
 
     describe '#<<' do
       it 'merges a hash into the existing parameters' do
-        worker << { 'foo' => 'bar' }
-        worker.parameters['foo'].should eql 'bar'
+        request << { 'foo' => 'bar' }
+        request.parameters['foo'].should eql 'bar'
       end
     end
 
     describe '#get' do
       it 'returns a response' do
-        worker.get.class.ancestors.should include Response
+        request.get.class.ancestors.should include Response
       end
     end
 
     describe "#reset" do
       it "returns parameters to a pristine state" do
-        worker << { 'foo' => 'bar' }
-        worker.reset
+        request << { 'foo' => 'bar' }
+        request.reset
 
-        worker.parameters.should have_key 'Service'
-        worker.parameters.should_not have_key 'foo'
+        request.parameters.should have_key 'Service'
+        request.parameters.should_not have_key 'foo'
       end
 
       it "returns the request object" do
-        worker.reset.should be_a Request
+        request.reset.should be_a Request
       end
     end
 
     describe '#version=' do
       it 'sets the Amazon API version' do
-        worker.version = 'foo'
-        worker.parameters['Version'].should eql 'foo'
+        request.version = 'foo'
+        request.parameters['Version'].should eql 'foo'
       end
     end
 
     describe '#build_query' do
       let(:query) do
-        worker.send(:build_query)
+        request.send(:build_query)
       end
 
       it 'canonicalizes query' do
@@ -65,40 +65,40 @@ module Sucker
       end
 
       it 'sorts query' do
-        worker.parameters['A'] = 'foo'
+        request.parameters['A'] = 'foo'
         query.should match /^A=foo/
       end
     end
 
     describe '#build_signed_query' do
-      let(:query) { worker.send(:build_signed_query) }
+      let(:query) { request.send(:build_signed_query) }
 
       it 'includes the key for the current locale' do
-        worker.key = 'foo'
+        request.key = 'foo'
         query.should include 'AWSAccessKeyId=foo'
       end
 
       it 'includes the associate tag for the current locale' do
-        worker.associate_tag = 'foo'
+        request.associate_tag = 'foo'
         query.should include 'AssociateTag=foo'
       end
 
       it 'returns a signed query string' do
-        query = worker.send :build_signed_query
+        query = request.send :build_signed_query
         query.should include 'Signature='
       end
     end
 
     describe '#escape' do
       it 'URL-encodes a string' do
-        worker.send(:escape, 'foo,bar').should eql 'foo%2Cbar'
+        request.send(:escape, 'foo,bar').should eql 'foo%2Cbar'
       end
     end
 
     describe '#host' do
       it 'returns a host' do
-        worker.locale = :fr
-        worker.send(:host).should eql 'ecs.amazonaws.fr'
+        request.locale = :fr
+        request.send(:host).should eql 'ecs.amazonaws.fr'
       end
     end
   end

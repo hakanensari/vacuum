@@ -13,14 +13,14 @@ Skip to the __Operations__ section if in a hurry.
 
 Set up.
 
-    worker = Sucker.new(
+    request = Sucker.new(
       :locale        => :us,
       :key           => a_key,
       :secret        => a_secret)
 
 Build a request.
 
-    worker << {
+    request << {
       'Operation'     => 'ItemLookup',
       'IdType'        => 'ASIN',
       'ItemId'        => 10.asins,
@@ -28,7 +28,7 @@ Build a request.
 
 Get a response.
 
-    response = worker.get
+    response = request.get
 
 Fulfill a business value.
 
@@ -57,15 +57,15 @@ To dig further into the response object:
       response.to_hash,
       response.xml
 
+To use multiple local IPs on your server, configure the request object like so:
+
+    adapter = request.adapter
+    adapter.socket_local.host = '10.0.0.2'
+
 Browse the public interface of Sucker
 [here](http://rdoc.info/github/papercavalier/sucker/master/frames). To see more
 advanced usage examples such as twenty-item batch requests and remote cart
 manipulation, read [here](http://relishapp.com/papercavalier/sucker).
-
-HTTP adapter
-------------
-Sucker sports [HTTPI](http://github.com/rubiii/httpi) under the hood, so you
-can use `curb` or `httpclient` instead of `Net::HTTP` if you so desire.
 
 Stubbing in Tests
 -----------------

@@ -6,7 +6,7 @@ Feature: Related items
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,7 +15,7 @@ Feature: Related items
   Scenario: Request related items
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation         => 'ItemLookup',
         :id_type           => 'ASIN',
         :item_id           => '0679753354',
@@ -24,7 +24,7 @@ Feature: Related items
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """
@@ -34,7 +34,7 @@ Feature: Related items
   Scenario: Authority title
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation         => 'ItemLookup',
         :id_type           => 'ASIN',
         :item_id           => 'B000ASPUES',
@@ -43,7 +43,7 @@ Feature: Related items
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

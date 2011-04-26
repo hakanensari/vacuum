@@ -6,7 +6,7 @@ Feature: Kindle search
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,7 +15,7 @@ Feature: Kindle search
   Scenario: Search for a Kindle edition using `binding:kindle`
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation      => 'ItemSearch',
         :search_index   => 'Books',
 				:power          => 'deleuze binding:kindle',
@@ -23,7 +23,7 @@ Feature: Kindle search
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """
@@ -38,7 +38,7 @@ Feature: Kindle search
   Scenario: Search for a Kindle edition using the `KindleStore` search index
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation      => 'ItemSearch',
         :search_index   => 'KindleStore',
 				:keywords       => 'deleuze',
@@ -46,7 +46,7 @@ Feature: Kindle search
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

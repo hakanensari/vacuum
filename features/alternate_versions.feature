@@ -6,7 +6,7 @@ Feature: Alternate versions
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,7 +15,7 @@ Feature: Alternate versions
   Scenario: Alternate versions response group
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation         => 'ItemLookup',
         :id_type           => 'ASIN',
         :item_id           => '0679753354',
@@ -23,7 +23,7 @@ Feature: Alternate versions
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

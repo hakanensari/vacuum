@@ -18,7 +18,7 @@ module SuckerMethods
   end
 
   def cassette_name
-    params = @worker.parameters.normalize
+    params = @request.parameters.normalize
     params.delete('Timestamp')
     params['Operation'].downcase + '/' + Digest::MD5.hexdigest(params.to_json)
   end

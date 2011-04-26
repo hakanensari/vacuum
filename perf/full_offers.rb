@@ -20,24 +20,24 @@ interface = ARGV[1]
 asins_fixture.each_slice(batch_size) do |asins|
   threads = timestamps.keys.map do |locale|
     Thread.new do
-      worker = Sucker.new(
+      request = Sucker.new(
         :locale => locale,
         :key    => amazon["key"],
         :secret => amazon["secret"])
-      worker.curl_opts { |c| c.interface = interface } unless interface !~ /\S/
-      worker << {
+      request.curl_opts { |c| c.interface = interface } unless interface !~ /\S/
+      request << {
         "Operation"                       => "ItemLookup",
         "ItemLookup.Shared.IdType"        => "ASIN",
         "ItemLookup.Shared.Condition"     => "All",
         "ItemLookup.Shared.MerchantId"    => "All",
         "ItemLookup.Shared.ResponseGroup" => "OfferFull"
       }
-      worker << { "ItemLookup.1.ItemId" => asins[0, 10] }
+      request << { "ItemLookup.1.ItemId" => asins[0, 10] }
       if batch_size > 10
-        worker << { "ItemLookup.2.ItemId" => asins[10, 10] }
+        request << { "ItemLookup.2.ItemId" => asins[10, 10] }
       end
 
-      resp = worker.get
+      resp = request.get
       Thread.current[:locale] = locale
       if resp.valid?
         Thread.current[:timestamp] = Time.now

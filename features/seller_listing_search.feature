@@ -6,7 +6,7 @@ Feature: Seller listing search
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,13 +15,13 @@ Feature: Seller listing search
   Scenario: Browse a seller's listings
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation         => 'SellerListingSearch',
         :seller_id         => 'A2XAZ8JI5FY49I' }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """
@@ -31,13 +31,13 @@ Feature: Seller listing search
   Scenario: Large inventories do not return any results
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation         => 'SellerListingSearch',
         :seller_id         => 'A2H6NH4SQYFZ4M' }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

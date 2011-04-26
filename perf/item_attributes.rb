@@ -20,22 +20,22 @@ local_ip = ARGV[1]
 asins_fixture.each_slice(batch_size) do |asins|
   threads = timestamps.keys.map do |locale|
     Thread.new do
-      worker = Sucker.new(
+      request = Sucker.new(
         :locale => locale,
         :key    => amazon["key"],
         :secret => amazon["secret"])
-      worker.local_ip = local_ip unless local_ip !~ /\S/
-      worker << {
+      request.local_ip = local_ip unless local_ip !~ /\S/
+      request << {
         "Operation"                       => "ItemLookup",
         "ItemLookup.Shared.IdType"        => "ASIN",
         "ItemLookup.Shared.ResponseGroup" => "ItemAttributes"
       }
-      worker << { "ItemLookup.1.ItemId" => asins[0, 10] }
+      request << { "ItemLookup.1.ItemId" => asins[0, 10] }
       if batch_size > 10
-        worker << { "ItemLookup.2.ItemId" => asins[10, 10] }
+        request << { "ItemLookup.2.ItemId" => asins[10, 10] }
       end
 
-      resp = worker.get
+      resp = request.get
       Thread.current[:locale] = locale
       if resp.valid?
         Thread.current[:timestamp] = Time.now

@@ -8,21 +8,21 @@ locale = ARGV[0] || :us
 loop do
   asins_fixture.each_slice(20) do |asins|
     Thread.new do
-      worker = Sucker.new(
+      request = Sucker.new(
         :locale => locale,
         :key    => amazon['key'],
         :secret => amazon['secret'])
-      worker << {
+      request << {
         'Operation'                       => 'ItemLookup',
         'ItemLookup.Shared.IdType'        => 'ASIN',
         'ItemLookup.Shared.Condition'     => 'All',
         'ItemLookup.Shared.MerchantId'    => 'All',
         'ItemLookup.Shared.ResponseGroup' => 'OfferFull'
       }
-      worker << { 'ItemLookup.1.ItemId' => asins[0, 10] }
-      worker << { 'ItemLookup.2.ItemId' => asins[10, 10] }
+      request << { 'ItemLookup.1.ItemId' => asins[0, 10] }
+      request << { 'ItemLookup.2.ItemId' => asins[10, 10] }
 
-      resp = worker.get
+      resp = request.get
       if resp.valid?
         puts "#{Time.now.strftime("%H:%M:%S")}"
       else

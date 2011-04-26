@@ -6,7 +6,7 @@ Feature: Item search
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,14 +15,14 @@ Feature: Item search
   Scenario: Search for an author
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation    => 'ItemSearch',
         :search_index => 'Books',
         :author       => 'George Orwell' }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """
@@ -32,7 +32,7 @@ Feature: Item search
   Scenario: Power search
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation    => 'ItemSearch',
         :search_index => 'Books',
         :power        => 'author:lacan and not fiction',
@@ -40,7 +40,7 @@ Feature: Item search
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

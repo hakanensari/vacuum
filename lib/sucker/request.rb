@@ -35,7 +35,7 @@ module Sucker
     #
     # Takes an optional hash of attribute and value pairs.
     #
-    #   worker = Sucker.new(
+    #   request = Sucker.new(
     #     :locale        => :us,
     #     :key           => a_key,
     #     :secret        => a_secret,
@@ -52,7 +52,7 @@ module Sucker
 
     # Merges a hash into the existing parameters.
     #
-    #   worker << {
+    #   request << {
     #     'Operation' => 'ItemLookup',
     #     'IdType'    => 'ASIN',
     #     'ItemId'    => '0816614024' }
@@ -63,7 +63,7 @@ module Sucker
 
     # Performs a request and returns a response object.
     #
-    #   response = worker.get
+    #   response = request.get
     #
     def get
       response = adapter.get(uri)
@@ -85,7 +85,7 @@ module Sucker
 
     # Sets the Amazon API version.
     #
-    #   worker.version = '2010-06-01'
+    #   request.version = '2010-06-01'
     #
     def version=(version)
       parameters['Version'] = version

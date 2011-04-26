@@ -6,7 +6,7 @@ Feature: Images
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -15,7 +15,7 @@ Feature: Images
   Scenario: Look up images
     Given the following:
       """
-      @worker << {
+      @request << {
         :operation      => 'ItemLookup',
         :id_type        => 'ASIN',
         :item_id        => '0394751221',
@@ -23,7 +23,7 @@ Feature: Images
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

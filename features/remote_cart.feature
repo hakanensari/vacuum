@@ -6,18 +6,18 @@ Feature: Remote cart
   Scenario: Create a cart
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
-      @worker << {
+      @request << {
         'Operation'             => 'CartCreate',
         'Item.1.OfferListingId' => 'foobar',
         'Item.1.Quantity'       => 1 }
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

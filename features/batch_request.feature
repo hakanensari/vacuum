@@ -6,7 +6,7 @@ Feature: Batch request
   Background:
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
@@ -21,7 +21,7 @@ Feature: Batch request
         0486454398 0268018359 1604246014 184467598X 0312427182
         1844674282 0745640974 0745646441 0826489540 1844672972 }
       
-      @worker << {
+      @request << {
         'Operation'                       => 'ItemLookup',
         'ItemLookup.Shared.IdType'        => 'ASIN',
         'ItemLookup.Shared.Condition'     => 'All',
@@ -32,7 +32,7 @@ Feature: Batch request
       """
     When I tape:
       """
-      @response = @worker.get
+      @response = @request.get
       """
     Then I expect:
       """

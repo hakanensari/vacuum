@@ -6,10 +6,10 @@ Feature: Threads
   Scenario: Thread requests to all six Amazon locales
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret)
-      @worker << {
+      @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',
         :item_id   => '0816614024' }
@@ -18,8 +18,8 @@ Feature: Threads
       """
       threads = Sucker::Request.locales.map do |locale|
         Thread.new do
-          @worker.locale = locale
-          Thread.current[:response] = @worker.get
+          @request.locale = locale
+          Thread.current[:response] = @request.get
         end
       end
 

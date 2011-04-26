@@ -6,31 +6,31 @@ Feature: Parameters
   Scenario: Reset parameters when setting up a new request
     Given the following:
       """
-      @worker = Sucker.new(
+      @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
         :locale => :us)
       """
     When I run:
       """
-      @worker << { 'Operation' => 'ItemLookup',
+      @request << { 'Operation' => 'ItemLookup',
                    'IdType'    => 'ASIN' }
       """
     Then I expect:
       """
-      @worker.parameters.should have_key 'Service'
-      @worker.parameters.should have_key 'IdType'
-      @worker.parameters['Operation'].should eql 'ItemLookup'
+      @request.parameters.should have_key 'Service'
+      @request.parameters.should have_key 'IdType'
+      @request.parameters['Operation'].should eql 'ItemLookup'
       """
     When I run:
       """
-      @worker.reset << { 'Operation' => 'CartCreate' }
+      @request.reset << { 'Operation' => 'CartCreate' }
       """
     Then I expect:
       """
-      @worker.parameters.should have_key 'Service'
-      @worker.parameters.should_not have_key 'IdType'
-      @worker.parameters['Operation'].should eql 'CartCreate'
+      @request.parameters.should have_key 'Service'
+      @request.parameters.should_not have_key 'IdType'
+      @request.parameters['Operation'].should eql 'CartCreate'
       """
 
 
