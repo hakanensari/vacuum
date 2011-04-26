@@ -1,5 +1,6 @@
 module Sucker
 
+  # A monkey-patched Hash, safely stashed away in the Sucker namespace.
   class Hash < ::Hash
     class << self
 
