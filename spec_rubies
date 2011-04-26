@@ -1,2 +1,2 @@
 rvm ree,1.9.2,jruby,rbx exec bundle install
-rvm ree,1.9.2,jruby,rbx rake
+rvm ree,1.9.2,jruby,rbx rake spec
