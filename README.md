@@ -1,7 +1,7 @@
 Sucker
 ======
 
-Sucker is a Nokogiri-based Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
+Sucker is a Nokogiri-based Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html). It's fast and supports the entire API.
 
 ![Hoover](https://github.com/papercavalier/sucker/raw/master/hoover.jpg)
 
@@ -71,11 +71,6 @@ Stubbing in Tests
 -----------------
 
 Try [VCR](http://github.com/myronmarston/vcr).
-
-Compatibility
--------------
-
-Specs pass against all modern Rubies.
 
 Moral of the story
 ------------------
