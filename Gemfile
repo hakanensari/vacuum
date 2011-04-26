@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 gemspec
 
+gem 'jruby-openssl', :platform => :jruby
+
 gem 'addressable', '2.2.4'
 gem 'cucumber', '~> 0.10.2'
 gem 'relish', '0.2.2'
