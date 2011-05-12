@@ -41,8 +41,8 @@ Feature: Seller listing search
       """
     Then I expect:
       """
-			@response['SellerListing'].size.should eql 0
-			@response.errors.size.should eql 1
-			error = @response.errors.first
-			error['Message'].should include 'We did not find any matches'
+      @response['SellerListing'].size.should eql 0
+      @response.errors.size.should eql 1
+      error = @response.errors.first
+      error['Message'].should include 'We did not find any matches'
       """

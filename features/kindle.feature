@@ -18,8 +18,8 @@ Feature: Kindle search
       @request << {
         :operation      => 'ItemSearch',
         :search_index   => 'Books',
-				:power          => 'deleuze binding:kindle',
-				:response_group => 'ItemAttributes, Offers' }
+        :power          => 'deleuze binding:kindle',
+        :response_group => 'ItemAttributes, Offers' }
       """
     When I tape:
       """
@@ -27,12 +27,12 @@ Feature: Kindle search
       """
     Then I expect:
       """
-			items = @response['Item']
-			items.size.should eql 10
-			items.all? do |item|
-				item['ItemAttributes']['Binding'].should eql 'Kindle Edition'
-			end
-			@response['Offer'].size.should eql 0
+      items = @response['Item']
+      items.size.should eql 10
+      items.all? do |item|
+        item['ItemAttributes']['Binding'].should eql 'Kindle Edition'
+      end
+      @response['Offer'].size.should eql 0
       """
 
   Scenario: Search for a Kindle edition using the `KindleStore` search index
@@ -41,8 +41,8 @@ Feature: Kindle search
       @request << {
         :operation      => 'ItemSearch',
         :search_index   => 'KindleStore',
-				:keywords       => 'deleuze',
-				:response_group => 'ItemAttributes, Offers' }
+        :keywords       => 'deleuze',
+        :response_group => 'ItemAttributes, Offers' }
       """
     When I tape:
       """
@@ -50,10 +50,10 @@ Feature: Kindle search
       """
     Then I expect:
       """
-			items = @response['Item']
-			items.size.should eql 10
-			items.all? do |item|
-				item['ItemAttributes']['Binding'].should eql 'Kindle Edition'
-			end
-			@response['Offer'].size.should eql 0
+      items = @response['Item']
+      items.size.should eql 10
+      items.all? do |item|
+        item['ItemAttributes']['Binding'].should eql 'Kindle Edition'
+      end
+      @response['Offer'].size.should eql 0
       """
