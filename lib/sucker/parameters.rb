@@ -3,10 +3,10 @@ module Sucker
     CURRENT_API_VERSION = '2010-11-01'
 
     def initialize
-      set_up
+      populate
     end
 
-    def set_up
+    def populate
       self.store 'Service',   'AWSECommerceService'
       self.store 'Version',   CURRENT_API_VERSION
       self.store 'Timestamp', timestamp
@@ -17,7 +17,9 @@ module Sucker
       inject({}) do |hash, kv|
         k, v = kv
         v = v.is_a?(Array) ? v.join(',') : v.to_s
-        hash[k.to_s.split('_').map {|w| w[0, 1] = w[0, 1].upcase; w }.join] = v
+        k = k.to_s.split('_').map {|w| w[0, 1] = w[0, 1].upcase; w }.join
+        hash[k] = v
+
         hash
       end
     end

@@ -78,7 +78,7 @@ module Sucker
     # Resets parameters and returns itself.
     def reset
       parameters.clear
-      parameters.set_up
+      parameters.populate
 
       self
     end
