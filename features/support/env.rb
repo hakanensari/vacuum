@@ -5,16 +5,12 @@ require 'ruby-debug'
 require 'sucker'
 
 module SuckerMethods
-  def amazon
-    YAML::load_file(File.dirname(__FILE__) + "/../../spec/support/amazon.yml")
-  end
-
   def amazon_key
-    amazon['key']
+    ENV['AMAZON_KEY']
   end
 
   def amazon_secret
-    amazon['secret']
+    ENV['AMAZON_SECRET']
   end
 
   def cassette_name

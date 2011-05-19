@@ -11,8 +11,8 @@ module Sucker
     let(:response) do
       request = Sucker.new(
         :locale => :us,
-        :key    => amazon['key'],
-        :secret => amazon['secret'])
+        :key    => amazon_key,
+        :secret => amazon_secret)
       request << {
           'Operation' => 'ItemLookup',
           'IdType'    => 'ASIN',
