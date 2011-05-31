@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   {
     'bundler'             => '~> 1.0.0',
     'cucumber'            => '~> 0.10.0',
+    'em-http-request'     => '~> 0.3.0',
     'rake'                => '~> 0.8.7',
     'relish'              => '~> 0.3.0',
     'rspec'               => '~> 2.6.0',
