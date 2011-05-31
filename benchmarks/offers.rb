@@ -22,8 +22,8 @@ asins_fixture.each_slice(batch_size) do |asins|
     Thread.new do
       request = Sucker.new(
         :locale => locale,
-        :key    => amazon["key"],
-        :secret => amazon["secret"])
+        :key    => amazon_key,
+        :secret => amazon_secret)
 
       unless local_ip !~ /\S/
         adapter = request.adapter
