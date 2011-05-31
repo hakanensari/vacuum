@@ -17,8 +17,8 @@ Set up.
 
     request = Sucker.new(
       :locale => :us,
-      :key    => a_key,
-      :secret => a_secret)
+      :key    => amazon_key,
+      :secret => amazon_secret)
 
 Build a request.
 

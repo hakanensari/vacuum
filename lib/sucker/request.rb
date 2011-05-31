@@ -37,9 +37,9 @@ module Sucker
     #
     #   request = Sucker.new(
     #     :locale        => :us,
-    #     :key           => a_key,
-    #     :secret        => a_secret,
-    #     :associate_tag => a_tag)
+    #     :key           => amazon_key,
+    #     :secret        => amazon_secret)
+    #     :associate_tag => amazon_tag)
     #
     def initialize(args={})
       args.each { |k, v| send("#{k}=", v) }
