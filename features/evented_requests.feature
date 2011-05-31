@@ -8,6 +8,8 @@ Feature: Evented requests
       """
       require 'em-http'
 
+      ResponseProxy = Struct.new(:body, :code)
+
       @request = Sucker.new(
         :key    => amazon_key,
         :secret => amazon_secret,
@@ -19,14 +21,14 @@ Feature: Evented requests
       """
     When I tape:
       """
-      ResponseProxy = Struct.new(:body, :code)
 
       EM.run {
         http = EM::HttpRequest.new(@request.url).get
 
         http.callback {
-          response = ResponseProxy.new(http.response, http.response_header.status)
-          @response = Sucker::Response.new(response)
+          response_proxy = ResponseProxy.new(http.response,
+                                             http.response_header.status)
+          @response = Sucker::Response.new(response_proxy)
 
           EM.stop
         }
