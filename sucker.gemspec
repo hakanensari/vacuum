@@ -23,13 +23,12 @@ Gem::Specification.new do |s|
 
   {
     'bundler'             => '~> 1.0.0',
-    'addressable'         => '2.2.4',
     'cucumber'            => '~> 0.10.0',
     'rake'                => '~> 0.8.7',
-    'relish'              => '~> 0.3.0.pre',
-    'rspec'               => '~> 2.5.0',
-    'vcr'                 => '~> 1.9.0',
-    'webmock'             => '~> 1.6.0'
+    'relish'              => '~> 0.3.0',
+    'rspec'               => '~> 2.6.0',
+    'vcr'                 => '~> 1.10.0',
+    'webmock'             => '~> 1.6.4'
   }.each do |lib, version|
     s.add_development_dependency lib, version
   end
