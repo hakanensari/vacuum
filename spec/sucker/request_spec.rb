@@ -44,6 +44,12 @@ module Sucker
       end
     end
 
+    describe '#url' do
+      it 'builds a URL' do
+        request.url.should be_an URI::HTTP
+      end
+    end
+
     describe '#version=' do
       it 'sets the Amazon API version' do
         request.version = 'foo'
@@ -51,9 +57,9 @@ module Sucker
       end
     end
 
-    describe '#build_query' do
+    describe '#build_query_string' do
       let(:query) do
-        request.send(:build_query)
+        request.send(:build_query_string)
       end
 
       it 'canonicalizes query' do
@@ -70,21 +76,10 @@ module Sucker
       end
     end
 
-    describe '#build_signed_query' do
-      let(:query) { request.send(:build_signed_query) }
-
-      it 'includes the key for the current locale' do
-        request.key = 'foo'
-        query.should include 'AWSAccessKeyId=foo'
-      end
-
-      it 'includes the associate tag for the current locale' do
-        request.associate_tag = 'foo'
-        query.should include 'AssociateTag=foo'
-      end
+    describe '#sign' do
+      let(:query) { request.send(:sign, 'foo=bar') }
 
       it 'returns a signed query string' do
-        query = request.send :build_signed_query
         query.should include 'Signature='
       end
     end

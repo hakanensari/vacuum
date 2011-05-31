@@ -69,7 +69,7 @@ module Sucker
     #   response = request.get
     #
     def get
-      response = adapter.get(uri)
+      response = adapter.get(url)
       Response.new(response)
     end
 
@@ -78,7 +78,7 @@ module Sucker
       @parameters ||= Parameters.new
     end
 
-    # Resets parameters and returns itself.
+    # Resets parameters and returns self.
     def reset
       parameters.clear
       parameters.populate
@@ -86,17 +86,23 @@ module Sucker
       self
     end
 
-    # Sets the Amazon API version.
-    #
-    #   request.version = '2010-06-01'
-    #
+    # The request URL.
+    def url
+      URI::HTTP.build(
+        :host   => host,
+        :path   => '/onca/xml',
+        :query  => sign(build_query_string)
+      )
+    end
+
+    # Sets the Amazon API version timestamp.
     def version=(version)
       parameters['Version'] = version
     end
 
     private
 
-    def build_query
+    def build_query_string
       parameters.
         normalize.
         merge({ 'AWSAccessKeyId' => key,
@@ -106,15 +112,13 @@ module Sucker
         join('&')
     end
 
-    def build_signed_query
-      query = build_query
-
+    def sign(query_string)
       digest = OpenSSL::Digest::Digest.new('sha256')
-      string = ['GET', host, '/onca/xml', query].join("\n")
-      hmac = OpenSSL::HMAC.digest(digest, secret, string)
+      url_string = ['GET', host, '/onca/xml', query_string].join("\n")
+      hmac = OpenSSL::HMAC.digest(digest, secret, url_string)
       signature = escape([hmac].pack('m').chomp)
 
-      query + '&Signature=' + signature
+      query_string + '&Signature=' + signature
     end
 
     def escape(value)
@@ -125,13 +129,6 @@ module Sucker
 
     def host
       HOSTS[locale.to_sym]
-    end
-
-    def uri
-      URI::HTTP.build(
-        :host   => host,
-        :path   => '/onca/xml',
-        :query  => build_signed_query)
     end
   end
 end
