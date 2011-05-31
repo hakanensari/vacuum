@@ -6,14 +6,17 @@ require 'sucker/response'
 # Sucker is a Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
 
-  # Initializes a request object.
-  #
-  #   request = Sucker.new(
-  #     :locale => :us,
-  #     :key    => api_key,
-  #     :secret => api_secret)
-  #
-  def self.new(args={})
-    Request.new(args)
+  class << self
+
+    # Initializes a request object.
+    #
+    #   request = Sucker.new(
+    #     :locale => :us,
+    #     :key    => api_key,
+    #     :secret => api_secret)
+    #
+    def new(args={})
+      Request.new(args)
+    end
   end
 end
