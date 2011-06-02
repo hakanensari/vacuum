@@ -26,7 +26,7 @@ module Sucker
       find(path).each { |match| block.call(match) }
     end
 
-    # Returns an array of errors in the response.
+    # An array of errors in the response.
     def errors
       find('Error')
     end

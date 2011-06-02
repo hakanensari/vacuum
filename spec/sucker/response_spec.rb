@@ -106,7 +106,7 @@ module Sucker
 
     describe '#[]' do
       it 'is an alias of #find' do
-        response['Foo'].should eql response.find('Foo')
+        response['Title'].should eql response.find('Title')
       end
     end
 
