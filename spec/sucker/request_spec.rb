@@ -31,12 +31,12 @@ module Sucker
     end
 
     describe "#reset" do
-      it "returns parameters to a pristine state" do
+      it "resets parameters" do
         request << { 'foo' => 'bar' }
         request.reset
 
-        request.parameters.should have_key 'Service'
-        request.parameters.should_not have_key 'foo'
+        request.parameters['Service'].should_not be_nil
+        request.parameters['foo'].should be_nil
       end
 
       it "returns the request object" do

@@ -8,15 +8,15 @@ module Sucker
 
     context "when initialized" do
       it "sets `Service`" do
-        parameters.should have_key "Service"
+        parameters['Service'].should_not be_nil
       end
 
       it "sets `Version`" do
-        parameters.should have_key "Version"
+        parameters['Version'].should_not be_nil
       end
 
       it "set `Timestamp`" do
-        parameters.should have_key "Timestamp"
+        parameters['Timestamp'].should_not be_nil
       end
     end
 

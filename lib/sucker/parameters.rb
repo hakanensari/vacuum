@@ -6,7 +6,7 @@ module Sucker
 
     CURRENT_API_VERSION = '2010-11-01'
 
-    def_delegators :@parameters, :[], :[]=, :has_key?, :merge!
+    def_delegators :@parameters, :[], :[]=, :merge!
 
     def initialize
       reset

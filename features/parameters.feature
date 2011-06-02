@@ -18,8 +18,8 @@ Feature: Parameters
       """
     Then I expect:
       """
-      @request.parameters.should have_key 'Service'
-      @request.parameters.should have_key 'IdType'
+      @request.parameters['Service'].should_not be_nil
+      @request.parameters['IdType'].should_not be_nil
       @request.parameters['Operation'].should eql 'ItemLookup'
       """
     When I run:
@@ -28,8 +28,8 @@ Feature: Parameters
       """
     Then I expect:
       """
-      @request.parameters.should have_key 'Service'
-      @request.parameters.should_not have_key 'IdType'
+      @request.parameters['Service'].should_not be_nil
+      @request.parameters['IdType'].should be_nil
       @request.parameters['Operation'].should eql 'CartCreate'
       """
 
