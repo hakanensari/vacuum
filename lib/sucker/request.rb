@@ -3,7 +3,6 @@ require 'openssl'
 require 'sucker/parameters'
 
 module Sucker
-
   # A wrapper around the API request.
   class Request
     HOSTS = {
@@ -80,8 +79,7 @@ module Sucker
 
     # Resets parameters and returns self.
     def reset
-      parameters.clear
-      parameters.populate
+      parameters.reset
 
       self
     end

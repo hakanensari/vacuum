@@ -6,10 +6,6 @@ module Sucker
       Parameters.new
     end
 
-    it "is a Hash" do
-      Parameters.ancestors.should include ::Hash
-    end
-
     context "when initialized" do
       it "sets `Service`" do
         parameters.should have_key "Service"

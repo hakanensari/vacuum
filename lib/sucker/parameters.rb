@@ -1,21 +1,30 @@
+require 'forwardable'
+
 module Sucker
-  class Parameters < ::Hash
+  class Parameters
+    extend Forwardable
+
     CURRENT_API_VERSION = '2010-11-01'
 
+    def_delegators :@parameters, :[], :[]=, :has_key?, :merge!
+
     def initialize
-      populate
+      reset
     end
 
-    def populate
-      self.store 'Service',   'AWSECommerceService'
-      self.store 'Version',   CURRENT_API_VERSION
-      self.store 'Timestamp', timestamp
+    # Creates a new hash to store parameters in.
+    def reset
+      @parameters = {
+        'Service'   => 'AWSECommerceService',
+        'Version'   => CURRENT_API_VERSION,
+        'Timestamp' => timestamp }
     end
 
+    # Returns a normalized parameters hash.
+    #
     # Ensures all keys and values are strings and camelizes former.
     def normalize
-      inject({}) do |hash, kv|
-        k, v = kv
+      @parameters.inject({}) do |hash, (k, v)|
         v = v.is_a?(Array) ? v.join(',') : v.to_s
         k = k.to_s.split('_').map {|w| w[0, 1] = w[0, 1].upcase; w }.join
         hash[k] = v
