@@ -1,7 +1,5 @@
 module Sucker
-
-  # A monkey-patched Hash, safely stashed away in the Sucker namespace.
-  class Hash < ::Hash
+  module HashBuilder
     class << self
 
       # Builds a hash from a Nokogiri XML document.
@@ -14,9 +12,9 @@ module Sucker
       def from_xml(xml)
         case xml
         when Nokogiri::XML::Document
-          new[xml.root.name] = from_xml(xml.root)
+          from_xml(xml.root)
         when Nokogiri::XML::Element
-          result_hash = new
+          result_hash = {}
 
           xml.attributes.each_pair do |key, attribute|
             result_hash[key] = attribute.value

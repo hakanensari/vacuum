@@ -1,8 +1,7 @@
 require 'nokogiri'
-require 'sucker/hash'
+require 'sucker/hash_builder'
 
 module Sucker
-
   # A wrapper around the API response.
   class Response
 
@@ -38,7 +37,7 @@ module Sucker
     #
     def find(attribute)
       xml.xpath("//xmlns:#{attribute}").map do |element|
-        Hash.from_xml(element)
+        HashBuilder.from_xml(element)
       end
     end
     alias_method :[], :find
@@ -59,7 +58,7 @@ module Sucker
 
     # Parses the response into a simple hash.
     def to_hash
-      Hash.from_xml(xml)
+      HashBuilder.from_xml(xml)
     end
 
     # Checks if the HTTP response is OK.
