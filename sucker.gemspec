@@ -15,21 +15,20 @@ Gem::Specification.new do |s|
   s.rubyforge_project = 'sucker'
 
   {
-    'httpclient'          => '~> 2.2.0.2',
-    'nokogiri'            => '~> 1.4.0'
+    'httpclient'          => '~> 2.2',
+    'nokogiri'            => '~> 1.4'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
 
   {
-    'bundler'             => '~> 1.0.0',
-    'cucumber'            => '~> 0.10.0',
-    'em-http-request'     => '~> 0.3.0',
-    'rake'                => '~> 0.8.7',
-    'relish'              => '~> 0.3.0',
-    'rspec'               => '~> 2.6.0',
-    'vcr'                 => '~> 1.10.0',
-    'webmock'             => '~> 1.6.4'
+    'bundler'             => '~> 1.0',
+    'cucumber'            => '~> 0.10',
+    'em-http-request'     => '~> 0.3',
+    'relish'              => '~> 0.4',
+    'rspec'               => '~> 2.6',
+    'vcr'                 => '~> 1.10',
+    'webmock'             => '~> 1.6'
   }.each do |lib, version|
     s.add_development_dependency lib, version
   end
