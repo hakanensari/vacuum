@@ -5,7 +5,7 @@ module Sucker
     use_vcr_cassette 'spec/sucker/request', :record => :new_episodes
 
     let(:request) do
-      Sucker.new(
+      Request.new(
         :locale => :us,
         :key    => 'key',
         :secret => 'secret')
