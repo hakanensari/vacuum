@@ -6,9 +6,7 @@ Feature: Evented requests
   Scenario: Event requests
     Given the following:
       """
-      require 'em-http'
-
-      ResponseProxy = Struct.new(:body, :code)
+      require 'sucker/synchrony'
 
       @request = Sucker.new(
         :key    => amazon_key,
@@ -17,22 +15,15 @@ Feature: Evented requests
       @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',
-        :item_id   => '0816614024' }
+        :item_id   => '0826490786' }
       """
     When I tape:
       """
 
-      EM.run {
-        http = EM::HttpRequest.new(@request.url).get
-
-        http.callback {
-          response_proxy = ResponseProxy.new(http.response,
-                                             http.response_header.status)
-          @response = Sucker::Response.new(response_proxy)
-
-          EM.stop
-        }
-      }
+      EM.synchrony do
+        @response = @request.get
+        EM.stop
+      end
       """
     Then I expect:
       """
