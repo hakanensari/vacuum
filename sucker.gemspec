@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ['code@papercavalier.com']
   s.homepage    = 'https://rubygems.org/gems/sucker'
   s.summary     = %q{A Ruby wrapper to the Amazon Product Advertising API}
-  s.description = %q{A Ruby wrapper to the Amazon Product Advertising API}
+  s.description = %q{A Nokogiri-based, optionally-evented Ruby wrapper to the Amazon Product Advertising API}
 
   s.rubyforge_project = 'sucker'
 
