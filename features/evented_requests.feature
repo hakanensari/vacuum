@@ -3,6 +3,7 @@ Feature: Evented requests
   I want to perform evented requests  
   Because that has some business value.
 
+  @synchrony
   Scenario: Event requests
     Given the following:
       """
