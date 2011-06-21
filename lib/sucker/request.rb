@@ -63,7 +63,7 @@ module Sucker
       parameters.merge!(hash)
     end
 
-    # Performs a request and returns a response object.
+    # Performs a request and returns a response.
     #
     #   response = request.get
     #
