@@ -18,12 +18,27 @@ module Sucker
         request.adapter.should eql ::EM::HttpRequest
       end
 
+      describe "#aget" do
+        it "yields a response" do
+          response = nil
+          EM.synchrony do
+            request.aget { |resp| response = resp }
+            EM.stop
+          end
+
+          response.should be_a Response
+        end
+      end
+
       describe "#get" do
         it "returns a response" do
+          response = nil
           EM.synchrony do
             response = request.get
             EM.stop
           end
+
+          response.should be_a Response
         end
       end
     end
