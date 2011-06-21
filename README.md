@@ -83,7 +83,7 @@ adapter.socket_local.host = '10.0.0.2'
 Evented Requests
 ----------------
 
-I am including a simple synchrony driver in the 2.0 major version release.
+I am including a EM:Synchrony patch in the 2.0 release.
 
 ```ruby
 require 'sucker/synchrony'
@@ -94,6 +94,8 @@ EM.synchrony do
   # do something with the response
   EM.stop
 end
+
+For more meaningful examples, read [these examples](http://relishapp.com/papercavalier/sucker/evented-requests).
 ```
 
 Stubbing Tests
