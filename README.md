@@ -95,8 +95,8 @@ EM.synchrony do
   EM.stop
 end
 
-For more meaningful examples, read [these examples](http://relishapp.com/papercavalier/sucker/evented-requests).
 ```
+For more meaningful examples, read [these examples](http://relishapp.com/papercavalier/sucker/evented-requests).
 
 Stubbing Tests
 --------------
