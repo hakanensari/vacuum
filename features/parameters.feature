@@ -6,10 +6,12 @@ Feature: Parameters
   Scenario: Reset parameters when setting up a new request
     Given the following:
       """
-      @request = Sucker.new(
-        :key    => amazon_key,
-        :secret => amazon_secret,
-        :locale => :us)
+      Sucker.configure do |c|
+        c.key    = amazon_key
+        c.secret = amazon_secret
+      end
+
+      @request = Sucker.new
       """
     When I run:
       """

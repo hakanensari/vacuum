@@ -9,10 +9,12 @@ Feature: Evented requests
       """
       require 'sucker/synchrony'
 
-      @request = Sucker.new(
-        key:       amazon_key,
-        secret:    amazon_secret,
-        locale:    'us')
+      Sucker.configure do |c|
+        c.key    = amazon_key
+        c.secret = amazon_secret
+      end
+
+      @request = Sucker.new
       @request << {
         operation: 'ItemLookup',
         id_type:   'ASIN',

@@ -6,10 +6,12 @@ Feature: Remote cart
   Scenario: Create a cart
     Given the following:
       """
-      @request = Sucker.new(
-        :key    => amazon_key,
-        :secret => amazon_secret,
-        :locale => :us)
+      Sucker.configure do |c|
+        c.key    = amazon_key
+        c.secret = amazon_secret
+      end
+
+      @request = Sucker.new
       @request << {
         'Operation'             => 'CartCreate',
         'Item.1.OfferListingId' => 'foobar',
