@@ -35,8 +35,8 @@ module Sucker
 
     private
 
-      def timestamp
-        Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
-      end
+    def timestamp
+      Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+    end
   end
 end
