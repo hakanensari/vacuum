@@ -5,61 +5,16 @@ require 'sucker/parameters'
 module Sucker
   # A wrapper around the API request.
   class Request
-    HOSTS = {
-      :us  => 'ecs.amazonaws.com',
-      :uk  => 'ecs.amazonaws.co.uk',
-      :de  => 'ecs.amazonaws.de',
-      :ca  => 'ecs.amazonaws.ca',
-      :fr  => 'ecs.amazonaws.fr',
-      :jp  => 'ecs.amazonaws.jp' }
+    # The locale-specific configuration.
+    attr_reader :config
 
-    class << self
-
-      # Available Amazon locales.
-      def locales
-        @locales ||= HOSTS.keys
-      end
-    end
-
-    attr_writer :associate_tag, :key, :secret, :locale
-
-    # The Amazon associate tag.
-    def associate_tag
-      @associate_tag ||= Config.associate_tag
-    end
-
-    # The Amazon Web Services access key.
-    def key
-      @key ||= Config.key
-    end
-
-    # The Amazon Web Services secret.
-    def secret
-      @secret ||= Config.secret
-    end
-
-    # The Amazon locale.
-    def locale
-      @locale ||= Config.locale
-    end
-
-    # Initializes a request object.
+    # Creates a new a request object.
     #
-    # Takes an optional hash of attribute and value pairs.
+    # Takes a Config object.
     #
-    #   request = Sucker.new(
-    #     :locale        => :us,
-    #     :key           => amazon_key,
-    #     :secret        => amazon_secret)
-    #     :associate_tag => amazon_tag)
-    #
-    def initialize(args={})
-      args.each { |k, v| send("#{k}=", v) }
-    end
-
-    # The HTTP adapter.
-    def adapter
-      @adapter ||= HTTPClient.new
+    # You should not be calling this method directly. Instead, use `Sucker.new`.
+    def initialize(config)
+      @config = config
     end
 
     # Merges a hash into the existing parameters.
@@ -71,6 +26,11 @@ module Sucker
     #
     def <<(hash)
       parameters.merge!(hash)
+    end
+
+    # The HTTP adapter.
+    def adapter
+      @adapter ||= HTTPClient.new
     end
 
     # Performs a request and returns a response.
@@ -90,14 +50,13 @@ module Sucker
     # Resets parameters and returns self.
     def reset
       parameters.reset
-
       self
     end
 
     # The request URL.
     def url
       URI::HTTP.build(
-        :host   => host,
+        :host   => config.host,
         :path   => '/onca/xml',
         :query  => sign(build_query_string)
       )
@@ -113,8 +72,8 @@ module Sucker
     def build_query_string
       parameters.
         normalize.
-        merge({ 'AWSAccessKeyId' => key,
-                'AssociateTag'   => associate_tag.to_s }).
+        merge({ 'AWSAccessKeyId' => config.key,
+                'AssociateTag'   => config.associate_tag.to_s }).
         sort.
         map { |k, v| "#{k}=" + escape(v) }.
         join('&')
@@ -122,8 +81,8 @@ module Sucker
 
     def sign(query_string)
       digest = OpenSSL::Digest::Digest.new('sha256')
-      url_string = ['GET', host, '/onca/xml', query_string].join("\n")
-      hmac = OpenSSL::HMAC.digest(digest, secret, url_string)
+      url_string = ['GET', config.host, '/onca/xml', query_string].join("\n")
+      hmac = OpenSSL::HMAC.digest(digest, config.secret, url_string)
       signature = escape([hmac].pack('m').chomp)
 
       query_string + '&Signature=' + signature
@@ -133,10 +92,6 @@ module Sucker
       value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
         '%' + $1.unpack('H2' * $1.bytesize).join('%').upcase
       end
-    end
-
-    def host
-      HOSTS[locale.to_sym]
     end
   end
 end

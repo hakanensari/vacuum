@@ -9,10 +9,12 @@ module Sucker
     let(:asins) { ['0816614024', '0143105825'] }
 
     let(:response) do
-      request = Sucker.new(
-        :locale => :us,
-        :key    => amazon_key,
-        :secret => amazon_secret)
+      Sucker.configure do |c|
+        c.key    = amazon_key
+        c.secret = amazon_secret
+      end
+
+      request = Sucker.new
       request << {
           'Operation' => 'ItemLookup',
           'IdType'    => 'ASIN',
