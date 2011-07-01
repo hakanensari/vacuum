@@ -110,33 +110,33 @@ module Sucker
 
     private
 
-      def build_query_string
-        parameters.
-          normalize.
-          merge({ 'AWSAccessKeyId' => key,
-                  'AssociateTag'   => associate_tag.to_s }).
-          sort.
-          map { |k, v| "#{k}=" + escape(v) }.
-          join('&')
-      end
+    def build_query_string
+      parameters.
+        normalize.
+        merge({ 'AWSAccessKeyId' => key,
+                'AssociateTag'   => associate_tag.to_s }).
+        sort.
+        map { |k, v| "#{k}=" + escape(v) }.
+        join('&')
+    end
 
-      def sign(query_string)
-        digest = OpenSSL::Digest::Digest.new('sha256')
-        url_string = ['GET', host, '/onca/xml', query_string].join("\n")
-        hmac = OpenSSL::HMAC.digest(digest, secret, url_string)
-        signature = escape([hmac].pack('m').chomp)
+    def sign(query_string)
+      digest = OpenSSL::Digest::Digest.new('sha256')
+      url_string = ['GET', host, '/onca/xml', query_string].join("\n")
+      hmac = OpenSSL::HMAC.digest(digest, secret, url_string)
+      signature = escape([hmac].pack('m').chomp)
 
-        query_string + '&Signature=' + signature
-      end
+      query_string + '&Signature=' + signature
+    end
 
-      def escape(value)
-        value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
-          '%' + $1.unpack('H2' * $1.bytesize).join('%').upcase
-        end
+    def escape(value)
+      value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
+        '%' + $1.unpack('H2' * $1.bytesize).join('%').upcase
       end
+    end
 
-      def host
-        HOSTS[locale.to_sym]
-      end
+    def host
+      HOSTS[locale.to_sym]
+    end
   end
 end
