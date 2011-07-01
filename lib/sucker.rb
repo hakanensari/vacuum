@@ -1,3 +1,4 @@
+require 'sucker/config'
 require 'sucker/request'
 require 'sucker/response'
 
@@ -17,6 +18,10 @@ module Sucker
     #
     def new(args={})
       Request.new(args)
+    end
+
+    def configure(&block)
+      yield Config
     end
   end
 end

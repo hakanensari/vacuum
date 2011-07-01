@@ -21,17 +21,27 @@ module Sucker
       end
     end
 
+    attr_writer :associate_tag, :key, :secret, :locale
+
     # The Amazon associate tag.
-    attr_accessor :associate_tag
+    def associate_tag
+      @associate_tag ||= Config.associate_tag
+    end
 
     # The Amazon Web Services access key.
-    attr_accessor :key
-
-    # The Amazon locale.
-    attr_accessor :locale
+    def key
+      @key ||= Config.key
+    end
 
     # The Amazon Web Services secret.
-    attr_accessor :secret
+    def secret
+      @secret ||= Config.secret
+    end
+
+    # The Amazon locale.
+    def locale
+      @locale ||= Config.locale
+    end
 
     # Initializes a request object.
     #
