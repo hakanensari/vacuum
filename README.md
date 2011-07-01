@@ -68,6 +68,13 @@ Sucker is a Nokogiri-based, optionally-evented Ruby wrapper to the
 
 4.  Repeat ad infinitum.
 
+    ```ruby
+    request << { 'ItemId' => 10.new.asins }
+    request.get["Item"].each do |item|
+      # consume
+    end
+    ```
+
 
 ## Some tips
 
@@ -109,7 +116,8 @@ adapter.socket_local.host = '10.0.0.2'
 Evented Requests
 ----------------
 
-I am including an EM:Synchrony patch in the 2.0 release.
+Large responses can block! I am including an EM:Synchrony patch in the 2.0
+release.
 
 ```ruby
 require 'sucker/synchrony'
