@@ -24,7 +24,16 @@ Sucker is a Nokogiri-based, optionally-evented Ruby wrapper to the
     ```
 
     If you are only interested in querying Amazon.com, you may omit the locale
-    above altogether.
+    altogether.
+
+    ```ruby
+    Sucker.configure do |c|
+      c.key    = amazon_key
+      c.secret = amazon_secret
+    end
+
+    request = Sucker.new
+    ```
 
 2.  Build a request.
 
