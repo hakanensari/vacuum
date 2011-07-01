@@ -1,54 +1,72 @@
-Sucker
-======
+# Sucker
 
-Sucker is a Nokogiri-based, optionally-evented Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
+Sucker is a Nokogiri-based, optionally-evented Ruby wrapper to the
+[Amazon Product Advertising API](https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html).
 
 ![Hoover](https://github.com/papercavalier/sucker/raw/master/hoover.jpg)
 
-Caption: Workers queuing to download data from Amazon.
+> Workers queuing to download data from Amazon.
 
-Usage
------
+## Usage
 
-Read the [Amazon API](http://aws.amazon.com/archives/Product%20Advertising%20API).
-Check out [these examples](http://relishapp.com/papercavalier/sucker) if in a hurry.
+1.  Set up a request.
 
-Set up.
+    ```ruby
+    locale = :us
+
+    Sucker.configure(locale) do |c|
+      c.key    = amazon_key
+      c.secret = amazon_secret
+    end
+
+    request = Sucker.new(locale)
+
+    ```
+
+    If you are only interested in querying Amazon.com, you may omit the locale
+    above altogether.
+
+2.  Build a request.
+
+    ```ruby
+    request << {
+      'Operation'     => 'ItemLookup',
+      'IdType'        => 'ASIN',
+      'ItemId'        => 10.asins,
+      'ResponseGroup' => 'ItemAttributes' }
+    ```
+
+    Amazon provides countless configuration options to fine-tune your query. Read
+    [their API](http://aws.amazon.com/archives/Product%20Advertising%20API) or 
+    check out [these common scenarios](http://relishapp.com/papercavalier/sucker)
+    if in a hurry.
+
+3.  Get a response.
+
+    ```ruby
+    response = request.get
+    ```
+
+    Fulfill a business value.
+
+    ```ruby
+    if response.valid?
+      response.find('Item').each do |item|
+        # consume
+      end
+    end
+    ```
+
+4.  Repeat ad infinitum.
+
+
+## Some tips
+
+Inspect the response as a hash to find out nodes you are interested in.
 
 ```ruby
-request = Sucker.new(
-  :locale => :us,
-  :key    => amazon_key,
-  :secret => amazon_secret)
+p response.to_hash
 ```
-
-Build a request.
-
-```ruby
-request << {
-  'Operation'     => 'ItemLookup',
-  'IdType'        => 'ASIN',
-  'ItemId'        => 10.asins,
-  'ResponseGroup' => 'ItemAttributes' }
-```
-
-Get a response.
-
-```ruby
-response = request.get
-```
-
-Fulfill a business value.
-
-```ruby
-if response.valid?
-  response.each('Item') do |item|
-    consume(item)
-  end
-end
-```
-
-Repeat ad infinitum.
 
 The following are all valid ways to query a response:
 
@@ -67,7 +85,6 @@ p response.valid?,
   response.code,
   response.errors,
   response.has_errors?,
-  response.to_hash,
   response.xml
 ```
 
