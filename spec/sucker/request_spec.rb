@@ -6,9 +6,10 @@ module Sucker
 
     let(:request) do
       Request.new(
-        :locale => :us,
-        :key    => 'key',
-        :secret => 'secret')
+        :locale        => :us,
+        :key           => 'key',
+        :secret        => 'secret',
+        :associate_tag => 'tag')
     end
 
     describe ".locales" do
@@ -63,7 +64,7 @@ module Sucker
       end
 
       it 'canonicalizes query' do
-        query.should match /AWSAccessKeyId=key&AssociateTag=&Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
+        query.should match /AWSAccessKeyId=key&AssociateTag=tag&Service=([^&]+)&Timestamp=([^&]+)&Version=([^&]+)/
       end
 
       it 'includes a timestamp' do
