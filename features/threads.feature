@@ -16,7 +16,7 @@ Feature: Threads
       """
     When I tape:
       """
-      threads = Sucker::Request.locales.map do |locale|
+      threads = Sucker::Request::LOCALES.map do |locale|
         Thread.new do
           @request.locale = locale
           Thread.current[:response] = @request.get

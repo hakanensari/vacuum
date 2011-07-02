@@ -6,53 +6,29 @@ require 'sucker/response'
 #
 # Sucker is a Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
-
   class << self
-
-    # Creates a request object for a specified Amazon locale.
+    # Initializes a request object.
     #
-    #   request = Sucker.new(:us)
+    #   request = Sucker.new(
+    #     :locale => :us,
+    #     :key    => api_key,
+    #     :secret => api_secret)
     #
-    def new(args = :us)
-      if args.is_a?(Hash)
-        Kernel.warn "[DEPRECATION] Configure request using `Sucker.configure`."
-
-        locale = args.delete(:locale)
-        configure(locale) do |c|
-          args.each { |k, v| c.send("#{k}=", v) }
-        end
-      else
-        locale = args
-      end
-
-      Request.new(config(locale))
+    def new(args={})
+      Request.new(args)
     end
 
-    # The config for specified locale.
+    # Configures locale-specific details.
     #
-    # It defaults to the US if no locale is specified.
-    def config(locale = :us)
-      locale = locale.to_sym
-      configs[locale] ||= Config.new(locale)
-    end
-
-    # Configures an Amazon locale.
-    #
-    #   Sucker.configure(:us) do |c|
+    #   Sucker.configure do |c|
+    #     c.locale        = :us
     #     c.key           = api_key
     #     c.secret        = api_secret
     #     c.associate_tag = associate_tag
     #   end
     #
-    # If no locale is specified, it defaults to the US.
-    def configure(locale = :us, &block)
-      yield config(locale)
-    end
-
-    private
-
-    def configs
-      @configs ||= Hash.new
+    def configure
+      yield Config
     end
   end
 end

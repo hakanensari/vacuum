@@ -5,13 +5,10 @@ module Sucker
     use_vcr_cassette 'spec/sucker/request', :record => :new_episodes
 
     let(:request) do
-      Sucker.configure do |c|
-        c.key           = 'key'
-        c.secret        = 'secret'
-        c.associate_tag = 'tag'
-      end
-
-      Request.new(Sucker.config)
+      Request.new(:locale        => :us,
+                  :key           => 'key',
+                  :secret        => 'secret',
+                  :associate_tag => 'tag')
     end
 
     describe '#<<' do
@@ -36,8 +33,8 @@ module Sucker
         request.parameters['foo'].should be_nil
       end
 
-      it "returns the request object" do
-        request.reset.should be_a Request
+      it "returns itself" do
+        request.reset.should eql request
       end
     end
 
@@ -84,6 +81,13 @@ module Sucker
     describe '#escape' do
       it 'URL-encodes a string' do
         request.send(:escape, 'foo,bar').should eql 'foo%2Cbar'
+      end
+    end
+
+    describe "#host" do
+      it "returns the host for specified locale" do
+        request.locale = :uk
+        request.send(:host).should eql Request::HOSTS[request.locale]
       end
     end
   end
