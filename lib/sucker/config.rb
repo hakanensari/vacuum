@@ -1,4 +1,5 @@
 module Sucker
+  # Amazon credentials.
   module Config
     extend self
 
