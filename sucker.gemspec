@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   {
     'httpclient'          => '~> 2.2',
-    'nokogiri'            => '~> 1.4'
+    'nokogiri'            => '~> 1.5'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
