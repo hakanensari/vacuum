@@ -22,11 +22,9 @@ Gem::Specification.new do |s|
   end
 
   {
-    'bundler'             => '~> 1.0',
     'cucumber'            => '~> 0.10',
     'em-http-request'     => '~> 1.0.0.beta.4',
     'em-synchrony'        => '~> 0.3.0.beta.1',
-    'relish'              => '~> 0.4',
     'rspec'               => '~> 2.6',
     'vcr'                 => '~> 1.10',
     'webmock'             => '~> 1.6'
