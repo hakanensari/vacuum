@@ -6,13 +6,9 @@ Feature: Threads
   Scenario: Thread requests to all six Amazon locales
     Given the following:
       """
-      Sucker::Config::LOCALES.map do |locale|
-        Sucker.configure(locale) do |c|
-          c.key    = amazon_key
-          c.secret = amazon_secret
-        end
-      end
-      @request = Sucker.new
+      @request = Sucker.new(
+        :key    => amazon_key,
+        :secret => amazon_secret)
       @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',
@@ -20,12 +16,10 @@ Feature: Threads
       """
     When I tape:
       """
-      threads = Sucker::Config::LOCALES.map do |locale|
+      threads = Sucker::Request.locales.map do |locale|
         Thread.new do
-          request = Sucker.new(locale)
-          request << @request.parameters.normalize
-
-          Thread.current[:response] = request.get
+          @request.locale = locale
+          Thread.current[:response] = @request.get
         end
       end
 

@@ -6,12 +6,10 @@ Feature: Item lookup
   Background:
     Given the following:
       """
-      Sucker.configure do |c|
-        c.key    = amazon_key
-        c.secret = amazon_secret
-      end
-
-      @request = Sucker.new
+      @request = Sucker.new(
+        :key    => amazon_key,
+        :secret => amazon_secret,
+        :locale => :us)
       """
 
   Scenario: Single item
@@ -53,12 +51,7 @@ Feature: Item lookup
   Scenario: Non-latin text
     Given the following:
       """
-      Sucker.configure(:jp) do |c|
-        c.key    = amazon_key
-        c.secret = amazon_secret
-      end
-
-      @request = Sucker.new(:jp)
+      @request.locale = :jp
       @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',

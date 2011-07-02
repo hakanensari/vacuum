@@ -6,11 +6,10 @@ Feature: Images
   Background:
     Given the following:
       """
-      Sucker.configure do |c|
-        c.key    = amazon_key
-        c.secret = amazon_secret
-      end
-      @request = Sucker.new
+      @request = Sucker.new(
+        :key    => amazon_key,
+        :secret => amazon_secret,
+        :locale => :us)
       """
 
   Scenario: Look up images
