@@ -9,30 +9,32 @@ Sucker is a Nokogiri-based, optionally-evented Ruby wrapper to the
 
 ## Usage
 
-1.  Set up a request.
+_Note_: For the README of version 1.6.1 and earlier, [click here](https://github.com/papercavalier/sucker/tree/v1.6.1).
 
-    ```ruby
-    locale = :us
-
-    Sucker.configure(locale) do |c|
-      c.key    = amazon_key
-      c.secret = amazon_secret
-    end
-
-    request = Sucker.new(locale)
-
-    ```
-
-    If you are only interested in querying Amazon.com, you may omit the locale
-    altogether.
+1.  Define your Amazon credentials.
 
     ```ruby
     Sucker.configure do |c|
-      c.key    = amazon_key
-      c.secret = amazon_secret
+      c.locale        = :us
+      c.key           = amazon_key
+      c.secret        = amazon_secret
+      c.associate_tag = associate_tag
     end
 
+2.  Set up a request.
+
+    ```ruby
     request = Sucker.new
+    ```
+
+    Alternatively, you may your credentials when initializing the request.
+
+    ```ruby
+    request = Sucker.new(
+      :locale => :us,
+      :key    => amazon_key,
+      :secret => amazon_secret)
+    end
     ```
 
 2.  Build a request.
