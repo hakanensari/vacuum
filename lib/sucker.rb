@@ -27,8 +27,8 @@ module Sucker
     #     c.associate_tag = associate_tag
     #   end
     #
-    def configure
-      yield Config
+    def configure(&block)
+      block.call(Config)
     end
   end
 end
