@@ -14,5 +14,9 @@ module Sucker
 
     # The Amazon associate tag.
     attr_accessor :associate_tag
+
+    def configure
+      yield self
+    end
   end
 end

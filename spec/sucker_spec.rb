@@ -8,8 +8,8 @@ describe Sucker do
   end
 
   describe ".configure" do
-    it "yields a configuration object" do
-      subject.should_receive(:configure).and_yield(Sucker::Config)
+    it "yields the configuration" do
+      Sucker::Config.should_receive(:configure)
       subject.configure { |c| }
     end
   end

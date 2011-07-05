@@ -28,7 +28,7 @@ module Sucker
     #   end
     #
     def configure(&block)
-      block.call(Config)
+      Config.configure(&block)
     end
   end
 end
