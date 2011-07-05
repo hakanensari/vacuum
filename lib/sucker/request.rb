@@ -18,9 +18,9 @@ module Sucker
     LOCALES = HOSTS.keys
 
     def_delegators :@config, :associate_tag, :associate_tag=,
-                             :key, :key=,
-                             :locale, :locale=,
-                             :secret, :secret=
+                             :key,           :key=,
+                             :locale,        :locale=,
+                             :secret,        :secret=
 
     # Creates a new a request.
     #
