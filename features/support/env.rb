@@ -6,11 +6,11 @@ require 'sucker'
 
 module SuckerMethods
   def amazon_key
-    ENV['AMAZON_KEY']
+    ENV['AMAZON_KEY'] || "key"
   end
 
   def amazon_secret
-    ENV['AMAZON_SECRET']
+    ENV['AMAZON_SECRET'] || "secret"
   end
 
   def cassette_name
