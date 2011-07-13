@@ -47,22 +47,3 @@ Feature: Item lookup
       error = @response.errors.first
       error['Message'].should include 'not a valid value'
       """
-
-  Scenario: Non-latin text
-    Given the following:
-      """
-      @request.locale = :jp
-      @request << {
-        :operation => 'ItemLookup',
-        :id_type   => 'ASIN',
-        :item_id   => '482224816X' }
-      """
-    When I tape:
-      """
-      @response = @request.get
-      """
-    Then I expect:
-      """
-      item = @response['Item'].first
-      item['ItemAttributes']['Title'].should include "ス"
-      """
