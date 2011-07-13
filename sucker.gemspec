@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     'cucumber'            => '~> 0.10',
     'em-http-request'     => '~> 1.0.0.beta.4',
     'em-synchrony'        => '~> 0.3.0.beta.1',
+    'rake'                => '~> 0.9',
     'rspec'               => '~> 2.6',
     'vcr'                 => '~> 1.10',
     'webmock'             => '~> 1.6'
