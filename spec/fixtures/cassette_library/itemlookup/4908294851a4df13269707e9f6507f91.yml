@@ -1,0 +1,26 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://ecs.amazonaws.com:80/onca/xml?AWSAccessKeyId=0ZVSQ33MDFPQS8H2PM02&AssociateTag=&IdType=ASIN&ItemId=0007218095&Operation=ItemLookup&Service=AWSECommerceService&Signature=W/qSSxRiQF/hXTlveZ2X6aEtDXfgSq8BdiYWOy0GLik=&Timestamp=2011-07-13T14:01:58Z&Version=2010-11-01
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - text/xml;charset=UTF-8
+      server: 
+      - Server
+      date: 
+      - Wed, 13 Jul 2011 14:01:58 GMT
+      nncoection: 
+      - close
+      vary: 
+      - Accept-Encoding,User-Agent
+      transfer-encoding: 
+      - chunked
+    body: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2010-11-01"><OperationRequest><RequestId>fbd5e4cc-6fe1-446a-92d8-3c9117b68811</RequestId><Arguments><Argument Name="Operation" Value="ItemLookup"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument><Argument Name="Signature" Value="W/qSSxRiQF/hXTlveZ2X6aEtDXfgSq8BdiYWOy0GLik="></Argument><Argument Name="AssociateTag"></Argument><Argument Name="Version" Value="2010-11-01"></Argument><Argument Name="ItemId" Value="0007218095"></Argument><Argument Name="IdType" Value="ASIN"></Argument><Argument Name="AWSAccessKeyId" Value="0ZVSQ33MDFPQS8H2PM02"></Argument><Argument Name="Timestamp" Value="2011-07-13T14:01:58Z"></Argument></Arguments><RequestProcessingTime>0.0833030000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><Condition>New</Condition><DeliveryMethod>Ship</DeliveryMethod><IdType>ASIN</IdType><MerchantId>Amazon</MerchantId><OfferPage>1</OfferPage><ItemId>0007218095</ItemId><ResponseGroup>Small</ResponseGroup><ReviewPage>1</ReviewPage><ReviewSort>-SubmissionDate</ReviewSort><VariationPage>All</VariationPage></ItemLookupRequest><Errors><Error><Code>AWS.InvalidParameterValue</Code><Message>0007218095 is not a valid value for ItemId. Please change this value and retry your request.</Message></Error></Errors></Request></Items></ItemLookupResponse>
+    http_version: "1.1"

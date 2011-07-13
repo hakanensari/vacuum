@@ -1,0 +1,27 @@
+
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://ecs.amazonaws.com:80/onca/xml?AWSAccessKeyId=0ZVSQ33MDFPQS8H2PM02&AssociateTag=&Item.1.OfferListingId=mg7dbfIPL3rTrnxR6R9I4u0glPrEbbdF6p7X9tXpyhAMBRUwGLGi1mOQoClXMciAFenOXG9dZXGSPTfjRoQXma9yOTmeHhYqwPOEPHOz2XHMgooCZPjeQRfgRYQe6DBEd1qz%252Fu1G0ew%253D&Item.1.Quantity=1&Operation=CartCreate&Service=AWSECommerceService&Signature=KOWNiGbBwuhtK2gCzvhY4zZEtjQpJfE5v0FRd8f+pBs=&Timestamp=2011-04-06T11:09:11Z&Version=2010-11-01
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Wed, 06 Apr 2011 11:09:11 GMT
+      server: 
+      - Server
+      content-type: 
+      - text/xml;charset=UTF-8
+      vary: 
+      - Accept-Encoding,User-Agent
+      nncoection: 
+      - close
+      transfer-encoding: 
+      - chunked
+    body: <?xml version="1.0" encoding="UTF-8"?><CartCreateResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2010-11-01"><OperationRequest><HTTPHeaders><Header Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>1168G1DJCNJD2Z5YBXCG</RequestId><Arguments><Argument Name="AssociateTag"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument><Argument Name="Signature" Value="KOWNiGbBwuhtK2gCzvhY4zZEtjQpJfE5v0FRd8f+pBs="></Argument><Argument Name="Item.1.OfferListingId" Value="mg7dbfIPL3rTrnxR6R9I4u0glPrEbbdF6p7X9tXpyhAMBRUwGLGi1mOQoClXMciAFenOXG9dZXGSPTfjRoQXma9yOTmeHhYqwPOEPHOz2XHMgooCZPjeQRfgRYQe6DBEd1qz%2Fu1G0ew%3D"></Argument><Argument Name="Item.1.Quantity" Value="1"></Argument><Argument Name="Operation" Value="CartCreate"></Argument><Argument Name="AWSAccessKeyId" Value="0ZVSQ33MDFPQS8H2PM02"></Argument><Argument Name="Version" Value="2010-11-01"></Argument><Argument Name="Timestamp" Value="2011-04-06T11:09:11Z"></Argument></Arguments><RequestProcessingTime>0.089832067489624</RequestProcessingTime></OperationRequest><Cart><Request><IsValid>True</IsValid><CartCreateRequest><Items><Item><OfferListingId>mg7dbfIPL3rTrnxR6R9I4u0glPrEbbdF6p7X9tXpyhAMBRUwGLGi1mOQoClXMciAFenOXG9dZXGSPTfjRoQXma9yOTmeHhYqwPOEPHOz2XHMgooCZPjeQRfgRYQe6DBEd1qz%2Fu1G0ew%3D</OfferListingId><Quantity>1</Quantity></Item></Items></CartCreateRequest></Request><CartId>185-5703867-5466531</CartId><HMAC>hE8sZY4/KzkQvZzH6XxuIVyEjk4=</HMAC><URLEncodedHMAC>hE8sZY4%2FKzkQvZzH6XxuIVyEjk4%3D</URLEncodedHMAC><PurchaseURL>https://www.amazon.com/gp/cart/aws-merge.html?cart-id=185-5703867-5466531%26associate-id=ws%26hmac=hE8sZY4/KzkQvZzH6XxuIVyEjk4=%26SubscriptionId=0ZVSQ33MDFPQS8H2PM02%26MergeCart=False</PurchaseURL><SubTotal><Amount>1054</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$10.54</FormattedPrice></SubTotal><CartItems><SubTotal><Amount>1054</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$10.54</FormattedPrice></SubTotal><CartItem><CartItemId>U2329STRQPCFPV</CartItemId><ASIN>1844672972</ASIN><ExchangeId>Y18M6004066M1787332</ExchangeId><MerchantId>A1C3QU77DDT2KW</MerchantId><SellerId>A1C3QU77DDT2KW</SellerId><SellerNickname>indoobestsellers</SellerNickname><Quantity>1</Quantity><Title>The Future of the Image</Title><ProductGroup>Book</ProductGroup><Price><Amount>1054</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$10.54</FormattedPrice></Price><ItemTotal><Amount>1054</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$10.54</FormattedPrice></ItemTotal></CartItem></CartItems></Cart></CartCreateResponse>
+    http_version: "1.1"
