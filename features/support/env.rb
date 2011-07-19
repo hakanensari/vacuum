@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'digest/md5'
-require 'ruby-debug'
 require 'sucker'
 
 module SuckerMethods
