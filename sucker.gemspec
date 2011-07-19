@@ -8,21 +8,21 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Paper Cavalier']
   s.email       = ['code@papercavalier.com']
-  s.homepage    = 'https://rubygems.org/gems/sucker'
+  s.homepage    = 'http://code.papercavalier.com/sucker'
   s.summary     = %q{A Ruby wrapper to the Amazon Product Advertising API}
-  s.description = %q{A Nokogiri-based, optionally-evented Ruby wrapper to the Amazon Product Advertising API}
+  s.description = %q{Sucker is a minimal Ruby wrapper to the Amazon Product Advertising API.}
 
   s.rubyforge_project = 'sucker'
 
   {
     'httpclient'          => '~> 2.2',
-    'nokogiri'            => '~> 1.5'
+    'nokogiri'            => '~> 1.4'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
 
   {
-    'cucumber'            => '~> 0.10',
+    'cucumber'            => '~> 1.0',
     'em-http-request'     => '~> 1.0.0.beta.4',
     'em-synchrony'        => '~> 0.3.0.beta.1',
     'rake'                => '~> 0.9',
