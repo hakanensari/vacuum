@@ -4,7 +4,7 @@ require 'sucker/response'
 
 # = Sucker
 #
-# Sucker is a Ruby wrapper to the Amazon Product Advertising API.
+# Sucker is a minimal Ruby wrapper to the Amazon Product Advertising API.
 module Sucker
   class << self
     # Initializes a request object.
