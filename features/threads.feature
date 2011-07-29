@@ -7,8 +7,9 @@ Feature: Threads
     Given the following:
       """
       @request = Sucker.new(
-        :key    => amazon_key,
-        :secret => amazon_secret)
+        :key           => amazon_key,
+        :secret        => amazon_secret,
+        :associate_tag => amazon_associate_tag)
       @request << {
         :operation => 'ItemLookup',
         :id_type   => 'ASIN',

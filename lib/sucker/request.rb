@@ -14,7 +14,6 @@ module Sucker
       :ca  => 'ecs.amazonaws.ca',
       :fr  => 'ecs.amazonaws.fr',
       :jp  => 'ecs.amazonaws.jp' }
-
     LOCALES = HOSTS.keys
 
     def_delegators :@config, :associate_tag, :associate_tag=,
@@ -30,7 +29,7 @@ module Sucker
     #     :locale        => :us,
     #     :key           => amazon_key,
     #     :secret        => amazon_secret)
-    #     :associate_tag => amazon_tag)
+    #     :associate_tag => amazon_associate_tag)
     #
     def initialize(args = {})
       @config = Config

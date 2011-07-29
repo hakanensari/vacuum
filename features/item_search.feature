@@ -7,8 +7,9 @@ Feature: Item search
     Given the following:
       """
       @request = Sucker.new(
-        :key    => amazon_key,
-        :secret => amazon_secret,
+        :key           => amazon_key,
+        :secret        => amazon_secret,
+        :associate_tag => amazon_associate_tag,
         :locale => :us)
       """
 
@@ -26,6 +27,7 @@ Feature: Item search
       """
     Then I expect:
       """
+      puts @response["ItemAttributes"].first
       @response['Item'].size.should eql 10
       """
 

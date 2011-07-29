@@ -4,6 +4,10 @@ require 'digest/md5'
 require 'sucker'
 
 module SuckerMethods
+  def amazon_associate_tag
+    ENV['AMAZON_ASSOCIATE_TAG'] || "tag"
+  end
+
   def amazon_key
     ENV['AMAZON_KEY'] || "key"
   end

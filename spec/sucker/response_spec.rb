@@ -1,123 +1,66 @@
-# encoding: utf-8
-
 require 'spec_helper'
 
 module Sucker
   describe Response do
-    use_vcr_cassette 'spec/sucker/response', :record => :new_episodes
-
-    let(:asins) { ['0816614024', '0143105825'] }
-
     let(:response) do
-      request = Request.new(:locale        => :us,
-                            :key           => 'key',
-                            :secret        => 'secret',
-                            :associate_tag => 'tag')
-      request << {
-          'Operation' => 'ItemLookup',
-          'IdType'    => 'ASIN',
-          'ItemId'    => asins }
-      request.get
+      http_resp = Struct.new(:body, :code).new
+      http_resp.body = File.read(File.expand_path('../../fixtures/http_response', __FILE__))
+      http_resp.code = 200
+      Response.new(http_resp)
     end
 
-    describe '.new' do
-      it 'initializes the response body' do
-        response.body.should be_an_instance_of String
-      end
+    describe '#each' do
+      context 'when a block is given' do
+        it 'yields matches to a block' do
+          yielded = false
+          response.each('Item') do |item|
+            yielded = true
+          end
 
-      it 'initializes the response code' do
-        response.code.should == 200
+          yielded.should be_true
+        end
       end
     end
 
-    context 'when response contains errors' do
-      before do
-        response.body = "<?xml version=\"1.0\" ?><ItemLookupResponse xmlns=\"http://webservices.amazon.com/AWSECommerceService/2010-09-01\"><Errors><Error>foo</Error><Error>bar</Error></Errors>"
+    describe '#errors' do
+      it 'returns an array of errors' do
+        response.body = '<Response xmlns="http://example.com"><Errors><Error>foo</Error></Errors>'
+        response.errors.should =~ ['foo']
       end
+    end
 
-      describe '#errors' do
-        it 'returns an array of errors' do
-          response.errors.count.should eql 2
+    describe '#has_errors?' do
+      context 'when a response does not contain any errors' do
+        it 'returns false' do
+          response.stub!(:errors).and_return([])
+          response.should_not have_errors
         end
       end
 
-      describe '#has_errors?' do
-        it 'returns true if the response has errors' do
+      context 'when a response contains errors' do
+        it 'returns true' do
+          response.stub!(:errors).and_return([1])
           response.should have_errors
         end
       end
     end
 
-    describe "#each" do
-      context "when a block is given" do
-        it "yields each match to a block" do
-          has_yielded = false
-
-          response.each("ItemAttributes") do |item|
-            has_yielded = true
-            item.should be_an_instance_of Hash
-          end
-
-          has_yielded.should be_true
-        end
-      end
-
-      context "when no block is given" do
-        it "raises error" do
-          expect do
-            response.each("ItemAttributes")
-          end.to raise_error(NoMethodError)
-        end
-      end
-    end
-
     describe '#find' do
-      context 'when there are matches' do
-        it 'returns an array of matching nodes' do
-          response.find('ASIN').should eql asins
-        end
-      end
-
-      context 'when there are no matches' do
-        it 'returns an empty array' do
-          node = response.find('Foo')
-          node.should eql []
-        end
+      it 'returns an array of matching nodes' do
+        response.find('ASIN').should_not be_empty
       end
     end
 
     describe "#map" do
-      context "when a block is given" do
-        it "yields each match to a block and maps returned values" do
-          titles = response.map("ItemAttributes") { |item| item["Title"] }
-
-          titles.count.should eql 2
-        end
-      end
-
-      context "when no block is given" do
-        it "raises error" do
-          expect do
-            response.map("ItemAttributes")
-          end.to raise_error(NoMethodError)
-        end
-      end
-    end
-
-    describe '#[]' do
-      it 'is an alias of #find' do
-        response['Title'].should eql response.find('Title')
+      it "yields each match to a block and maps returned values" do
+        titles = response.map('Item') { |item| item['ItemAttributes']['Title'] }
+        titles.count.should eql 2
       end
     end
 
     describe '#to_hash' do
-      it 'returns a hash' do
+      it 'casts response to a hash' do
         response.to_hash.should be_a Hash
-      end
-
-      it 'renders non-ASCII characters' do
-        response.body = '<ItemAttributes><Title>スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則</Title></ItemAttributes>'
-        response.to_hash['Title'].should eql 'スティーブ・ジョブズ 驚異のプレゼン―人々を惹きつける18の法則'
       end
     end
 

@@ -7,8 +7,9 @@ Feature: Item lookup
     Given the following:
       """
       @request = Sucker.new(
-        :key    => amazon_key,
-        :secret => amazon_secret,
+        :key           => amazon_key,
+        :secret        => amazon_secret,
+        :associate_tag => amazon_associate_tag,
         :locale => :us)
       """
 

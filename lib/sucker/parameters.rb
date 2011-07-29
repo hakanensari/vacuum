@@ -4,7 +4,7 @@ module Sucker
   class Parameters
     extend Forwardable
 
-    CURRENT_API_VERSION = '2010-11-01'
+    CURRENT_API_VERSION = '2011-08-01'
 
     def_delegators :@parameters, :[], :[]=, :merge!
 

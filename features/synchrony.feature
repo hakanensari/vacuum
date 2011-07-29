@@ -10,9 +10,10 @@ Feature: Evented requests
       require 'sucker/synchrony'
 
       @request = Sucker.new(
-        key:       amazon_key,
-        secret:    amazon_secret,
-        locale:    'us')
+        :key           => amazon_key,
+        :secret        => amazon_secret,
+        :associate_tag => amazon_associate_tag,
+        :locale => :us)
       @request << {
         operation: 'ItemLookup',
         id_type:   'ASIN',
@@ -37,11 +38,11 @@ Feature: Evented requests
       require 'sucker/synchrony'
 
       @asins   = %w{ 0816614024 0143105825 0485113600 }
-      @locales = Sucker::Request.locales
-
       @request = Sucker.new(
-        key:        amazon_key,
-        secret:     amazon_secret)
+        :key           => amazon_key,
+        :secret        => amazon_secret,
+        :associate_tag => amazon_associate_tag,
+        :locale => :us)
       @request << {
         operation: 'ItemLookup',
         id_type:   'ASIN' }
@@ -51,7 +52,7 @@ Feature: Evented requests
       EM.synchrony do
         concurrency = 6
 
-        @responses = EM::Synchrony::Iterator.new(@asins.product(@locales), concurrency).map do |(asin, locale), iter|
+        @responses = EM::Synchrony::Iterator.new(@asins.product(Sucker::Request::LOCALES), concurrency).map do |(asin, locale), iter|
           @request.locale = locale
           @request << { item_id: asin }
           @request.aget { |response| iter.return(response) }
