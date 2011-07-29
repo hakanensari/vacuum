@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Paper Cavalier']
   s.email       = ['code@papercavalier.com']
-  s.homepage    = 'http://code.papercavalier.com/sucker'
+  s.homepage    = 'http://code.papercavalier.com/sucker/'
   s.summary     = %q{A Ruby wrapper to the Amazon Product Advertising API}
   s.description = %q{Sucker is a minimal Ruby wrapper to the Amazon Product Advertising API.}
 

@@ -19,7 +19,7 @@ module Sucker
     # A shorthand that queries for a specified attribute and yields to a given
     # block each matching document.
     #
-    #   response.each('Item') { |item| process_item(item) }
+    #   response.each('Item') { |item| puts item }
     #
     def each(path, &block)
       find(path).each { |match| block.call(match) }
@@ -40,7 +40,7 @@ module Sucker
         HashBuilder.from_xml(element)
       end
     end
-    alias_method :[], :find
+    alias [] find
 
     # Returns true if the response contains errors.
     def has_errors?
