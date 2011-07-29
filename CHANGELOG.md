@@ -1,3 +1,6 @@
 # CHANGELOG
 
-See [here](http://code.papercavalier.com/sucker).
+## 2.0.0/2011-07-19
+
+  * EM::Synchrony patch
+  * add option to configure globally (@rclosner)
