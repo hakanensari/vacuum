@@ -8,12 +8,15 @@ module Sucker
     extend Forwardable
 
     HOSTS = {
-      :us  => 'ecs.amazonaws.com',
-      :uk  => 'ecs.amazonaws.co.uk',
-      :de  => 'ecs.amazonaws.de',
-      :ca  => 'ecs.amazonaws.ca',
-      :fr  => 'ecs.amazonaws.fr',
-      :jp  => 'ecs.amazonaws.jp' }
+      :ca => 'ecs.amazonaws.ca',
+      :cn => 'webservices.amazon.cn',
+      :de => 'ecs.amazonaws.de',
+      :fr => 'ecs.amazonaws.fr',
+      :it => 'webservices.amazon.it',
+      :jp => 'ecs.amazonaws.jp',
+      :us => 'ecs.amazonaws.com',
+      :uk => 'ecs.amazonaws.co.uk' }
+
     LOCALES = HOSTS.keys
 
     def_delegators :@config, :associate_tag, :associate_tag=,
