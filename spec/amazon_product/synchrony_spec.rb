@@ -1,17 +1,20 @@
 require 'spec_helper'
 
-module Sucker
-  describe 'Synchrony driver', :synchrony do
+module AmazonProduct
+  describe 'Synchrony adapter', :synchrony do
     before(:all) do
-      require 'sucker/synchrony'
+      require 'amazon_product/synchrony'
     end
 
     describe Request, :synchrony do
       let(:request) do
-        Request.new(
-          :locale => :us,
-          :key    => 'key',
-          :secret => 'secret')
+        req = AmazonProduct['us']
+        req.configure do |c|
+          c.key    = 'foo'
+          c.secret = 'bar'
+          c.tag    = 'baz'
+        end
+        req
       end
 
       it "uses an evented adapter" do

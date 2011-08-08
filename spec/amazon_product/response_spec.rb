@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Sucker
+module AmazonProduct
   describe Response do
     let(:response) do
       http_resp = Struct.new(:body, :code).new

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Sucker
+module AmazonProduct
   describe HashBuilder do
     let(:xml) do
       xml = <<-XML

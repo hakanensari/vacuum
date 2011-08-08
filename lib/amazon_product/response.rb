@@ -1,7 +1,4 @@
-require 'nokogiri'
-require 'sucker/hash_builder'
-
-module Sucker
+module AmazonProduct
   # A wrapper around the API response.
   class Response
 
