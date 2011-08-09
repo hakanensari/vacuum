@@ -2,6 +2,7 @@ module AmazonProduct
   # A wrapper around the API request.
   class Request
     extend Forwardable
+    include Operations
 
     # The latest Amazon API version. See:
     # http://aws.amazon.com/archives/Product%20Advertising%20API

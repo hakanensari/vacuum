@@ -6,6 +6,7 @@ require 'openssl'
 require 'amazon_product/error'
 require 'amazon_product/hash_builder'
 require 'amazon_product/locale'
+require 'amazon_product/operations'
 require 'amazon_product/request'
 require 'amazon_product/response'
 
