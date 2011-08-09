@@ -11,9 +11,10 @@ request.configure do |c|
   c.tag    = YOUR_AMAZON_ASSOCIATE_TAG
 end
 
-request << { :id_type => 'ASIN',
-             :item_id => '0816614024' }
+request << { :search_index => 'Books',
+             :author       => 'George Orwell' }
 
-response = request.get_item
-items = response['Item']
+response = request.search_item
+items = response["Item"]
 pp items
+puts items.size

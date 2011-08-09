@@ -1,7 +1,7 @@
 require File.expand_path('../helper.rb', __FILE__)
 
 require 'pp'
-require 'amazon_product'
+require 'amazon_product/synchrony'
 
 request = AmazonProduct['us']
 
@@ -14,6 +14,8 @@ end
 request << { :id_type => 'ASIN',
              :item_id => '0816614024' }
 
-response = request.get_item
-items = response['Item']
-pp items
+EM.synchrony do
+  response = request.get_item
+  pp response['Item']
+  EM.stop
+end

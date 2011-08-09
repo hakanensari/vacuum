@@ -11,9 +11,10 @@ request.configure do |c|
   c.tag    = YOUR_AMAZON_ASSOCIATE_TAG
 end
 
-request << { :id_type => 'ASIN',
-             :item_id => '0816614024' }
+request << { :id_type        => 'ASIN',
+             :item_id        => '0394751221',
+             :response_group => 'Images' }
 
 response = request.get_item
-items = response['Item']
-pp items
+image_set = response['ImageSet'].first
+pp image_set
