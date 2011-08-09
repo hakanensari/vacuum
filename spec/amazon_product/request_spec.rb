@@ -23,6 +23,11 @@ module AmazonProduct
         subject.params.should have_key 'SomeKey'
       end
 
+      it 'does not modify already-camelized keys' do
+        subject << { 'SomeKey' => 'value' }
+        subject.params.should have_key 'SomeKey'
+      end
+
       it 'casts numeric values to string' do
         subject << { 'Key' => 1 }
         subject.params['Key'].should eql '1'

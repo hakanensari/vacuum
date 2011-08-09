@@ -25,7 +25,7 @@ module AmazonProduct
         v = v.is_a?(Array) ? v.join(',') : v.to_s
 
         # Camelize key.
-        k = k.to_s.split('_').map {|w| w.capitalize }.join
+        k = k.to_s.split('_').map { |w| w[0, 1] = w[0, 1].upcase; w }.join
 
         @params[k] = v
       end
