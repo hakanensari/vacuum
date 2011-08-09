@@ -59,20 +59,11 @@ module AmazonProduct
     end
 
     # Checks if the HTTP response is OK.
-    #
-    #    response = request.get
-    #    response.valid?
-    #    => true
-    #
     def valid?
       code == 200
     end
 
     # The XML document.
-    #
-    #    response = request.get
-    #    response.xml
-    #
     def xml
       @xml ||= Nokogiri::XML(body)
     end

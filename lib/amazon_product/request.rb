@@ -20,6 +20,9 @@ module AmazonProduct
     end
 
     # Merges a hash of request parameters into the query.
+    #
+    #   request << { :key => 'value }
+    #
     def <<(hash)
       hash.each do |k, v|
         # Cast value to string.
@@ -33,6 +36,13 @@ module AmazonProduct
     end
 
     # Configures the Amazon locale.
+    #
+    #   request.configure do |c|
+    #     c.key    = YOUR_KEY
+    #     c.secret = YOUR_SECRET
+    #     c.tag    = YOUR_ASSOCIATE_TAG
+    #   end
+    #
     def configure
       yield locale
     end
