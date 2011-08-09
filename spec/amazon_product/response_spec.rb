@@ -24,7 +24,14 @@ module AmazonProduct
 
     describe '#errors' do
       it 'returns an array of errors' do
-        response.body = '<Response xmlns="http://example.com"><Errors><Error>foo</Error></Errors>'
+        response.body =  <<-XML.gsub!(/>\s+</, '><').strip!
+        <?xml version=\"1.0\" ?>
+        <Response xmlns="http://example.com">
+          <Errors>
+            <Error>foo</Error>
+          </Errors>
+        </Response>
+        XML
         response.errors.should =~ ['foo']
       end
     end

@@ -3,7 +3,7 @@ require 'spec_helper'
 module AmazonProduct
   describe HashBuilder do
     let(:xml) do
-      xml = <<-XML
+      xml = <<-XML.gsub!(/>\s+</, '><').strip!
       <?xml version=\"1.0\" ?>
       <ItemAttributes>
         <Title>Anti-Oedipus</Title>
@@ -12,7 +12,6 @@ module AmazonProduct
         <Creator Role="Translator">Robert Hurley</Creator>
       </ItemAttributes>
       XML
-      xml.gsub!(/>\s+</, '><')
       Nokogiri::XML(xml)
     end
 
