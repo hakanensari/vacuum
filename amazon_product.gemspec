@@ -7,10 +7,10 @@ Gem::Specification.new do |s|
   s.version     = AmazonProduct::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Hakan Ensari']
-  s.email       = ['hakan.ensari@papercavalier.com']
+  s.email       = ['code@papercavalier.com']
   s.homepage    = 'http://code.papercavalier.com/amazon_product/'
   s.summary     = %q{A Ruby wrapper to the Amazon Product Advertising API}
-  s.description = %q{A Ruby wrapper to the Amazon Product Advertising API}
+  s.description = %q{Amazon Product is a Ruby wrapper to the Amazon Product Advertising API.}
 
   s.add_runtime_dependency 'nokogiri', '~> 1.4'
 
