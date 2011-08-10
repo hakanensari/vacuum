@@ -24,7 +24,7 @@ Look up a product.
                  :item_id'   => '0679753354' }
     response = request.get
 
-Or [use a shorthand] [2].
+[Or use a shorthand] [2].
 
     response = req.find('0679753354')
 
