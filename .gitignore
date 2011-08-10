@@ -1,5 +1,2 @@
-.bundle
 Gemfile.lock
-docs
 pkg
-spec/fixtures/cassette_library
