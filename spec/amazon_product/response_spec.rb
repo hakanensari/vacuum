@@ -5,7 +5,7 @@ module AmazonProduct
     let(:response) do
       http_resp = Struct.new(:body, :code).new
       http_resp.body = File.read(File.expand_path('../../fixtures/http_response', __FILE__))
-      http_resp.code = 200
+      http_resp.code = '200'
       Response.new(http_resp)
     end
 

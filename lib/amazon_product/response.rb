@@ -10,7 +10,7 @@ module AmazonProduct
 
     def initialize(response)
       self.body = response.body
-      self.code = response.code
+      self.code = response.code.to_i
     end
 
     # A shorthand that queries for a specified attribute and yields to a given
