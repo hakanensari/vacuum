@@ -6,9 +6,9 @@ Amazon Product is a Ruby wrapper to the [Amazon Product Advertising API] [1].
 
 ## Usage
 
-Require.
-
 Set up a request.
+
+    require "amazon_product"
 
     request = AmazonProduct["us"]
 
