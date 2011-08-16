@@ -1,7 +1,7 @@
 require File.expand_path('../../helper.rb', __FILE__)
 
 in_your_shell do
-  require 'amazon_product/synchrony'
+  AmazonProduct::Request.adapter = :synchrony
 
   req = AmazonProduct['us']
 

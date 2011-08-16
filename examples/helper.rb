@@ -8,12 +8,14 @@ YOUR_AMAZON_ASSOCIATE_TAG = ENV['AMAZON_ASSOCIATE_TAG']
 # A minimal shell.
 def in_your_shell
   started_at = Time.now
+
   resp = yield
 
+  puts '>> completed_in?', "#{(Time.now - started_at).round(1)}s"
   if resp.is_a? AmazonProduct::Response
     puts '>> resp.valid?', "=> #{resp.valid?}"
-  else
-    puts "#{(Time.now - started_at).round(1)}s"
+  elsif resp.is_a? Array
+    puts '>> resp.all?(&:valid?)', "=> #{resp.all?(&:valid?)}"
   end
 
   loop do

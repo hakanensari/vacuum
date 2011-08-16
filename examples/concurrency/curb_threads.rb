@@ -1,6 +1,8 @@
 require File.expand_path('../../helper.rb', __FILE__)
 
 in_your_shell do
+  AmazonProduct::Request.adapter = :curb
+
   locales = AmazonProduct::Locale::LOCALES
 
   locales.each do |locale|
