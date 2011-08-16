@@ -40,13 +40,12 @@ module AmazonProduct
     end
 
     describe '#configure' do
-      it 'configures the locale' do
+      it 'yields the locale' do
+        yielded = nil
         subject.configure do |c|
-          c.key = 'foo'
+          yielded = c
         end
-
-        locale = subject.locale
-        locale.key.should eql 'foo'
+        yielded.should be_a Locale
       end
     end
 
@@ -73,7 +72,9 @@ module AmazonProduct
           end.to raise_error MissingKey
 
           expect do
-            subject.locale.key = 'foo'
+            subject.configure do |c|
+              c.key = 'foo'
+            end
             subject.params
           end.to raise_error MissingTag
         end
@@ -157,7 +158,9 @@ module AmazonProduct
 
     describe '#sign' do
       it 'adds a signature to a query' do
-        subject.locale.secret = 'baz'
+        subject.configure do |c|
+          c.secret = 'baz'
+        end
         subject.sign('foo').should match /^foo&Signature=/
       end
 

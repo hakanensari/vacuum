@@ -1,17 +1,11 @@
 module AmazonProduct
   # A wrapper around the API request.
   class Request
-    extend Forwardable
     include Operations
 
     # The latest Amazon API version. See:
     # http://aws.amazon.com/archives/Product%20Advertising%20API
     CURRENT_API_VERSION = '2011-08-01'
-
-    # The Amazon locale.
-    attr :locale
-
-    def_delegators :locale, :host, :key, :secret, :tag
 
     # Creates a new request for specified locale.
     def initialize(locale)
@@ -43,17 +37,17 @@ module AmazonProduct
     #     c.tag    = YOUR_ASSOCIATE_TAG
     #   end
     #
-    def configure
-      yield locale
+    def configure(&block)
+      block.call @locale
     end
 
     # The request parameters.
     def params
-      raise MissingKey unless key
-      raise MissingTag unless tag
+      raise MissingKey unless @locale.key
+      raise MissingTag unless @locale.tag
 
-      { 'AWSAccessKeyId' => key,
-        'AssociateTag'   => tag,
+      { 'AWSAccessKeyId' => @locale.key,
+        'AssociateTag'   => @locale.tag,
         'Service'        => 'AWSECommerceService',
         'Timestamp'      => timestamp,
         'Version'        => CURRENT_API_VERSION }.merge(@params)
@@ -77,11 +71,11 @@ module AmazonProduct
 
     # Adds a signature to a query
     def sign(unsigned_query)
-      raise MissingSecret unless secret
+      raise MissingSecret unless @locale.secret
 
       digest = OpenSSL::Digest::Digest.new('sha256')
-      url_string = ['GET', host, '/onca/xml', unsigned_query].join("\n")
-      hmac = OpenSSL::HMAC.digest(digest, secret, url_string)
+      url_string = ['GET', @locale.host, '/onca/xml', unsigned_query].join("\n")
+      hmac = OpenSSL::HMAC.digest(digest, @locale.secret, url_string)
       signature = escape([hmac].pack('m').chomp)
 
       "#{unsigned_query}&Signature=#{signature}"
@@ -94,7 +88,7 @@ module AmazonProduct
 
     # The Amazon URL.
     def url
-      URI::HTTP.build(:host  => host,
+      URI::HTTP.build(:host  => @locale.host,
                       :path  => '/onca/xml',
                       :query => sign(query))
     end

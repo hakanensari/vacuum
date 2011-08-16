@@ -1,4 +1,3 @@
-require 'forwardable'
 require 'net/http'
 require 'nokogiri'
 require 'openssl'
