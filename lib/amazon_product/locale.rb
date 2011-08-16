@@ -24,7 +24,7 @@ module AmazonProduct
     attr_accessor :tag
 
     def initialize(locale)
-      raise BadLocale unless HOSTS.has_key?(locale)
+      raise BadLocale unless LOCALES.include?(locale)
       @locale = locale
     end
 
