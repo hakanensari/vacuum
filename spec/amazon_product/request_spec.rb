@@ -75,7 +75,7 @@ module AmazonProduct
         Request.adapter = :net_http
       end
 
-      context 'when using Synchrony' do
+      context 'when using Synchrony', :synchrony do
         before do
           Request.adapter = :synchrony
         end
@@ -125,7 +125,7 @@ module AmazonProduct
         end
 
         it 'returns a response' do
-          if defined? EM
+          if Request.adapter == :synchrony
             EM.synchrony do
               subject.get.should be_a Response
               EM.stop
@@ -148,7 +148,7 @@ module AmazonProduct
         it_behaves_like 'an HTTP request'
       end
 
-      context 'when using Synchrony' do
+      context 'when using Synchrony', :synchrony do
         before do
           Request.adapter = :synchrony
         end
