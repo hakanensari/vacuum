@@ -1,7 +1,7 @@
 module AmazonProduct
   # An Amazon locale.
   class Locale
-    # Available Amazon hosts.
+    # Amazon hosts.
     HOSTS = { :ca => 'ecs.amazonaws.ca',
               :cn => 'webservices.amazon.cn',
               :de => 'ecs.amazonaws.de',
@@ -10,6 +10,9 @@ module AmazonProduct
               :jp => 'ecs.amazonaws.jp',
               :us => 'ecs.amazonaws.com',
               :uk => 'ecs.amazonaws.co.uk' }
+
+    # Country codes for Amazon locales.
+    LOCALES = HOSTS.keys
 
     # The Amazon Web Services access key.
     attr_accessor :key

@@ -1,7 +1,7 @@
 require File.expand_path('../../helper.rb', __FILE__)
 
 in_your_shell do
-  locales = AmazonProduct::Locale::HOSTS.keys
+  locales = AmazonProduct::Locale::LOCALES
 
   locales.each do |locale|
     AmazonProduct[locale].configure do |c|

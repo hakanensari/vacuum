@@ -3,7 +3,7 @@ require File.expand_path('../../helper.rb', __FILE__)
 in_your_shell do
   require 'amazon_product/synchrony'
 
-  locales = AmazonProduct::Locale::HOSTS.keys
+  locales = AmazonProduct::Locale::LOCALES
   asins   = %w{ 0816614024 0143105825 0485113600 }
 
   locales.each do |locale|
