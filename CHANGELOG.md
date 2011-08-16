@@ -3,9 +3,10 @@
 ## 3.0.0/not released
 
   * rename library
-  * add operations
-  * cache requests per locale and access cached instances via AmazonProduct.[]
-    shorthand in top namespace
+  * add support for multiple HTTP adapters; move Synchrony into main
+    library
+  * add request operations like #find and #search
+  * AmazonProduct.[] now returns a request
   * add China and Italy locales
 
 ## 2.1.0/2011-07-29
