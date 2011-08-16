@@ -2,8 +2,31 @@ require 'spec_helper'
 
 module AmazonProduct
   describe Request do
-
     subject { Request.new('us') }
+
+    describe ".adapter" do
+      it "defaults to :net_http" do
+        Request.adapter.should eql :net_http
+      end
+    end
+
+    describe ".adapter=" do
+      after do
+        Request.adapter = :net_http
+      end
+
+      it "sets the adapter" do
+        Request.adapter = :curb
+        Request.adapter.should eql :curb
+        defined?(Curl).should be_true
+      end
+
+      it "raises an error when specified an invalid adapter" do
+        expect {
+          Request.adapter = :foo
+        }.to raise_error ArgumentError
+      end
+    end
 
     describe '#<<' do
       before do
@@ -39,6 +62,44 @@ module AmazonProduct
       end
     end
 
+    describe '#aget' do
+      before do
+        subject.configure do |c|
+          c.key = 'foo'
+          c.secret = 'bar'
+          c.tag = 'baz'
+        end
+      end
+
+      after do
+        Request.adapter = :net_http
+      end
+
+      context 'when using Synchrony' do
+        before do
+          Request.adapter = :synchrony
+        end
+
+        it 'yields a response' do
+          response = nil
+          EM.synchrony do
+            subject.aget { |resp| response = resp }
+            EM.stop
+          end
+
+          response.should be_a Response
+        end
+      end
+
+      context 'when using another adapter' do
+        it 'raises an error' do
+          expect {
+            subject.aget { }
+          }.to raise_error TypeError
+        end
+      end
+    end
+
     describe '#configure' do
       it 'yields the locale' do
         yielded = nil
@@ -50,17 +111,49 @@ module AmazonProduct
     end
 
     describe '#get' do
-      before do
-        subject.configure do |c|
-          c.key = 'foo'
-          c.secret = 'bar'
-          c.tag = 'baz'
+      shared_examples_for 'an HTTP request' do
+        before do
+          subject.configure do |c|
+            c.key = 'foo'
+            c.secret = 'bar'
+            c.tag = 'baz'
+          end
+        end
+
+        after do
+          Request.adapter = :net_http
+        end
+
+        it 'returns a response' do
+          if defined? EM
+            EM.synchrony do
+              subject.get.should be_a Response
+              EM.stop
+            end
+          else
+            subject.get.should be_a Response
+          end
         end
       end
 
-      it 'returns a response' do
-        response = subject.get
-        response.should be_a Response
+      context 'when using Net::HTTP' do
+        it_behaves_like 'an HTTP request'
+      end
+
+      context 'when using Curb' do
+        before do
+          Request.adapter = :curb
+        end
+
+        it_behaves_like 'an HTTP request'
+      end
+
+      context 'when using Synchrony' do
+        before do
+          Request.adapter = :synchrony
+        end
+
+        it_behaves_like 'an HTTP request'
       end
     end
 

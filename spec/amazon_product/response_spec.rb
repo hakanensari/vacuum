@@ -3,10 +3,9 @@ require 'spec_helper'
 module AmazonProduct
   describe Response do
     let(:response) do
-      http_resp = Struct.new(:body, :code).new
-      http_resp.body = File.read(File.expand_path('../../fixtures/http_response', __FILE__))
-      http_resp.code = '200'
-      Response.new(http_resp)
+      body = File.read(File.expand_path('../../fixtures/http_response', __FILE__))
+      code = '200'
+      Response.new(body, code)
     end
 
     describe '#each' do

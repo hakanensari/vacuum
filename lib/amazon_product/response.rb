@@ -8,9 +8,9 @@ module AmazonProduct
     # The HTTP status code of the response.
     attr_accessor :code
 
-    def initialize(response)
-      self.body = response.body
-      self.code = response.code.to_i
+    def initialize(body, code)
+      @body = body
+      @code = code.to_i
     end
 
     # A shorthand that queries for a specified attribute and yields to a given
@@ -65,7 +65,7 @@ module AmazonProduct
 
     # The XML document.
     def xml
-      @xml ||= Nokogiri::XML(body)
+      @xml ||= Nokogiri::XML(@body)
     end
   end
 end

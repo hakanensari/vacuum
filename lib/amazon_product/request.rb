@@ -7,6 +7,39 @@ module AmazonProduct
     # http://aws.amazon.com/archives/Product%20Advertising%20API
     CURRENT_API_VERSION = '2011-08-01'
 
+    class << self
+      # The HTTP client.
+      attr :adapter
+
+      # Sets the HTTP client.
+      #
+      # Takes the name of the client library as argument, which can be:
+      #
+      # * `:net_http`
+      # * `:curb`
+      # * `:synchrony`
+      #
+      # For the latter two, you will have to make available the
+      # dependent gems manually.
+      def adapter=(client)
+        case client
+        when :curb
+          require 'curb'
+        when :synchrony
+          require 'em-synchrony'
+          require 'em-synchrony/em-http'
+        when :net_http
+        else
+          raise ArgumentError, "`:#{client}` is not a valid HTTP client"
+        end
+
+        @adapter = client
+      end
+    end
+
+    # Set HTTP client to Net::HTTP.
+    @adapter = :net_http
+
     # Creates a new request for specified locale.
     def initialize(locale)
       @locale = Locale.new(locale.to_sym)
@@ -29,6 +62,20 @@ module AmazonProduct
       end
     end
 
+    # Performs an asynchronous request with the EM async HTTP client.
+    #
+    # Yields response to given block.
+    def aget(&block)
+      unless adapter == :synchrony
+        raise TypeError, "Set HTTP client to `:synchrony`"
+      end
+
+      http = EM::HttpRequest.new(url).aget
+      resp = lambda { Response.new(http.response, http.response_header.status) }
+      http.callback { block.call(resp.call) }
+      http.errback  { block.call(resp.call) }
+    end
+
     # Configures the Amazon locale.
     #
     #   request.configure do |c|
@@ -39,6 +86,23 @@ module AmazonProduct
     #
     def configure(&block)
       block.call @locale
+    end
+
+    # Performs a request.
+    def get
+      case adapter
+      when :curb
+        http = Curl::Easy.perform(url.to_s)
+        body, code = http.body_str, http.response_code
+      when :synchrony
+        http = EM::HttpRequest.new(url).get
+        body, code = http.response, http.response_header.status
+      when :net_http
+        resp = Net::HTTP.get_response(url)
+        body, code = resp.body, resp.code
+      end
+
+      Response.new(body, code)
     end
 
     # The request parameters.
@@ -61,12 +125,6 @@ module AmazonProduct
     # Resets the request parameters.
     def reset
       @params = Hash.new
-    end
-
-    # Performs a request.
-    def get
-      resp = Net::HTTP.get_response(url)
-      Response.new(resp)
     end
 
     # Adds a signature to a query
@@ -94,6 +152,10 @@ module AmazonProduct
     end
 
     private
+
+    def adapter
+      Request.adapter
+    end
 
     def escape(value)
       value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
