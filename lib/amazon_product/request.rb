@@ -92,8 +92,10 @@ module AmazonProduct
     def get
       case adapter
       when :curb
-        http = Curl::Easy.perform(url.to_s)
-        body, code = http.body_str, http.response_code
+        @curl ||= Curl::Easy.new
+        @curl.url = url.to_s
+        @curl.perform
+        body, code = @curl.body_str, @curl.response_code
       when :synchrony
         http = EM::HttpRequest.new(url).get
         body, code = http.response, http.response_header.status
