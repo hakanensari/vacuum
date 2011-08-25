@@ -1,4 +1,5 @@
 require 'amazon_product'
+require 'pry'
 require 'pp'
 
 YOUR_AMAZON_KEY           = ENV['AMAZON_KEY']
@@ -7,17 +8,20 @@ YOUR_AMAZON_ASSOCIATE_TAG = ENV['AMAZON_ASSOCIATE_TAG']
 
 # A minimal shell.
 def in_your_shell
-  started_at = Time.now
+  if block_given?
+    started_at = Time.now
 
-  resp = yield
+    resp = yield
 
-  puts '>> completed_in?', "#{(Time.now - started_at).round(1)}s"
-  if resp.is_a? AmazonProduct::Response
-    puts '>> resp.valid?', "=> #{resp.valid?}"
-  elsif resp.is_a? Array
-    puts '>> resp.all?(&:valid?)', "=> #{resp.all?(&:valid?)}"
+    puts '>> completed_in?', "#{(Time.now - started_at).round(1)}s"
+    if resp.is_a? AmazonProduct::Response
+      puts '>> resp.valid?', "=> #{resp.valid?}"
+    elsif resp.is_a? Array
+      puts '>> resp.all?(&:valid?)', "=> #{resp.all?(&:valid?)}"
+    end
   end
 
+ # binding.pry
   loop do
     begin
       print '>> '
@@ -32,6 +36,17 @@ def in_your_shell
       end
     rescue Exception => msg
       puts msg
+    end
+  end
+end
+
+
+module Asin
+  class << self
+    include Enumerable
+    def each(&block)
+      fixture = File.expand_path('../asins', __FILE__)
+      File.new(fixture, 'r').each { |line| yield line.chomp }
     end
   end
 end
