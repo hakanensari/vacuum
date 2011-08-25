@@ -1,5 +1,9 @@
-require 'amazon_product'
-require 'pry'
+require 'rubygems'
+require 'bundler/setup'
+
+require File.expand_path('../../lib/amazon_product', __FILE__)
+
+#require 'pry'
 require 'pp'
 
 YOUR_AMAZON_KEY           = ENV['AMAZON_KEY']
