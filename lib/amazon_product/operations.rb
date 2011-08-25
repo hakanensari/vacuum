@@ -39,7 +39,7 @@ module AmazonProduct
     def find(*item_ids)
       reset
       params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
-      self.<< ({ 'Operation' => 'ItemLookup',
+      self.<<({ 'Operation' => 'ItemLookup',
                  'ItemId'    => item_ids }).merge(params)
       get
     end
@@ -48,7 +48,7 @@ module AmazonProduct
     # children, and ancestors.
     def find_browse_node(browse_node_id, params = {})
       reset
-      self.<< ({ 'Operation'    => 'BrowseNodeLookup',
+      self.<<({ 'Operation'    => 'BrowseNodeLookup',
                  'BrowseNodeId' => browse_node_id }).merge(params)
       get
     end
@@ -58,7 +58,7 @@ module AmazonProduct
     def find_similar(*item_ids)
       reset
       params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
-      self.<< ({ 'Operation' => 'SimilarityLookup',
+      self.<<({ 'Operation' => 'SimilarityLookup',
                  'ItemId'    => item_ids }).merge(params)
       get
     end
@@ -94,7 +94,7 @@ module AmazonProduct
         params = { 'Keywords' => params }
       end
 
-      self.<< ({ 'Operation'   => 'ItemSearch',
+      self.<<({ 'Operation'   => 'ItemSearch',
                  'SearchIndex' => search_index }.merge(params))
       get
     end
@@ -103,7 +103,7 @@ module AmazonProduct
 
     def cart(operation, params)
       reset
-      self.<< ({ 'Operation' => "Cart#{operation}" }.merge(params))
+      self.<<({ 'Operation' => "Cart#{operation}" }.merge(params))
       get
     end
   end
