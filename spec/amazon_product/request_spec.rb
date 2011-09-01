@@ -7,6 +7,7 @@ module AmazonProduct
     describe ".adapter" do
       it "defaults to :net_http" do
         Request.adapter.should eql :net_http
+        expect { Net::HTTP }.not_to raise_error
       end
     end
 

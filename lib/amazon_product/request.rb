@@ -39,7 +39,7 @@ module AmazonProduct
     end
 
     # Set HTTP client to Net::HTTP.
-    @adapter = :net_http
+    Request.adapter = :net_http
 
     # Creates a new request for specified locale.
     def initialize(locale)
