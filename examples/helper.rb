@@ -6,10 +6,6 @@ require File.expand_path('../../lib/amazon_product', __FILE__)
 #require 'pry'
 require 'pp'
 
-YOUR_AMAZON_KEY           = ENV['AMAZON_KEY']
-YOUR_AMAZON_SECRET        = ENV['AMAZON_SECRET']
-YOUR_AMAZON_ASSOCIATE_TAG = ENV['AMAZON_ASSOCIATE_TAG']
-
 # A minimal shell.
 def in_your_shell
   if block_given?
@@ -44,6 +40,11 @@ def in_your_shell
   end
 end
 
+credentials = File.open(File.expand_path("../credentials.yml", __FILE__))
+amazon = YAML::load credentials
+YOUR_AMAZON_KEY = amazon['key']
+YOUR_AMAZON_SECRET = amazon['secret']
+YOUR_AMAZON_ASSOCIATE_TAG = amazon['associate_tag']
 
 module Asin
   class << self
