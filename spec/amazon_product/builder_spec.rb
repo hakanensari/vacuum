@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module AmazonProduct
-  describe HashBuilder do
+  describe Builder do
     let(:xml) do
       xml = <<-XML.gsub!(/>\s+</, '><').strip!
       <?xml version=\"1.0\" ?>
@@ -17,19 +17,19 @@ module AmazonProduct
 
     describe '.from_xml' do
       it 'returns a hash' do
-        HashBuilder.from_xml(xml).should be_an_instance_of Hash
+        Builder.from_xml(xml).should be_an_instance_of Hash
       end
 
       it 'handles only childs' do
-        HashBuilder.from_xml(xml)['Title'].should eql 'Anti-Oedipus'
+        Builder.from_xml(xml)['Title'].should eql 'Anti-Oedipus'
       end
 
       it 'handles arrays' do
-        HashBuilder.from_xml(xml)['Author'].should be_a Array
+        Builder.from_xml(xml)['Author'].should be_a Array
       end
 
       it 'handles attributes' do
-        node = HashBuilder.from_xml(xml)['Creator']
+        node = Builder.from_xml(xml)['Creator']
         node['Role'].should eql 'Translator'
         node['__content__'].should eql 'Robert Hurley'
       end

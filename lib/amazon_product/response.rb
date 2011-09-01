@@ -33,9 +33,7 @@ module AmazonProduct
     #   items = response.find('Item')
     #
     def find(attribute)
-      xml.xpath("//xmlns:#{attribute}").map do |element|
-        HashBuilder.from_xml(element)
-      end
+      xml.xpath("//xmlns:#{attribute}").map { |e| Builder.from_xml(e) }
     end
     alias [] find
 
@@ -55,7 +53,7 @@ module AmazonProduct
 
     # Parses the response into a simple hash.
     def to_hash
-      HashBuilder.from_xml(xml)
+      Builder.from_xml(xml)
     end
 
     # Checks if the HTTP response is OK.

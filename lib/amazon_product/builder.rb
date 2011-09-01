@@ -1,5 +1,5 @@
 module AmazonProduct
-  module HashBuilder
+  module Builder
     # Builds a hash from a Nokogiri XML document.
     #
     # In earlier versions of Sucker, I was relying on the XML Mini

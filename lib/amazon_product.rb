@@ -2,12 +2,9 @@ require 'net/http'
 require 'nokogiri'
 require 'openssl'
 
-require 'amazon_product/error'
-require 'amazon_product/hash_builder'
-require 'amazon_product/locale'
-require 'amazon_product/operations'
-require 'amazon_product/request'
-require 'amazon_product/response'
+%w{builder error locale operations request response}.each do |f|
+  require "amazon_product/#{f}"
+end
 
 # Amazon Product is a Ruby wrapper to the Amazon Product Advertising API.
 module AmazonProduct
