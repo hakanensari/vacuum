@@ -40,7 +40,7 @@ module AmazonProduct
       reset
       params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
       self.<<({ 'Operation' => 'ItemLookup',
-                 'ItemId'    => item_ids }).merge(params)
+                'ItemId'    => item_ids }.merge(params))
       get
     end
 
@@ -49,7 +49,7 @@ module AmazonProduct
     def find_browse_node(browse_node_id, params = {})
       reset
       self.<<({ 'Operation'    => 'BrowseNodeLookup',
-                 'BrowseNodeId' => browse_node_id }).merge(params)
+                'BrowseNodeId' => browse_node_id }.merge(params))
       get
     end
 
@@ -59,7 +59,7 @@ module AmazonProduct
       reset
       params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
       self.<<({ 'Operation' => 'SimilarityLookup',
-                 'ItemId'    => item_ids }).merge(params)
+                'ItemId'    => item_ids }.merge(params))
       get
     end
 
@@ -95,7 +95,7 @@ module AmazonProduct
       end
 
       self.<<({ 'Operation'   => 'ItemSearch',
-                 'SearchIndex' => search_index }.merge(params))
+                'SearchIndex' => search_index }.merge(params))
       get
     end
 

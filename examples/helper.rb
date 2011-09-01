@@ -1,44 +1,7 @@
-require 'rubygems'
 require 'bundler/setup'
+require 'pry'
 
-require File.expand_path('../../lib/amazon_product', __FILE__)
-
-#require 'pry'
-require 'pp'
-
-# A minimal shell.
-def in_your_shell
-  if block_given?
-    started_at = Time.now
-
-    resp = yield
-
-    puts '>> completed_in?', "#{(Time.now - started_at).round(1)}s"
-    if resp.is_a? AmazonProduct::Response
-      puts '>> resp.valid?', "=> #{resp.valid?}"
-    elsif resp.is_a? Array
-      puts '>> resp.all?(&:valid?)', "=> #{resp.all?(&:valid?)}"
-    end
-  end
-
- # binding.pry
-  loop do
-    begin
-      print '>> '
-      line = STDIN.gets.strip
-      break if line.empty? || %w{q e quit exit}.include?(line)
-      out = eval(line)
-      if out.is_a?(Hash) || out.is_a?(Array)
-        pp out
-      else
-        print '=> '
-        puts out.nil? ? 'nil' : out
-      end
-    rescue Exception => msg
-      puts msg
-    end
-  end
-end
+require File.expand_path("../../lib/amazon_product", __FILE__)
 
 credentials = File.open(File.expand_path("../credentials.yml", __FILE__))
 amazon = YAML::load credentials
@@ -55,3 +18,5 @@ module Asin
     end
   end
 end
+
+Pry.hooks[:before_session] = proc { |out, target| Pry.run_command "whereami 100", :context => target }

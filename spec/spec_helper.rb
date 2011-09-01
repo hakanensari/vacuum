@@ -2,6 +2,11 @@ require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
 
+begin
+  require 'pry'
+rescue LoadError
+end
+
 require File.expand_path('../../lib/amazon_product', __FILE__)
 
 RSpec.configure do |c|

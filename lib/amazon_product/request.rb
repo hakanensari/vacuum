@@ -30,7 +30,7 @@ module AmazonProduct
           require 'em-synchrony/em-http'
         when :net_http
         else
-          raise ArgumentError, "`:#{client}` is not a valid HTTP client"
+          raise ArgumentError, ":#{client} is not a valid HTTP client"
         end
 
         @adapter = client
