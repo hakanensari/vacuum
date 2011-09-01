@@ -63,6 +63,11 @@ module AmazonProduct
       end
     end
 
+    # The HTTP client.
+    def adapter
+      Request.adapter
+    end
+
     # Performs an asynchronous request with the EM async HTTP client.
     #
     # Yields response to given block.
@@ -153,10 +158,6 @@ module AmazonProduct
     end
 
     private
-
-    def adapter
-      Request.adapter
-    end
 
     def escape(value)
       value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
