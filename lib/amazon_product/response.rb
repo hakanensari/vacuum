@@ -13,8 +13,8 @@ module AmazonProduct
       @code = code.to_i
     end
 
-    # A shorthand that queries for a specified attribute and yields to a given
-    # block each matching document.
+    # A shorthand that queries for a specified attribute and yields to
+    # a given block each matching document.
     #
     #   response.each('Item') { |item| puts item }
     #
@@ -27,8 +27,8 @@ module AmazonProduct
       find('Error')
     end
 
-    # Queries for a specified attribute and returns an array of matching
-    # documents.
+    # Queries for a specified attribute and returns an array of
+    # matching documents.
     #
     #   items = response.find('Item')
     #
@@ -42,8 +42,8 @@ module AmazonProduct
       errors.count > 0
     end
 
-    # A shorthand that queries for a specifed attribute, yields to a given
-    # block matching documents, and collects final values.
+    # A shorthand that queries for a specifed attribute, yields to a
+    # given block matching documents, and collects final values.
     #
     #   items = response.map('Item') { |item| # do something }
     #

@@ -1,6 +1,7 @@
 # Amazon Product
 
-Amazon Product is a [Nokogiri][1]-backed Ruby wrapper to the [Amazon Product Advertising API] [2].
+Amazon Product is a [Nokogiri][1]-backed Ruby wrapper to the [Amazon
+Product Advertising API] [2].
 
 [![travis](http://travis-ci.org/hakanensari/amazon_product.png)](http://travis-ci.org/hakanensari/amazon_product)
 
@@ -44,9 +45,15 @@ Quickly drop down to a particular node.
 
 [Please see the project page] [4] for further detail.
 
+## Adapters
+
+Amazon Product defaults to the Net::HTTP library but can be configured
+to use Curb or EM-HTTP-Request.
+
 ## Branding is a delicate art
 
-Amazon Product descends from [Sucker][5]. While I still like the vacuum metaphor, the name felt tiring after a while.
+Amazon Product descends from [Sucker][5]. While I still like the vacuum
+metaphor, the name felt tiring after a while.
 
 [1]: http://nokogiri.org/
 [2]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html

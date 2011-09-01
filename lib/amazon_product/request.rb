@@ -49,7 +49,7 @@ module AmazonProduct
 
     # Merges a hash of request parameters into the query.
     #
-    #   request << { :key => 'value }
+    #   request << { :key => 'value' }
     #
     def <<(hash)
       hash.each do |k, v|
@@ -68,7 +68,7 @@ module AmazonProduct
     # Yields response to given block.
     def aget(&block)
       unless adapter == :synchrony
-        raise TypeError, "Set HTTP client to `:synchrony`"
+        raise TypeError, "Set HTTP client to :synchrony"
       end
 
       http = EM::HttpRequest.new(url).aget
