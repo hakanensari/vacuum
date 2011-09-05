@@ -16,7 +16,7 @@ module AmazonProduct
         Request.adapter = :net_http
       end
 
-      it "sets the adapter" do
+      it "sets the adapter", :jruby do
         Request.adapter = :curb
         Request.adapter.should eql :curb
         defined?(Curl).should be_true
