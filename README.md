@@ -3,7 +3,7 @@
 Amazon Product is a [Nokogiri][1]-backed Ruby wrapper to the [Amazon
 Product Advertising API] [2].
 
-[![travis](http://travis-ci.org/hakanensari/amazon_product.png)](http://travis-ci.org/hakanensari/amazon_product)
+[![travis](https://secure.travis-ci.org/hakanensari/amazon_product.png)](http://travis-ci.org/hakanensari/amazon_product)
 
 ## Installation
 
