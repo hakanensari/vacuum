@@ -17,9 +17,9 @@ module AmazonProduct
       end
 
       it "sets the adapter" do
-        Request.adapter = :curb
-        Request.adapter.should eql :curb
-        defined?(Curl).should be_true
+        Request.adapter = :synchrony
+        Request.adapter.should eql :synchrony
+        defined?(EM).should be_true
       end
 
       it "raises an error when specified an invalid adapter" do
@@ -141,12 +141,14 @@ module AmazonProduct
         it_behaves_like 'an HTTP request'
       end
 
-      context 'when using Curb' do
-        before do
-          Request.adapter = :curb
-        end
+      unless ENV['CI'] && RUBY_PLATFORM == 'java'
+        context 'when using Curb' do
+          before do
+            Request.adapter = :curb
+          end
 
-        it_behaves_like 'an HTTP request'
+          it_behaves_like 'an HTTP request'
+        end
       end
 
       context 'when using Synchrony', :synchrony do
