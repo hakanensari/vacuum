@@ -61,6 +61,11 @@ module AmazonProduct
         subject << { 'Key' => ['foo', 'bar'] }
         subject.params['Key'].should eql 'foo,bar'
       end
+
+      it 'removes whitespace after commas in values' do
+        subject << { 'Key' => 'foo,  bar' }
+        subject.params['Key'].should eql 'foo,bar'
+      end
     end
 
     describe '#aget' do

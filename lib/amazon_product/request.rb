@@ -56,6 +56,9 @@ module AmazonProduct
         # Cast value to string.
         v = v.is_a?(Array) ? v.join(',') : v.to_s
 
+        # Remove whitespace after commas.
+        v.gsub!(/,\s+/, ',')
+
         # Camelize key.
         k = k.to_s.split('_').map { |w| w[0, 1] = w[0, 1].upcase; w }.join
 
