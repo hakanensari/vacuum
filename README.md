@@ -25,23 +25,31 @@ Set up a request.
       c.tag    = AMAZON_ASSOCIATE_TAG
     end
 
-Look up a product.
+Search for something.
 
-    req << { :operation' => 'ItemLookup',
-             :item_id'   => '0679753354' }
-    resp = request.get
+    req << { :operation    => 'ItemSearch',
+             :search_index => 'All',
+             :keywowds     => 'George Orwell' }
+    res = request.get
 
-[Or use a shorthand] [3].
+Or use a shorthand.
 
-    resp = req.find('0679753354')
+    res = req.search('George Orwell')
+
+Customise your request.
+
+    res = req.search('Books', :response_group => %w{ItemAttributes Images},
+                              :power          => 'George Orwell'
+
+For a reference of available methods and syntax, [read here] [3].
 
 Consume the entire response.
 
-    resp.to_hash
+    res.to_hash
 
 Quickly drop down to a particular node.
 
-    resp['Item']
+    res['Item']
 
 [Please see the project page] [4] for further detail.
 
