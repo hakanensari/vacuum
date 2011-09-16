@@ -5,9 +5,9 @@ AmazonProduct::Request.adapter = :synchrony
 req = AmazonProduct['us']
 
 req.configure do |c|
-  c.key    = YOUR_AMAZON_KEY
-  c.secret = YOUR_AMAZON_SECRET
-  c.tag    = YOUR_AMAZON_ASSOCIATE_TAG
+  c.key    = AMAZON_KEY
+  c.secret = AMAZON_SECRET
+  c.tag    = AMAZON_ASSOCIATE_TAG
 end
 
 resp = nil

@@ -4,9 +4,9 @@ locales = AmazonProduct::Locale::LOCALES
 
 locales.each do |locale|
   AmazonProduct[locale].configure do |c|
-    c.key    = YOUR_AMAZON_KEY
-    c.secret = YOUR_AMAZON_SECRET
-    c.tag    = YOUR_AMAZON_ASSOCIATE_TAG
+    c.key    = AMAZON_KEY
+    c.secret = AMAZON_SECRET
+    c.tag    = AMAZON_ASSOCIATE_TAG
   end
 end
 
