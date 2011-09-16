@@ -8,12 +8,14 @@ AMAZON_KEY           = credentials['key']
 AMAZON_SECRET        = credentials['secret']
 AMAZON_ASSOCIATE_TAG = credentials['associate_tag']
 
+# Some ASINs.
 module Asin
   class << self
-    include Enumerable
-    def each(&block)
-      fixture = File.expand_path('../asins', __FILE__)
-      File.new(fixture, 'r').each { |line| yield line.chomp }
+    def method_missing(mth, *args, &block)
+      (@asins ||=
+        File.new(File.expand_path('../asins', __FILE__), 'r').
+        map(&:chomp)).
+        send(mth, *args, &block)
     end
   end
 end
