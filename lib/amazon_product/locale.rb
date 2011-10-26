@@ -5,6 +5,7 @@ module AmazonProduct
     HOSTS = { :ca => 'ecs.amazonaws.ca',
               :cn => 'webservices.amazon.cn',
               :de => 'ecs.amazonaws.de',
+              :es => 'webservices.amazon.es',
               :fr => 'ecs.amazonaws.fr',
               :it => 'webservices.amazon.it',
               :jp => 'ecs.amazonaws.jp',
@@ -25,6 +26,7 @@ module AmazonProduct
 
     def initialize(locale)
       raise BadLocale unless LOCALES.include?(locale)
+
       @locale = locale
     end
 
