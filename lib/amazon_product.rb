@@ -2,7 +2,8 @@ require 'net/http'
 require 'nokogiri'
 require 'openssl'
 
-%w{builder error locale operations request response}.each do |f|
+%w{cart_operations lookup_operations search_operations builder cart
+   error locale request response}.each do |f|
   require "amazon_product/#{f}"
 end
 

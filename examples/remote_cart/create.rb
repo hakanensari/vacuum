@@ -14,7 +14,7 @@ resp = req.find('0816614024', :merchant_id    => 'All',
                               :response_group => 'Offers')
 olid = resp['OfferListingId'].first
 
-req.create_cart 'Item.1.OfferListingId' => olid,
-                'Item.1.Quantity'       => 1
+cart = req.create_cart 'Item.1.OfferListingId' => olid,
+                       'Item.1.Quantity'       => 1
 
 binding.pry
