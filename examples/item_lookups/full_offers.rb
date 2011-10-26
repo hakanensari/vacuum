@@ -8,12 +8,15 @@ req.configure do |c|
   c.tag    = AMAZON_ASSOCIATE_TAG
 end
 
-# We lock our version to `2010-11-10` because the latest API version returns
-# only the lowest-priced offers for each condition and deprecates some
-# important offer attributes.
-resp = req.find('0816614024', :version        => '2010-11-01',
-                              :merchant_id    => 'All',
-                              :condition      => 'All',
-                              :response_group => ['OfferFull', 'ItemAttributes'])
+# The latest API returns only the lowest-priced offers for each
+# condition and deprecates some important offer attributes.
+resp1 = req.find('0816614024', :condition      => 'All',
+                               :response_group => 'OfferFull')
+
+# Lock version to `2010-11-10`.
+resp2 = req.find('0816614024', :version        => '2010-11-01',
+                               :merchant_id    => 'All',
+                               :condition      => 'All',
+                               :response_group => 'OfferFull')
 
 binding.pry

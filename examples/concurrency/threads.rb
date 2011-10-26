@@ -17,7 +17,7 @@ threads = locales.map do |locale|
   end
 end
 
-threads.map do |thread|
+resps = threads.map do |thread|
   thread.join
   thread[:resp]
 end.flatten
