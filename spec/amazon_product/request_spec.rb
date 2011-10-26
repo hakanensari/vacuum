@@ -4,30 +4,6 @@ module AmazonProduct
   describe Request do
     subject { Request.new('us') }
 
-    describe ".adapter" do
-      it "defaults to :net_http" do
-        Request.adapter.should eql :net_http
-        expect { Net::HTTP }.not_to raise_error
-      end
-    end
-
-    describe ".adapter=" do
-      after do
-        Request.adapter = :net_http
-      end
-
-      it "sets the adapter", :jruby do
-        Request.adapter = :curb
-        Request.adapter.should eql :curb
-        defined?(Curl).should be_true
-      end
-
-      it "raises an error when specified an invalid adapter" do
-        expect {
-          Request.adapter = :foo
-        }.to raise_error ArgumentError
-      end
-    end
 
     describe '#<<' do
       before do

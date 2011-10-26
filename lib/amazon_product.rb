@@ -1,3 +1,4 @@
+require 'net/http'
 require 'nokogiri'
 require 'openssl'
 

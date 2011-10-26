@@ -1,6 +1,17 @@
 require File.expand_path('../../helper.rb', __FILE__)
 
-AmazonProduct::Request.adapter = :curb
+require 'curb'
+
+# Monkey-patch request to use Curb
+module AmazonProduct
+  class Request
+    def get
+      http = Curl::Easy.perform(url.to_s)
+
+      Response.new(http.body_str, http.response_code)
+    end
+  end
+end
 
 locales = AmazonProduct::Locale::LOCALES
 

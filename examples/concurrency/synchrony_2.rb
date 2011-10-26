@@ -1,6 +1,20 @@
 require File.expand_path('../../helper.rb', __FILE__)
 
-AmazonProduct::Request.adapter = :synchrony
+require 'em-synchrony'
+require 'em-synchrony/em-http'
+
+# Monkey-patch request to use EM::HTTP::Request
+module AmazonProduct
+  class Request
+    # Performs an asynchronous request with the EM async HTTP client
+    def aget(&block)
+      http = EM::HttpRequest.new(url).aget
+      resp = lambda { Response.new(http.response, http.response_header.status) }
+      http.callback { block.call(resp.call) }
+      http.errback  { block.call(resp.call) }
+    end
+  end
+end
 
 locales = AmazonProduct::Locale::LOCALES
 
