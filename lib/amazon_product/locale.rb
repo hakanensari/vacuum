@@ -1,7 +1,7 @@
 module AmazonProduct
-  # An Amazon locale.
+  # An Amazon locale
   class Locale
-    # Amazon hosts.
+    # Amazon hosts
     HOSTS = { :ca => 'ecs.amazonaws.ca',
               :cn => 'webservices.amazon.cn',
               :de => 'ecs.amazonaws.de',
@@ -12,25 +12,26 @@ module AmazonProduct
               :us => 'ecs.amazonaws.com',
               :uk => 'ecs.amazonaws.co.uk' }
 
-    # Country codes for Amazon locales.
+    # Country codes for Amazon locales
     LOCALES = HOSTS.keys
 
-    # The Amazon Web Services access key.
+    # @return [String] the Amazon Web Services access key
     attr_accessor :key
 
-    # The Amazon Web Services secret.
+    # @return [String] the Amazon Web Services secret
     attr_accessor :secret
 
-    # The Amazon associate tag.
+    # @return [String] the Amazon associate tag
     attr_accessor :tag
 
+    # @param [Symbol] locale the locale key
+    # @raise [AmazonProduct::BadLocale] locale is bad
     def initialize(locale)
       raise BadLocale unless LOCALES.include?(locale)
-
       @locale = locale
     end
 
-    # The Amazon host.
+    # @return [String] the Amazon host
     def host
       HOSTS[@locale]
     end

@@ -1,67 +1,83 @@
 module AmazonProduct
-  # A wrapper around the API response.
+  # A wrapper around the API response
   class Response
 
-    # The response body.
+    # @return [String] body the response body
     attr_accessor :body
 
-    # The HTTP status code of the response.
+    # @return [Integer] code the HTTP status code of the response
     attr_accessor :code
 
+    # Creates a new response
+    #
+    # @param [String] body the response body
+    # @param [#to_i] code the HTTP status code of the response
     def initialize(body, code)
       @body = body
       @code = code.to_i
     end
 
-    # A shorthand that queries for a specified attribute and yields to
-    # a given block each matching document.
+    # Queries for a specified attribute and yields to a given block
+    # each matching document
     #
-    #   response.each('Item') { |item| puts item }
+    # @param [String] query attribute to be queried
+    # @yield passes matching nodes to given block
     #
-    def each(path, &block)
-      find(path).each { |match| block.call(match) }
+    # @example
+    #   resp.each('Item') { |item| p item }
+    #
+    def each(query, &block)
+      find(query).each { |match| block.call(match) }
     end
 
-    # An array of errors in the response.
+    # @return [Array] errors in the response
     def errors
       find('Error')
     end
 
-    # Queries for a specified attribute and returns an array of
-    # matching documents.
+    # Queries for a specified attribute and returns matching nodes
     #
-    #   items = response.find('Item')
+    # @param [String] query attribute to be queried
+    # @return [Array] matching nodes
     #
-    def find(attribute)
-      xml.xpath("//xmlns:#{attribute}").map { |e| Builder.from_xml(e) }
+    # @example
+    #   items = resp.find('Item')
+    #
+    def find(query)
+      xml.xpath("//xmlns:#{query}").map { |e| Builder.from_xml(e) }
     end
     alias [] find
 
-    # Returns true if the response contains errors.
+    # @return [true, false] checks if the response has errors
     def has_errors?
       errors.count > 0
     end
 
-    # A shorthand that queries for a specifed attribute, yields to a
-    # given block matching documents, and collects final values.
+    # Queries for a specifed attribute, yields to a given block
+    # matching nodes, and collects final values.
     #
-    #   items = response.map('Item') { |item| # do something }
+    # @param [String] query attribute to be queried
+    # @yield passes matching nodes to given block
+    # @return [Array] processed results
+    #
+    # @example
+    #   asins = resp.map('Item') { |item| item['ASIN'] }
     #
     def map(path, &block)
       find(path).map { |match| block.call(match) }
     end
 
-    # Parses the response into a simple hash.
+    # @return [Hash] a hashified version of the response body
     def to_hash
       Builder.from_xml(xml)
     end
 
-    # Checks if the HTTP response is OK.
+    # @return [true, false] checks if the HTTP response is OK
     def valid?
       code == 200
     end
 
-    # The XML document.
+    # @return [Nokogiri::XML] the XML document
     def xml
       @xml ||= Nokogiri::XML(@body)
     end

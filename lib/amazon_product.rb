@@ -7,16 +7,16 @@ require 'openssl'
   require "amazon_product/#{f}"
 end
 
-# Amazon Product is a Ruby wrapper to the Amazon Product Advertising API.
+# Amazon Product is a Ruby wrapper to the Amazon Product Advertising
+# API.
 module AmazonProduct
   @requests = Hash.new
 
-  # A request.
+  # @param [#to_sym] locale a locale key
+  # @return [AmazonProduct::Request] a request
   #
-  # Takes an Amazon locale as argument. This can be +ca+, +cn+, +de+, +fr+,
-  # +it+, +jp+, +uk+, or +us+.
-  #
-  # The library will cache one request per locale.
+  # @note The locale key may be any of the following: +ca+, +cn+, +de+,
+  # +es+, +fr+, +it+, +jp+, +uk+, or +us+.
   def self.[](locale)
     @requests[locale] ||= Request.new(locale)
   end

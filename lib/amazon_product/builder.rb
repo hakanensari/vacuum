@@ -1,12 +1,15 @@
 module AmazonProduct
   module Builder
-    # Builds a hash from a Nokogiri XML document.
+    # Builds a hash from a Nokogiri XML document
     #
-    # In earlier versions of the library, I was relying on the XML Mini
-    # Nokogiri module in Active Support. This method essentially
-    # accomplishes the same.
+    # @note In earlier versions of the library, I was relying on the
+    # XML Mini Nokogiri module in Active Support. This method
+    # essentially accomplishes the same.
     #
-    # Based on https://gist.github.com/335286
+    # @see Based on https://gist.github.com/335286
+    #
+    # @param [Nokogiri::XML::Document] xml an XML document
+    # @return [Hash] a hashified version of the XML document
     def self.from_xml(xml)
       case xml
       when Nokogiri::XML::Document
