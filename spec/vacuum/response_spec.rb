@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module AmazonProduct
+module Vacuum
   describe Response do
     let(:resp) do
       body = File.read(File.expand_path('../../fixtures/http_response', __FILE__))

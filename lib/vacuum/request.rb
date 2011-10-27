@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   # A wrapper around the request to the Amazon Product Advertising API
   class Request
     include CartOperations
@@ -63,7 +63,7 @@ module AmazonProduct
 
     # Performs a request
     #
-    # @return [AmazonProduct::Response] a response
+    # @return [Vacuum::Response] a response
     def get
       resp = Net::HTTP.get_response(url)
 
@@ -71,8 +71,8 @@ module AmazonProduct
     end
 
     # @return [Hash] params The request parameters
-    # @raise [AmazonProduct::MissingKey] Amazon key is missing
-    # @raise [AmazonProduct::MissingTag] Amazon associate tag is
+    # @raise [Vacuum::MissingKey] Amazon key is missing
+    # @raise [Vacuum::MissingTag] Amazon associate tag is
     # missing
     def params
       raise MissingKey unless @locale.key
@@ -90,7 +90,7 @@ module AmazonProduct
       @params = {}
     end
 
-    # @raise [AmazonProduct::MissingSecret] Amazon secret is missing
+    # @raise [Vacuum::MissingSecret] Amazon secret is missing
     # @return [URI::HTTP] the Amazon URL
     def url
       raise MissingSecret unless @locale.secret

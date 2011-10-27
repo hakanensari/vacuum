@@ -4,16 +4,16 @@ require 'openssl'
 
 %w{cart_operations lookup_operations search_operations builder cart
    error locale request response}.each do |f|
-  require "amazon_product/#{f}"
+  require "vacuum/#{f}"
 end
 
-# Amazon Product is a Ruby wrapper to the Amazon Product Advertising
+# Vacuum is a Ruby wrapper to the Amazon Product Advertising
 # API.
-module AmazonProduct
+module Vacuum
   @requests = Hash.new
 
   # @param [#to_sym] locale a locale key
-  # @return [AmazonProduct::Request] a request
+  # @return [Vacuum::Request] a request
   #
   # @note The locale key may be any of the following: +ca+, +cn+, +de+,
   # +es+, +fr+, +it+, +jp+, +uk+, or +us+.

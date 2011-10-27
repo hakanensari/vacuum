@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   # Search operations
   module SearchOperations
     # Returns up to ten items that satisfy the search criteria,
@@ -6,7 +6,7 @@ module AmazonProduct
     #
     # @param [String, nil] search_index search index or keyword query
     # @param [String, Hash] params keyword query or hash of parameters
-    # @return [AmazonProduct::Response] a reponse
+    # @return [Vacuum::Response] a reponse
     #
     # @example The following searches the entire Amazon catalog for the
     # keyword 'book'.

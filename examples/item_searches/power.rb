@@ -1,6 +1,6 @@
 require File.expand_path('../../helper.rb', __FILE__)
 
-req = AmazonProduct['us']
+req = Vacuum['us']
 
 req.configure do |c|
   c.key    = AMAZON_KEY

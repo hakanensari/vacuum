@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   # An Amazon locale
   class Locale
     # Amazon hosts
@@ -25,7 +25,7 @@ module AmazonProduct
     attr_accessor :tag
 
     # @param [Symbol] locale the locale key
-    # @raise [AmazonProduct::BadLocale] locale is bad
+    # @raise [Vacuum::BadLocale] locale is bad
     def initialize(locale)
       raise BadLocale unless LOCALES.include?(locale)
       @locale = locale

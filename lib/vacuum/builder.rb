@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   module Builder
     # Builds a hash from a Nokogiri XML document
     #

@@ -7,7 +7,7 @@ def timestamp
 end
 
 Thread.new do
-  req = AmazonProduct['us']
+  req = Vacuum['us']
 
   req.configure do |c|
     c.key    = AMAZON_KEY

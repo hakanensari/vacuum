@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module AmazonProduct
+module Vacuum
   describe Request do
     let(:req) { Request.new('us') }
 

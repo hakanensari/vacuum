@@ -4,7 +4,7 @@ require 'em-synchrony'
 require 'em-synchrony/em-http'
 
 # Monkey-patch request to use EM::HTTP::Request
-module AmazonProduct
+module Vacuum
   class Request
     # Performs an asynchronous request with the EM async HTTP client
     def aget(&block)
@@ -26,7 +26,7 @@ module AmazonProduct
   end
 end
 
-req = AmazonProduct['us']
+req = Vacuum['us']
 
 req.configure do |c|
   c.key    = AMAZON_KEY

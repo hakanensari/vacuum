@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'pry'
 
-require File.expand_path("../../lib/amazon_product", __FILE__)
+require File.expand_path("../../lib/vacuum", __FILE__)
 
 credentials = YAML::load(File.open(File.expand_path("../credentials.yml", __FILE__)))
 AMAZON_KEY           = credentials['key']

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module AmazonProduct
+module Vacuum
   describe Builder do
     let(:xml) do
       xml = <<-XML.gsub!(/>\s+</, '><').strip!

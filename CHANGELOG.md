@@ -6,7 +6,7 @@
   * add support for multiple HTTP adapters; move Synchrony into main
     library
   * add request operations like #find and #search
-  * AmazonProduct.[] now returns a request
+  * Vacuum.[] now returns a request
   * add China and Italy locales
 
 ## 2.1.0/2011-07-29

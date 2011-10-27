@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   # Lookup operations
   module LookupOperations
     # Given up to ten item ids, returns some or all of the item
@@ -7,7 +7,7 @@ module AmazonProduct
     #
     # @param [Array] item_ids splat of item IDs and an optional hash of
     # parameters
-    # @return [AmazonProduct::Response] a response
+    # @return [Vacuum::Response] a response
     #
     # Id Type defaults to ASIN.
     #
@@ -35,7 +35,7 @@ module AmazonProduct
     #
     # @param [String] browse_node_id browse node ID
     # @params [Hash] params hash of parameters
-    # @return [AmazonProduct::Response] a response
+    # @return [Vacuum::Response] a response
     def find_browse_node(browse_node_id, params = {})
       reset!
       self.<<({ 'Operation'    => 'BrowseNodeLookup',
@@ -49,7 +49,7 @@ module AmazonProduct
     #
     # @param [Array] item_ids splat of item IDs and an optional hash of
     # parameters
-    # @return [AmazonProduct::Response] a response
+    # @return [Vacuum::Response] a response
     def find_similar(*item_ids)
       reset!
       params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}

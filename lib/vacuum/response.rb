@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   # A wrapper around the API response
   class Response
 

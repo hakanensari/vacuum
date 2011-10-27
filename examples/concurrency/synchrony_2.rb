@@ -4,7 +4,7 @@ require 'em-synchrony'
 require 'em-synchrony/em-http'
 
 # Monkey-patch request to use EM::HTTP::Request
-module AmazonProduct
+module Vacuum
   class Request
     # Performs an asynchronous request with the EM async HTTP client
     def aget(&block)
@@ -16,10 +16,10 @@ module AmazonProduct
   end
 end
 
-locales = AmazonProduct::Locale::LOCALES
+locales = Vacuum::Locale::LOCALES
 
 locales.each do |locale|
-  AmazonProduct[locale].configure do |c|
+  Vacuum[locale].configure do |c|
     c.key    = AMAZON_KEY
     c.secret = AMAZON_SECRET
     c.tag    = AMAZON_ASSOCIATE_TAG
@@ -32,7 +32,7 @@ EM.synchrony do
   concurrency = 8
 
   resps = EM::Synchrony::Iterator.new(locales, concurrency).map do |locale, iter|
-    req = AmazonProduct[locale]
+    req = Vacuum[locale]
     req << { 'Operation'                       => 'ItemLookup',
              'Version'                         => '2010-11-01',
              'ItemLookup.Shared.IdType'        => 'ASIN',

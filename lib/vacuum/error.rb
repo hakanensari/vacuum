@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   # Raised when a bad locale is specified
   class BadLocale < ArgumentError; end
 

@@ -3,7 +3,7 @@ require File.expand_path('../../helper.rb', __FILE__)
 require 'curb'
 
 # Monkey-patch request to use Curb
-module AmazonProduct
+module Vacuum
   class Request
     def get
       http = Curl::Easy.perform(url.to_s)
@@ -13,10 +13,10 @@ module AmazonProduct
   end
 end
 
-locales = AmazonProduct::Locale::LOCALES
+locales = Vacuum::Locale::LOCALES
 
 locales.each do |locale|
-  AmazonProduct[locale].configure do |c|
+  Vacuum[locale].configure do |c|
     c.key    = AMAZON_KEY
     c.secret = AMAZON_SECRET
     c.tag    = AMAZON_ASSOCIATE_TAG
@@ -25,7 +25,7 @@ end
 
 threads = locales.map do |locale|
   Thread.new do
-    req = AmazonProduct[locale]
+    req = Vacuum[locale]
     Thread.current[:resp] = req.find('0143105825')
   end
 end

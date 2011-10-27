@@ -1,4 +1,4 @@
-module AmazonProduct
+module Vacuum
   class Cart
     # @return [String] cart_id
     attr :id
@@ -8,7 +8,7 @@ module AmazonProduct
 
     attr :items
 
-    # @return [AmazonProduct::Response] last_response last response
+    # @return [Vacuum::Response] last_response last response
     # returned by the Amazon API
     attr :last_response
 
@@ -19,7 +19,7 @@ module AmazonProduct
 
     # Creates a new cart
     #
-    # @param [AmazonProduct::Request] req an API request
+    # @param [Vacuum::Request] req an API request
     # @param [Hash] params a hash of parameters
     def initialize(req, params)
       @req = req
@@ -58,7 +58,7 @@ module AmazonProduct
     # @param [String] cart_id
     # @param [String] hmac
     # @param [Hash] params
-    # @return [AmazonProduct::Cart] a response
+    # @return [Vacuum::Cart] a response
     # def add_to_cart(cart_id, hmac, params)
     #   cartify 'Add', { 'CartId' => cart_id,
     #                    'HMAC'   => hmac }.merge(params)
@@ -70,7 +70,7 @@ module AmazonProduct
     # @param [String] cart_id
     # @param [String] hmac
     # @param [Hash] params
-    # @return [AmazonProduct::Cart] a response
+    # @return [Vacuum::Cart] a response
     # def get_cart(cart_id, hmac, params)
     #   cartify 'Get', { 'CartId' => cart_id,
     #                    'HMAC'   => hmac }.merge(params)
@@ -81,7 +81,7 @@ module AmazonProduct
     # @param [String] cart_id
     # @param [String] hmac
     # @param [Hash] params
-    # @return [AmazonProduct::Cart] a response
+    # @return [Vacuum::Cart] a response
     # def modify_cart(cart_id, hmac, params)
     #   cartify 'Modify', { 'CartId' => cart_id,
     #                       'HMAC'   => hmac }.merge(params)
