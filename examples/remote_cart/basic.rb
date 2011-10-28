@@ -18,9 +18,10 @@ cart = req.create_cart 'Item.1.OfferListingId' => olid,
 
 # Remove added item from cart
 cart.modify({ 'Item.1.CartItemId' => cart.items.first['CartItemId'],
-              'Item.1.Quantity' => 0 })
+              'Item.1.Quantity'   => 0 })
+# you could have also done: cart.clear
 
-# And add it back!
+# And add the item back!
 cart.add({ 'Item.1.OfferListingId' => olid, 'Item.1.Quantity' => 1})
 
 binding.pry
