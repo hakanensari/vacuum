@@ -58,4 +58,4 @@ Quickly drop down to a particular node.
 [1]: http://nokogiri.org/
 [2]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
 [3]: https://github.com/hakanensari/vacuum/blob/master/lib/vacuum/operations.rb
-[4]: http://code.papercavalier.com/vacuum/
+[4]: http://code.papercavalier.com/amazon_product/
