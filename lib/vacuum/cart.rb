@@ -21,7 +21,7 @@ module Vacuum
       end
     end
 
-    # Add an item or items to the cart
+    # Adds an item or items to the cart
     #
     # @param [Hash] params hash of parameters
     def add(params = {})
