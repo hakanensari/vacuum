@@ -1,7 +1,7 @@
 module Vacuum
   # An admittedly minimal abstraction around the Amazon remote cart
   class Cart
-    # @ request [Vacuum::Request] the request object
+    # @return [Vacuum::Request] the request object
     attr :request
 
     # @return [Vacuum::Response] the most recent response
