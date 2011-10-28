@@ -74,7 +74,7 @@ module Vacuum
       Response.new(resp.body, resp.code)
     end
 
-    # @return [Hash] params the request parameters
+    # @return [Hash] the request parameters
     # @raise [Vacuum::MissingKey] Amazon key is missing
     # @raise [Vacuum::MissingTag] Amazon associate tag is
     # missing
