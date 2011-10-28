@@ -41,9 +41,11 @@ EM.synchrony do
              'ItemLookup.Shared.ResponseGroup' => %w{OfferFull ItemAttributes Images},
              'ItemLookup.1.ItemId'             => Asin[0, 10],
              'ItemLookup.2.ItemId'             => Asin[10, 10] }
-    req.aget { |resp| iter.return(resp) }
+    req.aget { |resp| iter.return({ locale => resp }) }
   end
   EM.stop
 end
+
+resps = resps.inject({}) { |a, resp| a.merge(resp) }
 
 binding.pry

@@ -26,7 +26,7 @@ end
 threads = locales.map do |locale|
   Thread.new do
     req = Vacuum[locale]
-    Thread.current[:resp] = req.find('0143105825')
+    Thread.current[:resp] = { locale => req.find('0143105825') }
   end
 end
 
@@ -34,5 +34,7 @@ resps = threads.map do |thread|
   thread.join
   thread[:resp]
 end.flatten
+
+resps = resps.inject({}) { |a, resp| a.merge(resp) }
 
 binding.pry
