@@ -11,49 +11,63 @@ Advertising API] [5].
 
 Add to your Gemfile.
 
-    gem 'vacuum'
+```ruby
+gem 'vacuum'
+```
 
 ## Usage
 
 Set up a request.
 
-    require "vacuum"
+```ruby
+require 'vacuum'
 
-    req = Vacuum["us"]
+req = Vacuum["us"]
 
-    req.configure do |c|
-      c.key    = AMAZON_KEY
-      c.secret = AMAZON_SECRET
-      c.tag    = AMAZON_ASSOCIATE_TAG
-    end
+req.configure do |c|
+  c.key    = AMAZON_KEY
+  c.secret = AMAZON_SECRET
+  c.tag    = AMAZON_ASSOCIATE_TAG
+end
+```
 
 Search for something.
 
-    req << { :operation    => 'ItemSearch',
-             :search_index => 'All',
-             :keywords     => 'George Orwell' }
-    res = request.get
+```ruby
+req << { :operation    => 'ItemSearch',
+         :search_index => 'All',
+         :keywords     => 'George Orwell' }
+res = request.get
+```
 
 Or use a shorthand.
 
-    res = req.search('George Orwell')
+```ruby
+res = req.search('George Orwell')
+```
 
 Customise your request.
 
-    res = req.search('Books', :response_group => 'ItemAttributes',
-                              :power          => 'George Orwell'
+```ruby
+res = req.search('Books', :response_group => 'ItemAttributes',
+                          :power          => 'George Orwell'
+```
 
 For a reference of available methods and syntax, [read here] [6].
 
 Consume the entire response.
 
-    res.to_hash
+```ruby
+res.to_hash
+```
 
 Quickly drop down to a particular node.
 
-    res.each('Item') do |item|
-      puts item['ASIN']
-    end
+```ruby
+res.each('Item') do |item|
+  puts item['ASIN']
+end
+```
 
 [Please see the project page] [7] for further detail.
 
