@@ -1,80 +1,54 @@
 module Vacuum
+  # An admittedly minimal abstraction around the Amazon remote cart
   class Cart
-    # @return [String] cart_id
-    attr :id
+    # @ request [Vacuum::Request] the request object
+    attr :request
 
-    # @return [String] hmac
-    attr :hmac
-
-    attr :items
-
-    # @return [Vacuum::Response] last_response last response
-    # returned by the Amazon API
-    attr :last_response
-
-    # @return [String] purchase_url
-    attr :purchase_url
-
-    attr :sub_total
+    # @return [Vacuum::Response] the most recent response
+    attr :response
 
     # Creates a new cart
     #
     # @param [Vacuum::Request] req an API request
-    # @param [Hash] params a hash of parameters
-    def initialize(req, params)
-      @req = req
-      get 'Create', params
+    # @param [Hash] params hash of parameters
+    def initialize(request, params)
+      @request = request
+
+      if params['CartId']
+        perform_request 'Get', params
+      else
+        perform_request 'Create', params
+      end
+    end
+
+    # Add an item or items to the cart
+    #
+    # @param [Hash] params hash of parameters
+    def add(params = {})
+      perform_request 'Add', params
     end
 
     # Clears the cart
     #
-    # @param [Hash] params a hash of parameters
+    # @param [Hash] params hash of parameters
     def clear(params = {})
-      get 'Clear', params
+      perform_request 'Clear', params
     end
 
-    private
-
-    def get(operation, params)
-      @req.reset!
-
-      if id
-        @req << { 'CartId'    => id,
-                  'HMAC'      => hmac }
-      end
-
-      @req << { 'Operation' => "Cart#{operation}" }.merge(params)
-
-      @last_response = @req.get
-      @items         = @last_response.find('CartItems')
-      @id            = @last_response.find('CartId').first
-      @hmac          = @last_response.find('HMAC').first
-      @purchase_url  = @last_response.find('PurchaseURL').first
-      @sub_total     = @last_response.find('SubTotal').first
+    # @return [String] the cart hmac
+    def hmac
+      response.find('HMAC').first
     end
 
-    # Add items to cart
-    #
-    # @param [String] cart_id
-    # @param [String] hmac
-    # @param [Hash] params
-    # @return [Vacuum::Cart] a response
-    # def add_to_cart(cart_id, hmac, params)
-    #   cartify 'Add', { 'CartId' => cart_id,
-    #                    'HMAC'   => hmac }.merge(params)
-    # end
+    # @return [String] the cart ID
+    def id
+      response.find('CartId').first
+    end
 
-
-    # Gets an existing cart
-    #
-    # @param [String] cart_id
-    # @param [String] hmac
-    # @param [Hash] params
-    # @return [Vacuum::Cart] a response
-    # def get_cart(cart_id, hmac, params)
-    #   cartify 'Get', { 'CartId' => cart_id,
-    #                    'HMAC'   => hmac }.merge(params)
-    # end
+    # @return [Array] cart items
+    def items
+      response.find('CartItem')
+    end
 
     # Modifies an existing cart
     #
@@ -82,9 +56,28 @@ module Vacuum
     # @param [String] hmac
     # @param [Hash] params
     # @return [Vacuum::Cart] a response
-    # def modify_cart(cart_id, hmac, params)
-    #   cartify 'Modify', { 'CartId' => cart_id,
-    #                       'HMAC'   => hmac }.merge(params)
-    # end
+    def modify(params)
+      perform_request 'Modify', params
+    end
+
+    # @return [String] the purchase URL
+    def url
+      response.find('PurchaseURL').first
+    end
+
+    # @return [Hash] the sub total
+    def total
+      response.find('SubTotal').first
+    end
+
+    private
+
+    def perform_request(operation, params)
+      @request.reset!
+      @request << { 'Operation' => "Cart#{operation}" }.merge(params)
+      @request << { 'CartId' => id, 'HMAC' => hmac } if response
+
+      @response = @request.get
+    end
   end
 end
