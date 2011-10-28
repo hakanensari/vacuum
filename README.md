@@ -1,11 +1,12 @@
 # Vacuum
 
-Vacuum is a [Nokogiri][1]-backed Ruby wrapper to the [Amazon Product
-Advertising API] [2].
+![vacuum] [1]
 
-[![travis] [3]] [4]
+[![travis] [2]] [3]
 
-![vacuum] [5]
+Vacuum is a [Nokogiri][4]-backed Ruby wrapper to the [Amazon Product
+Advertising API] [5].
+
 ## Installation
 
 Add to your Gemfile.
@@ -56,10 +57,10 @@ Quickly drop down to a particular node.
 
 [Please see the project page] [7] for further detail.
 
-[1]: http://nokogiri.org/
-[2]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
-[3]: https://secure.travis-ci.org/hakanensari/vacuum.png
-[4]: http://travis-ci.org/hakanensari/vacuum
-[5]: https://github.com/hakanensari/vacuum/blob/master/vacuum.png?raw=true
+[1]: https://github.com/hakanensari/vacuum/blob/master/vacuum.png?raw=true
+[2]: https://secure.travis-ci.org/hakanensari/vacuum.png
+[3]: http://travis-ci.org/hakanensari/vacuum
+[4]: http://nokogiri.org/
+[5]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
 [6]: https://github.com/hakanensari/vacuum/blob/master/lib/vacuum/operations.rb
 [7]: http://code.papercavalier.com/amazon_product/
