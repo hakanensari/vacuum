@@ -1,3 +1,7 @@
+require 'vacuum/cart_operations'
+require 'vacuum/lookup_operations'
+require 'vacuum/search_operations'
+
 module Vacuum
   # A wrapper around the request to the Amazon Product Advertising API
   class Request
@@ -70,7 +74,7 @@ module Vacuum
       Response.new(resp.body, resp.code)
     end
 
-    # @return [Hash] params The request parameters
+    # @return [Hash] params the request parameters
     # @raise [Vacuum::MissingKey] Amazon key is missing
     # @raise [Vacuum::MissingTag] Amazon associate tag is
     # missing
@@ -86,12 +90,16 @@ module Vacuum
     end
 
     # Resets the request parameters
+    #
+    # @return [Vacuum::Request] the request object
     def reset!
       @params = {}
+
+      self
     end
 
     # @raise [Vacuum::MissingSecret] Amazon secret is missing
-    # @return [URI::HTTP] the Amazon URL
+    # @return [URI::HTTP] the URL for the API request
     def url
       raise MissingSecret unless @locale.secret
 
