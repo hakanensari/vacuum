@@ -1,19 +1,8 @@
-# CHANGELOG
+# 0.0.2 / not released
 
-## 3.0.0/not released
+  * Add a minimal remote cart implementation
 
-  * rename library
-  * add support for multiple HTTP adapters; move Synchrony into main
-    library
-  * add request operations like #find and #search
-  * Vacuum.[] now returns a request
-  * add China and Italy locales
+# 0.0.1 / (27 October 2011)
 
-## 2.1.0/2011-07-29
-
-  * up default API version to 2011-08-01
-
-## 2.0.0/2011-07-19
-
-  * EM::Synchrony patch
-  * add option to configure globally (@rclosner)
+  * Pull back to major version 0 and packaged as a gem under a new
+    name.
