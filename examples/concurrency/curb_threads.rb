@@ -16,16 +16,16 @@ end
 locales = Vacuum::Locale::LOCALES
 
 locales.each do |locale|
-  Vacuum[locale].configure do |c|
-    c.key    = AMAZON_KEY
-    c.secret = AMAZON_SECRET
-    c.tag    = AMAZON_ASSOCIATE_TAG
+  Vacuum.configure locale do |c|
+    c.key    = KEY
+    c.secret = SECRET
+    c.tag    = ASSOCIATE_TAG
   end
 end
 
 threads = locales.map do |locale|
   Thread.new do
-    req = Vacuum[locale]
+    req = Vacuum.new locale
     Thread.current[:resp] = { locale => req.find('0143105825') }
   end
 end

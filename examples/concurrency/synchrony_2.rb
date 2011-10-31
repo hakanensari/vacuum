@@ -19,10 +19,10 @@ end
 locales = Vacuum::Locale::LOCALES
 
 locales.each do |locale|
-  Vacuum[locale].configure do |c|
-    c.key    = AMAZON_KEY
-    c.secret = AMAZON_SECRET
-    c.tag    = AMAZON_ASSOCIATE_TAG
+  Vacuum.configure locale do |c|
+    c.key    = KEY
+    c.secret = SECRET
+    c.tag    = ASSOCIATE_TAG
   end
 end
 
@@ -32,7 +32,7 @@ EM.synchrony do
   concurrency = 8
 
   resps = EM::Synchrony::Iterator.new(locales, concurrency).map do |locale, iter|
-    req = Vacuum[locale]
+    req = Vacuum.new locale
     req << { 'Operation'                       => 'ItemLookup',
              'Version'                         => '2010-11-01',
              'ItemLookup.Shared.IdType'        => 'ASIN',

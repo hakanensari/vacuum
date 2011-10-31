@@ -26,13 +26,12 @@ module Vacuum
   end
 end
 
-req = Vacuum['us']
-
-req.configure do |c|
-  c.key    = AMAZON_KEY
-  c.secret = AMAZON_SECRET
-  c.tag    = AMAZON_ASSOCIATE_TAG
+Vacuum.configure :us do |c|
+  c.key    = KEY
+  c.secret = SECRET
+  c.tag    = ASSOCIATE_TAG
 end
+req = Vacuum.new :us
 
 resp = nil
 EM.synchrony do

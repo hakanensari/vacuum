@@ -6,9 +6,9 @@ require File.expand_path('../../lib/vacuum', __FILE__)
 credentials_path = File.expand_path('../credentials.yml', __FILE__)
 credentials = YAML::load(File.open(credentials_path))
 
-AMAZON_KEY           = credentials['key']
-AMAZON_SECRET        = credentials['secret']
-AMAZON_ASSOCIATE_TAG = credentials['associate_tag']
+KEY           = credentials['key']
+SECRET        = credentials['secret']
+ASSOCIATE_TAG = credentials['associate_tag']
 
 # Some ASINs
 module Asin
