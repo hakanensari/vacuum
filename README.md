@@ -17,7 +17,15 @@ Add to your Gemfile:
 
 Set up a locale:
 
-    Vacuum.configure :us do |c|
+    Vacuum.configure :uk do |c|
+      c.key    = 'a key'
+      c.secret = 'a secret'
+      c.tag    = 'a tag'
+    end
+
+If you do not specify a locale, Vacuum will default to the US:
+
+    Vacuum.configure do |c|
       c.key    = 'a key'
       c.secret = 'a secret'
       c.tag    = 'a tag'

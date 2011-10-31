@@ -26,10 +26,10 @@ module Vacuum
     #     c.tag    = 'baz'
     #   end
     #
-    def configure(locale, &blk)
+    def configure(locale = :us, &blk)
       locale = locale.to_sym
 
-      (@locales ||= {})[locale] ||= Locale.new(locale).configure(&blk)
+      ((@locales ||= {})[locale] ||= Locale.new(locale)).configure(&blk)
     end
 
     # Returns a request for specified locale
