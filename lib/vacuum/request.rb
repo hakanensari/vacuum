@@ -19,10 +19,9 @@ module Vacuum
 
     # Creates a new request for specified locale
     #
-    # @param [#to_sym] locale two-letter abbreviation for locale
+    # @param [#Vacuum::Locale] a locale
     def initialize(locale)
-      @locale = Locale.new(locale.to_sym)
-      @params = Hash.new
+      @locale, @params = locale, Hash.new
     end
 
     # Merges a hash of request parameters into the query
@@ -54,13 +53,6 @@ module Vacuum
     #
     # @yield passes locale to block for configuration
     #
-    # @example
-    #   request.configure do |c|
-    #     c.key    = YOUR_KEY
-    #     c.secret = YOUR_SECRET
-    #     c.tag    = YOUR_ASSOCIATE_TAG
-    #   end
-    #
     def configure(&block)
       block.call(@locale)
     end
@@ -79,9 +71,6 @@ module Vacuum
     # @raise [Vacuum::MissingTag] Amazon associate tag is
     # missing
     def params
-      raise MissingKey unless @locale.key
-      raise MissingTag unless @locale.tag
-
       { 'AWSAccessKeyId' => @locale.key,
         'AssociateTag'   => @locale.tag,
         'Service'        => 'AWSECommerceService',
@@ -101,8 +90,6 @@ module Vacuum
     # @raise [Vacuum::MissingSecret] Amazon secret is missing
     # @return [URI::HTTP] the URL for the API request
     def url
-      raise MissingSecret unless @locale.secret
-
       URI::HTTP.build(:host  => @locale.host,
                       :path  => '/onca/xml',
                       :query => sign(query))

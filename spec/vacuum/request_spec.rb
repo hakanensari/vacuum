@@ -2,15 +2,10 @@ require 'spec_helper'
 
 module Vacuum
   describe Request do
-    let(:req) { Request.new('us') }
+    let_req
 
     describe '#<<' do
       before do
-        req.configure do |c|
-          c.key = 'foo'
-          c.tag = 'bar'
-        end
-
         req.reset!
       end
 
@@ -58,45 +53,12 @@ module Vacuum
     end
 
     describe '#get' do
-      before do
-        req.configure do |c|
-          c.key    = 'foo'
-          c.secret = 'bar'
-          c.tag    = 'baz'
-        end
-      end
-
       it 'returns a response' do
         req.get.should be_a Response
-      end
-
-      it 'raises an error if secret is missing' do
-        req.configure { |c| c.secret = nil }
-
-        expect { req.get }.to raise_error MissingSecret
       end
     end
 
     describe '#params' do
-      before do
-        req.configure do |c|
-          c.key = 'foo'
-          c.tag = 'bar'
-        end
-      end
-
-      it 'raises an error if key is missing' do
-        req.configure { |c| c.key = nil }
-
-        expect { req.params }.to raise_error MissingKey
-      end
-
-      it 'raises an error if tag is missing' do
-        req.configure { |c| c.tag = nil }
-
-        expect { req.params }.to raise_error MissingTag
-      end
-
       it 'includes common request parameters' do
         req.params['Service'].should eql 'AWSECommerceService'
       end
@@ -125,13 +87,6 @@ module Vacuum
     end
 
     describe '#reset!' do
-      before do
-        req.configure do |c|
-          c.key = 'foo'
-          c.tag = 'bar'
-        end
-      end
-
       it 'resets the request parameters' do
         req << { 'Key' => 'value' }
         req.params.should have_key 'Key'
@@ -142,14 +97,6 @@ module Vacuum
     end
 
     describe '#url' do
-      before do
-        req.configure do |c|
-          c.key = 'foo'
-          c.secret = 'bar'
-          c.tag = 'baz'
-        end
-      end
-
       it 'builds a URL' do
         req.url.should be_a URI::HTTP
       end
@@ -170,13 +117,6 @@ module Vacuum
 
       it 'signs the query' do
         req.url.query.should match /&Signature=/
-      end
-
-      it 'raises an error if no secret is specified' do
-        expect do
-          req.configure { |c| c.secret = nil }
-          req.url
-        end.to raise_error MissingSecret
       end
     end
   end

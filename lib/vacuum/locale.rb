@@ -1,5 +1,5 @@
 module Vacuum
-  # An Amazon locale
+  # An Amazon Web Services locale
   class Locale
     # Amazon hosts
     HOSTS = { :ca => 'ecs.amazonaws.ca',
@@ -9,29 +9,45 @@ module Vacuum
               :fr => 'ecs.amazonaws.fr',
               :it => 'webservices.amazon.it',
               :jp => 'ecs.amazonaws.jp',
-              :us => 'ecs.amazonaws.com',
-              :uk => 'ecs.amazonaws.co.uk' }
+              :uk => 'ecs.amazonaws.co.uk',
+              :us => 'ecs.amazonaws.com' }
 
-    # Country codes for Amazon locales
+    # Country codes
     LOCALES = HOSTS.keys
 
-    # @return [String] the Amazon Web Services access key
+    # @return [String] the access key
     attr_accessor :key
 
-    # @return [String] the Amazon Web Services secret
+    # @return [String] the secret
     attr_accessor :secret
 
-    # @return [String] the Amazon associate tag
+    # @return [String] the associate tag
     attr_accessor :tag
 
-    # @param [Symbol] locale the locale key
+    # @param [Symbol] locale the country code
     # @raise [Vacuum::BadLocale] locale is bad
     def initialize(locale)
-      raise BadLocale unless LOCALES.include?(locale)
+      unless LOCALES.include? locale
+        raise BadLocale, <<-MSG.strip
+          Valid values are #{LOCALES.join(', ')}
+        MSG
+      end
+
       @locale = locale
     end
 
-    # @return [String] the Amazon host
+    # @yield passes locale to given block for configuration
+    def configure(&blk)
+      yield self
+
+      raise MissingKey    unless key
+      raise MissingSecret unless secret
+      raise MissingTag    unless tag
+
+      self.freeze
+    end
+
+    # @return [String] the host
     def host
       HOSTS[@locale]
     end

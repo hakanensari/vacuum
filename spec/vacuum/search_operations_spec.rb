@@ -2,13 +2,9 @@ require 'spec_helper'
 
 module Vacuum
   describe SearchOperations do
-    let(:req) { Request.new('us') }
+    let_req
 
     before do
-      req.configure do |c|
-        c.key = 'foo'
-        c.tag = 'bar'
-      end
       req.stub!(:get)
     end
 
@@ -53,7 +49,7 @@ module Vacuum
         it "sets the search index" do
           req.params["SearchIndex"].should eql 'foo'
         end
-      end      
+      end
     end
   end
 end

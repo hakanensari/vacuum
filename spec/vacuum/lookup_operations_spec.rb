@@ -2,13 +2,9 @@ require 'spec_helper'
 
 module Vacuum
   describe LookupOperations do
-    let(:req) { Request.new('us') }
+    let_req
 
     before do
-      req.configure do |c|
-        c.key = 'foo'
-        c.tag = 'bar'
-      end
       req.stub!(:get)
     end
 

@@ -13,15 +13,32 @@ module Vacuum
   class MissingSecret < ArgumentError; end
   class MissingTag    < ArgumentError; end
 
-  # Returns a request for specified locale
-  #
-  # @param [#to_sym] locale a locale key
-  # @return [Vacuum::Request] a request
-  #
-  # @note The locale key may be any of the following:
-  # +ca+, +cn+, +de+, +es+, +fr+, +it+, +jp+, +uk+, +us+
-  def self.[](locale)
-    @requests ||= Hash.new
-    @requests[locale] ||= Request.new(locale)
+  class << self
+    # Returns a locale for configuration
+    #
+    # @param [#to_sym] locale a locale key
+    # @return [Vacuum::Locale] a locale
+    #
+    # @example
+    #   Vacuum.configure :us do |c|
+    #     c.key    = 'foo'
+    #     c.secret = 'bar'
+    #     c.tag    = 'baz'
+    #   end
+    #
+    def configure(locale, &blk)
+      locale = locale.to_sym
+
+      (@locales ||= {})[locale] ||= Locale.new(locale).configure(&blk)
+    end
+
+    # Returns a request for specified locale
+    #
+    # @param [#to_sym] locale a locale key
+    # @return [Vacuum::Request] a request
+    #
+    def new(locale)
+      Request.new(@locales[locale.to_sym])
+    end
   end
 end
