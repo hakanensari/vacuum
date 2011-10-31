@@ -49,14 +49,6 @@ module Vacuum
       end
     end
 
-    # Configures the Amazon locale
-    #
-    # @yield passes locale to block for configuration
-    #
-    def configure(&block)
-      block.call(@locale)
-    end
-
     # Performs a request
     #
     # @return [Vacuum::Response] a response

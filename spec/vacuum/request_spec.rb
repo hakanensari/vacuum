@@ -46,12 +46,6 @@ module Vacuum
       end
     end
 
-    describe '#configure' do
-      it 'yields the locale' do
-        req.configure(&:class).should eql Locale
-      end
-    end
-
     describe '#get' do
       it 'returns a response' do
         req.get.should be_a Response
