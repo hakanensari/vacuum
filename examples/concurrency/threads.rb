@@ -10,18 +10,15 @@ locales.each do |locale|
   end
 end
 
-threads = locales.map do |locale|
+resps = {}
+mutex = Mutex.new
+
+locales.map do |locale|
   Thread.new do
     req = Vacuum.new locale
-    Thread.current[:resp] = { locale => req.find('0143105825') }
+    res = req.find('0143105825')
+    mutex.synchronize { resps[locale] = res }
   end
-end
-
-resps = threads.map do |thread|
-  thread.join
-  thread[:resp]
-end.flatten
-
-resps = resps.inject({}) { |a, resp| a.merge(resp) }
+end.each { |thr| thr.join }
 
 binding.pry
