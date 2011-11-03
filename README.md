@@ -35,7 +35,12 @@ If you do not specify a locale, Vacuum will default to the US:
 
 Create a request for the above locale:
 
-    req = Vacuum.new(:us)
+    req = Vacuum.new(:uk)
+
+Again, if you don't specify a locale, the request will default to the
+US:
+
+    req = Vacuum.new
 
 Search for something:
 
