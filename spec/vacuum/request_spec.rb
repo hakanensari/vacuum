@@ -44,6 +44,10 @@ module Vacuum
 
         req.params['Key'].should eql 'foo,bar'
       end
+
+      it 'returns the request' do
+        req.<<({ }).should eql req
+      end
     end
 
     describe '#get' do
@@ -87,6 +91,10 @@ module Vacuum
 
         req.reset!
         req.params.should_not have_key 'Key'
+      end
+
+      it 'returns the request' do
+        req.reset!.should eql req
       end
     end
 

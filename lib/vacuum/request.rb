@@ -27,6 +27,7 @@ module Vacuum
     # Merges a hash of request parameters into the query
     #
     # @param [Hash] hsh pairs of parameter keys and values
+    # @return [Vacuum::Request] the request object
     #
     # @example
     #   request << { :key => 'value' }
@@ -47,6 +48,8 @@ module Vacuum
 
         @params[k] = v
       end
+
+      self
     end
 
     # Performs a request
