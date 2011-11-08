@@ -23,14 +23,14 @@ locales.each do |locale|
   end
 end
 
-resps = {}
+all = {}
 mutex = Mutex.new
 
 locales.map do |locale|
   Thread.new do
     req = Vacuum.new locale
     res = req.find('0143105825')
-    mutex.synchronize { resps[locale] = res }
+    mutex.synchronize { res[locale] = res }
   end
 end.each { |thr| thr.join }
 

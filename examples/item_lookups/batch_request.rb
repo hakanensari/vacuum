@@ -23,6 +23,6 @@ req << { 'Version'                         => '2010-11-01',
          'ItemLookup.Shared.ResponseGroup' => 'OfferFull',
          'ItemLookup.1.ItemId'             => asins[0, 10],
          'ItemLookup.2.ItemId'             => asins[10, 10] }
-resp = req.get
+res = req.get
 
 binding.pry

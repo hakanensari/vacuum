@@ -7,6 +7,6 @@ Vacuum.configure :us do |c|
 end
 req = Vacuum.new :us
 
-resp = req.find('0816614024')
+res = req.find('0816614024')
 
 binding.pry

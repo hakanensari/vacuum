@@ -8,6 +8,6 @@ end
 req = Vacuum.new :us
 
 # Run a keyword search on all search indices.
-resp = req.search('George Orwell')
+res = req.search('George Orwell')
 
 binding.pry

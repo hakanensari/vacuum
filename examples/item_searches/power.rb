@@ -7,7 +7,7 @@ Vacuum.configure :us do |c|
 end
 req = Vacuum.new :us
 
-resp = req.search('Books', :power => 'author:lacan and not fiction',
+res = req.search('Books', :power => 'author:lacan and not fiction',
                            :sort  => 'relevancerank')
 
 binding.pry

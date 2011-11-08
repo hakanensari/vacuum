@@ -8,6 +8,6 @@ end
 req = Vacuum.new :us
 
 # Look up cover art for an ASIN.
-resp = req.find('0394751221', :response_group => 'Images')
+res = req.find('0394751221', :response_group => 'Images')
 
 binding.pry

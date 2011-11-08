@@ -9,9 +9,9 @@ module Vacuum
     # Performs an asynchronous request with the EM async HTTP client
     def aget(&block)
       http = EM::HttpRequest.new(url).aget
-      resp = lambda { Response.new(http.response, http.response_header.status) }
-      http.callback { block.call(resp.call) }
-      http.errback  { block.call(resp.call) }
+      res = lambda { Response.new(http.response, http.response_header.status) }
+      http.callback { block.call(res.call) }
+      http.errback  { block.call(res.call) }
     end
   end
 end
@@ -26,12 +26,10 @@ locales.each do |locale|
   end
 end
 
-# Really fat requests executed evented and in parallel.
-resps = nil
 EM.synchrony do
   concurrency = 8
 
-  resps = EM::Synchrony::Iterator.new(locales, concurrency).map do |locale, iter|
+  all = EM::Synchrony::Iterator.new(locales, concurrency).map do |locale, iter|
     req = Vacuum.new locale
     req << { 'Operation'                       => 'ItemLookup',
              'Version'                         => '2010-11-01',
@@ -41,11 +39,11 @@ EM.synchrony do
              'ItemLookup.Shared.ResponseGroup' => %w{OfferFull ItemAttributes Images},
              'ItemLookup.1.ItemId'             => Asin[0, 10],
              'ItemLookup.2.ItemId'             => Asin[10, 10] }
-    req.aget { |resp| iter.return({ locale => resp }) }
+    req.aget { |res| iter.return({ locale => res }) }
   end
   EM.stop
+
+  all = all.inject({}) { |a, res| a.merge(res) }
+
+  binding.pry
 end
-
-resps = resps.inject({}) { |a, resp| a.merge(resp) }
-
-binding.pry

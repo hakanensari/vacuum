@@ -8,7 +8,7 @@ end
 req = Vacuum.new :us
 
 # Get a random offer listing ID for an item.
-resp = req.find('0816614024', :response_group => 'Offers')
+res = req.find('0816614024', :response_group => 'Offers')
 olid = resp['OfferListingId'].first
 
 # Create a cart

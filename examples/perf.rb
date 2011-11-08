@@ -19,7 +19,7 @@ Thread.new do
   loop do
     Asin.each_slice(10) do |batch|
       started_at = Time.now.to_f
-      resp = req.find(batch, :version        => '2010-11-01',
+      res = req.find(batch, :version        => '2010-11-01',
                              :merchant_id    => 'All',
                              :condition      => 'All',
                              :response_group => 'OfferFull')
@@ -27,7 +27,7 @@ Thread.new do
       @lock.synchronize do
         ts = timestamp
         @store[ts] ||= { error: 0, ok: 0 }
-        if resp.valid?
+        if res.valid?
           @store[ts][:ok] += 1
         else
           @store[ts][:error] += 1

@@ -12,7 +12,7 @@ req = Vacuum.new :us
 #
 # A response group can be a string or an array if you wish to include
 # more than one response group.
-resp = req.search('Books', :power          => 'Foucault',
+res = req.search('Books', :power          => 'Foucault',
                            :response_group => 'Medium')
 
 binding.pry
