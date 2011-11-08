@@ -24,7 +24,7 @@ module Vacuum
     # @yield passes matching nodes to given block
     #
     # @example
-    #   resp.each('Item') { |item| p item }
+    #   res.each('Item') { |item| p item }
     #
     def each(query, &block)
       find(query).each { |match| block.call(match) }
@@ -41,7 +41,7 @@ module Vacuum
     # @return [Array] matching nodes
     #
     # @example
-    #   items = resp.find('Item')
+    #   items = res.find('Item')
     #
     def find(query)
       xml.xpath("//xmlns:#{query}").map { |e| Builder.from_xml(e) }
@@ -61,7 +61,7 @@ module Vacuum
     # @return [Array] processed results
     #
     # @example
-    #   asins = resp.map('Item') { |item| item['ASIN'] }
+    #   asins = res.map('Item') { |item| item['ASIN'] }
     #
     def map(path, &block)
       find(path).map { |match| block.call(match) }

@@ -53,9 +53,9 @@ module Vacuum
     #
     # @return [Vacuum::Response] a response
     def get
-      resp = Net::HTTP.get_response(url)
+      res = Net::HTTP.get_response(url)
 
-      Response.new(resp.body, resp.code)
+      Response.new(res.body, res.code)
     end
 
     # @return [Hash] the request parameters
