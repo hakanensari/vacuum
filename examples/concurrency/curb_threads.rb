@@ -30,7 +30,7 @@ locales.map do |locale|
   Thread.new do
     req = Vacuum.new locale
     res = req.find('0143105825')
-    mutex.synchronize { res[locale] = res }
+    mutex.synchronize { all[locale] = res }
   end
 end.each { |thr| thr.join }
 
