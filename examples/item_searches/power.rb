@@ -8,6 +8,7 @@ end
 req = Vacuum.new :us
 
 res = req.search('Books', :power => 'author:lacan and not fiction',
-                           :sort  => 'relevancerank')
+                          :sort  => 'relevancerank',
+                          :response_group => %w{Images ItemAttributes})
 
 binding.pry

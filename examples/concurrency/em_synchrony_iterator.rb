@@ -31,14 +31,14 @@ EM.synchrony do
 
   all = EM::Synchrony::Iterator.new(locales, concurrency).map do |locale, iter|
     req = Vacuum.new locale
-    req << { 'Operation'                       => 'ItemLookup',
-             'Version'                         => '2010-11-01',
-             'ItemLookup.Shared.IdType'        => 'ASIN',
-             'ItemLookup.Shared.Condition'     => 'All',
-             'ItemLookup.Shared.MerchantId'    => 'All',
-             'ItemLookup.Shared.ResponseGroup' => %w{OfferFull ItemAttributes Images},
-             'ItemLookup.1.ItemId'             => Asin[0, 10],
-             'ItemLookup.2.ItemId'             => Asin[10, 10] }
+    req << { 'operation'                       => 'itemlookup',
+             'version'                         => '2010-11-01',
+             'itemlookup.shared.idtype'        => 'asin',
+             'itemlookup.shared.condition'     => 'all',
+             'itemlookup.shared.merchantid'    => 'all',
+             'itemlookup.shared.responsegroup' => %w{offerfull itemattributes images},
+             'itemlookup.1.itemid'             => asin[0, 10],
+             'itemlookup.2.itemid'             => asin[10, 10] }
     req.aget { |res| iter.return({ locale => res }) }
   end
   EM.stop
