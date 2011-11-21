@@ -39,7 +39,7 @@ EM.run do
     proc { |locale, iter|
       req = Vacuum.new(locale)
       req << { 'Operation' => 'ItemLookup',
-              'ItemId'    => '0143105825' }
+               'ItemId'    => '0143105825' }
       req.get { |res| iter.return({ locale => res }) }
     }, proc { |all|
       all = all.inject({}) { |a, res| a.merge(res) }
