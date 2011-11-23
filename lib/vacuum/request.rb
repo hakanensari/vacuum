@@ -62,9 +62,6 @@ module Vacuum
     end
 
     # @return [Hash] the request parameters
-    # @raise [Vacuum::MissingKey] Amazon key is missing
-    # @raise [Vacuum::MissingTag] Amazon associate tag is
-    # missing
     def params
       { 'AWSAccessKeyId' => @locale.key,
         'AssociateTag'   => @locale.tag,
@@ -82,7 +79,6 @@ module Vacuum
       self
     end
 
-    # @raise [Vacuum::MissingSecret] Amazon secret is missing
     # @return [URI::HTTP] the URL for the API request
     def url
       URI::HTTP.build(:host  => @locale.host,

@@ -37,6 +37,9 @@ module Vacuum
     end
 
     # @yield passes locale to given block for configuration
+    # @raise [Vacuum::MissingKey] Amazon key is missing
+    # @raise [Vacuum::MissingSecret] Amazon secret is missing
+    # @raise [Vacuum::MissingTag] Amazon associate tag is missing
     def configure(&blk)
       yield self
 
