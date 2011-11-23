@@ -1,5 +1,5 @@
 module Vacuum
-  # An admittedly minimal abstraction around the Amazon remote cart
+  # An abstraction around the Amazon remote cart
   class Cart
     # @return [Vacuum::Request] the request object
     attr :request
