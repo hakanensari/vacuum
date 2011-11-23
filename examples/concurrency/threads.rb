@@ -10,8 +10,7 @@ locales.each do |locale|
   end
 end
 
-all = {}
-mutex = Mutex.new
+all, mutex = {}, Mutex.new
 
 locales.map do |locale|
   Thread.new do

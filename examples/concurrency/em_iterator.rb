@@ -2,24 +2,20 @@ require File.expand_path('../../helper.rb', __FILE__)
 
 require 'em-http-request'
 
-# Monkey-patch request to use EM::HTTP::Request
 module Vacuum
   class Request
     def get(&blk)
       http = EM::HttpRequest.new(url).get
-      res = lambda {
-        body, status = http.response, http.response_header.status
+      http.callback { blk.call async_response(http) }
+      http.errback  { blk.call async_response(http) }
+    end
 
-        Response.new(body, status)
-      }
+    private
 
-      http.callback do
-        blk.call res.call
-      end
+    def async_response(http)
+      body, status = http.response, http.response_header.status
 
-      http.errback do
-        blk.call res.call
-      end
+      Response.new(body, status)
     end
   end
 end

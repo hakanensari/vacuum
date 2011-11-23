@@ -2,7 +2,6 @@ require File.expand_path('../../helper.rb', __FILE__)
 
 require 'curb'
 
-# Monkey-patch request to use Curb
 module Vacuum
   class Request
     def get

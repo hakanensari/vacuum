@@ -21,8 +21,8 @@ req << { 'Version'                         => '2010-11-01',
          'ItemLookup.Shared.Condition'     => 'All',
          'ItemLookup.Shared.MerchantId'    => 'All',
          'ItemLookup.Shared.ResponseGroup' => 'OfferFull',
-         'ItemLookup.1.ItemId'             => asins[0, 10],
-         'ItemLookup.2.ItemId'             => asins[10, 10] }
+         'ItemLookup.1.ItemId'             => Asin[0, 10],
+         'ItemLookup.2.ItemId'             => Asin[10, 10] }
 res = req.get
 
 binding.pry

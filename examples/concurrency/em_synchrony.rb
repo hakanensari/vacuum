@@ -3,7 +3,6 @@ require File.expand_path('../../helper.rb', __FILE__)
 require 'em-synchrony'
 require 'em-synchrony/em-http'
 
-# Monkey-patch request to use EM::HTTP::Request
 module Vacuum
   class Request
     def get
