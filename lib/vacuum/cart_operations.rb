@@ -1,5 +1,7 @@
 module Vacuum
   # Cart operations
+  #
+  # @see Vacuum::Cart for methods on the remote cart.
   module CartOperations
     # Creates a remote cart
     #
