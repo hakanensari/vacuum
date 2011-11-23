@@ -23,7 +23,7 @@ module Vacuum
     # by Amazon's relevance ranking.
     #
     #   req.search('Books', :power => 'author:lacan and not fiction',
-    #                           :sort  => 'relevancerank')
+    #                       :sort  => 'relevancerank')
     #
     def search(search_index, params = nil)
       reset!
