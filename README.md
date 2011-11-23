@@ -58,7 +58,8 @@ Customise your request:
     res = req.search('Books', :response_group => 'ItemAttributes',
                               :power          => 'George Orwell'
 
-For all available methods and syntax, [read here] [6].
+For all available methods and syntax, read [here] [6], [here] [7], and
+[here] [8] or check out the [examples] [9].
 
 # The Response
 
@@ -87,4 +88,7 @@ bits and pieces you need:
 [3]: http://travis-ci.org/hakanensari/vacuum
 [4]: http://nokogiri.org/
 [5]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
-[6]: https://github.com/hakanensari/vacuum/blob/master/lib/vacuum/operations.rb
+[6]: https://github.com/hakanensari/vacuum/blob/master/lib/vacuum/lookup_operations.rb
+[7]: https://github.com/hakanensari/vacuum/blob/master/lib/vacuum/search_operations.rb
+[8]: https://github.com/hakanensari/vacuum/blob/master/lib/vacuum/cart_operations.rb
+[9]: https://github.com/hakanensari/vacuum/blob/master/examples/
