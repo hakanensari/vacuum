@@ -47,7 +47,7 @@ module Vacuum
       raise MissingSecret unless secret
       raise MissingTag    unless tag
 
-      self.freeze
+      freeze
     end
 
     # @return [String] the host
