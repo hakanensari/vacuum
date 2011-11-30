@@ -17,8 +17,8 @@ module Vacuum
       when Nokogiri::XML::Element
         hsh = {}
 
-        xml.attributes.each_pair do |key, attr|
-          hsh[key] = attr.value
+        xml.attributes.each_pair do |key, attribute|
+          hsh[key] = attribute.value
         end
 
         xml.children.each do |child|
