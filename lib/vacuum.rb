@@ -39,7 +39,6 @@ module Vacuum
     #
     # @param [#to_sym] locale a locale key
     # @return [Vacuum::Request] a request
-    #
     def new(locale = :us)
       Request.new(@locales[locale.to_sym])
     end
