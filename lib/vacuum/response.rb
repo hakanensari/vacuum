@@ -46,6 +46,8 @@ module Vacuum
     def find(query)
       xml.xpath("//xmlns:#{query}").map { |e| Builder.from_xml(e) }
     end
+
+    # Alias of find
     alias [] find
 
     # @return [true, false] checks if the response has errors
