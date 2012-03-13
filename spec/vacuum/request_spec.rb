@@ -65,9 +65,7 @@ module Vacuum
         req.build 'Key' => 'value'
         req.params.should have_key 'Key'
 
-        req
-          .build!
-          .params.should_not have_key 'Key'
+        req.build!.params.should_not have_key 'Key'
       end
     end
 
