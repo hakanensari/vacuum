@@ -52,7 +52,7 @@ module Vacuum
 
     # Replaces the request query with given parameters.
     #
-    # see(#build)
+    # @see(#build)
     def build!(hsh = {})
       _reset!
       build hsh
