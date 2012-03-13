@@ -35,12 +35,12 @@ module Vacuum
       build!({ 'Operation'   => 'ItemSearch',
                'SearchIndex' => search_index }.merge(params))
 
-      get
+      get.items
     end
   end
 
   class Response
-    def to_item
+    def items
       find('Item') { |item| Item.new(item) }
     end
   end
@@ -50,6 +50,6 @@ req = Vacuum.new :key    => KEY,
                  :secret => SECRET,
                  :tag    => TAG
 
-items = req.search('deleuze').to_item
+items = req.search('deleuze')
 
 binding.pry
