@@ -98,6 +98,8 @@ module Vacuum
 
     def _query_string
       qs   = params.sort.map { |k, v| "#{k}=" + _escape(v) }.join('&')
+
+      # Sign query string.
       dig  = OpenSSL::Digest::Digest.new 'sha256'
       req  = ['GET', @host, '/onca/xml', qs]
       hmac = OpenSSL::HMAC.digest dig, @secret, req.join("\n")
