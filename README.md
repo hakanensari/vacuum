@@ -7,24 +7,23 @@
 Vacuum is a [Nokogiri][4]-backed Ruby wrapper to the [Amazon Product
 Advertising API] [5].
 
-Create:
+# Usage
 
+    # Create a request.
     req = Vacuum.new key:    'key',
                      secret: 'secret',
                      tag:    'tag',
                      locale: 'us'
 
-Build:
-
+    # Build query.
     req.build 'Operation'    => 'ItemSearch',
               'SearchIndex'  => 'All',
               'Keywords'     => 'Gilles Deleuze'
 
-Get:
+    # Execute.
     res = request.get
 
-Consume:
-
+    # Consume response.
     if res.valid?
       # res.to_hash
       res.find('Item') do |item|
@@ -32,11 +31,7 @@ Consume:
       end
     end
 
-
-Check out [some examples] [6].
-
-# The Response
-
+Check out some examples [here] [6].
 
 [1]: https://github.com/hakanensari/vacuum/blob/master/vacuum.png?raw=true
 [2]: https://secure.travis-ci.org/hakanensari/vacuum.png
