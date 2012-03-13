@@ -7,6 +7,11 @@ Vacuum.configure :us do |c|
 end
 req = Vacuum.new :us
 
-res = req.find('0816614024')
+req << {
+  'Operation' => 'ItemLookup',
+  'ItemId'    => '0816614024'
+}
+
+res = req.get
 
 binding.pry

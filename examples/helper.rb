@@ -1,25 +1,21 @@
 require 'bundler/setup'
 require 'pry'
 
-require File.expand_path('../../lib/vacuum', __FILE__)
+$:.unshift File.expand_path('../../lib', __FILE__)
 
 credentials_path = File.expand_path('../credentials.yml', __FILE__)
 credentials = YAML::load(File.open(credentials_path))
 
-KEY           = credentials['key']
-SECRET        = credentials['secret']
-ASSOCIATE_TAG = credentials['associate_tag']
+KEY    = credentials['key']
+SECRET = credentials['secret']
+TAG    = credentials['associate_tag']
 
 # Some ASINs
 module Asin
-  class << self
-    def asins
-      File.new(File.expand_path('../asins', __FILE__)).map(&:chomp)
-    end
-
-    def method_missing(mth, *args, &block)
-      (@asins ||= asins).send(mth, *args, &block)
-    end
+  def self.method_missing(mth, *args, &block)
+    File.new(File.expand_path('../asins', __FILE__))
+      .map(&:chomp)
+      .send(mth, *args, &block)
   end
 end
 
