@@ -35,7 +35,7 @@ module Vacuum
     #
     def find(query)
       xml.xpath("//xmlns:#{query}").map do |node|
-        hsh = HashBuilder.from_xml node
+        hsh = Knack.from_xml node
         block_given? ? yield(hsh) : hsh
       end
     end
@@ -47,7 +47,7 @@ module Vacuum
 
     # @return [Hash] A hash representation of the entire response.
     def to_hash
-      HashBuilder.from_xml xml
+      Knack.from_xml xml
     end
 
     # @return [true, false] Whether the HTTP response is OK

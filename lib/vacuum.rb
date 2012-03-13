@@ -1,10 +1,12 @@
 require 'forwardable'
 require 'net/http'
-require 'nokogiri'
 require 'openssl'
 require 'time'
 
-%w{hash_builder request response}.each do |f|
+require 'knack'
+require 'nokogiri'
+
+%w{request response}.each do |f|
   require "vacuum/#{f}"
 end
 
