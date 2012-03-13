@@ -1,8 +1,8 @@
 # Vacuum
 
-[![travis] [2]] [3]
+[![travis] [1]] [2]
 
-![vacuum] [1]
+![vacuum] [3]
 
 Vacuum is a minimal Ruby wrapper to the [Amazon Product Advertising API] [4].
 
@@ -36,8 +36,8 @@ end
 
 Read further [here] [5].
 
-[1]: https://github.com/hakanensari/vacuum/blob/master/vacuum.png?raw=true
-[2]: https://secure.travis-ci.org/hakanensari/vacuum.png
-[3]: http://travis-ci.org/hakanensari/vacuum
+[1]: https://secure.travis-ci.org/hakanensari/vacuum.png
+[2]: http://travis-ci.org/hakanensari/vacuum
+[3]: http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png
 [4]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
 [5]: https://github.com/hakanensari/vacuum/blob/master/examples/
