@@ -9,27 +9,29 @@ Advertising API] [5].
 
 # Usage
 
-    # Create a request.
-    req = Vacuum.new key:    'key',
-                     secret: 'secret',
-                     tag:    'tag',
-                     locale: 'us'
+```ruby
+# Create a request.
+req = Vacuum.new key:    'key',
+                 secret: 'secret',
+                 tag:    'tag',
+                 locale: 'us'
 
-    # Build query.
-    req.build 'Operation'    => 'ItemSearch',
-              'SearchIndex'  => 'All',
-              'Keywords'     => 'Gilles Deleuze'
+# Build query.
+req.build 'Operation'    => 'ItemSearch',
+          'SearchIndex'  => 'All',
+          'Keywords'     => 'Gilles Deleuze'
 
-    # Execute.
-    res = request.get
+# Execute.
+res = request.get
 
-    # Consume response.
-    if res.valid?
-      # res.to_hash
-      res.find('Item') do |item|
-        p item['ASIN']
-      end
-    end
+# Consume response.
+if res.valid?
+  # res.to_hash
+  res.find('Item') do |item|
+    p item['ASIN']
+  end
+end
+```
 
 Check out some examples [here] [6].
 
