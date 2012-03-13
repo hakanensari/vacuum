@@ -4,7 +4,6 @@ require 'openssl'
 require 'time'
 
 require 'knack'
-require 'nokogiri'
 
 %w{request response}.each do |f|
   require "vacuum/#{f}"
