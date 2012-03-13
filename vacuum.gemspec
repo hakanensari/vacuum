@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.version     = Vacuum::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Hakan Ensari']
-  s.email       = ['code@papercavalier.com']
-  s.homepage    = 'http://code.papercavalier.com/vacuum/'
+  s.email       = ['hakan.ensari@papercavalier.com']
+  s.homepage    = 'http://github.com/hakanensari/vacuum'
   s.summary     = %q{A Ruby wrapper to the Amazon Product Advertising API}
   s.description = %q{Vacuum is a Ruby wrapper to the Amazon Product Advertising API.}
 

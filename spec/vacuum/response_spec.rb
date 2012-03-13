@@ -4,19 +4,7 @@ module Vacuum
   describe Response do
     let(:res) do
       body = File.read(File.expand_path('../../fixtures/http_response', __FILE__))
-      code = '200'
-      Response.new(body, code)
-    end
-
-    describe '#each' do
-      it 'yields matches to given block' do
-        yielded = false
-        res.each('Item') do |item|
-          yielded = true
-        end
-
-        yielded.should be_true
-      end
+      Response.new(body, '200')
     end
 
     describe '#errors' do
@@ -34,35 +22,31 @@ module Vacuum
       end
     end
 
-    describe '#has_errors?' do
-      context 'when a response does not contain any errors' do
-        it 'returns false' do
-          res.stub!(:errors).and_return([])
-
-          res.should_not have_errors
-        end
-      end
-
-      context 'when a response contains errors' do
-        it 'returns true' do
-          res.stub!(:errors).and_return([1])
-
-          res.should have_errors
-        end
-      end
-    end
-
     describe '#find' do
       it 'returns an array of matching nodes' do
         res.find('ASIN').should_not be_empty
       end
+
+      it 'yields matches to a block if given one' do
+        titles = res.find('Item') { |item| item['ItemAttributes']['Title'] }
+        titles.count.should eql 2
+        titles.each { |title| title.should be_a String }
+      end
     end
 
-    describe "#map" do
-      it "yields each match to a block and maps returned values" do
-        titles = res.map('Item') { |i| i['ItemAttributes']['Title'] }
+    describe '#has_errors?' do
+      context 'when response does not contain any errors' do
+        it 'returns false' do
+          res.stub!(:errors).and_return([])
+          res.should_not have_errors
+        end
+      end
 
-        titles.count.should eql 2
+      context 'when response contains errors' do
+        it 'returns true' do
+          res.stub!(:errors).and_return([1])
+          res.should have_errors
+        end
       end
     end
 

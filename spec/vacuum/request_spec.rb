@@ -2,51 +2,72 @@ require 'spec_helper'
 
 module Vacuum
   describe Request do
-    let_req
+    let(:req) do
+      Request.new :locale => :us,
+                  :key    => 'foo',
+                  :secret => 'bar',
+                  :tag    => 'baz'
+    end
 
-    describe '#<<' do
-      before do
-        req.reset!
+    describe ".new" do
+      it 'raises an error if key is missing' do
+        expect do
+          Request.new :secret => 'foo',
+                      :tag    => 'bar'
+        end.to raise_error MissingKey
       end
 
-      it 'merges parameters into the query' do
-        req << { 'Key' => 'value' }
+      it 'raises an error if secret is missing' do
+        expect do
+          Request.new :key => 'foo',
+                      :tag => 'bar'
+        end.to raise_error MissingSecret
+      end
 
+      it 'raises an error if tag is missing' do
+        expect do
+          Request.new :key    => 'foo',
+                      :secret => 'bar'
+        end.to raise_error MissingTag
+      end
+
+      it 'raises an error if locale is not valid' do
+        expect do
+          Request.new :key    => 'foo',
+                      :secret => 'bar',
+                      :tag    => 'baz',
+                      :locale => 'bad'
+        end.to raise_error BadLocale
+      end
+    end
+
+    describe '#build' do
+      it 'merges parameters into the query' do
+        req.build 'Key' => 'value'
         req.params['Key'].should eql 'value'
       end
 
-      it 'camelizes keys' do
-        req << { :some_key => 'value' }
-
-        req.params.should have_key 'SomeKey'
-      end
-
-      it 'leaves camelized keys as is' do
-        req << { 'SomeKey' => 'value' }
-
-        req.params.should have_key 'SomeKey'
-      end
-
-      it 'casts numeric values to string' do
-        req << { 'Key' => 1 }
-
+      it 'casts values to string' do
+        req.build 'Key' => 1
         req.params['Key'].should eql '1'
-      end
 
-      it 'converts array values to string' do
-        req << { 'Key' => ['foo', 'bar'] }
-
+        req.build 'Key' => ['foo', 'bar']
         req.params['Key'].should eql 'foo,bar'
       end
 
-      it 'removes whitespace after commas in values' do
-        req << { 'Key' => 'foo,  bar' }
-
-        req.params['Key'].should eql 'foo,bar'
+      it 'returns self' do
+        req.build({}).should eql req
       end
+    end
 
-      it 'returns the request' do
-        req.<<({ }).should eql req
+    describe '#build!' do
+      it 'clears existing query' do
+        req.build 'Key' => 'value'
+        req.params.should have_key 'Key'
+
+        req
+          .build!
+          .params.should_not have_key 'Key'
       end
     end
 
@@ -57,7 +78,7 @@ module Vacuum
     end
 
     describe '#params' do
-      it 'includes common request parameters' do
+      it 'includes shared request parameters' do
         req.params['Service'].should eql 'AWSECommerceService'
       end
 
@@ -70,31 +91,17 @@ module Vacuum
         req.params['Timestamp'].should =~ /^\d+-\d+-\d+T\d+:\d+:\d+Z$/
       end
 
-      context 'when no API version is specified' do
+      context 'when no API version is given' do
         it 'includes the current API version' do
           req.params['Version'].should eql Request::CURRENT_API_VERSION
         end
       end
 
-      context 'when an API version is specified' do
-        it 'includes the specified API version' do
-          req << { 'Version' => '1' }
+      context 'when an API version is given' do
+        it 'includes the given API version' do
+          req.build 'Version' => '1'
           req.params['Version'].should eql '1' 
         end
-      end
-    end
-
-    describe '#reset!' do
-      it 'resets the request parameters' do
-        req << { 'Key' => 'value' }
-        req.params.should have_key 'Key'
-
-        req.reset!
-        req.params.should_not have_key 'Key'
-      end
-
-      it 'returns the request' do
-        req.reset!.should eql req
       end
     end
 
@@ -108,16 +115,16 @@ module Vacuum
       end
 
       it 'sorts the request parameters' do
-        req << { 'A' => 1 }
+        req.build 'A' => 1
         req.url.query.should match /^A=1&/
       end
 
       it 'URL-encodes values' do
-        req << { :key => 'foo,bar' }
+        req.build 'Key' => 'foo,bar'
         req.url.query.should match /foo%2Cbar/
       end
 
-      it 'signs the query' do
+      it 'is signed' do
         req.url.query.should match /&Signature=/
       end
     end

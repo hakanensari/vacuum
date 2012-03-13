@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Vacuum
-  describe Builder do
+  describe HashBuilder do
     let(:xml) do
       xml = <<-XML.gsub!(/>\s+</, '><').strip!
       <?xml version=\"1.0\" ?>
@@ -17,19 +17,19 @@ module Vacuum
 
     describe '.from_xml' do
       it 'returns a hash' do
-        Builder.from_xml(xml).should be_an_instance_of Hash
+        HashBuilder.from_xml(xml).should be_an_instance_of Hash
       end
 
       it 'handles only childs' do
-        Builder.from_xml(xml)['Title'].should eql 'Anti-Oedipus'
+        HashBuilder.from_xml(xml)['Title'].should eql 'Anti-Oedipus'
       end
 
       it 'handles arrays' do
-        Builder.from_xml(xml)['Author'].should be_a Array
+        HashBuilder.from_xml(xml)['Author'].should be_a Array
       end
 
       it 'handles attributes' do
-        node = Builder.from_xml(xml)['Creator']
+        node = HashBuilder.from_xml(xml)['Creator']
         node['Role'].should eql 'Translator'
         node['__content__'].should eql 'Robert Hurley'
       end

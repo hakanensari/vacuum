@@ -1,117 +1,112 @@
-require 'vacuum/cart_operations'
-require 'vacuum/lookup_operations'
-require 'vacuum/search_operations'
-
 module Vacuum
   # A wrapper around the request to the Amazon Product Advertising API
   class Request
-    include CartOperations
-    include LookupOperations
-    include SearchOperations
-
-    # The latest Amazon API version
-    #
-    # @see http://aws.amazon.com/archives/Product%20Advertising%20API
-    #
-    # @note If you have a whitelisted access key, override this in your
-    # parameters with the earlier `2010-11-01`.
+    # The latest Amazon API version.
     CURRENT_API_VERSION = '2011-08-01'
 
-    # Creates a new request for specified locale
+    # A list of Amazon endpoints.
+    HOSTS = {
+      :ca => 'ecs.amazonaws.ca',
+      :cn => 'webservices.amazon.cn',
+      :de => 'ecs.amazonaws.de',
+      :es => 'webservices.amazon.es',
+      :fr => 'ecs.amazonaws.fr',
+      :it => 'webservices.amazon.it',
+      :jp => 'ecs.amazonaws.jp',
+      :uk => 'ecs.amazonaws.co.uk',
+      :us => 'ecs.amazonaws.com'
+    }
+
+    # Creates a new request for given locale and credentials.
     #
-    # @param [#Vacuum::Locale] a locale
-    def initialize(locale)
-      @locale, @params = locale, Hash.new
+    # @param [Hash] options
+    # @option opts [#to_sym] :locale An Amazon locale
+    # @option opts [String] :key An Amazon AWS access key ID
+    # @option opts [String] :secret An Amazon AWS access secret key
+    # @options opts [String] :tag An Amazon Associate tag
+    # @raise [MissingKey] An Amazon AWS access key ID was not given
+    # @raise [MissingSecret] An Amazon AWS secret key was not given
+    # @raise [MissingTag] An Amazon Associate tag was not given
+    # @return [self]
+    def initialize(options)
+      _reset!
+
+      locale  = (options[:locale] || :us).to_sym
+      @host   = HOSTS[locale]    or raise BadLocale
+      @key    = options[:key]    or raise MissingKey
+      @secret = options[:secret] or raise MissingSecret
+      @tag    = options[:tag]    or raise MissingTag
     end
 
-    # Merges a hash of request parameters into the query
+    # Merges given parameters into the request query.
     #
-    # @param [Hash] hsh pairs of parameter keys and values
-    # @return [Vacuum::Request] the request object
-    #
-    # @example
-    #   request << { :key => 'value' }
-    #
-    def <<(hsh)
+    # @param [Hash] hsh Pairs of keys and values
+    # @return [self]
+    def build(hsh)
       hsh.each do |k, v|
-        # Cast value to string.
-        v = v.is_a?(Array) ? v.join(',') : v.to_s
-
-        # Remove whitespace after commas.
-        v.gsub!(/,\s+/, ',')
-
-        # Camelize key.
-        k = k.to_s.
-              split('_').
-              map { |w| w[0, 1] = w[0, 1].upcase; w }.
-              join
-
-        @params[k] = v
+        @params[k] = v.is_a?(Array) ? v.join(',') : v.to_s
       end
 
       self
     end
 
-    # Performs a request
+    # Replaces the request query with given parameters.
     #
-    # @return [Vacuum::Response] a response
+    # see(#build)
+    def build!(hsh = {})
+      _reset!
+      build hsh
+    end
+
+    # Performs a request.
+    #
+    # @return [Vacuum::Response] A response
     def get
       res = Net::HTTP.get_response(url)
-
       Response.new(res.body, res.code)
     end
 
-    # @return [Hash] the request parameters
+    # @return [Hash] The parameters that make up the request query.
     def params
-      { 'AWSAccessKeyId' => @locale.key,
-        'AssociateTag'   => @locale.tag,
+      { 'AWSAccessKeyId' => @key,
+        'AssociateTag'   => @tag,
         'Service'        => 'AWSECommerceService',
-        'Timestamp'      => timestamp,
-        'Version'        => CURRENT_API_VERSION }.merge(@params)
+        'Timestamp'      => _timestamp,
+        'Version'        => CURRENT_API_VERSION }
+        .merge(@params)
     end
 
-    # Resets the request parameters
-    #
-    # @return [Vacuum::Request] the request object
-    def reset!
-      @params = {}
-
-      self
-    end
-
-    # @return [URI::HTTP] the URL for the API request
+    # @return [URI::HTTP] The URL for the API request
     def url
-      URI::HTTP.build(:host  => @locale.host,
+      URI::HTTP.build :host  => @host,
                       :path  => '/onca/xml',
-                      :query => sign(query))
+                      :query => _signed_query_string
     end
 
     private
 
-    def escape(value)
+    def _escape(value)
       value.gsub(/([^a-zA-Z0-9_.~-]+)/) do
         '%' + $1.unpack('H2' * $1.bytesize).join('%').upcase
       end
     end
 
-    def query
-      params.sort.map { |k, v| "#{k}=" + escape(v) }.join('&')
+    def _reset!
+      @params = {}
     end
 
-    def sign(unsigned_query)
-      digest = OpenSSL::Digest::Digest.new('sha256')
-      url_string = ['GET',
-                    @locale.host,
-                    '/onca/xml',
-                    unsigned_query].join("\n")
-      hmac = OpenSSL::HMAC.digest(digest, @locale.secret, url_string)
-      signature = escape([hmac].pack('m').chomp)
+    def _signed_query_string
+      qs   = params.sort.map { |k, v| "#{k}=" + _escape(v) }.join('&')
+      dig  = OpenSSL::Digest::Digest.new 'sha256'
+      req  = ['GET', @host, '/onca/xml', qs]
+      hmac = OpenSSL::HMAC.digest dig, @secret, req.join("\n")
+      sig  = _escape [hmac].pack('m').chomp
 
-      "#{unsigned_query}&Signature=#{signature}"
+      "#{qs}&Signature=#{sig}"
     end
 
-    def timestamp
-      Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+    def _timestamp
+      Time.now.utc.iso8601
     end
   end
 end

@@ -1,15 +1,9 @@
 module Vacuum
-  module Builder
-    # Builds a hash from a Nokogiri XML document
+  module HashBuilder
+    # Builds a hash from a Nokogiri XML document.
     #
-    # @note In earlier versions of the library, I was relying on the
-    # XML Mini Nokogiri module in Active Support. This method
-    # essentially accomplishes the same.
-    #
-    # @see Based on https://gist.github.com/335286
-    #
-    # @param [Nokogiri::XML::Document] xml an XML document
-    # @return [Hash] a hashified version of the XML document
+    # @param [Nokogiri::XML::Document] xml An XML document
+    # @return [Hash]
     def self.from_xml(xml)
       case xml
       when Nokogiri::XML::Document

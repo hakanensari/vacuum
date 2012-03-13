@@ -1,87 +1,63 @@
 module Vacuum
-  # A wrapper around the API response
+  # A wrapper around the API response.
   class Response
 
-    # @return [String] body the response body
+    # @return [String] body The response body
     attr_accessor :body
 
-    # @return [Integer] code the HTTP status code of the response
+    # @return [Integer] code The HTTP status code of the response
     attr_accessor :code
 
-    # Creates a new response
+    # Creates a new response.
     #
-    # @param [String] body the response body
-    # @param [#to_i] code the HTTP status code of the response
+    # @param [String] body The response body
+    # @param [#to_i] code The HTTP status code of the response
     def initialize(body, code)
       @body = body
       @code = code.to_i
     end
 
-    # Queries for a specified attribute and yields to a given block
-    # each matching document
-    #
-    # @param [String] query attribute to be queried
-    # @yield passes matching nodes to given block
-    #
-    # @example
-    #   res.each('Item') { |item| p item }
-    #
-    def each(query, &block)
-      find(query).each { |match| block.call(match) }
-    end
-
-    # @return [Array] errors in the response
+    # @return [Array] Errors in the response
     def errors
-      find('Error')
+      find 'Error'
     end
 
-    # Queries for a specified attribute and returns matching nodes
+    # Queries for a given attribute, yielding matching nodes to a block if
+    # given one.
     #
-    # @param [String] query attribute to be queried
-    # @return [Array] matching nodes
+    # @param [String] Query attribute to be queried
+    # @yield Optionally passes matching nodes to a given block
+    # @return [Array] Matches
     #
     # @example
     #   items = res.find('Item')
+    #   asins = res.find('Item') { |item| item['ASIN'] }
     #
     def find(query)
-      xml.xpath("//xmlns:#{query}").map { |e| Builder.from_xml(e) }
+      xml.xpath("//xmlns:#{query}").map do |node|
+        hsh = HashBuilder.from_xml node
+        block_given? ? yield(hsh) : hsh
+      end
     end
 
-    # Alias of find
-    alias [] find
-
-    # @return [true, false] checks if the response has errors
+    # @return [true, false] Whether the response has errors
     def has_errors?
       errors.count > 0
     end
 
-    # Queries for a specifed attribute, yields to a given block
-    # matching nodes, and collects final values.
-    #
-    # @param [String] query attribute to be queried
-    # @yield passes matching nodes to given block
-    # @return [Array] processed results
-    #
-    # @example
-    #   asins = res.map('Item') { |item| item['ASIN'] }
-    #
-    def map(path, &block)
-      find(path).map { |match| block.call(match) }
-    end
-
-    # @return [Hash] a hashified version of the response body
+    # @return [Hash] A hash representation of the entire response.
     def to_hash
-      Builder.from_xml(xml)
+      HashBuilder.from_xml xml
     end
 
-    # @return [true, false] checks if the HTTP response is OK
+    # @return [true, false] Whether the HTTP response is OK
     def valid?
       code == 200
     end
 
     # @return [Nokogiri::XML] the XML document
     def xml
-      @xml ||= Nokogiri::XML(@body)
+      @xml ||= Nokogiri::XML @body
     end
   end
 end
