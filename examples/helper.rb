@@ -19,6 +19,8 @@ module Asin
   end
 end
 
-Pry.hooks[:before_session] = proc { |out, target|
-  Pry.run_command 'whereami 100', :context => target
-}
+Pry.config.hooks.clear :before_session
+Pry.config.hooks.add_hook(:before_session, :dump_code) do |out, target|
+  line_count = `wc -l #{target.eval('__FILE__')}`.split.first
+  Pry.run_command "whereami #{line_count}", :context => target
+end
