@@ -12,7 +12,8 @@ EM.run do
       req.build 'Operation' => 'ItemLookup',
                 'ItemId'    => '0143105825'
 
-      req.aget do |res|
+      err = ->(http) { raise http.error }
+      req.aget(err) do |res|
         iter.return({ locale => res })
       end
     }, proc { |all|
