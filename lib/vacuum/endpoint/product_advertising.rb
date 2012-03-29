@@ -16,10 +16,8 @@ module Vacuum
       }
 
       # Returns a String Product Advertising API host.
-      #
-      # Raises an Argument Error if the API locale is not valid.
       def host
-        HOSTS[locale] or raise ArgumentError, 'invalid locale'
+        HOSTS[locale]
       end
 
       # Sets the String Associate tag.
