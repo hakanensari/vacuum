@@ -1,11 +1,12 @@
-source :rubygems
-
+source 'http://rubygems.org'
 gemspec
 
-gem 'em-http-request'
-gem 'pry' unless ENV['CI']
-gem 'rake'
-gem 'rspec'
-gem 'structure'
-
 gem 'jruby-openssl', :platform => :jruby
+
+group :development do
+  gem 'em-synchrony'
+  gem 'em-http-request'
+  gem 'structure'
+end
+
+gem 'pry' unless ENV['CI']

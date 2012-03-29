@@ -8,11 +8,18 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Hakan Ensari']
   s.email       = ['hakan.ensari@papercavalier.com']
-  s.homepage    = 'http://github.com/hakanensari/vacuum'
-  s.summary     = %q{A Ruby wrapper to the Amazon Product Advertising API}
-  s.description = %q{Vacuum is a Ruby wrapper to the Amazon Product Advertising API.}
+  s.homepage    = 'https://github.com/hakanensari/vacuum'
+  s.summary     = 'A wrapper to various Amazon Web Services APIs'
+  s.description = <<-EOF
+Vacuum is a wrapper to various Amazon Web Services (AWS) APIs, including
+Product Advertising and Marketplace Web Services (MWS).
+  EOF
 
-  s.add_runtime_dependency 'knack', '~> 1.0'
+  s.add_development_dependency 'rake', '~> 0.9'
+  s.add_development_dependency 'rspec', '~> 2.9'
+  s.add_runtime_dependency 'addressable', '~> 2.2'
+  s.add_runtime_dependency 'faraday', '~> 0.7.6'
+  s.add_runtime_dependency 'nokogiri', '~> 1.5'
 
   s.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
   s.test_files    = Dir.glob('spec/**/*')

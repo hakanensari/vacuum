@@ -1,25 +1,37 @@
+# Standard library dependencies.
+require 'base64'
 require 'forwardable'
-require 'net/http'
 require 'openssl'
 require 'time'
 
-require 'knack'
+# External dependencies.
+require 'addressable/uri'
+require 'faraday'
+require 'nokogiri'
 
-%w{request response}.each do |f|
-  require "vacuum/#{f}"
-end
+# Internal dependencies.
+require 'vacuum/endpoint/base'
+require 'vacuum/request/base'
+require 'vacuum/request/signature/authentication'
+require 'vacuum/request/signature/builder'
+require 'vacuum/request/utils'
+require 'vacuum/response/base'
+require 'vacuum/response/utils'
 
-
-# Vacuum is a Ruby wrapper to the Amazon Product Advertising API.
+# Vacuum is a Ruby wrapper to various Amazon Web Services (AWS) APIs.
 module Vacuum
   class BadLocale     < ArgumentError; end
   class MissingKey    < ArgumentError; end
   class MissingSecret < ArgumentError; end
-  class MissingTag    < ArgumentError; end
 
   class << self
-    extend Forwardable
+    def new(api, &blk)
+      require "vacuum/#{api}"
 
-    def_delegators Request, :new
+      case api
+      when :product_advertising
+        Request::ProductAdvertising.new &blk
+      end
+    end
   end
 end

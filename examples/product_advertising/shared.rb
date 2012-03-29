@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'pry'
+require 'vacuum'
 
 $:.unshift File.expand_path('../../lib', __FILE__)
 
@@ -19,8 +20,8 @@ module Asin
   end
 end
 
-Pry.config.hooks.clear :before_session
-Pry.config.hooks.add_hook(:before_session, :dump_code) do |out, target|
-  line_count = `wc -l #{target.eval('__FILE__')}`.split.first
-  Pry.run_command "whereami #{line_count}", :context => target
+@req = Vacuum.new(:product_advertising) do |config|
+  config.key    = KEY
+  config.secret = SECRET
+  config.tag    = TAG
 end
