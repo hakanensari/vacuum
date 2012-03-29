@@ -1,7 +1,8 @@
 module Vacuum
   module Request
     module Signature
-      # Internal: Signs a request to an Amazon API with an HMAC-SHA256 signature.
+      # Internal: Signs a request to an Amazon API with an HMAC-SHA256
+      # signature.
       class Builder
         # Returns a Hash that contains info about the request.
         attr :env

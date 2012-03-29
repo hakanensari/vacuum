@@ -62,11 +62,6 @@ module Vacuum
         end
       end
 
-      # Returns the default Hash parameters shared by all AWS API requests.
-      def default_parameters
-        { 'AWSAccessKeyId' => endpoint.key }
-      end
-
       # Performs the AWS API request.
       #
       # Returns a Vacuum::Response.
@@ -91,6 +86,10 @@ module Vacuum
 
       def class_basename
         self.class.name.split('::').last
+      end
+
+      def default_parameters
+        { 'AWSAccessKeyId' => endpoint.key }
       end
     end
   end
