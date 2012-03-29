@@ -13,8 +13,7 @@ Vacuum is a [Faraday] [4]- and [Nokogiri] [5]-based Ruby wrapper to various
 require 'vacuum'
 
 # Set up a request.
-req = Vacuum.new :product_advertising
-req.configure do |config|
+req = Vacuum.new(:product_advertising) do |config|
   config.key    'key'
   config.secret 'secret'
   config.tag    'tag'
