@@ -1,13 +1,13 @@
 # Vacuum
 
-[![travis][1]][2]
+[![travis] [1]] [2]
 
-![vacuum][3]
+![vacuum] [3]
 
-Vacuum is a [Faraday][4]- and [Nokogiri][5]-based Ruby wrapper to various
-[Amazon Web Services (AWS) APIs][6].
+Vacuum is a [Faraday] [4]- and [Nokogiri] [5]-based Ruby wrapper to various
+[Amazon Web Services (AWS) APIs] [6].
 
-# [Amazon Product Advertising API][7]
+## [Amazon Product Advertising API] [7]
 
 ```ruby
 require 'vacuum'
@@ -48,11 +48,11 @@ end
 
 Read further [here] [8].
 
-# [Amazon Marketplace Web Services API][9]
+## [Amazon Marketplace Web Services API] [9]
 
 Work in progress.
 
-# Other AWS APIs
+## Other AWS APIs
 
 Vacuum should also work with EC2, S3, SimpleDB, SQS, SNS, SES, ELB, CW,
 and what have you. Feel free to implement and send over a pull request.
@@ -65,3 +65,4 @@ and what have you. Feel free to implement and send over a pull request.
 [6]: http://aws.amazon.com/
 [7]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
 [8]: https://github.com/hakanensari/vacuum/blob/master/examples/product_advertising/
+[9]: https://developer.amazonservices.com/gp/mws/docs.html
