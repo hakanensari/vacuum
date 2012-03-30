@@ -1,8 +1,5 @@
-require 'vacuum'
-
-%w(endpoint).each do |path|
+%w(endpoint request response).each do |path|
   require "vacuum/#{path}/mws"
-  require "vacuum/#{path}/mws_products"
 end
 
 module Vacuum

@@ -4,7 +4,8 @@ begin
 rescue LoadError
 end
 
-require 'vacuum/mws_products'
+require 'vacuum'
+require 'vacuum/mws'
 require 'vacuum/product_advertising'
 
 RSpec.configure do |c|

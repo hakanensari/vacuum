@@ -2,21 +2,22 @@ module Vacuum
   module Request
     # A wrapper to a Marketplace Web Services (MWS) API request.
     class MWS < Base
-      # Returns the Addressable::URI URL of the MWS API
-      # request.
+      # Returns the Addressable::URI URL of the MWS API request.
       def url
-        Addressable::URI.new :scheme        => 'http',
+        Addressable::URI.new :scheme        => 'https',
                              :host          => endpoint.host,
-                             :path          => '/onca/xml',
+                             :path          => endpoint.path,
                              :query_values  => parameters
       end
 
       private
 
       def default_parameters
-        super.merge 'AssociateTag' => endpoint.tag,
-                    'Service'      => 'AWSECommerceService',
-                    'Version'      => '2011-08-01'
+        super.merge 'MarketplaceId'    => endpoint.marketplace,
+                    'SellerId'         => endpoint.seller,
+                    'Service'          => 'AWSECommerceService',
+                    'SignatureMethod'  => 'HmacSHA256',
+                    'SignatureVersion' => 2
       end
     end
   end

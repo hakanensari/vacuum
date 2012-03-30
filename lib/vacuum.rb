@@ -31,6 +31,8 @@ module Vacuum
       case api
       when :product_advertising
         Request::ProductAdvertising.new &blk
+      when :mws
+        Request::MWS.new &blk
       end
     end
   end
