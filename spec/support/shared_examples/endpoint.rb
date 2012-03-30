@@ -33,11 +33,11 @@ shared_examples 'an endpoint' do
     end
 
     it 'describes the Ruby interpreter' do
-      endpoint.user_agent.should match /Language=/
+      endpoint.user_agent.should match /Language=(?:j?ruby|rbx)/
     end
 
     it 'describes the host' do
-      endpoint.user_agent.should match /Host=/
+      endpoint.user_agent.should match /Host=[\w\d]+/
     end
   end
 end

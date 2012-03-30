@@ -46,7 +46,8 @@ module Vacuum
 
       # Returns a String user agent for the AWS API request.
       def user_agent
-        language = [RUBY_ENGINE, RUBY_VERSION, "p#{RUBY_PATCHLEVEL}"].join ' '
+        engine   = defined?(RUBY_ENGINE) ? RUBY_ENGINE : 'ruby'
+        language = [engine, RUBY_VERSION, "p#{RUBY_PATCHLEVEL}"].join ' '
         hostname = `hostname`.chomp
         version  = Vacuum::VERSION
 
