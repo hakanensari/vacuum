@@ -43,6 +43,15 @@ module Vacuum
 
       # Sets the String AWS access secret key.
       attr_writer :secret
+
+      # Returns a String user agent for the AWS API request.
+      def user_agent
+        language = [RUBY_ENGINE, RUBY_VERSION, "p#{RUBY_PATCHLEVEL}"].join ' '
+        hostname = `hostname`.chomp
+        version  = Vacuum::VERSION
+
+        "Vacuum/#{version} (Language=#{language}; Host=#{hostname})"
+      end
     end
   end
 end

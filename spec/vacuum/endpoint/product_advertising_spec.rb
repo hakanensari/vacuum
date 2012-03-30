@@ -9,9 +9,15 @@ module Vacuum
 
       it_behaves_like 'an endpoint'
 
+      describe '#host' do
+        it 'returns a host' do
+          endpoint.host.should match /amazon/
+        end
+      end
+
       describe '#tag' do
         it 'requires tag to have been set' do
-          expect { endpoint.tag }.to raise_error Vacuum::MissingTag
+          expect { endpoint.tag }.to raise_error MissingTag
         end
       end
     end

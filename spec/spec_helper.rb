@@ -3,7 +3,8 @@ begin
   require 'pry'
 rescue LoadError
 end
-require 'vacuum/marketplace_web_services'
+
+require 'vacuum/mws_products'
 require 'vacuum/product_advertising'
 
 RSpec.configure do |c|

@@ -26,4 +26,18 @@ shared_examples 'an endpoint' do
       expect { endpoint.secret }.to raise_error Vacuum::MissingSecret
     end
   end
+
+  describe '#user_agent' do
+    it 'includes the library version number' do
+      endpoint.user_agent.should match /Vacuum\/[\d\w.]+\s/
+    end
+
+    it 'describes the Ruby interpreter' do
+      endpoint.user_agent.should match /Language=/
+    end
+
+    it 'describes the host' do
+      endpoint.user_agent.should match /Host=/
+    end
+  end
 end

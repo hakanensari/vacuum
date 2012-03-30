@@ -1,3 +1,5 @@
+require 'vacuum'
+
 %w(endpoint request response).each do |path|
   require "vacuum/#{path}/product_advertising"
 end
