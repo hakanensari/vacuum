@@ -49,18 +49,17 @@ Read further [here] [8].
 
 ## [Amazon Marketplace Web Services API] [9]
 
-req = Vacuum.new(:mws_products)
-req.configure do |config|
+Work in progress!
+
+```ruby
+req = Vacuum.new(:mws_products) do |config|
   config.locale      'us'
   config.key         'key'
   config.secret      'secret'
   config.marketplace 'marketplace'
   config.seller      'seller'
 end
-
-req.build operation:    'ItemSearch',
-          search_index: 'All',
-          keywords:     'widget'
+```
 
 ## Other AWS APIs
 
