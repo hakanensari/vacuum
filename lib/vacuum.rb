@@ -17,6 +17,7 @@ require 'vacuum/request/signature/builder'
 require 'vacuum/request/utils'
 require 'vacuum/response/base'
 require 'vacuum/response/utils'
+require 'vacuum/version'
 
 # Vacuum is a Ruby wrapper to various Amazon Web Services (AWS) APIs.
 module Vacuum
