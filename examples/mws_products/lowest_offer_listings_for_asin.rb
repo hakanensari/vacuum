@@ -7,6 +7,6 @@ require File.expand_path('../shared.rb', __FILE__)
 )
 @req.build action:         'GetLowestOfferListingsForASIN',
            item_condition: 'Used'
-offers = @req.get.find('GetLowestOfferListingsForASINResult')
+offers = @req.get.find 'GetLowestOfferListingsForASINResult'
 
 binding.pry
