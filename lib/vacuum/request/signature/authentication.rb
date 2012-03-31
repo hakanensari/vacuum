@@ -2,7 +2,7 @@ module Vacuum
   module Request
     module Signature
       # Internal: Middleware that signs REST requests to various Amazon API
-      # endpoints with an HMAC-SHA256 signature.
+      # endpoints.
       class Authentication < Faraday::Middleware
         # Initializes the middleware.
         #

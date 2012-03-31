@@ -15,7 +15,7 @@ module Vacuum
       context 'when API type is set to Products' do
         before do
           request.configure do |config|
-            config.api_type = :products
+            config.api = :products
           end
         end
 

@@ -1,6 +1,6 @@
 module Vacuum
   module Request
-    # A wrapper to a Marketplace Web Services (MWS) API request.
+    # A Marketplace Web Services (MWS) API request.
     class MWS < Base
       # Returns the Addressable::URI URL of the MWS API request.
       def url

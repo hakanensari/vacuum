@@ -26,13 +26,18 @@ module Vacuum
 
   class << self
     def new(api, &blk)
-      require "vacuum/#{api}"
-
       case api
+      when /^mws/
+        require 'vacuum/mws'
+        Request::MWS.new do |config|
+          config.api = api.slice(4, api.size).to_sym 
+          blk.call config
+        end
       when :product_advertising
+        require 'vacuum/product_advertising'
         Request::ProductAdvertising.new &blk
-      when :mws
-        Request::MWS.new &blk
+      else
+        raise NotImplementedError
       end
     end
   end

@@ -28,7 +28,7 @@ module Vacuum
       describe '#path' do
         context 'when API type is set to Products' do
           before do
-            endpoint.api_type = :products
+            endpoint.api = :products
           end
 
           it 'returns a URL path' do

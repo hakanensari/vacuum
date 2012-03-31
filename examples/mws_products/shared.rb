@@ -7,9 +7,11 @@ $:.unshift File.expand_path('../../lib', __FILE__)
 credentials_path = File.expand_path('../credentials.yml', __FILE__)
 credentials = YAML::load(File.open(credentials_path))
 
-KEY    = credentials['key']
-SECRET = credentials['secret']
-TAG    = credentials['associate_tag']
+KEY         = credentials['key']
+LOCALE      = credentials['locale']
+MARKETPLACE = credentials['marketplace']
+SECRET      = credentials['secret']
+SELLER      = credentials['seller']
 
 # Some ASINs
 module Asin
@@ -20,8 +22,10 @@ module Asin
   end
 end
 
-@req = Vacuum.new(:product_advertising) do |config|
-  config.key    = KEY
-  config.secret = SECRET
-  config.tag    = TAG
+@req = Vacuum.new(:mws_products) do |config|
+  config.key         = KEY
+  config.locale      = LOCALE
+  config.marketplace = MARKETPLACE
+  config.secret      = SECRET
+  config.seller      = SELLER
 end

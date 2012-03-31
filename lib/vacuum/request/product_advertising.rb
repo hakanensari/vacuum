@@ -1,6 +1,6 @@
 module Vacuum
   module Request
-    # A wrapper to a Product Advertising API request.
+    # A Product Advertising API request.
     class ProductAdvertising < Base
       # Returns the Addressable::URI URL of the Product Advertising API
       # request.

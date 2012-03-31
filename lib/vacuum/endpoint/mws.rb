@@ -15,8 +15,8 @@ module Vacuum
         'US' => 'mws.amazonservices.com'
       }
 
-      # Internal Gets/Sets the Symbol API type.
-      attr_accessor :api_type
+      # Internal: Gets/Sets the Symbol MWS API type.
+      attr_accessor :api
 
       # Returns a String MWS API host.
       def host
@@ -25,7 +25,7 @@ module Vacuum
 
       # Sets the String marketplace ID.
       #
-      # Raises a Missing Marketplace ID error if marketplace ID is missing.
+      # Raises a Missing Marketplace error if marketplace ID is missing.
       def marketplace
         @marketplace or raise MissingMarketplace
       end
@@ -34,8 +34,10 @@ module Vacuum
       attr_writer :marketplace
 
       # Returns a String MWS API URL path.
+      #
+      # Raises a Not Implemented Error if API is not implemented.
       def path
-        case api_type
+        case api
         when :products
           '/Products/2011-10-01'
         else
@@ -45,7 +47,7 @@ module Vacuum
 
       # Sets the String seller ID.
       #
-      # Raises a Missing Seller ID error if seller ID is missing.
+      # Raises a Missing Seller error if seller ID is missing.
       def seller
         @seller or raise MissingSeller
       end

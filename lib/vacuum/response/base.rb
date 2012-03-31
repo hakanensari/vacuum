@@ -1,6 +1,6 @@
 module Vacuum
   module Response
-    # A wrapper around an Amazon Web Services (AWS) API response.
+    # An Amazon Web Services (AWS) API response.
     class Base
       # Gets/Sets the String response body.
       attr_accessor :body

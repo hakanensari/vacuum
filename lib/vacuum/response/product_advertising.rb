@@ -1,6 +1,6 @@
 module Vacuum
   module Response
-    # A wrapper around a Product Advertising API response.
+    # A Product Advertising API response.
     class ProductAdvertising < Base
       # Returns an Array of errors.
       def errors

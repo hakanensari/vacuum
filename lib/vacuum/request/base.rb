@@ -1,6 +1,6 @@
 module Vacuum
   module Request
-    # A wrapper to an Amazon Web Services (AWS) API request.
+    # An Amazon Web Services (AWS) API request.
     class Base
       # Returns the AWS API Endpoint.
       attr :endpoint
