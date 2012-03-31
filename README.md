@@ -17,7 +17,7 @@ req = Vacuum.new(:product_advertising) do |config|
   config.key    'key'
   config.secret 'secret'
   config.tag    'tag'
-  config.locale 'us'
+  config.locale 'US'
 end
 
 # Build a query.
