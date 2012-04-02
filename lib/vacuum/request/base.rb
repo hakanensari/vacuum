@@ -22,7 +22,7 @@ module Vacuum
       # Returns self.
       def build(hsh)
         hsh.each do |k, v|
-          k = k.to_s.split('_').map(&:capitalize).join if k.is_a? Symbol
+          k = Utils.camelize k.to_s if k.is_a? Symbol
           @parameters[k] = v.is_a?(Array) ? v.join(',') : v.to_s
         end
 

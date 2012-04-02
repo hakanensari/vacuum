@@ -34,11 +34,16 @@ shared_examples 'a request' do
     end
 
     it 'casts Symbol keys to camel-cased String' do
-      request.build :camel_case => 'value'
-      request.parameters.should have_key 'CamelCase'
+      request.build :foo_bar => 'value'
+      request.parameters.should have_key 'FooBar'
     end
 
-    it 'casts to String' do
+    it 'does not modify String keys' do
+      request.build 'foo_bar' => 'value'
+      request.parameters.should have_key 'foo_bar'
+    end
+
+    it 'casts values to String' do
       request.build 'Key' => 1
       request.parameters['Key'].should eql '1'
     end
