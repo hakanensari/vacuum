@@ -64,7 +64,7 @@ module Vacuum
 
       # Performs the AWS API request.
       #
-      # Returns a Vacuum::Response.
+      # Returns a Vacuum::Response::Base or a subclass thereof.
       def get
         res = connection.get url
         Response.const_get(class_basename).new res.body, res.status

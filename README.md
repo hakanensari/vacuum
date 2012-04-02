@@ -2,76 +2,84 @@
 
 [![travis] [1]] [2]
 
-![vacuum] [3]
+Vacuum is a Ruby wrapper to [various Amazon Web Services (AWS) APIs] [3].
 
-Vacuum is a [Faraday] [4]- and [Nokogiri] [5]-based Ruby wrapper to various
-[Amazon Web Services (AWS) APIs] [6].
+![vacuum] [4]
 
-## [Amazon Product Advertising API] [7]
+## Amazon Product Advertising API
+
+Vacuum knows the [Amazon Product Advertising API] [5] [inside out] [6].
 
 ```ruby
-require 'vacuum'
+request = Vacuum.new(:product_advertising) do |config|
+  config.locale 'US'
 
-# Set up a request.
-req = Vacuum.new(:product_advertising) do |config|
   config.key    'key'
   config.secret 'secret'
   config.tag    'tag'
-  config.locale 'US'
 end
 
-# Build a query.
-req.build operation:    'ItemSearch',
-          search_index: 'All',
-          keywords:     'widget'
-
-# Use an alternative HTTP adapter.
-# req.connection do |builder|
+# Use an alternative Faraday adapter.
+# request.connection do |builder|
 #   builder.adapter :typhoeus
 # end
 
-# Execute.
-res = request.get
+# A barebone search request.
+request.build operation:    'ItemSearch',
+              search_index: 'Books',
+              keywords:     'Deleuze'
+response = request.get
 
-# Consume response.
-if res.valid?
-  # res.code
-  # res.body
-  # res.xml
-  # res.to_hash
-  res.find('Item') do |item|
+# A less verbose search.
+request.search :books, 'Deleuze'
+
+if response.valid?
+  # response.code
+  # response.body
+  # response.errors
+  # response.xml # The Nokogiri XML doc
+  # response.to_hash
+  response.find('Item') do |item|
     p item['ASIN']
   end
 end
 ```
+## Amazon Marketplace Web Services API
 
-Read further [here] [8].
-
-## [Amazon Marketplace Web Services API] [9]
-
-Work in progress!
+The wrapper to the [Amazon Marketplace Web Services API] [7] is a
+work-in-progress.
 
 ```ruby
-req = Vacuum.new(:mws_products) do |config|
-  config.locale      'us'
+request = Vacuum.new(:mws_products) do |config|
+  config.locale      'US'
+
   config.key         'key'
   config.secret      'secret'
   config.marketplace 'marketplace'
   config.seller      'seller'
 end
+
+request.build 'Action'          => 'GetLowestOfferListingsForASIN',
+              'ASINList.ASIN.1' => '0231081596'
+offers = request.get.find 'GetLowestOfferListingsForASINResult'
 ```
 
 ## Other AWS APIs
 
-Vacuum should also work with EC2, S3, SimpleDB, SQS, SNS, SES, ELB, CW,
-and what have you. Feel free to implement and send over a pull request.
+Vacuum should work with EC2, S3, IAM, SimpleDB, SQS, SNS, SES, ELB, CW, and so
+on. Implement and send a pull request.
+
+# Addendum
+
+![vacuums] [8]
+
+> Workers queuing to crawl AWS.
 
 [1]: https://secure.travis-ci.org/hakanensari/vacuum.png
 [2]: http://travis-ci.org/hakanensari/vacuum
-[3]: http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png
-[4]: https://github.com/technoweenie/faraday
-[5]: https://nokogiri/
-[6]: http://aws.amazon.com/
-[7]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
-[8]: https://github.com/hakanensari/vacuum/blob/master/examples/product_advertising/
-[9]: https://developer.amazonservices.com/gp/mws/docs.html
+[3]: http://aws.amazon.com/
+[4]: http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png
+[5]: https://affiliate-program.amazon.co.uk/gp/advertising/api/detail/main.html
+[6]: https://github.com/hakanensari/vacuum/blob/master/examples/product_advertising/
+[7]: https://developer.amazonservices.com/gp/mws/docs.html
+[8]: http://f.cl.ly/items/1Q3W372A0H3M0w2H1e0W/hoover.jpeg
