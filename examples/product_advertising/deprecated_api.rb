@@ -1,11 +1,9 @@
 require File.expand_path('../shared.rb', __FILE__)
 
-@req.build 'Operation'     => 'ItemLookup',
-           'MerchantId'    => 'All',
-           'Condition'     => 'All',
-           'ResponseGroup' => 'OfferFull',
-           'ItemId'        => '0816614024',
-           'Version'       => '2010-11-01'
-items = @req.get.find('Item')
+res = @req.look_up '0816614024', response_group: 'OfferFull',
+                                 merchant_id:    'All',
+                                 condition:      'All',
+                                 version:        '2010-11-01'
+items = res.find('Item')
 
 binding.pry

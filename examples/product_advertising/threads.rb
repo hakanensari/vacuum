@@ -1,6 +1,6 @@
 require File.expand_path('../shared.rb', __FILE__)
 
-results, mutex = {}, Mutex.new
+res, mutex = {}, Mutex.new
 Vacuum::Endpoint::Base::LOCALES.map do |locale|
   Thread.new do
     req = Vacuum.new(:product_advertising) do |config|
@@ -10,10 +10,7 @@ Vacuum::Endpoint::Base::LOCALES.map do |locale|
       config.tag    = TAG
     end
 
-    req.build 'Operation' => 'ItemLookup',
-              'ItemId'    => '0143105825'
-
-    mutex.synchronize { results[locale] = req.get.find('Item') }
+    mutex.synchronize { res[locale] = req.look_up('0143105825').find('Item') }
   end
 end.each(&:join)
 

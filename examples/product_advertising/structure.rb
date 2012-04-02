@@ -20,26 +20,6 @@ class Item < Structure
 end
 
 module Vacuum
-  module Request
-    class ProductAdvertising
-      def search(search_index, parameters = nil)
-        if parameters.nil?
-          parameters = { 'Keywords' => search_index }
-          search_index  = 'All'
-        end
-
-        if parameters.is_a? String
-          parameters = { 'Keywords' => parameters }
-        end
-
-        build!({ 'Operation'   => 'ItemSearch',
-                 'SearchIndex' => search_index }.merge(parameters))
-
-        get.items
-      end
-    end
-  end
-
   module Response
     class ProductAdvertising
       def items
@@ -54,6 +34,6 @@ req = Vacuum.new(:product_advertising) do |config|
   config.secret = SECRET
   config.tag    = TAG
 end
-items = req.search 'deleuze'
+items = req.search(:books, 'deleuze').items
 
 binding.pry

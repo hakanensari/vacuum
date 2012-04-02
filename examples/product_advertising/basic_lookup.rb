@@ -1,7 +1,6 @@
 require File.expand_path('../shared.rb', __FILE__)
 
-@req.build 'Operation' => 'ItemLookup',
-           'ItemId'    => '0816614024'
-items = @req.get.find 'Item'
+res   = @req.look_up '0816614024'
+items = res.find 'Item'
 
 binding.pry

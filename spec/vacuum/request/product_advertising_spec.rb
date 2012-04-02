@@ -13,7 +13,7 @@ module Vacuum
 
       it_behaves_like 'a request'
 
-      describe '#find' do
+      describe '#look_up' do
         before do
           request.stub! :get
         end
@@ -24,13 +24,13 @@ module Vacuum
 
         context 'given no items' do
           it 'raises an error' do
-            expect { request.find }.to raise_error ArgumentError
+            expect { request.look_up }.to raise_error ArgumentError
           end
         end
 
         context 'given up to 10 items' do
           before do
-            request.find *((1..10).to_a << { :foo => 'bar' })
+            request.look_up *((1..10).to_a << { :foo => 'bar' })
           end
 
           it 'builds a single-batch query' do
@@ -44,13 +44,13 @@ module Vacuum
 
         context 'given 11 to to 20 items' do
           before do
-            request.find *((1..20).to_a << { :foo => 'bar' })
+            request.look_up *((1..20).to_a << { :foo => 'bar' })
           end
 
           it 'builds a multi-batch query' do
-            first_batch = parameters['ItemId.1.ItemId'].split(',')
+            first_batch = parameters['ItemLookup.1.ItemId'].split(',')
             first_batch.should =~ (1..10).map(&:to_s)
-            second_batch = parameters['ItemId.2.ItemId'].split(',')
+            second_batch = parameters['ItemLookup.2.ItemId'].split(',')
             second_batch.should =~ (11..20).map(&:to_s)
           end
 
@@ -61,7 +61,7 @@ module Vacuum
 
         context 'given over 20 items' do
           it 'raises an error' do
-            expect { request.find *(1..21) }.to raise_error ArgumentError
+            expect { request.look_up *(1..21) }.to raise_error ArgumentError
           end
         end
       end

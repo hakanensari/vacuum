@@ -21,7 +21,7 @@ module Vacuum
 
       it_behaves_like 'a response'
 
-      describe '#find' do
+      describe '#[]' do
         it 'returns an array of matches' do
           response.find('child').should_not be_empty
         end

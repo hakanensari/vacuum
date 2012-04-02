@@ -4,15 +4,15 @@ module Vacuum
     class ProductAdvertising < Base
       # Looks up attributes of up to twenty items.
       #
-      # item_ids   - Splat Array of item IDs. The last element may optionally
-      #              specify a Hash of parameter key and value pairs.
+      # item_ids - Splat Array of item IDs. The last element may optionally
+      #            specify a Hash of parameter key and value pairs.
       #
       # Examples
       #
       #   request.find '0679753354', response_group: 'Images'
       #
       # Returns a Vacuum::Response.
-      def find(*item_ids)
+      def look_up(*item_ids)
         given_params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
 
         params =
@@ -25,8 +25,8 @@ module Vacuum
           when 11..20
             default = {
               'Operation'       => 'ItemLookup',
-              'ItemId.1.ItemId' => item_ids.shift(10),
-              'ItemId.2.ItemId' => item_ids
+              'ItemLookup.1.ItemId' => item_ids.shift(10),
+              'ItemLookup.2.ItemId' => item_ids
             }
             given_params.reduce(default) do |a, (k, v)|
               a.merge "ItemLookup.Shared.#{Utils.camelize k.to_s}" => v
