@@ -44,7 +44,7 @@ module Vacuum
       #
       # index           - Symbol search index
       # query_or_params - String keyword query or Hash of parameter key and
-      #                   value pairs (default: nil).
+      #                   value pairs.
       #
       # Examples
       #
