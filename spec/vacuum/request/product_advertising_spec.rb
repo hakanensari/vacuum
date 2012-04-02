@@ -30,7 +30,7 @@ module Vacuum
 
         context 'given up to 10 items' do
           before do
-            request.find *(1..10), :foo => 'bar'
+            request.find *((1..10).to_a << { :foo => 'bar' })
           end
 
           it 'builds a single-batch query' do
@@ -44,7 +44,7 @@ module Vacuum
 
         context 'given 11 to to 20 items' do
           before do
-            request.find *(1..20), :foo => 'bar'
+            request.find *((1..20).to_a << { :foo => 'bar' })
           end
 
           it 'builds a multi-batch query' do
