@@ -105,7 +105,7 @@ req.connection do |builder|
 end
 ```
 
-![vacuums] [9]
+![vacuums] [10]
 
 > Workers queuing to crawl AWS.
 
