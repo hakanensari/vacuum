@@ -1,3 +1,3 @@
 module Vacuum
-  VERSION = '0.2.0.pre.1'
+  VERSION = '0.2.0'
 end
