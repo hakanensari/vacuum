@@ -3,5 +3,5 @@
 end
 
 module Vacuum
-  class MissingTag < ArgumentError; end
+  MissingTag = Class.new(ArgumentError)
 end

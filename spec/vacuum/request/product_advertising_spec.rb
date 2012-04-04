@@ -3,6 +3,10 @@ require 'spec_helper'
 module Vacuum
   module Request
     describe ProductAdvertising do
+      let(:mock_response) do
+        Response::ProductAdvertising.new '', 200
+      end
+
       let(:request) do
         described_class.new do |config|
           config.key = 'key'
@@ -15,7 +19,7 @@ module Vacuum
 
       describe '#look_up' do
         before do
-          request.stub! :get
+          request.stub!(:get).and_return mock_response
         end
 
         let(:parameters) do
@@ -69,6 +73,10 @@ module Vacuum
       describe '#search' do
         let(:parameters) do
           request.parameters
+        end
+
+        before do
+          request.stub!(:get).and_return mock_response
         end
 
         context 'when given a search index and a keyword' do

@@ -35,12 +35,17 @@ req.build operation:    'ItemSearch',
           search_index: 'Books',
           keywords:     'Deleuze'
 res = req.get
+
+res.valid? or raise res.code
+
+p res.body
 ```
 
-Or accomplish the same search less verbosely:
+Or run the same search less verbosely:
 
 ```ruby
 res = req.search :books, 'Deleuze'
+p res.body
 ```
 
 The response wraps a [Nokogiri] [6] document:
@@ -52,14 +57,12 @@ res.xml
 And lets you drop down to any node:
 
 ```ruby
-if res.valid?
-  res.find('Item') do |item|
-    p item
-  end
+res.find('Item') do |item|
+  p item
 end
 ```
 
-You will find more examples [here] [7].
+Browse more examples [here] [7].
 
 ## Amazon Marketplace Web Services API
 

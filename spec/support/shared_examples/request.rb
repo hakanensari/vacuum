@@ -87,34 +87,31 @@ shared_examples 'a request' do
   end
 
   describe '#get!' do
-    let(:error_body) do
-      <<-XML.gsub!(/>\s+</, '><').strip!
-        <?xml version=\"1.0\" ?>
-        <ErrorResponse>
-          <Error>
-            <Code>RequestThrottled</Code>
-            <Message>Request from 192.168.0.1 is throttled.</Message>
-          </Error>
-          <RequestID>123</RequestID>
-        </ErrorResponse>
-      XML
-    end
-
     let(:response_class) do
       Vacuum::Response.const_get request.send(:class_basename)
     end
 
     context 'when response is bad' do
-      let(:error) do
-        response_class.new error_body, 503
+      let(:mock_response) do
+        body = <<-XML.gsub!(/>\s+</, '><').strip!
+          <?xml version=\"1.0\" ?>
+          <ErrorResponse>
+            <Error>
+              <Code>RequestThrottled</Code>
+              <Message>Request from 192.168.0.1 is throttled.</Message>
+            </Error>
+            <RequestID>123</RequestID>
+          </ErrorResponse>
+        XML
+
+        response_class.new body, 503
       end
 
       before do
-        request.stub!(:get).and_return error
+        request.stub!(:get).and_return mock_response
       end
 
       it 'raises a Bad Response error' do
-        pending
         expect do
           request.get!
         end.to raise_error Vacuum::BadResponse, '503 RequestThrottled'
@@ -122,17 +119,16 @@ shared_examples 'a request' do
     end
 
     context 'when response is OK' do
-      let(:response) do
+      let(:mock_response) do
         response_class.new('', 200)
       end
 
       before do
-        request.stub!(:get).and_return response
+        request.stub!(:get).and_return mock_response
       end
 
       it 'returns the response' do
-        pending
-        request.get!.should eql response
+        request.get!.should eql mock_response
       end
     end
   end

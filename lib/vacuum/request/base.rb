@@ -70,6 +70,19 @@ module Vacuum
         Response.const_get(class_basename).new res.body, res.status
       end
 
+      # Performs the AWS API request.
+      #
+      # Raises a Bad Response if the response is not valid.
+      #
+      # Returns a Vacuum::Response::Base or a subclass thereof.
+      def get!
+        unless (res = get).valid?
+          raise BadResponse, "#{res.code} #{res['Code'].first}"
+        end
+
+        res
+      end
+
       # Returns the Hash parameters of the AWS API request.
       def parameters
         default_parameters.merge @parameters

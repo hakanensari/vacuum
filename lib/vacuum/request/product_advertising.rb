@@ -11,7 +11,9 @@ module Vacuum
       #
       #   request.find '0679753354', response_group: 'Images'
       #
-      # Returns a Vacuum::Response.
+      # Raises a Bad Response if response is not valid.
+      #
+      # Returns a Vacuum::Response::ProductAdvertising.
       def look_up(*item_ids)
         given_params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
 
@@ -36,7 +38,7 @@ module Vacuum
           end
         build! params
 
-        get
+        get!
       end
 
       # Searches for items that satisfy the given criteria, including one or
@@ -56,6 +58,9 @@ module Vacuum
       #   request.search :books, power: 'author:lacan and not fiction',
       #                          sort:  'relevancerank'
       #
+      # Raises a Bad Response if response is not valid.
+      #
+      # Returns a Vacuum::Response::ProductAdvertising.
       def search(index, query_or_params = nil)
         params = case query_or_params
                  when String
@@ -66,7 +71,7 @@ module Vacuum
         build! params.merge! 'Operation'   => 'ItemSearch',
                              'SearchIndex' => Utils.camelize(index.to_s)
 
-        get
+        get!
       end
 
       # Returns the Addressable::URI URL of the Product Advertising API

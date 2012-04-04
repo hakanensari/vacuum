@@ -21,9 +21,10 @@ require 'vacuum/version'
 
 # Vacuum is a Ruby wrapper to various Amazon Web Services (AWS) APIs.
 module Vacuum
-  class BadLocale     < ArgumentError; end
-  class MissingKey    < ArgumentError; end
-  class MissingSecret < ArgumentError; end
+  BadLocale     = Class.new ArgumentError
+  BadResponse   = Class.new StandardError
+  MissingKey    = Class.new ArgumentError
+  MissingSecret = Class.new ArgumentError
 
   class << self
     def new(api, &blk)
@@ -31,7 +32,7 @@ module Vacuum
       when /^mws/
         require 'vacuum/mws'
         Request::MWS.new do |config|
-          config.api = api.slice(4, api.size).to_sym 
+          config.api = api.slice(4, api.size).to_sym
           blk.call config
         end
       when :product_advertising
