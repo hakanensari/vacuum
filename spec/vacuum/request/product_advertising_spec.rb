@@ -48,18 +48,25 @@ module Vacuum
 
         context 'given 11 to to 20 items' do
           before do
-            request.look_up *((1..20).to_a << { :foo => 'bar' })
+            request.look_up *((1..20).to_a << {
+              :foo => 'bar',
+              :version => 'baz'
+            })
           end
 
           it 'builds a multi-batch query' do
-            first_batch = parameters['ItemLookup.1.ItemId'].split(',')
-            first_batch.should =~ (1..10).map(&:to_s)
-            second_batch = parameters['ItemLookup.2.ItemId'].split(',')
-            second_batch.should =~ (11..20).map(&:to_s)
+            first = parameters['ItemLookup.1.ItemId'].split(',')
+            second = parameters['ItemLookup.2.ItemId'].split(',')
+            (first + second).should =~ (1..20).map(&:to_s)
           end
 
           it 'takes parameters' do
             parameters['ItemLookup.Shared.Foo'].should eql 'bar'
+          end
+
+          it 'overrides version' do
+            pending
+            parameters['Version'].should eql 'baz'
           end
         end
 
