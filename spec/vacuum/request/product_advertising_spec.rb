@@ -65,7 +65,6 @@ module Vacuum
           end
 
           it 'overrides version' do
-            pending
             parameters['Version'].should eql 'baz'
           end
         end

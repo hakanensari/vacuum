@@ -15,27 +15,33 @@ module Vacuum
       #
       # Returns a Vacuum::Response::ProductAdvertising.
       def look_up(*item_ids)
-        given_params = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
+        given = item_ids.last.is_a?(Hash) ? item_ids.pop : {}
 
-        params =
+        params = begin
           case item_ids.size
           when 1..10
             {
               'Operation' => 'ItemLookup',
               'ItemId'    => item_ids
-            }.merge given_params
+            }.merge given
           when 11..20
             default = {
-              'Operation'       => 'ItemLookup',
+              'Operation'           => 'ItemLookup',
               'ItemLookup.1.ItemId' => item_ids.shift(10),
               'ItemLookup.2.ItemId' => item_ids
             }
-            given_params.reduce(default) do |a, (k, v)|
+
+            if version = given.delete('Version') || given.delete(:version)
+              default['Version'] = version
+            end
+
+            given.reduce(default) do |a, (k, v)|
               a.merge "ItemLookup.Shared.#{Utils.camelize k.to_s}" => v
             end
           else
             raise ArgumentError, "Can't look up #{item_ids.size} items"
           end
+        end
         build! params
 
         get!
