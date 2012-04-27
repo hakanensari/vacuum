@@ -18,7 +18,7 @@ module Vacuum
                     'SellerId'         => endpoint.seller,
                     'Service'          => 'AWSECommerceService',
                     'SignatureMethod'  => 'HmacSHA256',
-                    'SignatureVersion' => 2
+                    'SignatureVersion' => '2'
       end
     end
   end
