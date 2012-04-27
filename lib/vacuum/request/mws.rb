@@ -4,10 +4,11 @@ module Vacuum
     class MWS < Base
       # Returns the Addressable::URI URL of the MWS API request.
       def url
-        Addressable::URI.new :scheme        => 'https',
+        uri = Addressable::URI.new :scheme        => 'https',
                              :host          => endpoint.host,
-                             :path          => endpoint.path,
-                             :query_values  => parameters
+                             :path          => endpoint.path
+        uri.query_values = parameters
+        uri
       end
 
       private
