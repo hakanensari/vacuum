@@ -28,14 +28,14 @@ module Vacuum
 
   class << self
     def new(api, &blk)
-      case api
+      case api.to_s
       when /^mws/
         require 'vacuum/mws'
         Request::MWS.new do |config|
           config.api = api.slice(4, api.size).to_sym
           blk.call config
         end
-      when :product_advertising
+      when "product_advertising"
         require 'vacuum/product_advertising'
         Request::ProductAdvertising.new &blk
       else
