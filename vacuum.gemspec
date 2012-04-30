@@ -17,7 +17,7 @@ Product Advertising and Marketplace Web Services (MWS).
 
   s.add_development_dependency 'rake', '~> 0.9'
   s.add_development_dependency 'rspec', '~> 2.9'
-  s.add_runtime_dependency 'addressable', '~> 2.2'
+  s.add_runtime_dependency 'addressable', '>= 2.2.7'
   s.add_runtime_dependency 'faraday', '~> 0.7.6'
   s.add_runtime_dependency 'nokogiri', '~> 1.5'
 
