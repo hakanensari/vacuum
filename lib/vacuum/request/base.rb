@@ -34,7 +34,7 @@ module Vacuum
       # hsh - A Hash of parameter key and value pairs.
       #
       # Returns self.
-      def build!(hsh = {})
+      def reset_build(hsh = {})
         @parameters = {}
         build hsh
       end
