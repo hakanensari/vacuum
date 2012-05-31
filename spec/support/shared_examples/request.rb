@@ -86,7 +86,7 @@ shared_examples 'a request' do
     end
   end
 
-  describe '#get!' do
+  describe '#check_response' do
     let(:response_class) do
       Vacuum::Response.const_get request.send(:class_basename)
     end
@@ -113,7 +113,7 @@ shared_examples 'a request' do
 
       it 'raises a Bad Response error' do
         expect do
-          request.get!
+          request.check_response
         end.to raise_error Vacuum::BadResponse, '503 RequestThrottled'
       end
     end
@@ -128,7 +128,7 @@ shared_examples 'a request' do
       end
 
       it 'returns the response' do
-        request.get!.should eql mock_response
+        request.check_response.should eql mock_response
       end
     end
   end

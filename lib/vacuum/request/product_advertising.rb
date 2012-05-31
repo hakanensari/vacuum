@@ -44,7 +44,7 @@ module Vacuum
         end
         reset_build params
 
-        get!
+        check_response
       end
 
       # Searches for items that satisfy the given criteria, including one or
@@ -77,7 +77,7 @@ module Vacuum
         reset_build params.merge! 'Operation'   => 'ItemSearch',
                              'SearchIndex' => Utils.camelize(index.to_s)
 
-        get!
+        check_response
       end
 
       # Returns the Addressable::URI URL of the Product Advertising API
