@@ -34,7 +34,7 @@ module Vacuum
       # hsh - A Hash of parameter key and value pairs.
       #
       # Returns self.
-      def build!(hsh = {})
+      def reset_build(hsh = {})
         @parameters = {}
         build hsh
       end
@@ -75,7 +75,7 @@ module Vacuum
       # Raises a Bad Response if the response is not valid.
       #
       # Returns a Vacuum::Response::Base or a subclass thereof.
-      def get!
+      def check_response
         unless (res = get).valid?
           raise BadResponse, "#{res.code} #{res['Code'].first}"
         end
