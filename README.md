@@ -22,9 +22,9 @@ Set up a request:
 req = Vacuum.new :product_advertising
 
 req.configure do |config|
-  config.key    'key'
-  config.secret 'secret'
-  config.tag    'tag'
+  config.key    = 'key'
+  config.secret = 'secret'
+  config.tag    = 'tag'
 end
 ```
 
@@ -73,11 +73,11 @@ Set up a request to the Products API:
 
 ```ruby
 req = Vacuum.new(:mws_products) do |config|
-  config.locale      'US'
-  config.key         'key'
-  config.secret      'secret'
-  config.marketplace 'marketplace'
-  config.seller      'seller'
+  config.locale      = 'US'
+  config.key         = 'key'
+  config.secret      = 'secret'
+  config.marketplace = 'marketplace'
+  config.seller      = 'seller'
 end
 ```
 
