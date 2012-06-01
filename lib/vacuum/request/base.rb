@@ -48,16 +48,16 @@ module Vacuum
 
       # Returns a Faraday::Connection.
       #
-      # Yields a Faraday::Builder to configure the connection if a block is
+      # Yields a Faraday::Connection to configure the connection if a block is
       # given.
       def connection
-        @connection ||= Faraday.new do |builder|
-          builder.use Signature::Authentication, endpoint.secret
+        @connection ||= Faraday.new do |conn|
+          conn.use Signature::Authentication, endpoint.secret
 
-          yield builder if block_given?
+          yield conn if block_given?
 
-          unless builder.handlers.any? { |h| h.name.include? ':Adapter:' }
-            builder.adapter Faraday.default_adapter
+          unless conn.builder.handlers.any? { |h| h.name.include? ':Adapter:' }
+            conn.adapter Faraday.default_adapter
           end
         end
       end
