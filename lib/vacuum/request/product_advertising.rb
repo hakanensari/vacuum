@@ -42,9 +42,9 @@ module Vacuum
             raise ArgumentError, "Can't look up #{item_ids.size} items"
           end
         end
-        build! params
+        reset_build params
 
-        get!
+        check_response
       end
 
       # Searches for items that satisfy the given criteria, including one or
@@ -74,10 +74,10 @@ module Vacuum
                  else
                    query_or_params
                  end
-        build! params.merge! 'Operation'   => 'ItemSearch',
+        reset_build params.merge! 'Operation'   => 'ItemSearch',
                              'SearchIndex' => Utils.camelize(index.to_s)
 
-        get!
+        check_response
       end
 
       # Returns the Addressable::URI URL of the Product Advertising API
