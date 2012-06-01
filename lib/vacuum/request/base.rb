@@ -66,7 +66,7 @@ module Vacuum
       #
       # Returns a Vacuum::Response::Base or a subclass thereof.
       def get
-        res = connection.get url
+        res = connection.get url.to_s
         Response.const_get(class_basename).new res.body, res.status
       end
 
