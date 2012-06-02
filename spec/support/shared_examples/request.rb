@@ -58,10 +58,10 @@ shared_examples 'a request' do
     end
   end
 
-  describe '#reset_build' do
+  describe '#rebuild' do
     it 'clears existing parameters' do
       request.build 'Key' => 'value'
-      request.reset_build.parameters.should_not have_key 'Key'
+      request.rebuild.parameters.should_not have_key 'Key'
     end
   end
 

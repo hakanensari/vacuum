@@ -42,7 +42,7 @@ module Vacuum
             raise ArgumentError, "Can't look up #{item_ids.size} items"
           end
         end
-        reset_build params
+        rebuild params
 
         check_response
       end
@@ -74,7 +74,7 @@ module Vacuum
                  else
                    query_or_params
                  end
-        reset_build params.merge! 'Operation'   => 'ItemSearch',
+        rebuild params.merge! 'Operation'   => 'ItemSearch',
                              'SearchIndex' => Utils.camelize(index.to_s)
 
         check_response
