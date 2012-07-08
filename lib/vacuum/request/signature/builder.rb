@@ -14,7 +14,17 @@ module Vacuum
         #
         # env - A Hash that contains info about the request.
         def initialize(env, secret)
-          env[:url] = Addressable::URI.parse env[:url]
+          url = Addressable::URI.parse env[:url]
+          if url.port.nil? and url.inferred_port
+            # note: faraday/adapter/net_http.rb expects env[:url] to
+            # be instance of URI or URI::HTTPS. URI::HTTPS#port would
+            # return 443 but Addressable::URI#port would return nil.
+            # Without this hack, net_http would try to connect to port
+            # 80 for https request resulting in 'Connection Refuse'
+            # error
+            url.port = url.inferred_port
+          end
+          env[:url] = url
           @env, @secret = env, secret
         end
 
