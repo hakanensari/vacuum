@@ -25,18 +25,20 @@ module Vacuum
       # Returns an Array of matching nodes or the return values of the yielded
       # block if latter was given.
       def find(query)
-        path = if xml.namespaces.empty?
-                 "//#{query}"
-               else
-                 "//xmlns:#{query}"
-               end
-
-        xml.xpath(path).map do |node|
+        xpath(query) do |node|
           hsh = Utils.xml_to_hash node
           block_given? ? yield(hsh) : hsh
         end
       end
       alias [] find
+
+      # Similar to `find` but returns XML nodes instead of hashes, this way you
+      # can keep query the resulting search with xpath.
+      def xml_find(query)
+        xpath(query) do |node|
+          block_given? ? yield(node) : node
+        end
+      end
 
       # Returns a Hash representation of the response.
       def to_hash
@@ -51,6 +53,19 @@ module Vacuum
       # Returns an XML document.
       def xml
         @xml ||= Nokogiri::XML.parse @body
+      end
+
+      private
+      def xpath(query, &block)
+        path = if xml.namespaces.empty?
+                 "//#{query}"
+               else
+                 "//xmlns:#{query}"
+               end
+
+        xml.xpath(path).map do |node|
+          yield(node)
+        end
       end
     end
   end
