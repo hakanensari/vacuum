@@ -33,6 +33,12 @@ module Vacuum
           names.should =~ %w(foo bar)
         end
       end
+
+      describe '#xml_find' do
+        it 'returns XML nodes instead of hashes' do
+          response.xml_find('child').first.should be_kind_of Nokogiri::XML::Element
+        end
+      end
     end
   end
 end
