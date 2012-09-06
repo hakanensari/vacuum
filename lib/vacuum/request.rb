@@ -53,7 +53,7 @@ module Vacuum
       end
     end
 
-    # Sets the String Associate Tag.
+    # Gets the String Associate Tag.
     #
     # Raises a Missing Tag error if Associate Tag is missing.
     def tag
