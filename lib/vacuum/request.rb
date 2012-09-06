@@ -42,15 +42,9 @@ module Vacuum
     #               :secret - The String AWS secret.
     #               :tag    - The String Associate Tag.
     #
-    # Yields self.
-    #
     # Returns nothing.
-    def configure(credentials, &blk)
-      if block_given?
-        yield self
-      else
-        credentials.each { |key, val| self.send "#{key}=", val }
-      end
+    def configure(credentials)
+      credentials.each { |key, val| self.send "#{key}=", val }
     end
 
     # Gets the String Associate Tag.
