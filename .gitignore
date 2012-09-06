@@ -1,4 +1,4 @@
 Gemfile.lock
 pkg
-credentials.yml
-coverage/
+amazon.yml
+coverage

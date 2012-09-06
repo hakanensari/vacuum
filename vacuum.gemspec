@@ -2,26 +2,20 @@
 $:.push File.expand_path('../lib', __FILE__)
 require 'vacuum/version'
 
-Gem::Specification.new do |s|
-  s.name        = 'vacuum'
-  s.version     = Vacuum::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Hakan Ensari']
-  s.email       = ['hakan.ensari@papercavalier.com']
-  s.homepage    = 'https://github.com/hakanensari/vacuum'
-  s.summary     = 'A wrapper to various Amazon Web Services APIs'
-  s.description = <<-EOF
-Vacuum is a wrapper to various Amazon Web Services (AWS) APIs, including
-Product Advertising and Marketplace Web Services (MWS).
-  EOF
+Gem::Specification.new do |gem|
+  gem.name        = 'vacuum'
+  gem.version     = Vacuum::VERSION
+  gem.platform    = Gem::Platform::RUBY
+  gem.authors     = ['Hakan Ensari']
+  gem.email       = ['hakan.ensari@papercavalier.com']
+  gem.homepage    = 'https://github.com/hakanensari/vacuum'
+  gem.description = 'A wrapper to the Amazon Product Advertising API'
 
-  s.add_development_dependency 'rake', '~> 0.9'
-  s.add_development_dependency 'rspec', '~> 2.9'
-  s.add_runtime_dependency 'addressable', '>= 2.2.7', '< 3.0'
-  s.add_runtime_dependency 'faraday', '~> 0.8.1'
-  s.add_runtime_dependency 'nokogiri', '~> 1.5'
+  gem.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
+  gem.test_files    = Dir.glob('test/**/*')
+  gem.require_paths = ['lib']
 
-  s.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
-  s.test_files    = Dir.glob('spec/**/*')
-  s.require_paths = ['lib']
+  gem.add_dependency 'jeff', '~> 0.4.0'
+  gem.add_development_dependency 'rake'
+  gem.required_ruby_version = '>= 1.9'
 end
