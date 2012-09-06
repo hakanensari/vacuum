@@ -2,9 +2,9 @@
 
 [![travis][1]][2]
 
-Vacuum is a thin Ruby wrapper to the [Amazon Product Advertising API][3].
-
 ![vacuum][4]
+
+Vacuum is a thin Ruby wrapper to the [Amazon Product Advertising API][3].
 
 ```ruby
 request = Vacuum.new
