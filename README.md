@@ -6,10 +6,6 @@ Vacuum is a thin Ruby wrapper to the [Amazon Product Advertising API][3].
 
 ![vacuum][4]
 
-## Usage
-
-Make a request:
-
 ```ruby
 request = Vacuum.new
 
@@ -21,8 +17,6 @@ request.get query: { 'Operation'   => 'ItemSearch',
                      'SearchIndex' => 'Books',
                      'Keywords'    => 'Architecture' }
 ```
-
-Parse the response.
 
 [1]: https://secure.travis-ci.org/hakanensari/vacuum.png
 [2]: http://travis-ci.org/hakanensari/vacuum
