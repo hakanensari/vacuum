@@ -25,7 +25,7 @@ module Vacuum
            'Service'      => 'AWSECommerceService',
            'Version'      => '2011-08-01'
 
-    # Creates a new request for given locale and credentials.
+    # Creates a new request for given locale.
     #
     # locale - The String Product Advertising API locale (default: US).
     #
