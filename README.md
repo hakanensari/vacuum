@@ -5,18 +5,18 @@
 
 ![vacuum][5]
 
-Vacuum is a minimal Ruby wrapper to the [Amazon Product Advertising API][6],
-which gives you access to the product catalogues of various Amazon websites.
-
 ## Usage
 
-[Build queries][7] and parse.
+Vacuum is a Ruby wrapper to the [Amazon Product Advertising API][6].
+
+[The API][7] gives you access to the product catalogues of various Amazon
+websites.
 
 ```ruby
 req = Vacuum.new
 req.configure key:    'foo',
               secret: 'secret',
-              tag:    'foo-bar'
+              tag:    'biz-val'
 
 res = req.get query: { 'Operation'   => 'ItemSearch',
                        'SearchIndex' => 'Books',
