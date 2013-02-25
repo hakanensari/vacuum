@@ -1,5 +1,6 @@
 require 'yaml'
 require 'vacuum'
+require 'benchmark'
 
 creds = YAML.load_file 'amazon.yml'
 
@@ -20,4 +21,16 @@ opts = (1..5).map { |page|
   )
 }
 
-res_ary = req.connection.requests opts
+Benchmark.bm do |x|
+  conn = req.connection
+
+  x.report('pipeline:') do
+    conn.requests opts
+  end
+
+  x.report('threads:') do
+    opts.map { |opt|
+      Thread.new { conn.request opt }
+    }.each(&:join)
+  end
+end
