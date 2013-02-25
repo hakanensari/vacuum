@@ -56,5 +56,19 @@ module Vacuum
 
     # Sets the String Associate Tag.
     attr_writer :tag
+
+    # Build a URL.
+    #
+    # params - A Hash of Amazon Product Advertising query params.
+    #
+    # Returns the built URL String.
+    def url(params)
+      opts = {
+        :method => :get,
+        :query  => params
+      }
+
+      [endpoint, build_options(opts).fetch(:query)].join('?')
+    end
   end
 end
