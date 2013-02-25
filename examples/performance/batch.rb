@@ -19,5 +19,4 @@ params = {
   'ItemSearch.2.ItemPage'           => 2
 }
 
-res = req.get expects: 200,
-              query:   params
+res = req.get query: params

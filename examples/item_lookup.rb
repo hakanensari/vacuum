@@ -17,5 +17,4 @@ params = {
   'ItemId'        => '0679753354'
 }
 
-res = req.get expects: 200,
-              query:   params
+res = req.get query: params

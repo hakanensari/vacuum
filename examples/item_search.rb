@@ -13,5 +13,4 @@ params = {
   'Keywords'      => 'Architecture'
 }
 
-res = req.get expects: 200,
-              query:   params
+res = req.get query: params
