@@ -5,8 +5,8 @@ module Vacuum
   class Request
     include Jeff
 
-    BadLocale  = Class.new ArgumentError
-    MissingTag = Class.new ArgumentError
+    BadLocale  = Class.new(ArgumentError)
+    MissingTag = Class.new(ArgumentError)
 
     # A list of Amazon Product Advertising API hosts.
     HOSTS = {
@@ -25,7 +25,7 @@ module Vacuum
            'Service'      => 'AWSECommerceService',
            'Version'      => '2011-08-01'
 
-    # Creates a new request for given locale.
+    # Create a new request for given locale.
     #
     # locale - The String Product Advertising API locale (default: US).
     #
@@ -35,7 +35,7 @@ module Vacuum
       self.endpoint = "http://#{host}/onca/xml"
     end
 
-    # Configures the Amazon Product Advertising API request.
+    # Configure the Amazon Product Advertising API request.
     #
     # credentials - The Hash credentials of the API endpoint.
     #               :key    - The String Amazon Web Services (AWS) key.
@@ -44,10 +44,10 @@ module Vacuum
     #
     # Returns nothing.
     def configure(credentials)
-      credentials.each { |key, val| self.send "#{key}=", val }
+      credentials.each { |key, val| self.send("#{key}=", val) }
     end
 
-    # Gets the String Associate Tag.
+    # Get the String Associate Tag.
     #
     # Raises a Missing Tag error if Associate Tag is missing.
     def tag
