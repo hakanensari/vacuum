@@ -1,6 +1,6 @@
+require 'benchmark'
 require 'yaml'
 require 'vacuum'
-require 'benchmark'
 
 creds = YAML.load_file 'amazon.yml'
 
@@ -21,7 +21,7 @@ opts = (1..5).map { |page|
   )
 }
 
-Benchmark.bm do |x|
+Benchmark.bm(8) do |x|
   conn = req.connection
 
   x.report('pipeline:') do
@@ -29,8 +29,8 @@ Benchmark.bm do |x|
   end
 
   x.report('threads:') do
-    opts.map { |opt|
-      Thread.new { conn.request opt }
-    }.each(&:join)
+    opts
+      .map { |opt| Thread.new { Thread.current[:res] = conn.request opt } }
+      .map { |thr| thr.join[:res] }
   end
 end
