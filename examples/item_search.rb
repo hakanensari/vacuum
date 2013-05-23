@@ -1,10 +1,8 @@
 require 'yaml'
 require 'vacuum'
 
-creds = YAML.load_file 'amazon.yml'
-
-req = Vacuum.new
-req.configure creds
+req = Vacuum.new('UK')
+req.configure(YAML.load_file('amazon.yml'))
 
 params = {
   'Operation'     => 'ItemSearch',
@@ -13,4 +11,4 @@ params = {
   'Keywords'      => 'Architecture'
 }
 
-res = req.get query: params
+@res = req.get(query: params)
