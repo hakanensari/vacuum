@@ -66,8 +66,8 @@ module Vacuum
     # Returns the built URL String.
     def url(params)
       opts = {
-        :method => :get,
-        :query  => params
+        method: :get,
+        query:  params
       }
 
       [endpoint, build_options(opts).fetch(:query)].join('?')

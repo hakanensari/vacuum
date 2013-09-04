@@ -13,7 +13,7 @@ module Vacuum
 
     it 'returns a URL' do
       req = Request.new
-      req.configure key: 'key', secret: 'secret', tag: 'tag'
+      req.configure(key: 'key', secret: 'secret', tag: 'tag')
       req.url('Foo' => 'Bar').must_match /amazonaws.com.*Foo=Bar/
     end
   end
