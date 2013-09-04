@@ -8,13 +8,27 @@ Vacuum is a Ruby wrapper to the [Amazon Product Advertising API][4].
 
 ## Usage
 
+Set up a request:
+
 ```ruby
 req = Vacuum.new
+  .configure(
+    aws_access_key_id:     'foo',
+    aws_secret_access_key: 'secret',
+    associate_tag:         'biz-val'
+  )
+```
 
-req.configure(key:    'foo',
-              secret: 'secret',
-              tag:    'biz-val')
+The locale defaults to the US. If you wish to use another locale, specify its
+ISO-3166 two-letter code when instantiating the request:
 
+```ruby
+Vacuum.new('GB')
+```
+
+Make a request:
+
+```ruby
 params = { 'Operation'   => 'ItemSearch',
            'SearchIndex' => 'Books',
            'Keywords'    => 'Architecture' }
@@ -22,8 +36,34 @@ params = { 'Operation'   => 'ItemSearch',
 res = req.get(:query => params)
 ```
 
-Parse the response with your favourite XML parser. If you don't mind the
-performance hit, cast into a Hash with [`MultiXml.parse`][5].
+Once you have a response, parse it with your favourite XML parser and parsing
+method.
+
+If you don't mind the performance hit, here is a simplistic solution based on
+[`MultiXml`][5]:
+
+```ruby
+require 'forwardable'
+require 'multi_xml'
+
+class Response
+  extend Forwardable
+
+  attr :response
+
+  def_delegators :code, :body, :response
+
+  def initialize(response)
+    @response = response
+  end
+
+  def to_h
+    MultiXml.parse(body)
+  end
+end
+
+Response.new(res).to_h
+```
 
 [1]: https://secure.travis-ci.org/hakanensari/vacuum.png
 [2]: http://travis-ci.org/hakanensari/vacuum
