@@ -6,7 +6,6 @@ module Vacuum
     include Jeff
 
     BadLocale  = Class.new(ArgumentError)
-    MissingTag = Class.new(ArgumentError)
 
     # A list of Amazon Product Advertising API hosts.
     HOSTS = {
@@ -21,7 +20,7 @@ module Vacuum
       'US' => 'ecs.amazonaws.com'
     }.freeze
 
-    params 'AssociateTag' => -> { tag },
+    params 'AssociateTag' => -> { associate_tag },
            'Service'      => 'AWSECommerceService',
            'Version'      => '2011-08-01'
 
@@ -38,24 +37,21 @@ module Vacuum
     # Configure the Amazon Product Advertising API request.
     #
     # credentials - The Hash credentials of the API endpoint.
-    #               :key    - The String Amazon Web Services (AWS) key.
-    #               :secret - The String AWS secret.
-    #               :tag    - The String Associate Tag.
+    #               :aws_access_key_id     - The String Amazon Web Services
+    #                                        (AWS) key.
+    #               :aws_secret_access_key - The String AWS secret.
+    #               :associate_tag         - The String Associate Tag.
     #
     # Returns nothing.
     def configure(credentials)
       credentials.each { |key, val| self.send("#{key}=", val) }
     end
 
-    # Get the String Associate Tag.
-    #
-    # Raises a Missing Tag error if Associate Tag is missing.
-    def tag
-      @tag or raise MissingTag
-    end
-
-    # Sets the String Associate Tag.
-    attr_writer :tag
+    # Get/Sets the String Associate Tag.
+    attr_accessor :associate_tag
+    # Keep around old attribute for a while for backward compatibility.
+    alias :tag :associate_tag
+    alias :tag= :associate_tag=
 
     # Build a URL.
     #

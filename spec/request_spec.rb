@@ -7,10 +7,6 @@ module Vacuum
       -> { Request.new('foo') }.must_raise Request::BadLocale
     end
 
-    it 'requires an Associate Tag' do
-      -> { Request.new('US').tag }.must_raise Request::MissingTag
-    end
-
     it 'defaults to the US endpoint' do
       Request.new.endpoint.must_equal 'http://ecs.amazonaws.com/onca/xml'
     end
