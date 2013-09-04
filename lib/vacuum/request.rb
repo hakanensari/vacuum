@@ -16,7 +16,7 @@ module Vacuum
       'FR' => 'ecs.amazonaws.fr',
       'IT' => 'webservices.amazon.it',
       'JP' => 'ecs.amazonaws.jp',
-      'UK' => 'ecs.amazonaws.co.uk',
+      'GB' => 'ecs.amazonaws.co.uk',
       'US' => 'ecs.amazonaws.com'
     }.freeze
 
@@ -30,6 +30,11 @@ module Vacuum
     #
     # Raises a Bad Locale error if locale is not valid.
     def initialize(locale = nil)
+      if locale == 'UK'
+        warn '[DEPRECATION] Use GB instead of UK'
+        locale = 'GB'
+      end
+
       host = HOSTS[locale || 'US'] or raise BadLocale
       self.endpoint = "http://#{host}/onca/xml"
     end
