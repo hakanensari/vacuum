@@ -47,9 +47,10 @@ module Vacuum
     #               :aws_secret_access_key - The String AWS secret.
     #               :associate_tag         - The String Associate Tag.
     #
-    # Returns nothing.
+    # Returns self.
     def configure(credentials)
       credentials.each { |key, val| self.send("#{key}=", val) }
+      self
     end
 
     # Get/Sets the String Associate Tag.
