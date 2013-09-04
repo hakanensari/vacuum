@@ -33,7 +33,7 @@ params = { 'Operation'   => 'ItemSearch',
            'SearchIndex' => 'Books',
            'Keywords'    => 'Architecture' }
 
-res = req.get(:query => params)
+res = req.get(query: params)
 ```
 
 Once you have a response, parse it with your favourite XML parser and parsing
