@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.homepage    = 'https://github.com/hakanensari/vacuum'
   gem.description = 'A wrapper to the Amazon Product Advertising API'
   gem.summary     = 'Amazon Product Advertising in Ruby'
+  gem.license     = 'MIT'
 
   gem.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
   gem.test_files    = Dir.glob('test/**/*')
