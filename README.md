@@ -49,9 +49,7 @@ require 'multi_xml'
 class Response
   extend Forwardable
 
-  attr :response
-
-  def_delegators :code, :body, :response
+  def_delegators :code, :body, :@response
 
   def initialize(response)
     @response = response
