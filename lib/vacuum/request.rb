@@ -9,15 +9,15 @@ module Vacuum
 
     # A list of Amazon Product Advertising API hosts.
     HOSTS = {
-      'CA' => 'ecs.amazonaws.ca',
+      'CA' => 'webservices.amazon.ca',
       'CN' => 'webservices.amazon.cn',
-      'DE' => 'ecs.amazonaws.de',
+      'DE' => 'webservices.amazon.de',
       'ES' => 'webservices.amazon.es',
-      'FR' => 'ecs.amazonaws.fr',
+      'FR' => 'webservices.amazon.fr',
       'IT' => 'webservices.amazon.it',
-      'JP' => 'ecs.amazonaws.jp',
-      'GB' => 'ecs.amazonaws.co.uk',
-      'US' => 'ecs.amazonaws.com'
+      'JP' => 'webservices.amazon.co.jp',
+      'GB' => 'webservices.amazon.co.uk',
+      'US' => 'webservices.amazon.com'
     }.freeze
 
     params 'AssociateTag' => -> { associate_tag },
