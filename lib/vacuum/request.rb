@@ -70,7 +70,7 @@ module Vacuum
         query:  params
       }
 
-      [endpoint, build_options(opts).fetch(:query)].join('?')
+      [aws_endpoint, build_options(opts).fetch(:query)].join('?')
     end
   end
 end
