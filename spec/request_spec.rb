@@ -8,13 +8,13 @@ module Vacuum
     end
 
     it 'defaults to the US endpoint' do
-      Request.new.endpoint.must_equal 'http://ecs.amazonaws.com/onca/xml'
+      Request.new.endpoint.must_equal 'http://webservices.amazon.com/onca/xml'
     end
 
     it 'returns a URL' do
       req = Request.new
-      req.configure(key: 'key', secret: 'secret', tag: 'tag')
-      req.url('Foo' => 'Bar').must_match /amazonaws.com.*Foo=Bar/
+      req.configure(aws_access_key: 'key', aws_secret_access_key: 'secret', tag: 'tag')
+      req.url('Foo' => 'Bar').must_match /webservices.amazon.com.*Foo=Bar/
     end
   end
 end

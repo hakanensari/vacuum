@@ -36,7 +36,7 @@ module Vacuum
       end
 
       host = HOSTS[locale || 'US'] or raise BadLocale
-      self.endpoint = "http://#{host}/onca/xml"
+      self.aws_endpoint = "http://#{host}/onca/xml"
     end
 
     # Configure the Amazon Product Advertising API request.
