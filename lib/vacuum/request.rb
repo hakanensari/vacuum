@@ -9,15 +9,15 @@ module Vacuum
 
     # A list of Amazon Product Advertising API hosts.
     HOSTS = {
-      'CA' => 'ecs.amazonaws.ca',
+      'CA' => 'webservices.amazon.ca',
       'CN' => 'webservices.amazon.cn',
-      'DE' => 'ecs.amazonaws.de',
+      'DE' => 'webservices.amazon.de',
       'ES' => 'webservices.amazon.es',
-      'FR' => 'ecs.amazonaws.fr',
+      'FR' => 'webservices.amazon.fr',
       'IT' => 'webservices.amazon.it',
-      'JP' => 'ecs.amazonaws.jp',
-      'GB' => 'ecs.amazonaws.co.uk',
-      'US' => 'ecs.amazonaws.com'
+      'JP' => 'webservices.amazon.co.jp',
+      'GB' => 'webservices.amazon.co.uk',
+      'US' => 'webservices.amazon.com'
     }.freeze
 
     params 'AssociateTag' => -> { associate_tag },
@@ -36,7 +36,7 @@ module Vacuum
       end
 
       host = HOSTS[locale || 'US'] or raise BadLocale
-      self.endpoint = "http://#{host}/onca/xml"
+      self.aws_endpoint = "http://#{host}/onca/xml"
     end
 
     # Configure the Amazon Product Advertising API request.
@@ -70,7 +70,7 @@ module Vacuum
         query:  params
       }
 
-      [endpoint, build_options(opts).fetch(:query)].join('?')
+      [aws_endpoint, build_options(opts).fetch(:query)].join('?')
     end
   end
 end
