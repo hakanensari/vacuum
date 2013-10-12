@@ -14,6 +14,7 @@ module Vacuum
       'DE' => 'webservices.amazon.de',
       'ES' => 'webservices.amazon.es',
       'FR' => 'webservices.amazon.fr',
+      'IN' => 'webservices.amazon.in',
       'IT' => 'webservices.amazon.it',
       'JP' => 'webservices.amazon.co.jp',
       'GB' => 'webservices.amazon.co.uk',
