@@ -37,7 +37,14 @@ res = req.get(query: params)
 ```
 
 Once you have a response, parse it with your favourite XML parser and parsing
-method.
+method. XML is stored in the Object's body.
+
+[`Nokogiri`][5]:
+
+```
+res = res.body
+xml = Nokogiri::XML(res)
+```
 
 If you don't mind the performance hit, here is a simplistic solution based on
 [`MultiXml`][5]:
@@ -68,3 +75,4 @@ Response.new(res).to_h
 [3]: http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png
 [4]: https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
 [5]: https://github.com/sferik/multi_xml
+[6]: https://github.com/sparklemotion/nokogiri
