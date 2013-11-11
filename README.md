@@ -28,7 +28,7 @@ req.configure(
     aws_access_key_id:     'key',
     aws_secret_access_key: 'secret',
     associate_tag:         'tag'
-  )
+)
 ```
 
 Make a request:
