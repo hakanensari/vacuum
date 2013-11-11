@@ -47,6 +47,10 @@ Parse the response into a Ruby hash:
 res.to_h
 ```
 
+Allowed requests include `browse_node_lookup`, `cart_add`, `cart_clear`,
+`cart_create`, `cart_get`, `cart_modify`, `item_lookup`, `item_search`,
+`similarity_lookup`.
+
 Vacuum is built with [excon][5] and [multi_xml][6].
 
 [1]: https://secure.travis-ci.org/hakanensari/vacuum.png
