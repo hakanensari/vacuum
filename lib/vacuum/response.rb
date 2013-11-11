@@ -6,7 +6,5 @@ module Vacuum
     def to_h
       MultiXml.parse(body)
     end
-
-    alias :to_hash :to_h
   end
 end
