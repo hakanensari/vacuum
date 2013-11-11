@@ -1,10 +1,11 @@
-require 'yaml'
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require 'pry'
 require 'vacuum'
 
-creds = YAML.load_file 'amazon.yml'
+credentials = YAML.load_file(File.expand_path('../amazon.yml', __FILE__))
 
 req = Vacuum.new
-req.configure creds
+req.configure(credentials)
 
 scopes = %w(
   ItemAttributes Images AlternateVersions
@@ -19,4 +20,7 @@ params = {
   'ItemSearch.2.ItemPage'           => 2
 }
 
-res = req.get query: params
+res = req.item_search(params)
+puts res.to_h
+
+binding.pry

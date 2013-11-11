@@ -1,8 +1,11 @@
-require 'yaml'
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require 'pry'
 require 'vacuum'
 
-req = Vacuum.new('UK')
-req.configure(YAML.load_file('amazon.yml'))
+credentials = YAML.load_file(File.expand_path('../amazon.yml', __FILE__))
+
+req = Vacuum.new
+req.configure(credentials)
 
 params = {
   'Operation'     => 'ItemSearch',
@@ -11,4 +14,7 @@ params = {
   'Keywords'      => 'Architecture'
 }
 
-@res = req.get(query: params)
+res = req.item_search(params)
+puts res.to_h
+
+binding.pry

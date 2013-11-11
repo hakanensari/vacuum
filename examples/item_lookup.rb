@@ -1,18 +1,23 @@
-require 'yaml'
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require 'pry'
 require 'vacuum'
 
+credentials = YAML.load_file(File.expand_path('../amazon.yml', __FILE__))
+
 req = Vacuum.new
-req.configure(YAML.load_file('amazon.yml'))
+req.configure(credentials)
 
 scopes = %w(
   AlternateVersions Images ItemAttributes SalesRank Similarities
 ).join ','
 
 params = {
-  'Operation'     => 'ItemLookup',
   'IdType'        => 'ASIN',
   'ResponseGroup' => scopes,
-  'ItemId'        => '0679753354,039473954X'
+  'ItemId'        => '0679753354'
 }
 
-@res = req.get(query: params)
+res = req.item_lookup(params)
+puts res.to_h
+
+binding.pry
