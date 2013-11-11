@@ -29,11 +29,13 @@ module Vacuum
     # Create a new request for given locale.
     #
     # locale - The String Product Advertising API locale (default: US).
+    # secure - Whether to use the secure version of the endpoint (default:
+    #          false)
     #
     # Raises a Bad Locale error if locale is not valid.
-    def initialize(locale = nil)
+    def initialize(locale = nil, secure = false)
       host = HOSTS[locale || 'US'] or raise BadLocale
-      self.aws_endpoint = "http://#{host}/onca/xml"
+      self.aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
     end
 
     # Configure the Amazon Product Advertising API request.
