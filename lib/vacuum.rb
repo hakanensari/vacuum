@@ -1,5 +1,4 @@
 require 'forwardable'
-
 require 'vacuum/request'
 require 'vacuum/version'
 
@@ -8,6 +7,6 @@ module Vacuum
   class << self
     extend Forwardable
 
-    def_delegator 'Vacuum::Request', :new
+    def_delegator Vacuum::Request, :new
   end
 end

@@ -13,8 +13,8 @@ module Vacuum
 
     it 'returns a URL' do
       req = Request.new
-      req.configure(aws_access_key_id: 'key', aws_secret_access_key: 'secret', tag: 'tag')
-      req.url('Foo' => 'Bar').must_match /webservices.amazon.com.*Foo=Bar/
+      req.configure(aws_access_key_id: 'key', aws_secret_access_key: 'secret', associate_tag: 'tag')
+      req.url('Foo' => 'Bar').must_match(/webservices.amazon.com.*Foo=Bar/)
     end
   end
 end

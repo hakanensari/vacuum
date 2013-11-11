@@ -7,7 +7,6 @@ module Vacuum
 
     BadLocale  = Class.new(ArgumentError)
 
-    # A list of Amazon Product Advertising API hosts.
     HOSTS = {
       'CA' => 'webservices.amazon.ca',
       'CN' => 'webservices.amazon.cn',
@@ -25,17 +24,14 @@ module Vacuum
            'Service'      => 'AWSECommerceService',
            'Version'      => '2011-08-01'
 
+    attr_accessor :associate_tag
+
     # Create a new request for given locale.
     #
     # locale - The String Product Advertising API locale (default: US).
     #
     # Raises a Bad Locale error if locale is not valid.
     def initialize(locale = nil)
-      if locale == 'UK'
-        warn '[DEPRECATION] Use GB instead of UK'
-        locale = 'GB'
-      end
-
       host = HOSTS[locale || 'US'] or raise BadLocale
       self.aws_endpoint = "http://#{host}/onca/xml"
     end
@@ -54,24 +50,15 @@ module Vacuum
       self
     end
 
-    # Get/Sets the String Associate Tag.
-    attr_accessor :associate_tag
-    # Keep around old attribute for a while for backward compatibility.
-    alias :tag :associate_tag
-    alias :tag= :associate_tag=
 
     # Build a URL.
     #
-    # params - A Hash of Amazon Product Advertising query params.
+    # params - A Hash of Amazon Product Advertising request parameters.
     #
     # Returns the built URL String.
     def url(params)
-      opts = {
-        method: :get,
-        query:  params
-      }
-
-      [aws_endpoint, build_options(opts).fetch(:query)].join('?')
+      options = { method: :get, query: params }
+      [aws_endpoint, build_options(options).fetch(:query)].join('?')
     end
   end
 end
