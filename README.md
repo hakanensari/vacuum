@@ -12,59 +12,46 @@ Set up a request:
 
 ```ruby
 req = Vacuum.new
-  .configure(
-    aws_access_key_id:     'foo',
-    aws_secret_access_key: 'secret',
-    associate_tag:         'biz-val'
-  )
 ```
 
-The locale defaults to the US. If you wish to use another locale, specify its
-ISO-3166 two-letter code when instantiating the request:
+The locale defaults to the US. If you wish to use another locale, instantiate
+with its ISO-3166 two-letter country code:
 
 ```ruby
-Vacuum.new('GB')
+req = Vacuum.new('GB')
+```
+
+Configure the request credentials:
+
+```ruby
+req.configure(
+    aws_access_key_id:     'key',
+    aws_secret_access_key: 'secret',
+    associate_tag:         'tag'
+  )
 ```
 
 Make a request:
 
 ```ruby
-params = { 'Operation'   => 'ItemSearch',
-           'SearchIndex' => 'Books',
-           'Keywords'    => 'Architecture' }
-
-res = req.get(query: params)
+params = {
+  'SearchIndex' => 'Books',
+  'Keywords'    => 'Architecture'
+}
+res = req.item_search(params)
 ```
 
-Once you have a response, parse it with your favourite XML parser and parsing
-method.
-
-If you don't mind the performance hit, here is a simplistic solution based on
-[`MultiXml`][5]:
+Parse the response into a Ruby hash:
 
 ```ruby
-require 'forwardable'
-require 'multi_xml'
-
-class Response
-  extend Forwardable
-
-  def_delegators :@response, :code, :body
-
-  def initialize(response)
-    @response = response
-  end
-
-  def to_h
-    MultiXml.parse(body)
-  end
-end
-
-Response.new(res).to_h
+res.to_h
 ```
+
+Vacuum is built with [excon][5] and [multi_xml][6].
 
 [1]: https://secure.travis-ci.org/hakanensari/vacuum.png
 [2]: http://travis-ci.org/hakanensari/vacuum
 [3]: http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png
 [4]: https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
-[5]: https://github.com/sferik/multi_xml
+[5]: https://github.com/geemus/excon
+[6]: https://github.com/sferik/multi_xml
