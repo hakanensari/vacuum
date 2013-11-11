@@ -1,4 +1,5 @@
 require 'jeff'
+require 'vacuum/response'
 
 module Vacuum
   # An Amazon Product Advertising API request.
@@ -19,6 +20,18 @@ module Vacuum
       'GB' => 'webservices.amazon.co.uk',
       'US' => 'webservices.amazon.com'
     }.freeze
+
+    OPERATIONS = %w(
+      BrowseNodeLookup
+      CartAdd
+      CartClear
+      CartCreate
+      CartGet
+      CartModify
+      ItemLookup
+      ItemSearch
+      SimilarityLookup
+    ).freeze
 
     params 'AssociateTag' => -> { associate_tag },
            'Service'      => 'AWSECommerceService',
@@ -52,6 +65,12 @@ module Vacuum
       self
     end
 
+    OPERATIONS.each do |operation|
+      method_name = operation.gsub(/(.)([A-Z])/,'\1_\2').downcase
+      define_method(method_name) do |params, excon_options = {}|
+        Response.new(get(excon_options.merge(query: params.merge('Operation' => operation))))
+      end
+    end
 
     # Build a URL.
     #
