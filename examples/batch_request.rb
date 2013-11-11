@@ -12,7 +12,6 @@ scopes = %w(
 ).join(',')
 
 params = {
-  'Operation'                       => 'ItemSearch',
   'ItemSearch.Shared.SearchIndex'   => 'Books',
   'ItemSearch.Shared.Power'         => 'Foucault',
   'ItemSearch.Shared.ResponseGroup' => scopes,

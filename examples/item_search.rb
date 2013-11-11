@@ -8,7 +8,6 @@ req = Vacuum.new
 req.configure(credentials)
 
 params = {
-  'Operation'     => 'ItemSearch',
   'SearchIndex'   => 'KindleStore',
   'ResponseGroup' => 'ItemAttributes,Images',
   'Keywords'      => 'Architecture'
