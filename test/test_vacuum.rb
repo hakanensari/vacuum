@@ -1,10 +1,11 @@
 require 'minitest/autorun'
+require 'minitest/pride'
 require_relative '../lib/vacuum'
 
 class TestVacuum < Minitest::Test
   include Vacuum
 
-  def test_request_valid_locale
+  def test_requires_valid_locale
     assert_raises(Request::BadLocale) { Request.new('foo') }
   end
 

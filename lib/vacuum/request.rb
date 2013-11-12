@@ -46,9 +46,9 @@ module Vacuum
     #          false)
     #
     # Raises a Bad Locale error if locale is not valid.
-      self.aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
     def initialize(locale = 'US', secure = false)
       host = HOSTS.fetch(locale) { raise BadLocale }
+      @aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
     end
 
     # Configure the Amazon Product Advertising API request.
@@ -67,8 +67,9 @@ module Vacuum
 
     OPERATIONS.each do |operation|
       method_name = operation.gsub(/(.)([A-Z])/,'\1_\2').downcase
-      define_method(method_name) do |params, excon_options = {}|
-        Response.new(get(excon_options.merge(query: params.merge('Operation' => operation))))
+      define_method(method_name) do |params, opts = {}|
+        res = get(opts.merge(query: params.merge('Operation' => operation)))
+        Response.new(res)
       end
     end
 
@@ -78,8 +79,8 @@ module Vacuum
     #
     # Returns the built URL String.
     def url(params)
-      options = { method: :get, query: params }
-      [aws_endpoint, build_options(options).fetch(:query)].join('?')
+      opts = { method: :get, query: params }
+      [aws_endpoint, build_options(opts).fetch(:query)].join('?')
     end
   end
 end
