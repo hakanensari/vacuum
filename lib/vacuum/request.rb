@@ -46,9 +46,9 @@ module Vacuum
     #          false)
     #
     # Raises a Bad Locale error if locale is not valid.
-    def initialize(locale = nil, secure = false)
-      host = HOSTS[locale || 'US'] or raise BadLocale
       self.aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
+    def initialize(locale = 'US', secure = false)
+      host = HOSTS.fetch(locale) { raise BadLocale }
     end
 
     # Configure the Amazon Product Advertising API request.
