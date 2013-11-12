@@ -15,7 +15,7 @@ req = Vacuum.new
 ```
 
 The locale defaults to the US. If you wish to use another locale, instantiate
-with its ISO-3166 two-letter country code:
+with its two-letter country code:
 
 ```ruby
 req = Vacuum.new('GB')
@@ -51,7 +51,7 @@ Allowed requests include `browse_node_lookup`, `cart_add`, `cart_clear`,
 `cart_create`, `cart_get`, `cart_modify`, `item_lookup`, `item_search`,
 `similarity_lookup`.
 
-Vacuum is built with [excon][5] and [multi_xml][6].
+Vacuum uses [excon][5] and [multi_xml][6].
 
 [1]: https://secure.travis-ci.org/hakanensari/vacuum.png
 [2]: http://travis-ci.org/hakanensari/vacuum
