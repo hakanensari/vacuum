@@ -3,10 +3,8 @@ require 'benchmark'
 require 'pry'
 require 'vacuum'
 
-credentials = YAML.load_file(File.expand_path('../amazon.yml', __FILE__))
-
 req = Vacuum.new
-req.configure(credentials)
+req.associate_tag = 'foobar'
 
 params = {
   'Operation'     => 'ItemSearch',

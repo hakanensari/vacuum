@@ -2,10 +2,8 @@ $:.unshift(File.expand_path('../../lib', __FILE__))
 require 'pry'
 require 'vacuum'
 
-credentials = YAML.load_file(File.expand_path('../amazon.yml', __FILE__))
-
 req = Vacuum.new
-req.configure(credentials)
+req.associate_tag = 'foobar'
 
 scopes = %w(
   AlternateVersions Images ItemAttributes SalesRank Similarities
@@ -18,6 +16,6 @@ params = {
 }
 
 res = req.item_lookup(params)
-puts res.to_h
+p res.to_h
 
 binding.pry
