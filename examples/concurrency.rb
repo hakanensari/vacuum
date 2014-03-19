@@ -1,18 +1,13 @@
-$:.unshift(File.expand_path('../../lib', __FILE__))
 require 'benchmark'
-require 'pry'
-require 'vacuum'
 
 req = Vacuum.new
 req.associate_tag = 'foobar'
-
 params = {
   'Operation'     => 'ItemSearch',
   'SearchIndex'   => 'KindleStore',
   'ResponseGroup' => 'ItemAttributes,Images',
   'Keywords'      => 'Architecture'
 }
-
 opts = (1..5).map { |page|
   req.send(:build_options,
     method: :get,
