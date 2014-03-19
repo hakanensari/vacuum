@@ -9,6 +9,7 @@ module Vacuum
     BadLocale  = Class.new(ArgumentError)
 
     HOSTS = {
+      'BR' => 'webservices.amazon.com.br',
       'CA' => 'webservices.amazon.ca',
       'CN' => 'webservices.amazon.cn',
       'DE' => 'webservices.amazon.de',
