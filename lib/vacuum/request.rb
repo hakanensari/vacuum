@@ -14,10 +14,10 @@ module Vacuum
       'DE' => 'webservices.amazon.de',
       'ES' => 'webservices.amazon.es',
       'FR' => 'webservices.amazon.fr',
+      'GB' => 'webservices.amazon.co.uk',
       'IN' => 'webservices.amazon.in',
       'IT' => 'webservices.amazon.it',
       'JP' => 'webservices.amazon.co.jp',
-      'GB' => 'webservices.amazon.co.uk',
       'US' => 'webservices.amazon.com'
     }.freeze
 
@@ -65,22 +65,39 @@ module Vacuum
       self
     end
 
+    # Execute an API operation. See `OPERATIONS` constant for available
+    # operation names.
+    #
+    # params - The Hash request parameters.
+    # opts   - Options passed to Excon (default: {}).
+    #
+    # Alternatively, pass Excon options as first argument and include request
+    # parameters as query key.
+    #
+    # Examples
+    #
+    #   req.item_search(
+    #     'SearchIndex' => 'All',
+    #     'Keywords' => 'Architecture'
+    #   )
+    #
+    #   req.item_search(
+    #     query: {
+    #       'SearchIndex' => 'All',
+    #       'Keywords' => 'Architecture'
+    #     },
+    #     persistent: true
+    #   )
+    #
+    # Returns a Vacuum Response.
     OPERATIONS.each do |operation|
       method_name = operation.gsub(/(.)([A-Z])/,'\1_\2').downcase
       define_method(method_name) do |params, opts = {}|
-        res = get(opts.merge(query: params.merge('Operation' => operation)))
-        Response.new(res)
-      end
-    end
+        params.has_key?(:query) ? opts = params : opts.update(query: params)
+        opts[:query].update('Operation' => operation)
 
-    # Build a URL.
-    #
-    # params - A Hash of Amazon Product Advertising request parameters.
-    #
-    # Returns the built URL String.
-    def url(params)
-      opts = { method: :get, query: params }
-      [aws_endpoint, build_options(opts).fetch(:query)].join('?')
+        Response.new(get(opts))
+      end
     end
   end
 end
