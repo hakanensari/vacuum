@@ -18,6 +18,7 @@ class TestIntegration < Minitest::Test
   include Vacuum
 
   def setup
+    skip if RUBY_VERSION < '2'
     VCR.insert_cassette('vacuum')
   end
 
