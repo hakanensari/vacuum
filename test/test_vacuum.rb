@@ -35,4 +35,10 @@ class TestVacuum < Minitest::Test
     res = req.item_lookup(query: {}, mock: true)
     refute_empty res.to_h
   end
+
+  def test_force_encodes_body
+    res = Object.new
+    def res.body; String.new.force_encoding('ASCII-8BIT'); end
+    assert_equal 'UTF-8', Response.new(res).body.encoding.name
+  end
 end

@@ -6,5 +6,9 @@ module Vacuum
     def to_h
       MultiXml.parse(body)
     end
+
+    def body
+      __getobj__.body.force_encoding('UTF-8')
+    end
   end
 end

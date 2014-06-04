@@ -24,4 +24,17 @@ class TestIntegration < Minitest::Test
   def teardown
     VCR.eject_cassette
   end
+
+  def test_encoding_issues
+    params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
+
+    %w(CA CN DE ES FR GB IN IT JP US).each do |locale|
+      req = Vacuum.new(locale)
+      req.associate_tag = 'foo'
+      res = req.item_search(query: params)
+      item = res.to_h['ItemSearchResponse']['Items']['Item'].sample
+
+      assert_equal 'UTF-8', item['ASIN'].encoding.name
+    end
+  end
 end
