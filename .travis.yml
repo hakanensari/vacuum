@@ -1,5 +1,9 @@
 before_install:
   - gem install bundler -v '= 1.5.1'
+env:
+  global:
+    - AWS_ACCESS_KEY_ID=key
+    - AWS_SECRET_ACCESS_KEY=secret
 rvm:
   - 2.0.0
   - 1.9.3
