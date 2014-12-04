@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'vacuum/errors'
 require 'vacuum/request'
 require 'vacuum/version'
 
