@@ -22,17 +22,14 @@ class TestVacuum < Minitest::Test
   end
 
   def test_fetches_parsable_response
-    Excon.stub({}, { body: '<foo>bar</foo>' })
-    @req.configure(aws_access_key_id: 'key', aws_secret_access_key: 'secret', associate_tag: 'tag')
+    Excon.stub({}, { body: '<foo/>' })
     res = @req.item_lookup({}, mock: true)
     refute_empty res.to_h
   end
 
   def test_alternative_query_syntax
-    Excon.stub({}, { body: '<foo>bar</foo>' })
-    req = Request.new
-    req.configure(aws_access_key_id: 'key', aws_secret_access_key: 'secret', associate_tag: 'tag')
-    res = req.item_lookup(query: {}, mock: true)
+    Excon.stub({}, { body: '<foo/>' })
+    res = @req.item_lookup(query: {}, mock: true)
     refute_empty res.to_h
   end
 
@@ -40,5 +37,25 @@ class TestVacuum < Minitest::Test
     res = Object.new
     def res.body; String.new.force_encoding('ASCII-8BIT'); end
     assert_equal 'UTF-8', Response.new(res).body.encoding.name
+  end
+
+  def test_sets_custom_parser_on_class_level
+    original_parser = Response.parser
+    Excon.stub({}, { body: '<foo/>' })
+    parser = MiniTest::Mock.new
+    parser.expect(:parse, '123', ['<foo/>'])
+    Response.parser = parser
+    res = @req.item_lookup(query: {}, mock: true)
+    assert_equal '123', res.to_h
+    Response.parser = original_parser # clean up
+  end
+
+  def test_sets_custom_parser_on_instance_level
+    Excon.stub({}, { body: '<foo/>' })
+    res = @req.item_lookup(query: {}, mock: true)
+    parser = MiniTest::Mock.new
+    parser.expect(:parse, '123', ['<foo/>'])
+    res.parser = parser
+    assert_equal '123', res.to_h
   end
 end
