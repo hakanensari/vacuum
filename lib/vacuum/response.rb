@@ -4,11 +4,7 @@ require 'multi_xml'
 module Vacuum
   class Response < SimpleDelegator
     class << self
-      def parser
-        @parser ||= MultiXml
-      end
-
-      attr_writer :parser
+      attr_accessor :parser
     end
 
     def parser
@@ -18,10 +14,12 @@ module Vacuum
     attr_writer :parser
 
     def parse
-      parser.parse(body)
+      parser ? parser.parse(body) : to_h
     end
 
-    alias_method :to_h, :parse
+    def to_h
+      MultiXml.parse(body)
+    end
 
     def body
       __getobj__.body.force_encoding('UTF-8')

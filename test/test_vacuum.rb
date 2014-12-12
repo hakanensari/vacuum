@@ -24,13 +24,13 @@ class TestVacuum < Minitest::Test
   def test_fetches_parsable_response
     Excon.stub({}, { body: '<foo/>' })
     res = @req.item_lookup({}, mock: true)
-    refute_empty res.to_h
+    refute_empty res.parse
   end
 
   def test_alternative_query_syntax
     Excon.stub({}, { body: '<foo/>' })
     res = @req.item_lookup(query: {}, mock: true)
-    refute_empty res.to_h
+    refute_empty res.parse
   end
 
   def test_force_encodes_body
@@ -46,7 +46,7 @@ class TestVacuum < Minitest::Test
     parser.expect(:parse, '123', ['<foo/>'])
     Response.parser = parser
     res = @req.item_lookup(query: {}, mock: true)
-    assert_equal '123', res.to_h
+    assert_equal '123', res.parse
     Response.parser = original_parser # clean up
   end
 
@@ -56,6 +56,15 @@ class TestVacuum < Minitest::Test
     parser = MiniTest::Mock.new
     parser.expect(:parse, '123', ['<foo/>'])
     res.parser = parser
-    assert_equal '123', res.to_h
+    assert_equal '123', res.parse
+  end
+
+  def test_casts_to_hash
+    Excon.stub({}, { body: '<foo/>' })
+    parser = MiniTest::Mock.new
+    res = @req.item_lookup(query: {}, mock: true)
+    assert_kind_of Hash, res.to_h
+    res.parser = parser
+    assert_kind_of Hash, res.to_h
   end
 end
