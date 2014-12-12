@@ -2,6 +2,7 @@ require 'delegate'
 require 'multi_xml'
 
 module Vacuum
+  # A wrapper around the Amazon Product Advertising API response.
   class Response < SimpleDelegator
     class << self
       attr_accessor :parser

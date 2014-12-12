@@ -48,7 +48,7 @@ module Vacuum
     #
     # Raises a Bad Locale error if locale is not valid.
     def initialize(locale = 'US', secure = false)
-      host = HOSTS.fetch(locale) { raise BadLocale }
+      host = HOSTS.fetch(locale) { fail BadLocale }
       @aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
     end
 
@@ -62,7 +62,7 @@ module Vacuum
     #
     # Returns self.
     def configure(credentials)
-      credentials.each { |key, val| self.send("#{key}=", val) }
+      credentials.each { |key, val| send("#{key}=", val) }
       self
     end
 
@@ -92,9 +92,9 @@ module Vacuum
     #
     # Returns a Vacuum Response.
     OPERATIONS.each do |operation|
-      method_name = operation.gsub(/(.)([A-Z])/,'\1_\2').downcase
+      method_name = operation.gsub(/(.)([A-Z])/, '\1_\2').downcase
       define_method(method_name) do |params, opts = {}|
-        params.has_key?(:query) ? opts = params : opts.update(query: params)
+        params.key?(:query) ? opts = params : opts.update(query: params)
         opts[:query].update('Operation' => operation)
 
         Response.new(get(opts))

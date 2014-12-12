@@ -22,26 +22,28 @@ class TestVacuum < Minitest::Test
   end
 
   def test_fetches_parsable_response
-    Excon.stub({}, { body: '<foo/>' })
+    Excon.stub({}, body: '<foo/>')
     res = @req.item_lookup({}, mock: true)
     refute_empty res.parse
   end
 
   def test_alternative_query_syntax
-    Excon.stub({}, { body: '<foo/>' })
+    Excon.stub({}, body: '<foo/>')
     res = @req.item_lookup(query: {}, mock: true)
     refute_empty res.parse
   end
 
   def test_force_encodes_body
     res = Object.new
-    def res.body; String.new.force_encoding('ASCII-8BIT'); end
+    def res.body
+      ''.force_encoding('ASCII-8BIT')
+    end
     assert_equal 'UTF-8', Response.new(res).body.encoding.name
   end
 
   def test_sets_custom_parser_on_class_level
     original_parser = Response.parser
-    Excon.stub({}, { body: '<foo/>' })
+    Excon.stub({}, body: '<foo/>')
     parser = MiniTest::Mock.new
     parser.expect(:parse, '123', ['<foo/>'])
     Response.parser = parser
@@ -51,7 +53,7 @@ class TestVacuum < Minitest::Test
   end
 
   def test_sets_custom_parser_on_instance_level
-    Excon.stub({}, { body: '<foo/>' })
+    Excon.stub({}, body: '<foo/>')
     res = @req.item_lookup(query: {}, mock: true)
     parser = MiniTest::Mock.new
     parser.expect(:parse, '123', ['<foo/>'])
@@ -60,7 +62,7 @@ class TestVacuum < Minitest::Test
   end
 
   def test_casts_to_hash
-    Excon.stub({}, { body: '<foo/>' })
+    Excon.stub({}, body: '<foo/>')
     parser = MiniTest::Mock.new
     res = @req.item_lookup(query: {}, mock: true)
     assert_kind_of Hash, res.to_h

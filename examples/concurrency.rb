@@ -8,12 +8,13 @@ params = {
   'ResponseGroup' => 'ItemAttributes,Images',
   'Keywords'      => 'Architecture'
 }
-opts = (1..5).map { |page|
-  req.send(:build_options,
+opts = (1..5).map do |page|
+  req.send(
+    :build_options,
     method: :get,
     query: params.dup.update('ItemPage' => page)
   )
-}
+end
 
 Benchmark.bm(8) do |x|
   conn = req.connection
@@ -27,8 +28,10 @@ Benchmark.bm(8) do |x|
   end
 
   x.report('threads') do
-    opts
-      .map { |opt| Thread.new { Thread.current[:res] = conn.request(opt) } }
-      .map { |thr| thr.join[:res] }
+    thrs = opts.map do |opt|
+      Thread.new { Thread.current[:res] = conn.request(opt) }
+    end
+
+    thrs.map { |thr| thr.join[:res] }
   end
 end
