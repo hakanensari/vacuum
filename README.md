@@ -1,96 +1,193 @@
 # Vacuum
+[![Travis](https://travis-ci.org/hakanensari/vacuum.svg)](https://travis-ci.org/hakanensari/vacuum)
 
-[![Build Status][1]][2]
+Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html).
 
-Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising API][4].
-
-![vacuum][3]
+![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
 
 ## Usage
 
 ### Setup
 
-Set up a request:
+Create a request:
 
 ```ruby
-req = Vacuum.new
+request = Vacuum.new
 ```
 
-The locale defaults to the US. To use another locale, instantiate with its
-two-letter country code:
+The locale will default to the US. To use another locale, reference its two-letter country code:
 
 ```ruby
-req = Vacuum.new('GB')
+request = Vacuum.new('GB')
 ```
 
 Configure the request credentials:
 
 ```ruby
-req.configure(
-    aws_access_key_id:     'key',
+request.configure(
+    aws_access_key_id: 'key',
     aws_secret_access_key: 'secret',
-    associate_tag:         'tag'
+    associate_tag: 'tag'
 )
 ```
 
-Alternatively, set the key and secret as environment variables globally:
+You can omit the above if you set your key and secret as environment variables:
 
 ```sh
 export AWS_ACCESS_KEY_ID=key
 export AWS_SECRET_ACCESS_KEY=secret
 ```
 
-You will still need to set a distinct associate tag for each locale:
+You will still need to set an associate tag:
 
 ```ruby
-req.associate_tag = 'tag'
+request.associate_tag = 'tag'
 ```
+
+Provided you are looking to earn commission, you have to register independently with each locale you query. Otherwise, you may reuse any dummy associate tag.
 
 ### Request
 
-Set up your parameters and make a request:
+#### Browse Node Lookup
+
+**BrowseNodeLookup** returns a specified browse node’s name and ancestors:
 
 ```ruby
-params = {
-  'SearchIndex' => 'Books',
-  'Keywords'    => 'Architecture'
-}
-res = req.item_search(query: params)
+response = request.browse_node_lookup(
+  query: {
+    'BrowseNodeId' => 123
+  }
+)
 ```
-The above executes an item search operation. The names of available methods
-derive from the operations listed in the API docs and include
-`browse_node_lookup`, `cart_add`, `cart_clear`, `cart_create`, `cart_get`,
-`cart_modify`, `item_lookup`, `item_search`, and `similarity_lookup`.
 
-Vacuum uses [Excon][5] as HTTP client. Check the Excon API for ways to tweak
-your request:
+#### Cart Operations
+
+The **CartCreate** operation creates a remote shopping cart:
 
 ```ruby
-res = req.item_search(query: params, persistent: true)
+response = request.cart_create(
+  query: {
+    'HMAC' => 'secret',
+    'Item.1.OfferListingId' => '123',
+    'Item.1.Quantity' => 1
+  }
+)
+```
+
+The **CartAdd** operation adds items to an existing remote shopping cart:
+
+```ruby
+response = request.cart_add(
+  query: {
+    'CartId' => '123',
+    'HMAC' => 'secret',
+    'Item.1.OfferListingId' => '123',
+    'Item.1.Quantity' => 1
+  }
+)
+```
+
+The **CartClear** operation removes all of the items in a remote shopping cart:
+
+```ruby
+response = request.cart_clear(
+  query: {
+    'CartId' => '123',
+    'HMAC' => 'secret'
+  }
+)
+```
+
+The **CartGet** operation retrieves the IDs, quantities, and prices of the items, including SavedForLater ones, in a remote shopping cart:
+
+```ruby
+response = request.cart_get(
+  query: {
+    'CartId' => '123',
+    'HMAC' => 'secret',
+    'CartItemId' => '123'
+  }
+)
+```
+
+#### Item Lookup
+
+The **ItemLookup** operation returns some or all of the attributes of an item, depending on the response group specified in the request. By default, the operation returns an item’s ASIN, manufacturer, product group, and title.
+
+```ruby
+response = request.item_lookup(
+  query: {
+    'ItemId' => '0679753354'
+  }
+)
+```
+
+#### Item Search
+
+The **ItemSearch** operation returns items that satisfy the search criteria, including one or more search indices.
+
+```ruby
+response = request.item_search(
+  query: {
+    'Keywords'    => 'Architecture',
+    'SearchIndex' => 'Books'
+  }
+)
+```
+
+#### Similarity Lookup
+
+The **SimilarityLookup** operation returns up to ten products per page that are similar to one or more items specified in the request. This operation is typically used to pique a customer’s interest in buying something similar to what they’ve already ordered.
+
+```ruby
+response = request.similarity_lookup(
+  query: {
+    'ItemId'    => '0679753354'
+  }
+)
+```
+
+#### Configuring a request
+
+Vacuum wraps [Excon](https://github.com/geemus/excon). Use the latter's API to tweak your request.
+
+For example, to use a persistent connection:
+
+```ruby
+response = request.item_search(
+  query: {
+    'ItemId' => '0679753354'
+  },
+  persistent: true
+)
 ```
 
 ### Response
 
-The quickest way to consume a response is to parse it into a Ruby hash:
+The quick and dirty way to consume a response is to parse it into a Ruby hash:
 
 ```ruby
-res.to_h
+response.to_h
 ```
 
-Vacuum uses [MultiXml][6], which will work with a number of popular XML
-libraries. If working in MRI, you may want to use [Ox][7].
-
-You can also pass the response body into your own parser for some custom XML
-heavy-lifting:
+In production, you may prefer to use a custom parser to do some XML heavy-lifting:
 
 ```ruby
-MyParser.new(res.body)
+class MyParser
+  # A parser has to respond to this.
+  def self.parse(body)
+    new(body)
+  end
+
+  def initialize(body)
+    @body = body
+  end
+
+  # Implement parser here.
+end
+
+response.parser = MyParser
+response.parse
 ```
 
-[1]: https://secure.travis-ci.org/hakanensari/vacuum.png
-[2]: http://travis-ci.org/hakanensari/vacuum
-[3]: http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png
-[4]: https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
-[5]: https://github.com/geemus/excon
-[6]: https://github.com/sferik/multi_xml
-[7]: https://github.com/ohler55/ox
+If no custom parser is set, `Vacuum::Response#parse` delegates to `#to_h`.
