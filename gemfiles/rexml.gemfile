@@ -4,6 +4,5 @@ source "http://rubygems.org"
 
 gem "jruby-openssl", :platform => :jruby
 gem "rubysl", :platform => :rbx
-gem "excon", "0.33.0"
 
 gemspec :path => "../"

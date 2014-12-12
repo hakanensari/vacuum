@@ -229,7 +229,6 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal
-  excon (= 0.33.0)
   jruby-openssl
   minitest (~> 5.0)
   rake

@@ -3,6 +3,3 @@ pkg
 amazon.yml
 coverage
 bin
-
-# RubyMine project files
-.idea

@@ -2,6 +2,11 @@ env:
   global:
     - AWS_ACCESS_KEY_ID=key
     - AWS_SECRET_ACCESS_KEY=secret
+gemfile:
+  - gemfiles/libxml.gemfile
+  - gemfiles/nokogiri.gemfile
+  - gemfiles/ox.gemfile
+  - gemfiles/rexml.gemfile
 rvm:
   - 2.0.0
   - 1.9.3
