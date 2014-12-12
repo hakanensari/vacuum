@@ -13,8 +13,9 @@ rvm:
   - 2.1.0
   - jruby-19mode
   - rbx-2
-exclude:
-  - rvm: jruby-19mode
-    gemfile:
-      - gemfiles/libxml.gemfile
-      - gemfiles/ox.gemfile
+matrix:
+  exclude:
+    - rvm: jruby-19mode
+      gemfile: gemfiles/libxml.gemfile
+    - rvm: jruby-19mode
+      gemfile: gemfiles/ox.gemfile
