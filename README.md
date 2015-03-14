@@ -129,7 +129,7 @@ The **ItemSearch** operation returns items that satisfy the search criteria, inc
 ```ruby
 response = request.item_search(
   query: {
-    'Keywords'    => 'Architecture',
+    'Keywords' => 'Architecture',
     'SearchIndex' => 'Books'
   }
 )
@@ -142,7 +142,7 @@ The **SimilarityLookup** operation returns up to ten products per page that are 
 ```ruby
 response = request.similarity_lookup(
   query: {
-    'ItemId'    => '0679753354'
+    'ItemId' => '0679753354'
   }
 )
 ```

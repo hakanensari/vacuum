@@ -28,7 +28,7 @@ class TestIntegration < Minitest::Test
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
 
-    %w(CA CN DE ES FR GB IN IT JP US).each do |locale|
+    %w(BR CA CN DE ES FR GB IN IT JP US).each do |locale|
       req = Vacuum.new(locale)
       req.associate_tag = 'foo'
       res = req.item_search(query: params)

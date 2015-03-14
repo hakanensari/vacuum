@@ -12,7 +12,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:23 GMT
@@ -35,8 +35,7 @@ http_interactions:
         Name="Keywords" Value="google"></Argument><Argument Name="SignatureMethod"
         Value="HmacSHA256"></Argument><Argument Name="SearchIndex" Value="All"></Argument><Argument
         Name="SignatureVersion" Value="2"></Argument><Argument Name="Signature" Value="y2q524sf2rXCfKvCxaOBlNcUiSrDXC+wIFkA5xF1mZM="></Argument><Argument
-        Name="AWSAccessKeyId" Value="KEY"></Argument><Argument Name="Timestamp"
-        Value="2014-06-04T19:18:21Z"></Argument></Arguments><RequestProcessingTime>0.0613420000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><Keywords>google</Keywords><ResponseGroup>Small</ResponseGroup><SearchIndex>All</SearchIndex></ItemSearchRequest></Request><TotalResults>36909</TotalResults><TotalPages>3691</TotalPages><MoreSearchResultsUrl>http://www.amazon.ca/gp/redirect.html?camp=2025&amp;creative=386005&amp;location=http%3A%2F%2Fwww.amazon.ca%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%26url%3Dsearch-alias%253Daws-amazon-aps&amp;linkCode=xm2&amp;tag=foo&amp;SubscriptionId=KEY</MoreSearchResultsUrl><Item><ASIN>B00IT92PR0</ASIN><DetailPageURL>http://www.amazon.ca/Google-Chromecast-Streaming-Player-Compatible/dp/B00IT92PR0%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00IT92PR0</DetailPageURL><ItemLinks><ItemLink><Description>Add
+        Name="AWSAccessKeyId" Value="KEY"></Argument><Argument Name="Timestamp" Value="2014-06-04T19:18:21Z"></Argument></Arguments><RequestProcessingTime>0.0613420000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><Keywords>google</Keywords><ResponseGroup>Small</ResponseGroup><SearchIndex>All</SearchIndex></ItemSearchRequest></Request><TotalResults>36909</TotalResults><TotalPages>3691</TotalPages><MoreSearchResultsUrl>http://www.amazon.ca/gp/redirect.html?camp=2025&amp;creative=386005&amp;location=http%3A%2F%2Fwww.amazon.ca%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%26url%3Dsearch-alias%253Daws-amazon-aps&amp;linkCode=xm2&amp;tag=foo&amp;SubscriptionId=KEY</MoreSearchResultsUrl><Item><ASIN>B00IT92PR0</ASIN><DetailPageURL>http://www.amazon.ca/Google-Chromecast-Streaming-Player-Compatible/dp/B00IT92PR0%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00IT92PR0</DetailPageURL><ItemLinks><ItemLink><Description>Add
         To Wishlist</Description><URL>http://www.amazon.ca/gp/registry/wishlist/add-item.html%3Fasin.0%3DB00IT92PR0%26SubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386005%26creativeASIN%3DB00IT92PR0</URL></ItemLink><ItemLink><Description>Tell
         A Friend</Description><URL>http://www.amazon.ca/gp/pdp/taf/B00IT92PR0%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386005%26creativeASIN%3DB00IT92PR0</URL></ItemLink><ItemLink><Description>All
         Customer Reviews</Description><URL>http://www.amazon.ca/review/product/B00IT92PR0%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386005%26creativeASIN%3DB00IT92PR0</URL></ItemLink><ItemLink><Description>All
@@ -94,7 +93,7 @@ http_interactions:
         Customer Reviews</Description><URL>http://www.amazon.ca/review/product/B005QX7KYU%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386005%26creativeASIN%3DB005QX7KYU</URL></ItemLink><ItemLink><Description>All
         Offers</Description><URL>http://www.amazon.ca/gp/offer-listing/B005QX7KYU%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386005%26creativeASIN%3DB005QX7KYU</URL></ItemLink></ItemLinks><ItemAttributes><Manufacturer>eForCity</Manufacturer><ProductGroup>Wireless</ProductGroup><Title>Micro
         USB OTG to USB 2.0 Adapter</Title></ItemAttributes></Item></Items></ItemSearchResponse>'
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:22 GMT
 - request:
     method: get
@@ -108,7 +107,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:24 GMT
@@ -317,7 +316,7 @@ http_interactions:
         cm9kdWN0R3JvdXA+PFRpdGxlPuenu+WKqOmjjuaatDroi7nmnpzkuI7osLfm
         rYznmoTnp5HmioDkuYvmiJg8L1RpdGxlPjwvSXRlbUF0dHJpYnV0ZXM+PC9J
         dGVtPjwvSXRlbXM+PC9JdGVtU2VhcmNoUmVzcG9uc2U+
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:28 GMT
 - request:
     method: get
@@ -331,7 +330,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:29 GMT
@@ -721,7 +720,7 @@ http_interactions:
         Qm9va3M8L1Byb2R1Y3RHcm91cD48VGl0bGU+R29vZ2xlOiBEaWUgMzMgYmVz
         dGVuIFRpcHBzPC9UaXRsZT48L0l0ZW1BdHRyaWJ1dGVzPjwvSXRlbT48L0l0
         ZW1zPjwvSXRlbVNlYXJjaFJlc3BvbnNlPg==
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:28 GMT
 - request:
     method: get
@@ -735,7 +734,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:29 GMT
@@ -893,7 +892,7 @@ http_interactions:
         R3JvdXA+TW9iaWxlIEFwcGxpY2F0aW9uPC9Qcm9kdWN0R3JvdXA+PFRpdGxl
         PkFsbCBNYXJrZXQ8L1RpdGxlPjwvSXRlbUF0dHJpYnV0ZXM+PC9JdGVtPjwv
         SXRlbXM+PC9JdGVtU2VhcmNoUmVzcG9uc2U+
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:28 GMT
 - request:
     method: get
@@ -907,7 +906,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:29 GMT
@@ -1301,7 +1300,7 @@ http_interactions:
         PFRpdGxlPlNlYXJjaCsgZm9yIEdvb2dsZSxCaW5nLFlhaG9vPC9UaXRsZT48
         L0l0ZW1BdHRyaWJ1dGVzPjwvSXRlbT48L0l0ZW1zPjwvSXRlbVNlYXJjaFJl
         c3BvbnNlPg==
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:29 GMT
 - request:
     method: get
@@ -1315,7 +1314,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:30 GMT
@@ -1394,7 +1393,7 @@ http_interactions:
         Customer Reviews</Description><URL>http://www.amazon.co.uk/review/product/B004SIIBGU%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D12734%26creativeASIN%3DB004SIIBGU</URL></ItemLink><ItemLink><Description>All
         Offers</Description><URL>http://www.amazon.co.uk/gp/offer-listing/B004SIIBGU%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D12734%26creativeASIN%3DB004SIIBGU</URL></ItemLink></ItemLinks><ItemAttributes><Manufacturer>eBay
         Inc</Manufacturer><ProductGroup>Mobile Application</ProductGroup><Title>eBay</Title></ItemAttributes></Item></Items></ItemSearchResponse>
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:29 GMT
 - request:
     method: get
@@ -1408,7 +1407,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:31 GMT
@@ -1431,8 +1430,7 @@ http_interactions:
         Name="Keywords" Value="google"></Argument><Argument Name="SignatureMethod"
         Value="HmacSHA256"></Argument><Argument Name="SearchIndex" Value="All"></Argument><Argument
         Name="SignatureVersion" Value="2"></Argument><Argument Name="Signature" Value="oq2lltnlGlm8p/jACS7NFvbOjOJzwnMKoi/qIlHrQ8s="></Argument><Argument
-        Name="AWSAccessKeyId" Value="KEY"></Argument><Argument Name="Timestamp"
-        Value="2014-06-04T19:18:29Z"></Argument></Arguments><RequestProcessingTime>0.6759540000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><Keywords>google</Keywords><ResponseGroup>Small</ResponseGroup><SearchIndex>All</SearchIndex></ItemSearchRequest></Request><TotalResults>13047</TotalResults><TotalPages>1305</TotalPages><MoreSearchResultsUrl>http://www.amazon.in/gp/redirect.html?camp=2025&amp;creative=165953&amp;location=http%3A%2F%2Fwww.amazon.in%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%26url%3Dsearch-alias%253Daws-amazon-aps&amp;linkCode=xm2&amp;tag=foo&amp;SubscriptionId=KEY</MoreSearchResultsUrl><Item><ASIN>B00EV8Y4QI</ASIN><DetailPageURL>http://www.amazon.in/Spigen-SGP10569-Coated-Cushioned-Protective/dp/B00EV8Y4QI%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00EV8Y4QI</DetailPageURL><ItemAttributes><Manufacturer>Spigen</Manufacturer><ProductGroup>CE</ProductGroup><Title>Spigen
+        Name="AWSAccessKeyId" Value="KEY"></Argument><Argument Name="Timestamp" Value="2014-06-04T19:18:29Z"></Argument></Arguments><RequestProcessingTime>0.6759540000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><Keywords>google</Keywords><ResponseGroup>Small</ResponseGroup><SearchIndex>All</SearchIndex></ItemSearchRequest></Request><TotalResults>13047</TotalResults><TotalPages>1305</TotalPages><MoreSearchResultsUrl>http://www.amazon.in/gp/redirect.html?camp=2025&amp;creative=165953&amp;location=http%3A%2F%2Fwww.amazon.in%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%26url%3Dsearch-alias%253Daws-amazon-aps&amp;linkCode=xm2&amp;tag=foo&amp;SubscriptionId=KEY</MoreSearchResultsUrl><Item><ASIN>B00EV8Y4QI</ASIN><DetailPageURL>http://www.amazon.in/Spigen-SGP10569-Coated-Cushioned-Protective/dp/B00EV8Y4QI%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00EV8Y4QI</DetailPageURL><ItemAttributes><Manufacturer>Spigen</Manufacturer><ProductGroup>CE</ProductGroup><Title>Spigen
         SGP10569 Slim Armor SF Coated Air Cushioned Protective Case with Dual Layer
         for Google Nexus 5 (Smooth Black)</Title></ItemAttributes></Item><Item><ASIN>818495364X</ASIN><DetailPageURL>http://www.amazon.in/The-Story-Google-Sara-Gilbert/dp/818495364X%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D818495364X</DetailPageURL><ItemAttributes><Author>Sara
         Gilbert</Author><Manufacturer>Jaico Publishing House</Manufacturer><ProductGroup>Book</ProductGroup><Title>The
@@ -1450,7 +1448,7 @@ http_interactions:
         Laakmann Mcdowell</Author><Manufacturer>Wiley India Pvt Ltd</Manufacturer><ProductGroup>Book</ProductGroup><Title>The
         Google Resume</Title></ItemAttributes></Item><Item><ASIN>B00KE6JN1W</ASIN><DetailPageURL>http://www.amazon.in/Gioiabazar-Designer-Silicon-cover-Google/dp/B00KE6JN1W%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00KE6JN1W</DetailPageURL><ItemAttributes><Manufacturer>Gioiabazar</Manufacturer><ProductGroup>CE</ProductGroup><Title>Gioiabazar
         New Designer Soft Tpu Silicon case cover Back Skin for LG Google Nexus 5 #8</Title></ItemAttributes></Item></Items></ItemSearchResponse>'
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:30 GMT
 - request:
     method: get
@@ -1464,7 +1462,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:31 GMT
@@ -1513,7 +1511,7 @@ http_interactions:
         Google. Guida al web marketing con gli strumenti di Google</Title></ItemAttributes></Item><Item><ASIN>B00DGPG532</ASIN><DetailPageURL>http://www.amazon.it/Android-RK3188-Dongle-Bluetooth-MK809/dp/B00DGPG532%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00DGPG532</DetailPageURL><ItemAttributes><Manufacturer>DracoTek</Manufacturer><ProductGroup>Personal
         Computer</ProductGroup><Title>Android 4.2 mini PC a 1,8 GHz Quad Core con
         2G RAM DDR3 RK3188 TV Box TV Dongle Bluetooth WIFI HDMI MK809 III</Title></ItemAttributes></Item></Items></ItemSearchResponse>'
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:31 GMT
 - request:
     method: get
@@ -1527,7 +1525,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       x-amzn-RequestId:
       - 04bdc911-ec1d-11e3-8a8f-b178c70ed6ec
@@ -1939,7 +1937,7 @@ http_interactions:
         R3JvdXA+PFRpdGxlPuesrOS6lOOBruaoqeWKmy0tLUdvb2dsZeOBq+OBr+im
         i+OBiOOBpuOBhOOCi+acquadpTwvVGl0bGU+PC9JdGVtQXR0cmlidXRlcz48
         L0l0ZW0+PC9JdGVtcz48L0l0ZW1TZWFyY2hSZXNwb25zZT4=
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:32 GMT
 - request:
     method: get
@@ -1953,7 +1951,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
       Date:
       - Wed, 04 Jun 2014 19:18:33 GMT
@@ -1976,8 +1974,7 @@ http_interactions:
         Name="Keywords" Value="google"></Argument><Argument Name="SignatureMethod"
         Value="HmacSHA256"></Argument><Argument Name="SearchIndex" Value="All"></Argument><Argument
         Name="SignatureVersion" Value="2"></Argument><Argument Name="Signature" Value="hKocx+/jZn5dxlASgcH0aYTm0/T10i/QYIw5lJwbQH8="></Argument><Argument
-        Name="AWSAccessKeyId" Value="KEY"></Argument><Argument Name="Timestamp"
-        Value="2014-06-04T19:18:32Z"></Argument></Arguments><RequestProcessingTime>0.0535160000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><Keywords>google</Keywords><ResponseGroup>Small</ResponseGroup><SearchIndex>All</SearchIndex></ItemSearchRequest></Request><TotalResults>543720</TotalResults><TotalPages>54372</TotalPages><MoreSearchResultsUrl>http://www.amazon.com/gp/redirect.html?camp=2025&amp;creative=386001&amp;location=http%3A%2F%2Fwww.amazon.com%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%26url%3Dsearch-alias%253Daws-amazon-aps&amp;linkCode=xm2&amp;tag=foo&amp;SubscriptionId=KEY</MoreSearchResultsUrl><Item><ASIN>B00IX9UPV4</ASIN><DetailPageURL>http://www.amazon.com/Search-for-Google-Bing-Yahoo/dp/B00IX9UPV4%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00IX9UPV4</DetailPageURL><ItemLinks><ItemLink><Description>Technical
+        Name="AWSAccessKeyId" Value="KEY"></Argument><Argument Name="Timestamp" Value="2014-06-04T19:18:32Z"></Argument></Arguments><RequestProcessingTime>0.0535160000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemSearchRequest><Keywords>google</Keywords><ResponseGroup>Small</ResponseGroup><SearchIndex>All</SearchIndex></ItemSearchRequest></Request><TotalResults>543720</TotalResults><TotalPages>54372</TotalPages><MoreSearchResultsUrl>http://www.amazon.com/gp/redirect.html?camp=2025&amp;creative=386001&amp;location=http%3A%2F%2Fwww.amazon.com%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%26url%3Dsearch-alias%253Daws-amazon-aps&amp;linkCode=xm2&amp;tag=foo&amp;SubscriptionId=KEY</MoreSearchResultsUrl><Item><ASIN>B00IX9UPV4</ASIN><DetailPageURL>http://www.amazon.com/Search-for-Google-Bing-Yahoo/dp/B00IX9UPV4%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00IX9UPV4</DetailPageURL><ItemLinks><ItemLink><Description>Technical
         Details</Description><URL>http://www.amazon.com/Search-for-Google-Bing-Yahoo/dp/tech-data/B00IX9UPV4%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00IX9UPV4</URL></ItemLink><ItemLink><Description>Add
         To Baby Registry</Description><URL>http://www.amazon.com/gp/registry/baby/add-item.html%3Fasin.0%3DB00IX9UPV4%26SubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00IX9UPV4</URL></ItemLink><ItemLink><Description>Add
         To Wedding Registry</Description><URL>http://www.amazon.com/gp/registry/wedding/add-item.html%3Fasin.0%3DB00IX9UPV4%26SubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00IX9UPV4</URL></ItemLink><ItemLink><Description>Add
@@ -2061,6 +2058,204 @@ http_interactions:
         Customer Reviews</Description><URL>http://www.amazon.com/review/product/B00H9K3IGM%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00H9K3IGM</URL></ItemLink><ItemLink><Description>All
         Offers</Description><URL>http://www.amazon.com/gp/offer-listing/B00H9K3IGM%3FSubscriptionId%3DKEY%26tag%3Dfoo%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00H9K3IGM</URL></ItemLink></ItemLinks><ItemAttributes><Manufacturer>AppPlanet</Manufacturer><ProductGroup>Mobile
         Application</ProductGroup><Title>Tabs for Google (Google+, Gmail, Maps, Search)</Title></ItemAttributes></Item></Items></ItemSearchResponse>
-    http_version:
+    http_version: 
   recorded_at: Wed, 04 Jun 2014 19:18:32 GMT
-recorded_with: VCR 2.9.2
+- request:
+    method: get
+    uri: http://webservices.amazon.com.br/onca/xml?AWSAccessKeyId=AKIAJSPUCXLO5N2SFVRQ&AssociateTag=foo&Keywords=google&Operation=ItemSearch&SearchIndex=All&Service=AWSECommerceService&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2015-01-04T00%3A08%3A52Z&Version=2011-08-01&Signature=RhKo%2B7nxIv1AV82TxbfjdXK1ickvI%2Bn%2Ft0HFdwlTZak%3D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Jeff/1.1.0 (Language=Ruby; Hakans-MacBook-Pro.local)
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Date:
+      - Sun, 04 Jan 2015 00:07:45 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Vary:
+      - Accept-Encoding,User-Agent
+      Cneonction:
+      - close
+      X-Cache:
+      - MISS from access-gateway.hospitality.swisscom.com
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxJdGVtU2VhcmNoUmVzcG9uc2UgeG1s
+        bnM9Imh0dHA6Ly93ZWJzZXJ2aWNlcy5hbWF6b24uY29tL0FXU0VDb21tZXJj
+        ZVNlcnZpY2UvMjAxMS0wOC0wMSI+PE9wZXJhdGlvblJlcXVlc3Q+PEhUVFBI
+        ZWFkZXJzPjxIZWFkZXIgTmFtZT0iVXNlckFnZW50IiBWYWx1ZT0iSmVmZi8x
+        LjEuMCAoTGFuZ3VhZ2U9UnVieTsgSGFrYW5zLU1hY0Jvb2stUHJvLmxvY2Fs
+        KSI+PC9IZWFkZXI+PC9IVFRQSGVhZGVycz48UmVxdWVzdElkPmYzOTlhNGY1
+        LTQ2ZTQtNDk1ZS1iNDMwLTM3NTVmYTU0NjUwYjwvUmVxdWVzdElkPjxBcmd1
+        bWVudHM+PEFyZ3VtZW50IE5hbWU9Ik9wZXJhdGlvbiIgVmFsdWU9Ikl0ZW1T
+        ZWFyY2giPjwvQXJndW1lbnQ+PEFyZ3VtZW50IE5hbWU9IlNlcnZpY2UiIFZh
+        bHVlPSJBV1NFQ29tbWVyY2VTZXJ2aWNlIj48L0FyZ3VtZW50PjxBcmd1bWVu
+        dCBOYW1lPSJTaWduYXR1cmUiIFZhbHVlPSJSaEtvKzdueEl2MUFWODJUeGJm
+        amRYSzFpY2t2SStuL3QwSEZkd2xUWmFrPSI+PC9Bcmd1bWVudD48QXJndW1l
+        bnQgTmFtZT0iQXNzb2NpYXRlVGFnIiBWYWx1ZT0iZm9vIj48L0FyZ3VtZW50
+        PjxBcmd1bWVudCBOYW1lPSJWZXJzaW9uIiBWYWx1ZT0iMjAxMS0wOC0wMSI+
+        PC9Bcmd1bWVudD48QXJndW1lbnQgTmFtZT0iS2V5d29yZHMiIFZhbHVlPSJn
+        b29nbGUiPjwvQXJndW1lbnQ+PEFyZ3VtZW50IE5hbWU9IlNpZ25hdHVyZU1l
+        dGhvZCIgVmFsdWU9IkhtYWNTSEEyNTYiPjwvQXJndW1lbnQ+PEFyZ3VtZW50
+        IE5hbWU9IkFXU0FjY2Vzc0tleUlkIiBWYWx1ZT0iQUtJQUpTUFVDWExPNU4y
+        U0ZWUlEiPjwvQXJndW1lbnQ+PEFyZ3VtZW50IE5hbWU9IlRpbWVzdGFtcCIg
+        VmFsdWU9IjIwMTUtMDEtMDRUMDA6MDg6NTJaIj48L0FyZ3VtZW50PjxBcmd1
+        bWVudCBOYW1lPSJTZWFyY2hJbmRleCIgVmFsdWU9IkFsbCI+PC9Bcmd1bWVu
+        dD48QXJndW1lbnQgTmFtZT0iU2lnbmF0dXJlVmVyc2lvbiIgVmFsdWU9IjIi
+        PjwvQXJndW1lbnQ+PC9Bcmd1bWVudHM+PFJlcXVlc3RQcm9jZXNzaW5nVGlt
+        ZT4wLjczMDAwMDAwMDAwMDAwMDA8L1JlcXVlc3RQcm9jZXNzaW5nVGltZT48
+        L09wZXJhdGlvblJlcXVlc3Q+PEl0ZW1zPjxSZXF1ZXN0PjxJc1ZhbGlkPlRy
+        dWU8L0lzVmFsaWQ+PEl0ZW1TZWFyY2hSZXF1ZXN0PjxLZXl3b3Jkcz5nb29n
+        bGU8L0tleXdvcmRzPjxSZXNwb25zZUdyb3VwPlNtYWxsPC9SZXNwb25zZUdy
+        b3VwPjxTZWFyY2hJbmRleD5BbGw8L1NlYXJjaEluZGV4PjwvSXRlbVNlYXJj
+        aFJlcXVlc3Q+PC9SZXF1ZXN0PjxUb3RhbFJlc3VsdHM+NTg5MzwvVG90YWxS
+        ZXN1bHRzPjxUb3RhbFBhZ2VzPjU5MDwvVG90YWxQYWdlcz48TW9yZVNlYXJj
+        aFJlc3VsdHNVcmw+aHR0cDovL3d3dy5hbWF6b24uY29tLmJyL2dwL3JlZGly
+        ZWN0Lmh0bWw/Y2FtcD0yMDI1JmFtcDtjcmVhdGl2ZT0xNjU5NTMmYW1wO2xv
+        Y2F0aW9uPWh0dHAlM0ElMkYlMkZ3d3cuYW1hem9uLmNvbS5iciUyRmdwJTJG
+        c2VhcmNoJTNGa2V5d29yZHMlM0Rnb29nbGUlMjZ1cmwlM0RzZWFyY2gtYWxp
+        YXMlMjUzRGF3cy1hbWF6b24tYXBzJmFtcDtsaW5rQ29kZT14bTImYW1wO3Rh
+        Zz1mb28mYW1wO1N1YnNjcmlwdGlvbklkPUFLSUFKU1BVQ1hMTzVOMlNGVlJR
+        PC9Nb3JlU2VhcmNoUmVzdWx0c1VybD48SXRlbT48QVNJTj5CMDBEUE1aWVZB
+        PC9BU0lOPjxEZXRhaWxQYWdlVVJMPmh0dHA6Ly93d3cuYW1hem9uLmNvbS5i
+        ci9Db25zb2xlLWZvci1Hb29nbGUtQXBwcy1MaXRlL2RwL0IwMERQTVpZVkEl
+        M0ZTdWJzY3JpcHRpb25JZCUzREFLSUFKU1BVQ1hMTzVOMlNGVlJRJTI2dGFn
+        JTNEZm9vJTI2bGlua0NvZGUlM0R4bTIlMjZjYW1wJTNEMjAyNSUyNmNyZWF0
+        aXZlJTNEMTY1OTUzJTI2Y3JlYXRpdmVBU0lOJTNEQjAwRFBNWllWQTwvRGV0
+        YWlsUGFnZVVSTD48SXRlbUF0dHJpYnV0ZXM+PE1hbnVmYWN0dXJlcj5TTU9M
+        SUFSLkNPTTwvTWFudWZhY3R1cmVyPjxQcm9kdWN0R3JvdXA+TW9iaWxlIEFw
+        cGxpY2F0aW9uPC9Qcm9kdWN0R3JvdXA+PFRpdGxlPkNvbnNvbGUgZm9yIEdv
+        b2dsZSBBcHBzIChMaXRlKTwvVGl0bGU+PC9JdGVtQXR0cmlidXRlcz48L0l0
+        ZW0+PEl0ZW0+PEFTSU4+QjAwQ01ERUQ2SzwvQVNJTj48RGV0YWlsUGFnZVVS
+        TD5odHRwOi8vd3d3LmFtYXpvbi5jb20uYnIvR29vZ2xlLUEtQmlvZ3JhZmlh
+        LVN0ZXZlbi1MZXZ5LWVib29rL2RwL0IwMENNREVENkslM0ZTdWJzY3JpcHRp
+        b25JZCUzREFLSUFKU1BVQ1hMTzVOMlNGVlJRJTI2dGFnJTNEZm9vJTI2bGlu
+        a0NvZGUlM0R4bTIlMjZjYW1wJTNEMjAyNSUyNmNyZWF0aXZlJTNEMTY1OTUz
+        JTI2Y3JlYXRpdmVBU0lOJTNEQjAwQ01ERUQ2SzwvRGV0YWlsUGFnZVVSTD48
+        SXRlbUF0dHJpYnV0ZXM+PEF1dGhvcj5TdGV2ZW4gTGV2eTwvQXV0aG9yPjxN
+        YW51ZmFjdHVyZXI+VW5pdmVyc28gZG9zIExpdnJvczwvTWFudWZhY3R1cmVy
+        PjxQcm9kdWN0R3JvdXA+ZUJvb2tzPC9Qcm9kdWN0R3JvdXA+PFRpdGxlPkdv
+        b2dsZSAtIEEgQmlvZ3JhZmlhwqA8L1RpdGxlPjwvSXRlbUF0dHJpYnV0ZXM+
+        PC9JdGVtPjxJdGVtPjxBU0lOPkIwMElYOVVQVjQ8L0FTSU4+PERldGFpbFBh
+        Z2VVUkw+aHR0cDovL3d3dy5hbWF6b24uY29tLmJyL1NlYXJjaC1mb3ItR29v
+        Z2xlLUJpbmctWWFob28vZHAvQjAwSVg5VVBWNCUzRlN1YnNjcmlwdGlvbklk
+        JTNEQUtJQUpTUFVDWExPNU4yU0ZWUlElMjZ0YWclM0Rmb28lMjZsaW5rQ29k
+        ZSUzRHhtMiUyNmNhbXAlM0QyMDI1JTI2Y3JlYXRpdmUlM0QxNjU5NTMlMjZj
+        cmVhdGl2ZUFTSU4lM0RCMDBJWDlVUFY0PC9EZXRhaWxQYWdlVVJMPjxJdGVt
+        QXR0cmlidXRlcz48TWFudWZhY3R1cmVyPlZveWFnZSBBcHBzPC9NYW51ZmFj
+        dHVyZXI+PFByb2R1Y3RHcm91cD5Nb2JpbGUgQXBwbGljYXRpb248L1Byb2R1
+        Y3RHcm91cD48VGl0bGU+U2VhcmNoKyBmb3IgR29vZ2xlLEJpbmcsWWFob288
+        L1RpdGxlPjwvSXRlbUF0dHJpYnV0ZXM+PC9JdGVtPjxJdGVtPjxBU0lOPkIw
+        MEE0NkVTWDA8L0FTSU4+PERldGFpbFBhZ2VVUkw+aHR0cDovL3d3dy5hbWF6
+        b24uY29tLmJyL0RvbWluYW5kby1hcy1GZXJyYW1lbnRhcy1kby1Hb29nbGUt
+        ZWJvb2svZHAvQjAwQTQ2RVNYMCUzRlN1YnNjcmlwdGlvbklkJTNEQUtJQUpT
+        UFVDWExPNU4yU0ZWUlElMjZ0YWclM0Rmb28lMjZsaW5rQ29kZSUzRHhtMiUy
+        NmNhbXAlM0QyMDI1JTI2Y3JlYXRpdmUlM0QxNjU5NTMlMjZjcmVhdGl2ZUFT
+        SU4lM0RCMDBBNDZFU1gwPC9EZXRhaWxQYWdlVVJMPjxJdGVtQXR0cmlidXRl
+        cz48QXV0aG9yPlNhbmRyYSBSaXRhPC9BdXRob3I+PE1hbnVmYWN0dXJlcj5V
+        bml2ZXJzbyBkb3MgTGl2cm9zPC9NYW51ZmFjdHVyZXI+PFByb2R1Y3RHcm91
+        cD5lQm9va3M8L1Byb2R1Y3RHcm91cD48VGl0bGU+RG9taW5hbmRvIGFzIEZl
+        cnJhbWVudGFzIGRvIEdvb2dsZTwvVGl0bGU+PC9JdGVtQXR0cmlidXRlcz48
+        L0l0ZW0+PEl0ZW0+PEFTSU4+QjAwQjdZMDIwNjwvQVNJTj48RGV0YWlsUGFn
+        ZVVSTD5odHRwOi8vd3d3LmFtYXpvbi5jb20uYnIvVm95YWdlLUFwcHMtRnJl
+        ZS12VHViZS1Zb3VUdWJlL2RwL0IwMEI3WTAyMDYlM0ZTdWJzY3JpcHRpb25J
+        ZCUzREFLSUFKU1BVQ1hMTzVOMlNGVlJRJTI2dGFnJTNEZm9vJTI2bGlua0Nv
+        ZGUlM0R4bTIlMjZjYW1wJTNEMjAyNSUyNmNyZWF0aXZlJTNEMTY1OTUzJTI2
+        Y3JlYXRpdmVBU0lOJTNEQjAwQjdZMDIwNjwvRGV0YWlsUGFnZVVSTD48SXRl
+        bUF0dHJpYnV0ZXM+PE1hbnVmYWN0dXJlcj5Wb3lhZ2UgQXBwczwvTWFudWZh
+        Y3R1cmVyPjxQcm9kdWN0R3JvdXA+TW9iaWxlIEFwcGxpY2F0aW9uPC9Qcm9k
+        dWN0R3JvdXA+PFRpdGxlPkZyZWUgdlR1YmUgZm9yIFlvdVR1YmU8L1RpdGxl
+        PjwvSXRlbUF0dHJpYnV0ZXM+PC9JdGVtPjxJdGVtPjxBU0lOPkIwMEI0QkM4
+        SUc8L0FTSU4+PERldGFpbFBhZ2VVUkw+aHR0cDovL3d3dy5hbWF6b24uY29t
+        LmJyL3ZlcmRhZGUtcG9yLXRyJUMzJUExcy1Hb29nbGUtZWJvb2svZHAvQjAw
+        QjRCQzhJRyUzRlN1YnNjcmlwdGlvbklkJTNEQUtJQUpTUFVDWExPNU4yU0ZW
+        UlElMjZ0YWclM0Rmb28lMjZsaW5rQ29kZSUzRHhtMiUyNmNhbXAlM0QyMDI1
+        JTI2Y3JlYXRpdmUlM0QxNjU5NTMlMjZjcmVhdGl2ZUFTSU4lM0RCMDBCNEJD
+        OElHPC9EZXRhaWxQYWdlVVJMPjxJdGVtQXR0cmlidXRlcz48QXV0aG9yPkFs
+        ZWphbmRybyBTdcOhcmV6ICBTw6FuY2hlei1PY2HDsWE8L0F1dGhvcj48TWFu
+        dWZhY3R1cmVyPkVkaXRvcmEgUGxhbmV0YTwvTWFudWZhY3R1cmVyPjxQcm9k
+        dWN0R3JvdXA+ZUJvb2tzPC9Qcm9kdWN0R3JvdXA+PFRpdGxlPkEgdmVyZGFk
+        ZSBwb3IgdHLDoXMgZG8gR29vZ2xlPC9UaXRsZT48L0l0ZW1BdHRyaWJ1dGVz
+        PjwvSXRlbT48SXRlbT48QVNJTj5CMDBBRkNFSUIwPC9BU0lOPjxEZXRhaWxQ
+        YWdlVVJMPmh0dHA6Ly93d3cuYW1hem9uLmNvbS5ici9reXktU2VhcmNoLUVu
+        Z2luZS1Gb3ItR29vZ2xlL2RwL0IwMEFGQ0VJQjAlM0ZTdWJzY3JpcHRpb25J
+        ZCUzREFLSUFKU1BVQ1hMTzVOMlNGVlJRJTI2dGFnJTNEZm9vJTI2bGlua0Nv
+        ZGUlM0R4bTIlMjZjYW1wJTNEMjAyNSUyNmNyZWF0aXZlJTNEMTY1OTUzJTI2
+        Y3JlYXRpdmVBU0lOJTNEQjAwQUZDRUlCMDwvRGV0YWlsUGFnZVVSTD48SXRl
+        bUF0dHJpYnV0ZXM+PE1hbnVmYWN0dXJlcj5reXk8L01hbnVmYWN0dXJlcj48
+        UHJvZHVjdEdyb3VwPk1vYmlsZSBBcHBsaWNhdGlvbjwvUHJvZHVjdEdyb3Vw
+        PjxUaXRsZT5TZWFyY2ggRW5naW5lIEZvciBHb29nbGU8L1RpdGxlPjwvSXRl
+        bUF0dHJpYnV0ZXM+PC9JdGVtPjxJdGVtPjxBU0lOPjE0NTU1ODIzNDQ8L0FT
+        SU4+PERldGFpbFBhZ2VVUkw+aHR0cDovL3d3dy5hbWF6b24uY29tLmJyL0hv
+        dy1Hb29nbGUtV29ya3MtRXJpYy1TY2htaWR0L2RwLzE0NTU1ODIzNDQlM0ZT
+        dWJzY3JpcHRpb25JZCUzREFLSUFKU1BVQ1hMTzVOMlNGVlJRJTI2dGFnJTNE
+        Zm9vJTI2bGlua0NvZGUlM0R4bTIlMjZjYW1wJTNEMjAyNSUyNmNyZWF0aXZl
+        JTNEMTY1OTUzJTI2Y3JlYXRpdmVBU0lOJTNEMTQ1NTU4MjM0NDwvRGV0YWls
+        UGFnZVVSTD48SXRlbUF0dHJpYnV0ZXM+PEF1dGhvcj5FcmljLCBJSUkgU2No
+        bWlkdDwvQXV0aG9yPjxBdXRob3I+Sm9uYXRoYW4gUm9zZW5iZXJnPC9BdXRo
+        b3I+PEF1dGhvcj5BbGFuIEVhZ2xlPC9BdXRob3I+PE1hbnVmYWN0dXJlcj5H
+        cmFuZCBDZW50cmFsIFB1Ymxpc2hpbmc8L01hbnVmYWN0dXJlcj48UHJvZHVj
+        dEdyb3VwPkJvb2s8L1Byb2R1Y3RHcm91cD48VGl0bGU+SG93IEdvb2dsZSBX
+        b3JrczwvVGl0bGU+PC9JdGVtQXR0cmlidXRlcz48L0l0ZW0+PEl0ZW0+PEFT
+        SU4+QjAwOTRCQjRUVzwvQVNJTj48RGV0YWlsUGFnZVVSTD5odHRwOi8vd3d3
+        LmFtYXpvbi5jb20uYnIvRmFjZWJvb2svZHAvQjAwOTRCQjRUVyUzRlN1YnNj
+        cmlwdGlvbklkJTNEQUtJQUpTUFVDWExPNU4yU0ZWUlElMjZ0YWclM0Rmb28l
+        MjZsaW5rQ29kZSUzRHhtMiUyNmNhbXAlM0QyMDI1JTI2Y3JlYXRpdmUlM0Qx
+        NjU5NTMlMjZjcmVhdGl2ZUFTSU4lM0RCMDA5NEJCNFRXPC9EZXRhaWxQYWdl
+        VVJMPjxJdGVtQXR0cmlidXRlcz48TWFudWZhY3R1cmVyPkZhY2Vib29rPC9N
+        YW51ZmFjdHVyZXI+PFByb2R1Y3RHcm91cD5Nb2JpbGUgQXBwbGljYXRpb248
+        L1Byb2R1Y3RHcm91cD48VGl0bGU+RmFjZWJvb2s8L1RpdGxlPjwvSXRlbUF0
+        dHJpYnV0ZXM+PC9JdGVtPjxJdGVtPjxBU0lOPkIwMEEyVjJDSjQ8L0FTSU4+
+        PERldGFpbFBhZ2VVUkw+aHR0cDovL3d3dy5hbWF6b24uY29tLmJyL1ZvYyVD
+        MyVBQS1pbnRlbGlnZW50ZS1iYXN0YW50ZS10cmFiYWxoYXItR29vZ2xlLWVi
+        b29rL2RwL0IwMEEyVjJDSjQlM0ZTdWJzY3JpcHRpb25JZCUzREFLSUFKU1BV
+        Q1hMTzVOMlNGVlJRJTI2dGFnJTNEZm9vJTI2bGlua0NvZGUlM0R4bTIlMjZj
+        YW1wJTNEMjAyNSUyNmNyZWF0aXZlJTNEMTY1OTUzJTI2Y3JlYXRpdmVBU0lO
+        JTNEQjAwQTJWMkNKNDwvRGV0YWlsUGFnZVVSTD48SXRlbUF0dHJpYnV0ZXM+
+        PEF1dGhvcj5XaWxsaWFtIFBvdW5kc3RvbmU8L0F1dGhvcj48TWFudWZhY3R1
+        cmVyPlphaGFyPC9NYW51ZmFjdHVyZXI+PFByb2R1Y3RHcm91cD5lQm9va3M8
+        L1Byb2R1Y3RHcm91cD48VGl0bGU+Vm9jw6ogw6kgaW50ZWxpZ2VudGUgbyBi
+        YXN0YW50ZSBwYXJhIHRyYWJhbGhhciBubyBHb29nbGU/PC9UaXRsZT48L0l0
+        ZW1BdHRyaWJ1dGVzPjwvSXRlbT48L0l0ZW1zPjwvSXRlbVNlYXJjaFJlc3Bv
+        bnNlPg==
+    http_version: 
+  recorded_at: Sun, 04 Jan 2015 00:08:53 GMT
+- request:
+    method: get
+    uri: http://webservices.amazon.co.uk/onca/xml?AWSAccessKeyId=123&AssociateTag=foo&Keywords=google&Operation=ItemSearch&SearchIndex=All&Service=AWSECommerceService&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2015-03-14T22%3A01%3A45Z&Version=2011-08-01&Signature=h3uziKjuAFKXPYarTRYmuo8wVf0rWOMDTKz5p%2BIkNs0%3D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Jeff/1.2.0 (Language=Ruby; Hakans-MacBook-Pro.local)
+  response:
+    status:
+      code: 403
+      message: 
+    headers:
+      Date:
+      - Sat, 14 Mar 2015 22:01:45 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Vary:
+      - Accept-Encoding,User-Agent
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0"?>
+        <ItemSearchErrorResponse xmlns="http://ecs.amazonaws.com/doc/2011-08-01/"><Error><Code>InvalidClientTokenId</Code><Message>The AWS Access Key Id you provided does not exist in our records.</Message></Error><RequestId>abe6635a-e9d5-47cf-bc4c-9eee708225d3</RequestId></ItemSearchErrorResponse>
+    http_version: 
+  recorded_at: Sat, 14 Mar 2015 22:01:46 GMT
+recorded_with: VCR 2.9.3
