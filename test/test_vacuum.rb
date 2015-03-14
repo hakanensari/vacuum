@@ -21,6 +21,10 @@ class TestVacuum < Minitest::Test
     assert_equal 'http://webservices.amazon.com/onca/xml', @req.aws_endpoint
   end
 
+  def test_accepts_UK_as_locale
+    Request.new("UK")
+  end
+
   def test_fetches_parsable_response
     Excon.stub({}, body: '<foo/>')
     res = @req.item_lookup({}, mock: true)

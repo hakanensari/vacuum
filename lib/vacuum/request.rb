@@ -48,6 +48,7 @@ module Vacuum
     #
     # Raises a Bad Locale error if locale is not valid.
     def initialize(locale = 'US', secure = false)
+      locale = "GB" if locale == "UK"
       host = HOSTS.fetch(locale) { fail BadLocale }
       @aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
     end
