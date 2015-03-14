@@ -9,8 +9,8 @@ gemfile:
   - gemfiles/rexml.gemfile
 rvm:
   - 2.0.0
-  - 1.9.3
   - 2.1.0
+  - 2.2.0
   - jruby-19mode
   - rbx-2
 matrix:
