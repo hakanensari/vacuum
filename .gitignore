@@ -3,3 +3,4 @@ pkg
 amazon.yml
 coverage
 bin
+gemfiles/*.gemfile.lock
