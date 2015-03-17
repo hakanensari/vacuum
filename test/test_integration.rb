@@ -27,14 +27,17 @@ class TestIntegration < Minitest::Test
 
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
-
-    %w(BR CA CN DE ES FR GB IN IT JP US).each do |locale|
+    titles = %w(BR CA CN DE ES FR GB IN IT JP US).flat_map do |locale|
       req = Vacuum.new(locale)
       req.associate_tag = 'foo'
       res = req.item_search(query: params)
-      item = res.to_h['ItemSearchResponse']['Items']['Item'].sample
-
-      assert_equal 'UTF-8', item['ASIN'].encoding.name
+      items = res.to_h['ItemSearchResponse']['Items']['Item']
+      items.map { |item| item['ItemAttributes']['Title'] }
     end
+    encodings = titles.map { |t| t.encoding.name }.uniq
+
+    # Newer JRuby now appears to return both US-ASCII and UTF-8, depending on
+    # whether the string has non-ASCII characters. MRI will only return latter.
+    assert encodings.any? { |encoding| encoding == 'UTF-8' }
   end
 end
