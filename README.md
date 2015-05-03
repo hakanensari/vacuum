@@ -22,12 +22,14 @@ request = Vacuum.new('GB')
 ```
 
 Configure the request credentials:
+The aws_version will default to '2011-08-01'. To use another version, reference its date string:
 
 ```ruby
 request.configure(
     aws_access_key_id: 'key',
     aws_secret_access_key: 'secret',
-    associate_tag: 'tag'
+    associate_tag: 'tag',
+    aws_version: '2013-08-01'
 )
 ```
 
