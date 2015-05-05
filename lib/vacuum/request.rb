@@ -36,9 +36,9 @@ module Vacuum
 
     params 'AssociateTag' => -> { associate_tag },
            'Service'      => 'AWSECommerceService',
-           'Version'      => '2011-08-01'
+           'Version'      => -> { aws_version } || "2011-08-01"
 
-    attr_accessor :associate_tag
+    attr_accessor :associate_tag, :aws_version
 
     # Create a new request for given locale.
     #
@@ -60,6 +60,7 @@ module Vacuum
     #                                        (AWS) key.
     #               :aws_secret_access_key - The String AWS secret.
     #               :associate_tag         - The String Associate Tag.
+    #               :aws_version           - The String AWS version.
     #
     # Returns self.
     def configure(credentials)
