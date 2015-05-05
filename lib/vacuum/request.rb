@@ -8,6 +8,8 @@ module Vacuum
 
     BadLocale  = Class.new(ArgumentError)
 
+    LATEST_VERSION = '2013-08-01'
+
     HOSTS = {
       'BR' => 'webservices.amazon.com.br',
       'CA' => 'webservices.amazon.ca',
@@ -36,9 +38,10 @@ module Vacuum
 
     params 'AssociateTag' => -> { associate_tag },
            'Service'      => 'AWSECommerceService',
-           'Version'      => -> { aws_version } || "2011-08-01"
+           'Version'      => -> { version }
 
-    attr_accessor :associate_tag, :aws_version
+    attr_accessor :associate_tag
+    attr_writer :version
 
     # Create a new request for given locale.
     #
@@ -48,7 +51,7 @@ module Vacuum
     #
     # Raises a Bad Locale error if locale is not valid.
     def initialize(locale = 'US', secure = false)
-      locale = "GB" if locale == "UK"
+      locale = 'GB' if locale == 'UK'
       host = HOSTS.fetch(locale) { fail BadLocale }
       @aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
     end
@@ -66,6 +69,11 @@ module Vacuum
     def configure(credentials)
       credentials.each { |key, val| send("#{key}=", val) }
       self
+    end
+
+    # Returns the API version.
+    def version
+      @version || LATEST_VERSION
     end
 
     # Execute an API operation. See `OPERATIONS` constant for available

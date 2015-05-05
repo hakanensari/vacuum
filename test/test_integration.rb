@@ -8,7 +8,7 @@ VCR.configure do |c|
   c.cassette_library_dir = 'test/cassettes'
   c.default_cassette_options = {
     match_requests_on: [VCR.request_matchers.uri_without_param(
-      'AWSAccessKeyId', 'AssociateTag', 'Signature', 'Timestamp'
+      'AWSAccessKeyId', 'AssociateTag', 'Signature', 'Timestamp', 'Version'
     )],
     record: :new_episodes
   }
@@ -25,6 +25,7 @@ class TestIntegration < Minitest::Test
     VCR.eject_cassette
   end
 
+  # rubocop:disable AbcSize
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
     titles = %w(BR CA CN DE ES FR GB IN IT JP US).flat_map do |locale|

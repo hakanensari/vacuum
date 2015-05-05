@@ -21,7 +21,11 @@ class TestVacuum < Minitest::Test
     assert_equal 'http://webservices.amazon.com/onca/xml', @req.aws_endpoint
   end
 
-  def test_accepts_UK_as_locale
+  def test_defaults_to_latest_api_version
+    assert_equal Request::LATEST_VERSION, @req.version
+  end
+
+  def test_accepts_uk_as_locale
     Request.new("UK")
   end
 
