@@ -7,6 +7,10 @@ Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising A
 
 ## Usage
 
+### Prerequisite
+
+Your Access Id must be registered for the Amazon Product Advertising API. Use the AccessKey Id obtained after registering at [https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html](https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html)
+
 ### Setup
 
 Create a request:
