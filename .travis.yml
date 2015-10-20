@@ -19,6 +19,8 @@ rvm:
   - jruby-19mode
   - rbx-2
 matrix:
+  allow_failures:
+    - rvm: ruby-head
   exclude:
     - rvm: jruby-19mode
       gemfile: gemfiles/libxml.gemfile
