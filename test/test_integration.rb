@@ -28,7 +28,7 @@ class TestIntegration < Minitest::Test
   # rubocop:disable AbcSize
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
-    titles = %w(BR CA CN DE ES FR GB IN IT JP US).flat_map do |locale|
+    titles = %w(BR CA CN DE ES FR GB IN IT JP US MX).flat_map do |locale|
       req = Vacuum.new(locale)
       req.associate_tag = 'foo'
       res = req.item_search(query: params)

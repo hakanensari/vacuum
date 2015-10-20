@@ -29,6 +29,10 @@ class TestVacuum < Minitest::Test
     Request.new("UK")
   end
 
+  def test_accepts_mx_as_locale
+    Request.new("MX")
+  end
+
   def test_fetches_parsable_response
     Excon.stub({}, body: '<foo/>')
     res = @req.item_lookup({}, mock: true)
