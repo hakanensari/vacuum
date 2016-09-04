@@ -6,9 +6,9 @@ module Vacuum
   class Request
     include Jeff
 
-    BadLocale  = Class.new(ArgumentError)
+    BadLocale = Class.new(ArgumentError)
 
-    LATEST_VERSION = '2013-08-01'
+    LATEST_VERSION = '2013-08-01'.freeze
 
     HOSTS = {
       'BR' => 'webservices.amazon.com.br',
@@ -53,8 +53,8 @@ module Vacuum
     # Raises a Bad Locale error if locale is not valid.
     def initialize(locale = 'US', secure = false)
       locale = 'GB' if locale == 'UK'
-      host = HOSTS.fetch(locale) { fail BadLocale }
-      @aws_endpoint = "#{secure ? 'https' : 'http' }://#{host}/onca/xml"
+      host = HOSTS.fetch(locale) { raise BadLocale }
+      @aws_endpoint = "#{secure ? 'https' : 'http'}://#{host}/onca/xml"
     end
 
     # Configure the Amazon Product Advertising API request.

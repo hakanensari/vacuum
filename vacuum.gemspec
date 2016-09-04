@@ -19,9 +19,10 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'jeff', '~> 1.0'
   gem.add_dependency 'multi_xml', '~> 0.5.0'
+  gem.add_development_dependency 'appraisal'
   gem.add_development_dependency 'minitest', '~> 5.0'
   gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'appraisal'
+  gem.add_development_dependency 'rubocop'
   gem.add_development_dependency 'vcr'
-  gem.required_ruby_version = '>= 1.9'
+  gem.required_ruby_version = '> 2.0'
 end

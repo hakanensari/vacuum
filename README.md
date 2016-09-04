@@ -5,6 +5,10 @@ Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising A
 
 ![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
 
+> Amazon is a $250 billion dollar company that reacts to you buying a vacuum by going THIS GUY LOVES BUYING VACUUMS HERE ARE SOME MORE VACUUMS
+
+— [@kibblesmith](https://twitter.com/kibblesmith/status/724817086309142529)
+
 ## Usage
 
 ### Prerequisite

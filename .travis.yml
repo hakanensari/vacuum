@@ -5,24 +5,20 @@ env:
 gemfile:
   - gemfiles/libxml.gemfile
   - gemfiles/nokogiri.gemfile
+  - gemfiles/oga.gemfile
   - gemfiles/ox.gemfile
   - gemfiles/rexml.gemfile
-rvm:
-  - 2.0.0
-  - 2.1.0
-  - 2.1.1
-  - 2.1.2
-  - 2.1.5
-  - 2.2.0
-  - 2.2.1
-  - ruby-head
-  - jruby-19mode
-  - rbx-2
+language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
   exclude:
-    - rvm: jruby-19mode
-      gemfile: gemfiles/libxml.gemfile
-    - rvm: jruby-19mode
+    - rvm: jruby-9000
       gemfile: gemfiles/ox.gemfile
+rvm:
+  - 2.1
+  - 2.2
+  - 2.3.1
+  - jruby-9000
+  - ruby-head
+sudo: false

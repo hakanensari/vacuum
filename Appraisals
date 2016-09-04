@@ -1,8 +1,11 @@
-appraise 'ox' do
-  gem 'ox'
+appraise 'libxml' do
 end
 
-appraise 'libxml' do
+appraise 'oga' do
+  gem 'oga'
+end
+
+appraise 'ox' do
   gem 'ox'
 end
 
