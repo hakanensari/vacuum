@@ -35,6 +35,7 @@ module Vacuum
       ItemLookup
       ItemSearch
       SimilarityLookup
+      MerchantId
     ).freeze
 
     params 'AssociateTag' => -> { associate_tag },
