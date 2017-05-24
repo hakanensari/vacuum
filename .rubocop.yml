@@ -1,6 +1,3 @@
-Documentation:
-  Enabled: false
-ExtraSpacing:
-  Enabled: false
-StringLiterals:
-  Enabled: false
+AllCops:
+  Exclude:
+    - Appraisals

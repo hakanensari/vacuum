@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'vacuum/version'
 
@@ -13,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.summary     = 'Amazon Product Advertising in Ruby'
   gem.license     = 'MIT'
 
-  gem.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
+  gem.files         = Dir.glob('lib/**/*') + %w[LICENSE README.md]
   gem.test_files    = Dir.glob('test/**/*')
   gem.require_paths = ['lib']
 

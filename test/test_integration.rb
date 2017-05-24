@@ -27,7 +27,7 @@ class TestIntegration < Minitest::Test
   # rubocop:disable AbcSize
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
-    titles = %w(BR CA CN DE ES FR GB IN IT JP US MX).flat_map do |locale|
+    titles = %w[BR CA CN DE ES FR GB IN IT JP US MX].flat_map do |locale|
       req = Vacuum.new(locale)
       req.associate_tag = 'foo'
       res = req.item_search(query: params)
@@ -38,6 +38,6 @@ class TestIntegration < Minitest::Test
 
     # Newer JRuby now appears to return both US-ASCII and UTF-8, depending on
     # whether the string has non-ASCII characters. MRI will only return latter.
-    assert encodings.any? { |encoding| encoding == 'UTF-8' }
+    assert(encodings.any? { |encoding| encoding == 'UTF-8' })
   end
 end

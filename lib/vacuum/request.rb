@@ -25,7 +25,7 @@ module Vacuum
       'MX' => 'webservices.amazon.com.mx'
     }.freeze
 
-    OPERATIONS = %w(
+    OPERATIONS = %w[
       BrowseNodeLookup
       CartAdd
       CartClear
@@ -35,7 +35,7 @@ module Vacuum
       ItemLookup
       ItemSearch
       SimilarityLookup
-    ).freeze
+    ].freeze
 
     params 'AssociateTag' => -> { associate_tag },
            'Service'      => 'AWSECommerceService',

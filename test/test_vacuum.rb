@@ -25,11 +25,11 @@ class TestVacuum < Minitest::Test
   end
 
   def test_accepts_uk_as_locale
-    Request.new("UK")
+    Request.new('UK')
   end
 
   def test_accepts_mx_as_locale
-    Request.new("MX")
+    Request.new('MX')
   end
 
   def test_fetches_parsable_response
