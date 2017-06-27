@@ -37,11 +37,12 @@ module Vacuum
       SimilarityLookup
     ].freeze
 
-    params 'AssociateTag' => -> { associate_tag },
-           'Service'      => 'AWSECommerceService',
-           'Version'      => -> { version }
+    params 'AssociateTag'   => -> { associate_tag },
+           'Service'        => 'AWSECommerceService',
+           'SubscriptionId' => -> { subscription_id },
+           'Version'        => -> { version }
 
-    attr_accessor :associate_tag
+    attr_accessor :associate_tag, :subscription_id
     attr_writer :version
 
     # Create a new request for given locale.
