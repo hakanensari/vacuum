@@ -1,3 +1,3 @@
 module Vacuum
-  VERSION = '1.4.1'.freeze
+  VERSION = '1.5.0'.freeze
 end
