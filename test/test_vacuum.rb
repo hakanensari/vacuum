@@ -80,4 +80,10 @@ class TestVacuum < Minitest::Test
     res.parser = parser
     assert_kind_of Hash, res.to_h
   end
+
+  def test_digs
+    Excon.stub({}, body: '<foo><bar>baz</bar></foo>')
+    res = @req.item_lookup(query: {}, mock: true)
+    assert_equal 'baz', res.dig('foo', 'bar')
+  end
 end

@@ -30,7 +30,7 @@ class TestIntegration < Minitest::Test
       req = Vacuum.new(locale)
       req.associate_tag = 'foo'
       res = req.item_search(query: params)
-      items = res.to_h['ItemSearchResponse']['Items']['Item']
+      items = res.dig('ItemSearchResponse', 'Items', 'Item')
       items.map { |item| item['ItemAttributes']['Title'] }
     end
     encodings = titles.map { |t| t.encoding.name }.uniq

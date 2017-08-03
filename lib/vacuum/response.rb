@@ -1,18 +1,24 @@
 require 'delegate'
+require 'dig_rb'
+require 'forwardable'
 require 'multi_xml'
 
 module Vacuum
   # A wrapper around the Amazon Product Advertising API response.
   class Response < SimpleDelegator
+    extend Forwardable
+
     class << self
       attr_accessor :parser
     end
 
+    def_delegator :parse, :dig
+
+    attr_writer :parser
+
     def parser
       @parser || self.class.parser
     end
-
-    attr_writer :parser
 
     def parse
       parser ? parser.parse(body) : to_h

@@ -178,10 +178,16 @@ response = request.item_search(
 
 ### Response
 
-The quick and dirty way to consume a response is to parse it into a Ruby hash:
+The quick and dirty way to consume a response is to parse into a Ruby hash:
 
 ```ruby
 response.to_h
+```
+
+You can also use the `#dig` polyfill:
+
+```ruby
+response.dig('ItemSearchResponse', 'Items', 'Item')
 ```
 
 In production, you may prefer to use a custom parser to do some XML heavy-lifting:
