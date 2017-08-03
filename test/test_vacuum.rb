@@ -86,4 +86,10 @@ class TestVacuum < Minitest::Test
     res = @req.item_lookup(query: {}, mock: true)
     assert_equal 'baz', res.dig('foo', 'bar')
   end
+
+  def test_handles_unauthorized_errors
+    Excon.stub({}, status: 403, body: '<foo/>')
+    res = @req.item_lookup(query: {}, mock: true)
+    assert_equal 403, res.status
+  end
 end
