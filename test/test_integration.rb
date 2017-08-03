@@ -24,7 +24,6 @@ class TestIntegration < Minitest::Test
     VCR.eject_cassette
   end
 
-  # rubocop:disable AbcSize
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
     titles = %w[BR CA CN DE ES FR GB IN IT JP US MX].flat_map do |locale|
