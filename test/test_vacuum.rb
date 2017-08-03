@@ -83,12 +83,15 @@ class TestVacuum < Minitest::Test
 
   def test_digs
     Excon.stub({}, body: '<foo><bar>baz</bar></foo>')
+    parser = MiniTest::Mock.new
     res = @req.item_lookup(query: {}, mock: true)
+    assert_equal 'baz', res.dig('foo', 'bar')
+    res.parser = parser
     assert_equal 'baz', res.dig('foo', 'bar')
   end
 
   def test_handles_unauthorized_errors
-    Excon.stub({}, status: 403, body: '<foo/>')
+    Excon.stub({}, status: 403)
     res = @req.item_lookup(query: {}, mock: true)
     assert_equal 403, res.status
   end

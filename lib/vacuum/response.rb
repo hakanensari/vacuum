@@ -12,7 +12,7 @@ module Vacuum
       attr_accessor :parser
     end
 
-    def_delegator :parse, :dig
+    def_delegator :to_h, :dig
 
     attr_writer :parser
 
