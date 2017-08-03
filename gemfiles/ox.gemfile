@@ -4,4 +4,4 @@ source "https://rubygems.org"
 
 gem "ox"
 
-gemspec :path => "../"
+gemspec path: "../"
