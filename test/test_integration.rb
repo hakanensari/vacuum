@@ -27,6 +27,14 @@ class TestIntegration < Minitest::Test
     VCR.eject_cassette
   end
 
+  def test_happy_path
+    req = Vacuum.new
+    req.associate_tag = 'foo'
+    params = { 'SearchIndex' => 'All', 'Keywords' => 'vacuum' }
+    res = req.item_search(query: params)
+    assert res.dig('ItemSearchResponse', 'Items', 'Item')
+  end
+
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
     titles = %w[BR CA CN DE ES FR GB IN IT JP US MX].flat_map do |locale|
