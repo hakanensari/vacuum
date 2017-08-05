@@ -5,15 +5,11 @@ Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising A
 
 ![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
 
-> Amazon is a $250 billion dollar company that reacts to you buying a vacuum by going THIS GUY LOVES BUYING VACUUMS HERE ARE SOME MORE VACUUMS
-
-— [@kibblesmith](https://twitter.com/kibblesmith/status/724817086309142529)
-
 ## Usage
 
 ### Prerequisite
 
-Your Access Id must be registered for the Amazon Product Advertising API. Use the AccessKey Id obtained after registering at [https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html](https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html)
+You must [register as an affiliate](https://affiliate-program.amazon.com) to access the Product Advertising API. Amazon will issue your AWS credentials when you register.
 
 ### Setup
 
@@ -33,9 +29,9 @@ Configure the request credentials:
 
 ```ruby
 request.configure(
-    aws_access_key_id: 'key',
-    aws_secret_access_key: 'secret',
-    associate_tag: 'tag'
+  aws_access_key_id: 'key',
+  aws_secret_access_key: 'secret',
+  associate_tag: 'tag'
 )
 ```
 
