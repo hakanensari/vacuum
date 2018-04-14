@@ -180,7 +180,7 @@ The quick and dirty way to consume a response is to parse into a Ruby hash:
 response.to_h
 ```
 
-You can also use the `#dig` polyfill:
+You can also `#dig` into returned Hash:
 
 ```ruby
 response.dig('ItemSearchResponse', 'Items', 'Item')

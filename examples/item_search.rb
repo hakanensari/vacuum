@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 req = Vacuum.new
 req.associate_tag = 'foo'
 query = {

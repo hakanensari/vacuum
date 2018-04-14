@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'delegate'
-require 'dig_rb'
 require 'forwardable'
 require 'multi_xml'
 
@@ -29,7 +30,7 @@ module Vacuum
     end
 
     def body
-      __getobj__.body.force_encoding('UTF-8')
+      (+__getobj__.body).force_encoding(Encoding::UTF_8)
     end
   end
 end

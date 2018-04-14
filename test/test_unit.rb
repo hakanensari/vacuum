@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require_relative '../lib/vacuum'
 
@@ -47,7 +49,7 @@ class TestVacuum < Minitest::Test
   def test_force_encodes_body
     res = Object.new
     def res.body
-      ''.force_encoding('ASCII-8BIT')
+      (+'').force_encoding(Encoding::ASCII_8BIT)
     end
     assert_equal 'UTF-8', Response.new(res).body.encoding.name
   end

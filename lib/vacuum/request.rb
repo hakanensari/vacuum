@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jeff'
 require 'vacuum/response'
 
@@ -8,7 +10,7 @@ module Vacuum
 
     BadLocale = Class.new(ArgumentError)
 
-    LATEST_VERSION = '2013-08-01'.freeze
+    LATEST_VERSION = '2013-08-01'
 
     HOSTS = {
       'BR' => 'webservices.amazon.com.br',

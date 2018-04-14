@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - Appraisals
+  TargetRubyVersion: 2.3
 Metrics/AbcSize:
   Exclude:
     - test/**/*

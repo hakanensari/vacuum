@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 req = Vacuum.new
 req.version = '2013-04-01'
 req.associate_tag = 'foo'
