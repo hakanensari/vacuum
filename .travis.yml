@@ -5,7 +5,6 @@ env:
 gemfile:
   - gemfiles/libxml.gemfile
   - gemfiles/nokogiri.gemfile
-  - gemfiles/oga.gemfile
   - gemfiles/ox.gemfile
   - gemfiles/rexml.gemfile
 language: ruby
