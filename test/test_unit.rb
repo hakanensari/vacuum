@@ -96,7 +96,7 @@ class TestVacuum < Minitest::Test
     Excon.stub({}, status: 403)
     res = @req.item_lookup(query: {}, mock: true)
     assert_equal 403, res.status
-    assert_raises Excon::Error do
+    assert_raises Excon::Error::Forbidden do
       @req.item_lookup(query: {}, expects: 200, mock: true)
     end
   end
