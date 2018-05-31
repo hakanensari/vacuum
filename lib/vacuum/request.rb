@@ -13,6 +13,7 @@ module Vacuum
     LATEST_VERSION = '2013-08-01'
 
     HOSTS = {
+      'AU' => 'webservices.amazon.com.au',
       'BR' => 'webservices.amazon.com.br',
       'CA' => 'webservices.amazon.ca',
       'CN' => 'webservices.amazon.cn',
