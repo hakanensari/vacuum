@@ -39,6 +39,7 @@ module Vacuum
       ItemSearch
       SimilarityLookup
     ].freeze
+    private_constant :OPERATIONS
 
     params 'AssociateTag'   => -> { associate_tag },
            'Service'        => 'AWSECommerceService',
@@ -81,7 +82,7 @@ module Vacuum
       @version || LATEST_VERSION
     end
 
-    # Execute an API operation. See `OPERATIONS` constant for available
+    # Execute an API operation. See `OPERATIONS` constant above for available
     # operation names.
     #
     # params - The Hash request parameters.

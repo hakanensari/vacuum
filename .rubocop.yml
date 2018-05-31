@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-    - Appraisals
+    - gemfiles/*
   TargetRubyVersion: 2.3
 Metrics/AbcSize:
   Exclude:
