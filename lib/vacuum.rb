@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'vacuum/errors'
 require 'vacuum/request'
 require 'vacuum/version'
 

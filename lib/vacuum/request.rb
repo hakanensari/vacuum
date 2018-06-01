@@ -2,6 +2,7 @@
 
 require 'jeff'
 require 'vacuum/response'
+require 'vacuum/itemsearch_response'
 
 module Vacuum
   # An Amazon Product Advertising API request.
