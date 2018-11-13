@@ -7,9 +7,11 @@ Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising A
 
 ## Usage
 
+Refer to the [API docs](https://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_ApiReference.html) as necessary.
+
 ### Prerequisite
 
-You must [register as an affiliate](https://affiliate-program.amazon.com) to access the Product Advertising API. Amazon will issue your AWS credentials when you register.
+You must [register as an affiliate](https://affiliate-program.amazon.com) to access the API. Amazon will issue your AWS credentials when you register.
 
 ### Setup
 
