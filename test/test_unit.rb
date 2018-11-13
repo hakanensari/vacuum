@@ -92,12 +92,15 @@ class TestVacuum < Minitest::Test
     assert_equal 'baz', res.dig('foo', 'bar')
   end
 
-  def test_handles_unauthorized_errors
+  def test_handles_authorisation_errors
+    Excon.stub({}, status: 400)
+    res = @req.item_lookup(query: {}, mock: true)
+    assert_equal 400, res.status
+    assert_raises Excon::Error::BadRequest do
+      @req.item_lookup(query: {}, expects: 200, mock: true)
+    end
     Excon.stub({}, status: 403)
     res = @req.item_lookup(query: {}, mock: true)
     assert_equal 403, res.status
-    assert_raises Excon::Error::Forbidden do
-      @req.item_lookup(query: {}, expects: 200, mock: true)
-    end
   end
 end

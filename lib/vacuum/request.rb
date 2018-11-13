@@ -112,7 +112,7 @@ module Vacuum
       method_name = operation.gsub(/(.)([A-Z])/, '\1_\2').downcase
       define_method(method_name) do |params, opts = {}|
         params.key?(:query) ? opts = params : opts.update(query: params)
-        opts[:expects] ||= [200, 403]
+        opts[:expects] ||= [200, 400, 403]
         opts[:query].update('Operation' => operation)
 
         Response.new(get(opts))
