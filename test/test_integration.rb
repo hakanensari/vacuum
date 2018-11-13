@@ -39,11 +39,11 @@ class TestIntegration < Minitest::Test
 
   def test_encoding_issues
     params = { 'SearchIndex' => 'All', 'Keywords' => 'google' }
-    titles = %w[BR CA CN DE ES FR GB IN IT JP US MX].flat_map do |locale|
+    titles = locales.flat_map do |locale|
       req = Vacuum.new(locale)
       req.associate_tag = 'foo'
       res = req.item_search(query: params)
-      items = res.dig('ItemSearchResponse', 'Items', 'Item')
+      items = res.dig('ItemSearchResponse', 'Items', 'Item') || []
       items.map { |item| item['ItemAttributes']['Title'] }
     end
     encodings = titles.map { |t| t.encoding.name }.uniq
@@ -59,5 +59,11 @@ class TestIntegration < Minitest::Test
     params = { 'SearchIndex' => 'All', 'Keywords' => 'amazon' }
     res = req.item_search(query: params)
     assert_equal 'InvalidClientTokenId', res.dig('ItemSearchErrorResponse', 'Error', 'Code')
+  end
+
+  private
+
+  def locales
+    Request::HOSTS.keys
   end
 end

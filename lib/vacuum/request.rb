@@ -24,8 +24,9 @@ module Vacuum
       'IN' => 'webservices.amazon.in',
       'IT' => 'webservices.amazon.it',
       'JP' => 'webservices.amazon.co.jp',
-      'US' => 'webservices.amazon.com',
-      'MX' => 'webservices.amazon.com.mx'
+      'MX' => 'webservices.amazon.com.mx',
+      'TR' => 'webservices.amazon.com.tr',
+      'US' => 'webservices.amazon.com'
     }.freeze
 
     OPERATIONS = %w[
