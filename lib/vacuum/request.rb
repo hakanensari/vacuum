@@ -41,10 +41,10 @@ module Vacuum
     ].freeze
     private_constant :OPERATIONS
 
-    params 'AssociateTag'   => -> { associate_tag },
-           'Service'        => 'AWSECommerceService',
+    params 'AssociateTag' => -> { associate_tag },
+           'Service' => 'AWSECommerceService',
            'SubscriptionId' => -> { subscription_id },
-           'Version'        => -> { version }
+           'Version' => -> { version }
 
     attr_accessor :associate_tag, :subscription_id
     attr_writer :version
