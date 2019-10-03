@@ -1,5 +1,4 @@
 .env
 Gemfile.lock
 coverage
-gemfiles/*.gemfile.lock
 pkg
