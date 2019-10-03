@@ -8,14 +8,13 @@ AMAZON_KEY = 'AMAZON_KEY'
 AMAZON_SECRET = 'AMAZON_SECRET'
 AMAZON_TAG = 'test-20'
 
-
 HTTPI.adapter = :excon
 
 VCR.configure do |c|
   c.hook_into :excon
   c.cassette_library_dir = 'test/cassettes'
   c.default_cassette_options = {
-    #match_requests_on: [VCR.request_matchers.uri_without_param(
+    # match_requests_on: [VCR.request_matchers.uri_without_param(
     #  'AWSAccessKeyId', 'AssociateTag', 'Signature', 'Timestamp', 'Version'
     # )],
     record: :new_episodes
@@ -32,42 +31,40 @@ class VacuumTest < Minitest::Test
   end
 
   DEFAULT_RESOURCES = [
-    "BrowseNodeInfo.WebsiteSalesRank",
-    "Images.Primary.Large",
-    "ItemInfo.ByLineInfo",
-    "ItemInfo.ContentInfo",
-    "ItemInfo.ContentRating",
-    "ItemInfo.Classifications",
-    "ItemInfo.ExternalIds",
-    "ItemInfo.Features",
-    "ItemInfo.ManufactureInfo",
-    "ItemInfo.ProductInfo",
-    "ItemInfo.TechnicalInfo",
-    "ItemInfo.Title",
-    "ItemInfo.TradeInInfo",
-    "Offers.Listings.Price",
-    "ParentASIN"
+    'BrowseNodeInfo.WebsiteSalesRank',
+    'Images.Primary.Large',
+    'ItemInfo.ByLineInfo',
+    'ItemInfo.ContentInfo',
+    'ItemInfo.ContentRating',
+    'ItemInfo.Classifications',
+    'ItemInfo.ExternalIds',
+    'ItemInfo.Features',
+    'ItemInfo.ManufactureInfo',
+    'ItemInfo.ProductInfo',
+    'ItemInfo.TechnicalInfo',
+    'ItemInfo.Title',
+    'ItemInfo.TradeInInfo',
+    'Offers.Listings.Price',
+    'ParentASIN'
   ].freeze
-
 
   def test_get_items
     response = client.get_items(
-      item_ids: ["B07212L4G2"],
+      item_ids: ['B07212L4G2'],
       resources: DEFAULT_RESOURCES
     )
 
-    assert_equal 200,  response.code
+    assert_equal 200, response.code
   end
 
   def test_get_variations
     response = client.get_variations(
-      asin: "B07212L4G2",
+      asin: 'B07212L4G2',
       resources: DEFAULT_RESOURCES
     )
 
-    assert_equal 200,  response.code
+    assert_equal 200, response.code
   end
-
 
   private
 
