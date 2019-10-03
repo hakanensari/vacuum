@@ -1,122 +1,119 @@
 # frozen_string_literal: true
 
-require 'jeff'
-require 'vacuum/response'
+require 'httpi'
+require 'aws-sigv4'
 
 module Vacuum
-  # An Amazon Product Advertising API request.
   class Request
-    include Jeff
+    Market = Struct.new(:host, :region) do
+      def site
+        host.sub('webservices', 'www')
+      end
 
-    BadLocale = Class.new(ArgumentError)
+      def endpoint(operation)
+        "https://#{host}/paapi5/#{operation.downcase}"
+      end
+    end
 
-    LATEST_VERSION = '2013-08-01'
-
-    HOSTS = {
-      'AU' => 'webservices.amazon.com.au',
-      'BR' => 'webservices.amazon.com.br',
-      'CA' => 'webservices.amazon.ca',
-      'CN' => 'webservices.amazon.cn',
-      'DE' => 'webservices.amazon.de',
-      'ES' => 'webservices.amazon.es',
-      'FR' => 'webservices.amazon.fr',
-      'GB' => 'webservices.amazon.co.uk',
-      'IN' => 'webservices.amazon.in',
-      'IT' => 'webservices.amazon.it',
-      'JP' => 'webservices.amazon.co.jp',
-      'MX' => 'webservices.amazon.com.mx',
-      'TR' => 'webservices.amazon.com.tr',
-      'US' => 'webservices.amazon.com'
+    MARKETPLACES = {
+      au: Market.new('webservices.amazon.com.au', 'us-west-2'),
+      br: Market.new('webservices.amazon.com.br'  'us-east-1'),
+      ca: Market.new('webservices.amazon.ca',     'us-east-1'),
+      fr: Market.new('webservices.amazon.fr',     'eu-west-1'),
+      de: Market.new('webservices.amazon.de',     'eu-west-1'),
+      in: Market.new('webservices.amazon.in',     'eu-west-1'),
+      it: Market.new('webservices.amazon.it',     'eu-west-1'),
+      jp: Market.new('webservices.amazon.co.jp',  'us-west-2'),
+      mx: Market.new('webservices.amazon.com.mx', 'us-east-1'),
+      es: Market.new('webservices.amazon.es',     'eu-west-1'),
+      tr: Market.new('webservices.amazon.com.tr', 'eu-west-1'),
+      ae: Market.new('webservices.amazon.ae',     'eu-west-1'),
+      uk: Market.new('webservices.amazon.co.uk',  'eu-west-1'),
+      us: Market.new('webservices.amazon.com',    'us-east-1'),
     }.freeze
 
-    OPERATIONS = %w[
-      BrowseNodeLookup
-      CartAdd
-      CartClear
-      CartCreate
-      CartGet
-      CartModify
-      ItemLookup
-      ItemSearch
-      SimilarityLookup
+    OPERATIONS = [
+      'GetBrowseNodes',
+      'GetItems',
+      'GetVariations',
+      'SearchItems'
     ].freeze
-    private_constant :OPERATIONS
 
-    params 'AssociateTag' => -> { associate_tag },
-           'Service' => 'AWSECommerceService',
-           'SubscriptionId' => -> { subscription_id },
-           'Version' => -> { version }
+    attr_reader :access_key, :secret_key, :market, :partner_tag
 
-    attr_accessor :associate_tag, :subscription_id
-    attr_writer :version
-
-    # Create a new request for given locale.
-    #
-    # locale - The String Product Advertising API locale (default: US).
-    # secure - Whether to use the secure version of the endpoint (default:
-    #          false)
-    #
-    # Raises a Bad Locale error if locale is not valid.
-    def initialize(locale = 'US', secure = false)
-      locale = 'GB' if locale == 'UK'
-      host = HOSTS.fetch(locale) { raise BadLocale }
-      @aws_endpoint = "#{secure ? 'https' : 'http'}://#{host}/onca/xml"
+    def initialize(access_key:,
+                   secret_key:,
+                   partner_tag:,
+                   market: :us
+                   )
+      @access_key = access_key
+      @secret_key = secret_key
+      @partner_tag = partner_tag
+      @market =  market
     end
 
-    # Configure the Amazon Product Advertising API request.
-    #
-    # credentials - The Hash credentials of the API endpoint.
-    #               :aws_access_key_id     - The String Amazon Web Services
-    #                                        (AWS) key.
-    #               :aws_secret_access_key - The String AWS secret.
-    #               :associate_tag         - The String Associate Tag.
-    #               :aws_version           - The String AWS version.
-    #
-    # Returns self.
-    def configure(credentials)
-      credentials.each { |key, val| send("#{key}=", val) }
-      self
+    def get_items(item_ids:, resources:)
+      body = { ItemIds: Array(item_ids), Resources:  resources }
+
+      request('GetItems', body)
     end
 
-    # Returns the API version.
-    def version
-      @version || LATEST_VERSION
+    def get_variations(asin:, resources: )
+      body = { ASIN: asin, Resources:  resources }
+
+      request('GetVariations', body)
     end
 
-    # Execute an API operation. See `OPERATIONS` constant above for available
-    # operation names.
-    #
-    # params - The Hash request parameters.
-    # opts   - Options passed to Excon (default: {}).
-    #
-    # Alternatively, pass Excon options as first argument and include request
-    # parameters as query key.
-    #
-    # Examples
-    #
-    #   req.item_search(
-    #     'SearchIndex' => 'All',
-    #     'Keywords' => 'Architecture'
-    #   )
-    #
-    #   req.item_search(
-    #     query: {
-    #       'SearchIndex' => 'All',
-    #       'Keywords' => 'Architecture'
-    #     },
-    #     persistent: true
-    #   )
-    #
-    # Returns a Vacuum Response.
-    OPERATIONS.each do |operation|
-      method_name = operation.gsub(/(.)([A-Z])/, '\1_\2').downcase
-      define_method(method_name) do |params, opts = {}|
-        params.key?(:query) ? opts = params : opts.update(query: params)
-        opts[:expects] ||= [200, 400, 403]
-        opts[:query].update('Operation' => operation)
 
-        Response.new(get(opts))
-      end
+    private
+
+    def request(operation, body)
+      raise ArguemntError unless OPERATIONS.include?(operation)
+
+      marketplace = MARKETPLACES[market]
+
+      body = {
+        'PartnerTag' => partner_tag,
+        'PartnerType' => 'Associates',
+        'Marketplace' => marketplace.site
+      }.merge(body).to_json
+
+      headers = {
+        'X-Amz-Target' => "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.#{operation}",
+        'Content-Encoding' => 'amz-1.0',
+      }
+
+      signer = Aws::Sigv4::Signer.new(
+        service: 'ProductAdvertisingAPI',
+        region: marketplace.region,
+        access_key_id: access_key,
+        secret_access_key: secret_key,
+        http_method: 'POST',
+        endpoint: marketplace.host
+      )
+
+      signature = signer.sign_request(
+        http_method: 'POST',
+        url: marketplace.endpoint(operation),
+        headers: headers,
+        body: body
+      )
+
+      headers = headers.dup.merge({
+        'Content-Type' => 'application/json; charset=utf-8',
+        'Authorization' => signature.headers['authorization'],
+        'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
+        'X-Amz-Date' => signature.headers['x-amz-date'],
+        'Host' => marketplace.host
+      })
+
+      request = HTTPI::Request.new(
+        headers: headers,
+        url: marketplace.endpoint(operation),
+        body: body
+      )
+
+      HTTPI.post(request)
     end
   end
 end
