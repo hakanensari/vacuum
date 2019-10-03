@@ -18,13 +18,13 @@ Gem::Specification.new do |gem|
   gem.test_files    = Dir.glob('test/**/*')
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'httpi'
   gem.add_dependency 'aws-sigv4'
+  gem.add_dependency 'httpi'
+  gem.add_development_dependency 'excon'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rubocop'
   gem.add_development_dependency 'vcr'
-  gem.add_development_dependency 'excon'
   gem.required_ruby_version = '>= 2.3'
 end

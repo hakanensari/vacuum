@@ -17,7 +17,7 @@ module Vacuum
 
     MARKETPLACES = {
       au: Market.new('webservices.amazon.com.au', 'us-west-2'),
-      br: Market.new('webservices.amazon.com.br'  'us-east-1'),
+      br: Market.new('webservices.amazon.com.br', 'us-east-1'),
       ca: Market.new('webservices.amazon.ca',     'us-east-1'),
       fr: Market.new('webservices.amazon.fr',     'eu-west-1'),
       de: Market.new('webservices.amazon.de',     'eu-west-1'),
@@ -29,14 +29,14 @@ module Vacuum
       tr: Market.new('webservices.amazon.com.tr', 'eu-west-1'),
       ae: Market.new('webservices.amazon.ae',     'eu-west-1'),
       uk: Market.new('webservices.amazon.co.uk',  'eu-west-1'),
-      us: Market.new('webservices.amazon.com',    'us-east-1'),
+      us: Market.new('webservices.amazon.com',    'us-east-1')
     }.freeze
 
-    OPERATIONS = [
-      'GetBrowseNodes',
-      'GetItems',
-      'GetVariations',
-      'SearchItems'
+    OPERATIONS = %w[
+      GetBrowseNodes
+      GetItems
+      GetVariations
+      SearchItems
     ].freeze
 
     attr_reader :access_key, :secret_key, :market, :partner_tag
@@ -44,26 +44,24 @@ module Vacuum
     def initialize(access_key:,
                    secret_key:,
                    partner_tag:,
-                   market: :us
-                   )
+                   market: :us)
       @access_key = access_key
       @secret_key = secret_key
       @partner_tag = partner_tag
-      @market =  market
+      @market = market
     end
 
     def get_items(item_ids:, resources:)
-      body = { ItemIds: Array(item_ids), Resources:  resources }
+      body = { ItemIds: Array(item_ids), Resources: resources }
 
       request('GetItems', body)
     end
 
-    def get_variations(asin:, resources: )
-      body = { ASIN: asin, Resources:  resources }
+    def get_variations(asin:, resources:)
+      body = { ASIN: asin, Resources: resources }
 
       request('GetVariations', body)
     end
-
 
     private
 
@@ -80,7 +78,7 @@ module Vacuum
 
       headers = {
         'X-Amz-Target' => "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.#{operation}",
-        'Content-Encoding' => 'amz-1.0',
+        'Content-Encoding' => 'amz-1.0'
       }
 
       signer = Aws::Sigv4::Signer.new(
@@ -99,13 +97,13 @@ module Vacuum
         body: body
       )
 
-      headers = headers.dup.merge({
+      headers = headers.dup.merge(
         'Content-Type' => 'application/json; charset=utf-8',
         'Authorization' => signature.headers['authorization'],
         'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
         'X-Amz-Date' => signature.headers['x-amz-date'],
         'Host' => marketplace.host
-      })
+      )
 
       request = HTTPI::Request.new(
         headers: headers,
