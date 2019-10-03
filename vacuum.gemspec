@@ -20,7 +20,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'httpi'
   gem.add_dependency 'aws-sigv4'
-  gem.add_development_dependency 'appraisal'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rake'

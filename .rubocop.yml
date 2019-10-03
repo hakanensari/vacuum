@@ -1,6 +1,4 @@
 AllCops:
-  Exclude:
-    - gemfiles/*
   TargetRubyVersion: 2.3
 Metrics/AbcSize:
   Exclude:
