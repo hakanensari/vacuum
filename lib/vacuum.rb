@@ -4,6 +4,7 @@ require 'forwardable'
 require 'vacuum/request'
 require 'vacuum/version'
 
+# Vacuum is a Ruby wrapper to the Amazon Product Advertising API.
 module Vacuum
   class << self
     extend Forwardable

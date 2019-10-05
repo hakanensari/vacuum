@@ -5,7 +5,10 @@ require 'httpi'
 require 'aws-sigv4'
 
 module Vacuum
+  # An Amazon Product Advertising API request.
   class Request
+    SERVICE = 'ProductAdvertisingAPI'
+
     attr_reader :access_key, :secret_key, :market, :partner_tag
 
     def initialize(access_key:,
@@ -39,12 +42,7 @@ module Vacuum
     def request(operation, body)
       raise ArgumentError unless OPERATIONS.include?(operation)
 
-      body = {
-        'PartnerTag' => partner_tag,
-        'PartnerType' => 'Associates',
-        'Marketplace' => marketplace.site
-      }.merge(body).to_json
-
+      body = default_body.merge(body).to_json
       request = HTTPI::Request.new(
         headers: request_headers(operation, sign(operation, body)),
         url: marketplace.endpoint(operation),
@@ -52,6 +50,14 @@ module Vacuum
       )
 
       Response.new HTTPI.post(request)
+    end
+
+    def default_body
+      {
+        'PartnerTag' => partner_tag,
+        'PartnerType' => 'Associates',
+        'Marketplace' => marketplace.site
+      }
     end
 
     def marketplace
@@ -70,26 +76,28 @@ module Vacuum
 
     def headers(operation)
       {
-        'X-Amz-Target' => "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.#{operation}",
+        'X-Amz-Target' => "com.amazon.paapi5.v1.#{SERVICE}v1.#{operation}",
         'Content-Encoding' => 'amz-1.0'
       }
     end
 
     def sign(operation, body)
-      signer = Aws::Sigv4::Signer.new(
-        service: 'ProductAdvertisingAPI',
-        region: marketplace.region,
-        access_key_id: access_key,
-        secret_access_key: secret_key,
-        http_method: 'POST',
-        endpoint: marketplace.host
-      )
-
       signer.sign_request(
         http_method: 'POST',
         url: marketplace.endpoint(operation),
         headers: headers(operation),
         body: body
+      )
+    end
+
+    def signer
+      Aws::Sigv4::Signer.new(
+        service: SERVICE,
+        region: marketplace.region,
+        access_key_id: access_key,
+        secret_access_key: secret_key,
+        http_method: 'POST',
+        endpoint: marketplace.host
       )
     end
 
