@@ -43,8 +43,9 @@ module Vacuum
       raise ArgumentError unless OPERATIONS.include?(operation)
 
       body = default_body.merge(body).to_json
+      signature = sign(operation, body)
       request = HTTPI::Request.new(
-        headers: request_headers(operation, sign(operation, body)),
+        headers: request_headers(operation, signature),
         url: marketplace.endpoint(operation),
         body: body
       )
