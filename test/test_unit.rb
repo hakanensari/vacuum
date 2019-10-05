@@ -4,25 +4,29 @@ require 'minitest/autorun'
 require_relative '../lib/vacuum'
 
 class VacuumRequestTest < Minitest::Test
-  def test_resource_validation
+  def test_item_resource_validation
     assert_raises(ArgumentError) do
       client.get_items(
         item_ids: ['B07212L4G2'],
         resources: ['WrongResource']
       )
     end
+  end
 
-    assert_raises(ArgumentError) do
-      client.get_items(
-        item_ids: ['B07212L4G2'],
-        resources: 'NotArrayOfResources'
-      )
-    end
-
+  def test_variation_resource_validation
     assert_raises(ArgumentError) do
       client.get_variations(
         asin: 'B07212L4G2',
         resources: ['WrongResource']
+      )
+    end
+  end
+
+  def test_resource_type_validation
+    assert_raises(ArgumentError) do
+      client.get_items(
+        item_ids: ['B07212L4G2'],
+        resources: 'NotArrayOfResources'
       )
     end
   end
