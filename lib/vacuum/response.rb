@@ -2,7 +2,7 @@
 
 require 'delegate'
 require 'forwardable'
-require 'multi_xml'
+require 'json'
 
 module Vacuum
   # A wrapper around the Amazon Product Advertising API response.
@@ -26,11 +26,7 @@ module Vacuum
     end
 
     def to_h
-      MultiXml.parse(body)
-    end
-
-    def body
-      (+__getobj__.body).force_encoding(Encoding::UTF_8)
+      JSON.parse(body)
     end
   end
 end
