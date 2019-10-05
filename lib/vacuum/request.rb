@@ -9,9 +9,9 @@ module Vacuum
     attr_reader :access_key, :secret_key, :market, :partner_tag
 
     def initialize(access_key:,
-     secret_key:,
-     partner_tag:,
-     market: :us)
+                   secret_key:,
+                   partner_tag:,
+                   market: :us)
       @access_key = access_key
       @secret_key = secret_key
       @partner_tag = partner_tag
@@ -83,7 +83,7 @@ module Vacuum
         secret_access_key: secret_key,
         http_method: 'POST',
         endpoint: marketplace.host
-        )
+      )
 
       signer.sign_request(
         http_method: 'POST',
@@ -94,7 +94,7 @@ module Vacuum
     end
 
     def validate_resources(res)
-      raise ArgumentError unless res.kind_of?(Array)
+      raise ArgumentError unless res.is_a?(Array)
       raise ArgumentError unless (res - RESOURCES).empty?
     end
   end
