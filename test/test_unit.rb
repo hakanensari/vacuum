@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require_relative '../lib/vacuum'
+require_relative 'test_helper'
 
 class VacuumRequestTest < Minitest::Test
   def test_item_resource_validation
@@ -29,14 +28,6 @@ class VacuumRequestTest < Minitest::Test
         resources: 'NotArrayOfResources'
       )
     end
-  end
-
-  def client
-    Vacuum.new(
-      access_key: 'AMAZON_KEY',
-      secret_key: 'AMAZON_SECRET',
-      partner_tag: 'test-20'
-    )
   end
 end
 
