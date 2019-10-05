@@ -2,6 +2,7 @@
 
 require 'minitest/autorun'
 require 'vcr'
+require 'pry'
 require_relative '../lib/vacuum'
 
 AMAZON_KEY = 'AMAZON_KEY'
@@ -55,6 +56,7 @@ class VacuumTest < Minitest::Test
     )
 
     assert_equal 200, response.code
+    assert_equal(['ItemsResult'], response.to_h.keys)
   end
 
   def test_get_variations
@@ -64,6 +66,7 @@ class VacuumTest < Minitest::Test
     )
 
     assert_equal 200, response.code
+    assert_equal(['VariationsResult'], response.to_h.keys)
   end
 
   private

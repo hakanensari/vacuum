@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'vacuum/response'
 require 'httpi'
 require 'aws-sigv4'
 
@@ -111,7 +112,7 @@ module Vacuum
         body: body
       )
 
-      HTTPI.post(request)
+      Response.new HTTPI.post(request)
     end
   end
 end
