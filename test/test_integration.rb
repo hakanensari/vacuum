@@ -11,6 +11,20 @@ class VacuumTest < Minitest::Test
     VCR.eject_cassette
   end
 
+  def test_set_resource_once
+    client = Vacuum.new(
+      access_key: 'AMAZON_KEY',
+      secret_key: 'AMAZON_SECRET',
+      partner_tag: 'test-20',
+      resources: RESOURCES
+    )
+
+    response = client.get_items(item_ids: ['B07212L4G2'])
+    assert_equal 200, response.code
+    response = client.get_variations(asin: 'B07212L4G2')
+    assert_equal 200, response.code
+  end
+
   def test_get_items
     response = client.get_items(
       item_ids: ['B07212L4G2'],

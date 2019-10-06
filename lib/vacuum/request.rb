@@ -9,30 +9,34 @@ module Vacuum
   class Request
     SERVICE = 'ProductAdvertisingAPI'
 
+    attr_accessor :res
     attr_reader :access_key, :secret_key, :market, :partner_tag
 
     def initialize(access_key:,
                    secret_key:,
                    partner_tag:,
-                   market: :us)
+                   market: :us,
+                   resources: nil)
+      validate_resources(resources)
+
       @access_key = access_key
       @secret_key = secret_key
       @partner_tag = partner_tag
       @market = market
     end
 
-    def get_items(item_ids:, resources:)
+    def get_items(item_ids:, resources: nil)
       validate_resources(resources)
 
-      body = { ItemIds: Array(item_ids), Resources: resources }
+      body = { ItemIds: Array(item_ids), Resources: res }
 
       request('GetItems', body)
     end
 
-    def get_variations(asin:, resources:)
+    def get_variations(asin:, resources: nil)
       validate_resources(resources)
 
-      body = { ASIN: asin, Resources: resources }
+      body = { ASIN: asin, Resources: res }
 
       request('GetVariations', body)
     end
@@ -51,6 +55,15 @@ module Vacuum
       )
 
       Response.new HTTPI.post(request)
+    end
+
+    def sign(operation, body)
+      signer.sign_request(
+        http_method: 'POST',
+        url: marketplace.endpoint(operation),
+        headers: headers(operation),
+        body: body
+      )
     end
 
     def default_body
@@ -82,15 +95,6 @@ module Vacuum
       }
     end
 
-    def sign(operation, body)
-      signer.sign_request(
-        http_method: 'POST',
-        url: marketplace.endpoint(operation),
-        headers: headers(operation),
-        body: body
-      )
-    end
-
     def signer
       Aws::Sigv4::Signer.new(
         service: SERVICE,
@@ -102,9 +106,13 @@ module Vacuum
       )
     end
 
-    def validate_resources(res)
-      raise ArgumentError unless res.is_a?(Array)
-      raise ArgumentError unless (res - RESOURCES).empty?
+    def validate_resources(resources)
+      return unless resources
+
+      raise ArgumentError unless resources.is_a?(Array)
+      raise ArgumentError unless (resources - RESOURCES).empty?
+
+      @res = resources
     end
   end
 end
