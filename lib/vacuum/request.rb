@@ -11,17 +11,19 @@ module Vacuum
     SERVICE = 'ProductAdvertisingAPI'
 
     attr_accessor :res
-    attr_reader :access_key, :secret_key, :market, :partner_tag
+    attr_reader :access_key, :secret_key, :market, :partner_tag, :partner_type
 
     def initialize(access_key:,
                    secret_key:,
                    partner_tag:,
                    market: :us,
+                   partner_type: 'Associates',
                    resources: nil)
       @res = resources if resources
       @access_key = access_key
       @secret_key = secret_key
       @partner_tag = partner_tag
+      @partner_type = partner_type
       @market = market
     end
 
@@ -79,7 +81,7 @@ module Vacuum
     def default_body
       {
         'PartnerTag' => partner_tag,
-        'PartnerType' => 'Associates',
+        'PartnerType' => partner_type,
         'Marketplace' => marketplace.site
       }
     end
