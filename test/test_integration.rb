@@ -25,6 +25,15 @@ class VacuumTest < Minitest::Test
     assert_equal '200', response.code
   end
 
+  def test_get_browse_nodes
+    response = client.get_browse_nodes(
+      browse_node_ids: ['3045']
+    )
+
+    assert_equal '200', response.code
+    assert_equal(['BrowseNodesResult'], response.to_h.keys)
+  end
+
   def test_get_items
     response = client.get_items(
       item_ids: ['B07212L4G2'],

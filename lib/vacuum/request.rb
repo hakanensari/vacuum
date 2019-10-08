@@ -11,12 +11,12 @@ module Vacuum
     SERVICE = 'ProductAdvertisingAPI'
 
     attr_accessor :res
-    attr_reader :access_key, :secret_key, :market, :partner_tag, :partner_type
+    attr_reader :access_key, :secret_key, :marketplace, :partner_tag, :partner_type
 
     def initialize(access_key:,
                    secret_key:,
                    partner_tag:,
-                   market: :us,
+                   marketplace: :us,
                    partner_type: 'Associates',
                    resources: nil)
       @res = resources if resources
@@ -24,7 +24,23 @@ module Vacuum
       @secret_key = secret_key
       @partner_tag = partner_tag
       @partner_type = partner_type
-      @market = market
+      @marketplace = marketplace
+    end
+
+    def get_browse_nodes(browse_node_ids:,
+                         languages_of_preference: nil,
+                         marketplace: nil)
+      @res = ['BrowseNodes.Ancestor', 'BrowseNodes.Children']
+      @marketplace = marketplace if marketplace
+
+      body = {}.tap do |hsh|
+        hsh[:BrowseNodeIds] = Array(browse_node_ids)
+        if languages_of_preference
+          hsh[:LanguagesOfPreference] = languages_of_preference
+        end
+      end
+
+      request('GetBrowseNodes', body)
     end
 
     def get_items(item_ids:,
@@ -32,10 +48,10 @@ module Vacuum
                   condition: nil,
                   currency_of_preference: nil,
                   languages_of_preference: nil,
-                  market: nil,
+                  marketplace: nil,
                   offer_count: nil)
       @res = resources if resources
-      @market = market if market
+      @marketplace = marketplace if marketplace
 
       body = {}.tap do |hsh|
         hsh[:ItemIds] = Array(item_ids)
@@ -57,12 +73,12 @@ module Vacuum
                        condition: nil,
                        currency_of_preference: nil,
                        languages_of_preference: nil,
-                       market: nil,
+                       marketplace: nil,
                        offer_count: nil,
                        variation_count: nil,
                        variation_page: nil)
       @res = resources if resources
-      @market = market if market
+      @marketplace = marketplace if marketplace
 
       body = {}.tap do |hsh|
         hsh[:ASIN] = asin
@@ -88,7 +104,7 @@ module Vacuum
 
       body = default_body.merge(body).to_json
       signature = sign(operation, body)
-      uri = URI.parse(marketplace.endpoint(operation))
+      uri = URI.parse(market.endpoint(operation))
       request = Net::HTTP::Post.new(uri)
       request.content_type = 'application/json; charset=UTF-8'
       request_headers(operation, signature).each do |key, value|
@@ -110,7 +126,7 @@ module Vacuum
     def sign(operation, body)
       signer.sign_request(
         http_method: 'POST',
-        url: marketplace.endpoint(operation),
+        url: market.endpoint(operation),
         headers: headers(operation),
         body: body
       )
@@ -120,13 +136,13 @@ module Vacuum
       {
         'PartnerTag' => partner_tag,
         'PartnerType' => partner_type,
-        'Marketplace' => marketplace.site,
+        'Marketplace' => market.site,
         'Resources' => res
       }
     end
 
-    def marketplace
-      MARKETPLACES[market]
+    def market
+      MARKETPLACES[marketplace]
     end
 
     def request_headers(operation, signature)
@@ -134,7 +150,7 @@ module Vacuum
         'Authorization' => signature.headers['authorization'],
         'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
         'X-Amz-Date' => signature.headers['x-amz-date'],
-        'Host' => marketplace.host
+        'Host' => market.host
       )
     end
 
@@ -148,11 +164,11 @@ module Vacuum
     def signer
       Aws::Sigv4::Signer.new(
         service: SERVICE,
-        region: marketplace.region,
+        region: market.region,
         access_key_id: access_key,
         secret_access_key: secret_key,
         http_method: 'POST',
-        endpoint: marketplace.host
+        endpoint: market.host
       )
     end
   end
