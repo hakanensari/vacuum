@@ -19,7 +19,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'aws-sigv4'
-  gem.add_dependency 'httpi'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rake'

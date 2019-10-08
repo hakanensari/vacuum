@@ -5,8 +5,6 @@ require 'vcr'
 require 'pry'
 require_relative '../lib/vacuum'
 
-HTTPI.adapter = :net_http
-
 VCR.configure do |c|
   c.hook_into :webmock
   c.cassette_library_dir = 'test/cassettes'
