@@ -20,9 +20,9 @@ class VacuumTest < Minitest::Test
     )
 
     response = client.get_items(item_ids: ['B07212L4G2'])
-    assert_equal "200", response.code
+    assert_equal '200', response.code
     response = client.get_variations(asin: 'B07212L4G2')
-    assert_equal "200", response.code
+    assert_equal '200', response.code
   end
 
   def test_get_items
@@ -31,7 +31,7 @@ class VacuumTest < Minitest::Test
       resources: RESOURCES
     )
 
-    assert_equal "200", response.code
+    assert_equal '200', response.code
     assert_equal(['ItemsResult'], response.to_h.keys)
   end
 
@@ -41,7 +41,7 @@ class VacuumTest < Minitest::Test
       resources: RESOURCES
     )
 
-    assert_equal "200", response.code
+    assert_equal '200', response.code
     assert_equal(['VariationsResult'], response.to_h.keys)
   end
 end
