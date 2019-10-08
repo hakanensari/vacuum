@@ -5,10 +5,10 @@ require 'vcr'
 require 'pry'
 require_relative '../lib/vacuum'
 
-HTTPI.adapter = :excon
+HTTPI.adapter = :net_http
 
 VCR.configure do |c|
-  c.hook_into :excon
+  c.hook_into :webmock
   c.cassette_library_dir = 'test/cassettes'
   c.default_cassette_options = {
     # match_requests_on: [VCR.request_matchers.uri_without_param(
