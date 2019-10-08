@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'vacuum/response'
-require 'httpi'
+require 'net/http'
+require 'uri'
 require 'aws-sigv4'
 
 module Vacuum
@@ -26,7 +27,7 @@ module Vacuum
 
     def get_items(item_ids:, resources: nil)
       @res = resources if resources
-      
+
       body = { ItemIds: Array(item_ids), Resources: res }
 
       request('GetItems', body)
@@ -47,13 +48,23 @@ module Vacuum
 
       body = default_body.merge(body).to_json
       signature = sign(operation, body)
-      request = HTTPI::Request.new(
-        headers: request_headers(operation, signature),
-        url: marketplace.endpoint(operation),
-        body: body
-      )
+      uri = URI.parse(marketplace.endpoint(operation))
+      request = Net::HTTP::Post.new(uri)
+      request.content_type = "application/json; charset=UTF-8"
+      request_headers(operation, signature).each do |key, value|
+        request[key] = value
+      end
+      request.body = body
 
-      Response.new HTTPI.post(request)
+      req_options = {
+        use_ssl: uri.scheme == "https"
+      }
+
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+
+      Response.new response
     end
 
     def sign(operation, body)
@@ -79,7 +90,6 @@ module Vacuum
 
     def request_headers(operation, signature)
       headers(operation).merge(
-        'Content-Type' => 'application/json; charset=utf-8',
         'Authorization' => signature.headers['authorization'],
         'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
         'X-Amz-Date' => signature.headers['x-amz-date'],
