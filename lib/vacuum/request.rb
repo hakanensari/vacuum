@@ -17,8 +17,7 @@ module Vacuum
                    partner_tag:,
                    market: :us,
                    resources: nil)
-      validate_resources(resources)
-
+      @res = resources if resources
       @access_key = access_key
       @secret_key = secret_key
       @partner_tag = partner_tag
@@ -26,15 +25,15 @@ module Vacuum
     end
 
     def get_items(item_ids:, resources: nil)
-      validate_resources(resources)
-
+      @res = resources if resources
+      
       body = { ItemIds: Array(item_ids), Resources: res }
 
       request('GetItems', body)
     end
 
     def get_variations(asin:, resources: nil)
-      validate_resources(resources)
+      @res = resources if resources
 
       body = { ASIN: asin, Resources: res }
 
@@ -104,15 +103,6 @@ module Vacuum
         http_method: 'POST',
         endpoint: marketplace.host
       )
-    end
-
-    def validate_resources(resources)
-      return unless resources
-
-      raise ArgumentError unless resources.is_a?(Array)
-      raise ArgumentError unless (resources - RESOURCES).empty?
-
-      @res = resources
     end
   end
 end

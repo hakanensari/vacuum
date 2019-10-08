@@ -2,35 +2,6 @@
 
 require_relative 'test_helper'
 
-class VacuumRequestTest < Minitest::Test
-  def test_item_resource_validation
-    assert_raises(ArgumentError) do
-      client.get_items(
-        item_ids: ['B07212L4G2'],
-        resources: ['WrongResource']
-      )
-    end
-  end
-
-  def test_variation_resource_validation
-    assert_raises(ArgumentError) do
-      client.get_variations(
-        asin: 'B07212L4G2',
-        resources: ['WrongResource']
-      )
-    end
-  end
-
-  def test_resource_type_validation
-    assert_raises(ArgumentError) do
-      client.get_items(
-        item_ids: ['B07212L4G2'],
-        resources: 'NotArrayOfResources'
-      )
-    end
-  end
-end
-
 class VacuumResponseTest < Minitest::Test
   def test_parsable_response
     assert_equal(['ItemsResult'], res.parse.keys)
