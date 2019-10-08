@@ -27,18 +27,56 @@ module Vacuum
       @market = market
     end
 
-    def get_items(item_ids:, resources: nil)
+    def get_items(item_ids:,
+                  resources: nil,
+                  condition: nil,
+                  currency_of_preference: nil,
+                  languages_of_preference: nil,
+                  market: nil,
+                  offer_count: nil)
       @res = resources if resources
+      @market = market if market
 
-      body = { ItemIds: Array(item_ids), Resources: res }
+      body = {}.tap do |hsh|
+        hsh[:ItemIds] = Array(item_ids)
+        hsh[:Condition] = condition if condition
+        if currency_of_preference
+          hsh[:CurrencyOfPreference] = currency_of_preference
+        end
+        if languages_of_preference
+          hsh[:LanguagesOfPreference] = languages_of_preference
+        end
+        hsh[:OfferCount] = offer_count if offer_count
+      end
 
       request('GetItems', body)
     end
 
-    def get_variations(asin:, resources: nil)
+    def get_variations(asin:,
+                       resources: nil,
+                       condition: nil,
+                       currency_of_preference: nil,
+                       languages_of_preference: nil,
+                       market: nil,
+                       offer_count: nil,
+                       variation_count: nil,
+                       variation_page: nil)
       @res = resources if resources
+      @market = market if market
 
-      body = { ASIN: asin, Resources: res }
+      body = {}.tap do |hsh|
+        hsh[:ASIN] = asin
+        hsh[:Condition] = condition if condition
+        if currency_of_preference
+          hsh[:CurrencyOfPreference] = currency_of_preference
+        end
+        if languages_of_preference
+          hsh[:LanguagesOfPreference] = languages_of_preference
+        end
+        hsh[:OfferCount] = offer_count if offer_count
+        hsh[:VariationCount] = variation_count if variation_count
+        hsh[:VariationPage] = variation_page if variation_page
+      end
 
       request('GetVariations', body)
     end
@@ -52,14 +90,14 @@ module Vacuum
       signature = sign(operation, body)
       uri = URI.parse(marketplace.endpoint(operation))
       request = Net::HTTP::Post.new(uri)
-      request.content_type = "application/json; charset=UTF-8"
+      request.content_type = 'application/json; charset=UTF-8'
       request_headers(operation, signature).each do |key, value|
         request[key] = value
       end
       request.body = body
 
       req_options = {
-        use_ssl: uri.scheme == "https"
+        use_ssl: uri.scheme == 'https'
       }
 
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -82,7 +120,8 @@ module Vacuum
       {
         'PartnerTag' => partner_tag,
         'PartnerType' => partner_type,
-        'Marketplace' => marketplace.site
+        'Marketplace' => marketplace.site,
+        'Resources' => res
       }
     end
 
