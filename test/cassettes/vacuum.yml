@@ -5,46 +5,54 @@ http_interactions:
     uri: https://webservices.amazon.com/paapi5/getitems
     body:
       encoding: UTF-8
-      string: '{"PartnerTag":"test-20","PartnerType":"Associates","Marketplace":"www.amazon.com","ItemIds":["B07212L4G2"],"Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"]}'
+      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.com","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"],"ItemIds":["B07212L4G2"]}'
     headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - webservices.amazon.com
+      Content-Type:
+      - application/json; charset=UTF-8
       X-Amz-Target:
       - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
       Content-Encoding:
       - amz-1.0
-      Content-Type:
-      - application/json; charset=utf-8
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_KEY/20191003/us-east-1/ProductAdvertisingAPI/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=<KEY>/20191008/us-east-1/ProductAdvertisingAPI/aws4_request,
         SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=35eb21fd39a379b54f8aae33154ad0b0949ef5d9c017a8140516d96008e94641
+        Signature=a66f646a247e44bcd8b73ecff945ca6c1a20ca7c90c1946213cbd91fc7590af1
       X-Amz-Content-Sha256:
-      - 533250311793b8c510518e3dbb07fde631af61d15673e73d1d391024402ac45d
+      - 779db2da98aff2eb96aba6332a3885a50013f3796bf56c146090a0a8af519fca
       X-Amz-Date:
-      - 20191003T170323Z
+      - 20191008T174654Z
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       Server:
       - Server
       Date:
-      - Thu, 03 Oct 2019 17:03:25 GMT
+      - Tue, 08 Oct 2019 17:46:55 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2162'
+      - '1051'
       Connection:
       - keep-alive
-      x-amzn-RequestId:
-      - 111b713a-f23e-419a-92ff-e71b5a962123
+      X-Amzn-Requestid:
+      - 9f3d6bf1-9a51-4dac-9a8f-116728d116fe
       Vary:
       - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
-      x-amz-rid:
-      - 52AKTDJJXFVCB8VXZKAW
+      X-Amz-Rid:
+      - W9YJ50YY59C06MFZP50Q
     body:
       encoding: ASCII-8BIT
-      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.com/dp/B07212L4G2?tag=test-20&linkCode=ogi&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.com/dp/B07212L4G2?tag=<PARTNER_TAG>&linkCode=ogi&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
         Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
         Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"T-shirt","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129406"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129406"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
         Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
@@ -54,66 +62,62 @@ http_interactions:
         29 in\n    \n\nProduct measurements were taken using size MD. Please note
         that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
         Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals 3-Stripes Tee Intense Lemons MD","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"nTbwLoohuOnOlcqzv3tU2slwGKE%2FICZt7LOpgMtt0P6vP6Ny%2FR1RtwQ6ps130j5qKlGvZpPS0Rmtuk6y3KWCyc2v9%2B2IR0Capgos7s%2F7ahQZBCwtlpijdxRwz0c4wr8vlac3t1swYcflYBEevCPiMlajMNM2Qwra","Price":{"Amount":29.09,"Currency":"USD","DisplayAmount":"$29.09"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L"}]}}'
+        Originals 3-Stripes Tee Intense Lemons MD","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"mNHWaSggDzIiWxfHa1H6Xuwa69zYfIQ9Ms%2F1ucYKiBAtdJ6zpAAwc4OcIKo7a64T0mJuQxvNfya%2FNwi%2FrD6yLR9E73X10KWUCjqL%2B2uS0guLkToa5jxVCSshEQaD6JTgeOpZHMZH3UgGuHzB8Ms1Zw%3D%3D","Price":{"Amount":29.99,"Currency":"USD","DisplayAmount":"$29.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L"}]}}'
     http_version: 
-  recorded_at: Thu, 03 Oct 2019 17:03:25 GMT
+  recorded_at: Tue, 08 Oct 2019 17:46:55 GMT
 - request:
     method: post
     uri: https://webservices.amazon.com/paapi5/getvariations
     body:
       encoding: UTF-8
-      string: '{"PartnerTag":"test-20","PartnerType":"Associates","Marketplace":"www.amazon.com","ASIN":"B07212L4G2","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"]}'
+      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.com","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"],"ASIN":"B07212L4G2"}'
     headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - webservices.amazon.com
+      Content-Type:
+      - application/json; charset=UTF-8
       X-Amz-Target:
       - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
       Content-Encoding:
       - amz-1.0
-      Content-Type:
-      - application/json; charset=utf-8
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AMAZON_KEY/20191003/us-east-1/ProductAdvertisingAPI/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=<KEY>/20191008/us-east-1/ProductAdvertisingAPI/aws4_request,
         SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=5f88a1202751fce94c3c6d4e678d24a999fcb824bd941a21dfafae89760adeb4
+        Signature=d3076ba9c02f07c365c096bb4199ad52f49c284badb777749f003c1c6433383a
       X-Amz-Content-Sha256:
-      - 1d8025b433ada7d5c6a8a5d72f1a186b71da0b89f82f2f0289fcc2033aa89b85
+      - 7dae12e0c5c19243d01790a4c34185ccdc68e5ef6206adc01c36e136c25a6661
       X-Amz-Date:
-      - 20191003T170325Z
+      - 20191008T174655Z
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       Server:
       - Server
       Date:
-      - Thu, 03 Oct 2019 17:03:26 GMT
+      - Tue, 08 Oct 2019 17:46:57 GMT
       Content-Type:
       - application/json
-      Content-Length:
-      - '20819'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      x-amzn-RequestId:
-      - fa8e62b6-a108-42a1-b02c-5aabe44420b8
+      X-Amzn-Requestid:
+      - 999b9c0f-713a-4337-b3b6-2be14e2d759c
       Vary:
       - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
-      x-amz-rid:
-      - CG2PXZ92XDAV7GNBVY3D
+      X-Amz-Rid:
+      - 7PPKQN80F79V2AQMA88Q
     body:
       encoding: ASCII-8BIT
-      string: '{"VariationsResult":{"Items":[{"ASIN":"B07212KJ34","DetailPageURL":"https://www.amazon.com/dp/B07212KJ34?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004666"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004666"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-S","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
-        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Small","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, S","Label":"Title","Locale":"en_US"}},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Trace
-        Scarlet"}]},{"ASIN":"B071G3G2JF","DetailPageURL":"https://www.amazon.com/dp/B071G3G2JF?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/41PUG+spC-L.jpg","Width":461}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027116147"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027116147"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1205-400-M","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1205","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Collegiate
-        Royal","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Men''s Originals 3 Stripes Tee, Collegiate Royal, M","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9XOPSzzK30I8QEllbCuktXv6AHTi8RQyCguXAXnFiCsaIevtKTIGmJrZt9F6P1EqZ7feUWYXdvNa1mn1VO2JnGp6F%2F2wgrN7S5RfxmNBXn1XI4SPF8IhrFSHUaMc%2BExuQUlqj3wodRXv","Price":{"Amount":48.73,"Currency":"USD","DisplayAmount":"$48.73"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Collegiate
-        Royal"}]},{"ASIN":"B071G3GFYP","DetailPageURL":"https://www.amazon.com/dp/B071G3GFYP?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+      string: '{"VariationsResult":{"Items":[{"ASIN":"B071G3GFYP","DetailPageURL":"https://www.amazon.com/dp/B071G3GFYP?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
         Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
         Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129437"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129437"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
         Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
@@ -123,42 +127,8 @@ http_interactions:
         29 in\n    \n\nProduct measurements were taken using size MD. Please note
         that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
         Lemons","Label":"Color","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.5,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9YC7JGNr%2BCoUhJ5SeK%2FUWQ4LPy7uycbqCUnpHz%2FJ5wwZwiYfh00N1GTriMq%2Fgaxu1iMm%2BYw4%2F5cC5jeBQ2iAqiKJZbWqzxPCCNUr21bmkqekVPVGmrITA56X5BNGRfJvHg%3D%3D","Price":{"Amount":60.21,"Currency":"USD","DisplayAmount":"$60.21"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B07212KSMC","DetailPageURL":"https://www.amazon.com/dp/B07212KSMC?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129383"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129383"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.4,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Small","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons Small","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9WIUOyz4Zfxh2erXlTa4REAiyZUW1LJBt5%2Fp5DD8UiveytdeJBI17H5ON2iWHr7bCw3Gek6ttDgZfs7mE2iAqDgOQtSnLH2pzNDpOn169QCIxlv7cWXToQCwxqP19vS3aSGjy8yR7WX2","Price":{"Amount":45.96,"Currency":"USD","DisplayAmount":"$45.96"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B071JPCVMM","DetailPageURL":"https://www.amazon.com/dp/B071JPCVMM?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/414nIoLXyzL.jpg","Width":458}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027099259"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027099259"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1206-305-M","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1206","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Collegiate
-        Green","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s Originals 3 Stripes Tee, Collegiate Green, M","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9WQQMS%2B8Rri2CI%2Bx%2BdFUApvr9SyRxm4%2FNk0Tn%2Fi9Y%2Bl%2FJqY%2FsI0UaQXpAs7WO9FCs3GVTsCVS5yvne0DTjsFBbB7l93j4PS1EuWI3IaAevDrRSNCG%2BI5NkMIJ%2Flt7KimqVk2rK8M0Zig","Price":{"Amount":46.83,"Currency":"USD","DisplayAmount":"$46.83"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Collegiate
-        Green"}]},{"ASIN":"B07212K481","DetailPageURL":"https://www.amazon.com/dp/B07212K481?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129468"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129468"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.5,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"X-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons X-Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9XH5mTmYZSI0nv2yagYHLE2o6ianR%2FbFsxeYLR7k4a8%2FaLZ%2BL6Cbft30pe3M6wb8gPpU8nQnHVTCnQUgIomiDfCJJLy7zxXdpH0%2BsuqVwMYvirOGg7l74rWwIgEjY74s%2Bw%3D%3D","Price":{"Amount":25.93,"Currency":"USD","DisplayAmount":"$25.93"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B071G3FR4M","DetailPageURL":"https://www.amazon.com/dp/B071G3FR4M?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004680"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004680"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-XL","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
-        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"X-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, XL","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9dDcMSr69RkVsDAWrD7%2FmQrD8FQqNJWfHWDJeu%2F%2F1mUK46Y9uxBqgAiCCvner5l1Ga45y3jn5OxBIEl6vh2pH7zQTMQSjGY7t9zY3wUp7qoX0MBVMsNkUsTKNYeEE7bNeqSKRVROFUIi","Price":{"Amount":52.5,"Currency":"USD","DisplayAmount":"$52.50"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Trace
-        Scarlet"}]},{"ASIN":"B071JPD1TG","DetailPageURL":"https://www.amazon.com/dp/B071JPD1TG?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVuSWtbTsp4OM41a2twheWgGFoFSzlUgeYwF9LnOPNPh7IQA4AKkyVr6CyW%2Bq3zaPVxxjr%2BBq43FQIsWXfx6TTZytay0GUYnkIzPvGcMuNqJ9xWqkmsPztXTWFw58R5%2BlQA%3D%3D","Price":{"Amount":60.21,"Currency":"USD","DisplayAmount":"$60.21"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B071JPD1TG","DetailPageURL":"https://www.amazon.com/dp/B071JPD1TG?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
         Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
         Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129352"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129352"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
         Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
@@ -168,22 +138,141 @@ http_interactions:
         29 in\n    \n\nProduct measurements were taken using size MD. Please note
         that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
         Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"Size":{"DisplayValue":"XX-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons XX-Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9fhtYjXSCCwGhG%2BN8olrW4R7g%2BNVxuZZv7LYLDAz9PxcvSlayABi7KL9SFJjqpmmtgIBoVpQdY7gGKDepTZDTQ3r3T5ZnowZk8B%2BHsOTafK3Iz1NFPqfztQ6oGFFm9%2FHaQ%3D%3D","Price":{"Amount":25.99,"Currency":"USD","DisplayAmount":"$25.99","Savings":{"Amount":9.01,"Currency":"USD","DisplayAmount":"$9.01
+        Originals Men''s 3-Stripes Tee Intense Lemons XX-Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVoRoiu17%2BEMtmT56zc753yUwHS4Dmc1h8eYJranZi9fNWeK7VNcqT9sxV6M2WkXWNOJVQeuxevKe4CBy%2Fc7NsGOca4xYaMdDhFnu136Q8leKWINYXqzARyAuX5ov5nX45Q%3D%3D","Price":{"Amount":25.99,"Currency":"USD","DisplayAmount":"$25.99","Savings":{"Amount":9.01,"Currency":"USD","DisplayAmount":"$9.01
         (26%)","Percentage":26}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"XX-Large"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B07212L479","DetailPageURL":"https://www.amazon.com/dp/B07212L479?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/41pIhtuvZIL.jpg","Width":468}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Lemons"}]},{"ASIN":"B071G3G2JF","DetailPageURL":"https://www.amazon.com/dp/B071G3G2JF?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/41PUG+spC-L.jpg","Width":461}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
         Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027031679"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027031679"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CV6000-650-L","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CV6000","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Dust
-        Pink","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Men''s Originals 3 Stripes Tee, Dust Pink, L","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9TJUxoUfMGt2LRg%2F%2FDe9G6gU6F95ttW2dT9hDwzK4simYLnqRXuiDSngmpcgmQtFwgNPhqeLUIOIR1MdIdRCUbsc0fKSvaGk3BRCxkdM0LIJqeFJ1YUGwCLso291vLHjtSCM%2FUkaYozI","Price":{"Amount":29.99,"Currency":"USD","DisplayAmount":"$29.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Dust
-        Pink"}]},{"ASIN":"B07212L2BM","DetailPageURL":"https://www.amazon.com/dp/B07212L2BM?tag=test-20&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027116147"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027116147"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
+        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1205-400-M","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1205","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Collegiate
+        Royal","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Men''s Originals 3 Stripes Tee, Collegiate Royal, M","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVli%2FI8N39cZ5XtUbMevjp%2F6r1qLRqoDOFXlIN%2BTzWWJVqqChYzNe%2BYw%2BUDvc9q6zH4xFn330QST2n%2Bqr7SIOLwhdcUanmixTPX64Vmfs35OP8IlBiM3eQiI2ymQ%2F0DSHcFdyLJjzXe%2BS","Price":{"Amount":48.13,"Currency":"USD","DisplayAmount":"$48.13"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Collegiate
+        Royal"}]},{"ASIN":"B07212K481","DetailPageURL":"https://www.amazon.com/dp/B07212K481?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129468"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129468"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
+        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
+        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
+        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
+        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
+        29 in\n    \n\nProduct measurements were taken using size MD. Please note
+        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
+        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.5,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"X-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons X-Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVo37vcAWkjpHJQae5dbnkcw9y3EeOUnV%2BirBpf8Rj75zT0HwM4zksp7zwRFF51V5z5GXvyswWnCJAq36hwk1Aprrekl7ThejiEHic8txeveGAGUpXvrf9AWdHPttcghZ8A%3D%3D","Price":{"Amount":25.99,"Currency":"USD","DisplayAmount":"$25.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B07212KJ34","DetailPageURL":"https://www.amazon.com/dp/B07212KJ34?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004666"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004666"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
+        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-S","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
+        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Small","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, S","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVhy04B42Jjb%2Fq4X6JEKZUvJeCwXVW5eT9Vxzaw5rrB%2Fb%2FfEd56czfIPQIvInNyXl4cK9wh17HS%2BHtrAXa%2BinfbjXNFzdGSJr5nw5SGXJoLsevHfDuOFoTscPdxtJtjf5T6lIwP8QKorG","Price":{"Amount":60.21,"Currency":"USD","DisplayAmount":"$60.21"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B071G3FR4M","DetailPageURL":"https://www.amazon.com/dp/B071G3FR4M?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004680"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004680"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
+        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-XL","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
+        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"X-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, XL","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVme3nARQqTe3vVSO%2BSg93uUZJZc1pmtilKSuTBSBPo1gmBd%2FvoJ5eR%2BEQvylDUc%2Bcw70B9z86nk9lEmLjQb95gd1MkOWb1kDB4qlG61fXAjyC3vm4kY2XygLWhh4RZhHU7wGZpLf6EgA","Price":{"Amount":32.27,"Currency":"USD","DisplayAmount":"$32.27","Savings":{"Amount":2.73,"Currency":"USD","DisplayAmount":"$2.73
+        (8%)","Percentage":8}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B07212L2BM","DetailPageURL":"https://www.amazon.com/dp/B07212L2BM?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
         Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
         Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004741"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004741"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
         fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-L","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
         Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Men''s Originals 3 Stripes Tee, Trace Scarlet, L","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"TnTszVDbtDIe3TcizIed9UsGsAVk2OdhYXUiwbgRLif5tz6bodJWgJvfWQGuQjEbJKTzcrFc%2FRCDxGXweltvI5e4S6quk8Z%2F98otGna33%2FQBL2EBcbBBAA%3D%3D","Price":{"Amount":28.91,"Currency":"USD","DisplayAmount":"$28.91","Savings":{"Amount":6.09,"Currency":"USD","DisplayAmount":"$6.09
-        (17%)","Percentage":17}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Trace
-        Scarlet"}]}],"VariationSummary":{"PageCount":2,"VariationCount":16}}}'
+        Men''s Originals 3 Stripes Tee, Trace Scarlet, L","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVjUdvKz6xw%2FUmgawlMTW33qm%2Fmy7d0jLdwGvISHOfXE%2BW5x%2BFPujB9t1KYyZpqqN1RIojdWiTbx6oKoOsYmF9qLeaQxqMi7dwA%3D%3D","Price":{"Amount":18.0,"Currency":"USD","DisplayAmount":"$18.00","Savings":{"Amount":17.0,"Currency":"USD","DisplayAmount":"$17.00
+        (49%)","Percentage":49}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B07212KSMC","DetailPageURL":"https://www.amazon.com/dp/B07212KSMC?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129383"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129383"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
+        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
+        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
+        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
+        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
+        29 in\n    \n\nProduct measurements were taken using size MD. Please note
+        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
+        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.4,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Small","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Small","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVv4qSnwkNM206LcIRz7Y0F2KQy8RVMPB5lddEEFE957bo%2Bg7lyE0DqBsP0%2FhMyHvY8yOUcDHABt4xJgsHrCo03P6ZGM%2FTON%2BtBajpA3kjExKTRTbx4SC2MM%2BF%2FdZedSsQ2EP%2BzC%2Ba5nJ","Price":{"Amount":45.96,"Currency":"USD","DisplayAmount":"$45.96"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B07212L479","DetailPageURL":"https://www.amazon.com/dp/B07212L479?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/41pIhtuvZIL.jpg","Width":468}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027031679"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027031679"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
+        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CV6000-650-L","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CV6000","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Dust
+        Pink","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Men''s Originals 3 Stripes Tee, Dust Pink, L","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVlC52KLMPGiwA7ZJ6jN42CFyv2mCvKioeEYsbjr%2FfkdWuqIwE4lVDJcay69wQ0Swv7HOsKNAZe1xU5Y%2BQCcUU2687NORu9JL5bm153gbRd4iNdQBj%2BgIM3n6q1gmpbRQiVmOMPzdXuOW","Price":{"Amount":29.99,"Currency":"USD","DisplayAmount":"$29.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Dust
+        Pink"}]},{"ASIN":"B071JPCVMM","DetailPageURL":"https://www.amazon.com/dp/B071JPCVMM?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/414nIoLXyzL.jpg","Width":458}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
+        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
+        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027099259"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027099259"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
+        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1206-305-M","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1206","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Collegiate
+        Green","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
+        Originals Men''s Originals 3 Stripes Tee, Collegiate Green, M","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVvuuCqYHoR8YE3FpnHcyhRWnq1QcWlrPrTYEPTvCxPqb9wcl%2FD82mQmKzFHb3vBlEz%2Bu0XcVNItv4SDNN2afAHMYJSjY48UY4Bu1Bx2NSE9gAk%2FiR6I0TY7B4vwg78l5ZncSYxbJ1B%2F0","Price":{"Amount":47.59,"Currency":"USD","DisplayAmount":"$47.59"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Collegiate
+        Green"}]}],"VariationSummary":{"PageCount":2,"VariationCount":16}}}'
     http_version: 
-  recorded_at: Thu, 03 Oct 2019 17:03:27 GMT
+  recorded_at: Tue, 08 Oct 2019 17:46:57 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.com/paapi5/getbrowsenodes
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.com","Resources":["BrowseNodes.Ancestor","BrowseNodes.Children"],"BrowseNodeIds":["3045"]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - webservices.amazon.com
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
+      Content-Encoding:
+      - amz-1.0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<KEY>/20191008/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=b4d8c81ef166c04ce7a571416ea0daa8296ea0052ad7ad831eea056f5c946fa0
+      X-Amz-Content-Sha256:
+      - 2ba033827cd47da82995f86843d01364fcff20cf01c80b95049851f8e38876ca
+      X-Amz-Date:
+      - 20191008T174657Z
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Tue, 08 Oct 2019 17:46:58 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '469'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - c3507c66-6900-444d-b07d-5164cb96883b
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - TSKEJ79B83PS0ENEBCFC
+    body:
+      encoding: ASCII-8BIT
+      string: '{"BrowseNodesResult":{"BrowseNodes":[{"Ancestor":{"Ancestor":{"Ancestor":{"Ancestor":{"ContextFreeName":"Books","DisplayName":"Books","Id":"283155"},"ContextFreeName":"Subjects","DisplayName":"Subjects","Id":"1000"},"ContextFreeName":"Children''s
+        Books","DisplayName":"Children''s Books","Id":"4"},"ContextFreeName":"Children''s
+        Growing Up & Facts of Life Books","DisplayName":"Growing Up & Facts of Life","Id":"1084192"},"Children":[{"ContextFreeName":"Children''s
+        Adoption Books","DisplayName":"Adoption","Id":"3046"},{"ContextFreeName":"Children''s
+        Babysitting Books","DisplayName":"Babysitting","Id":"1084232"},{"ContextFreeName":"Children''s
+        Marriage & Divorce Books","DisplayName":"Marriage & Divorce","Id":"3050"},{"ContextFreeName":"Children''s
+        Money","DisplayName":"Money","Id":"15356841"},{"ContextFreeName":"Children''s
+        Moving","DisplayName":"Moving","Id":"1084194"},{"ContextFreeName":"Children''s
+        Multigenerational Family Life","DisplayName":"Multigenerational","Id":"3053"},{"ContextFreeName":"Children''s
+        New Baby Books","DisplayName":"New Baby","Id":"3056"},{"ContextFreeName":"Children''s
+        New Experiences Books","DisplayName":"New Experiences","Id":"3059"},{"ContextFreeName":"Children''s
+        Orphans & Foster Homes Books","DisplayName":"Orphans & Foster Homes","Id":"3060"},{"ContextFreeName":"Children''s
+        Parents Books","DisplayName":"Parents","Id":"3061"},{"ContextFreeName":"Children''s
+        Siblings Books","DisplayName":"Siblings","Id":"3064"},{"ContextFreeName":"Children''s
+        Sleep Issues","DisplayName":"Sleep","Id":"1084248"},{"ContextFreeName":"Children''s
+        Stepfamilies Books","DisplayName":"Stepfamilies","Id":"3067"},{"ContextFreeName":"Children''s
+        Values Books","DisplayName":"Values","Id":"3163"}],"ContextFreeName":"Children''s
+        Family Life Books","DisplayName":"Family Life","Id":"3045","IsRoot":false}]}}'
+    http_version: 
+  recorded_at: Tue, 08 Oct 2019 17:46:58 GMT
 recorded_with: VCR 5.0.0

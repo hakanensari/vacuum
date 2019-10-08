@@ -5,6 +5,10 @@ require 'vcr'
 require 'pry'
 require_relative '../lib/vacuum'
 
+ACCESS_KEY = 'key'
+SECRET_KEY = 'secret'
+PARTNER_TAG = 'test-20'
+
 VCR.configure do |c|
   c.hook_into :webmock
   c.cassette_library_dir = 'test/cassettes'
@@ -14,13 +18,16 @@ VCR.configure do |c|
     # )],
     record: :new_episodes
   }
+  c.filter_sensitive_data('<KEY>') { ACCESS_KEY }
+  c.filter_sensitive_data('<SECRET>') { SECRET_KEY }
+  c.filter_sensitive_data('<PARTNER_TAG>') { PARTNER_TAG }
 end
 
 def client
   Vacuum.new(
-    access_key: 'AMAZON_KEY',
-    secret_key: 'AMAZON_SECRET',
-    partner_tag: 'test-20'
+    access_key: ACCESS_KEY,
+    secret_key: SECRET_KEY,
+    partner_tag: PARTNER_TAG
   )
 end
 
