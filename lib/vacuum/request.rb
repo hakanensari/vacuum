@@ -5,7 +5,6 @@ require 'vacuum/adapter'
 require 'aws-sigv4'
 
 module Vacuum
-  BadLocale = Class.new(ArgumentError)
   # An Amazon Product Advertising API request.
   class Request
     SERVICE = 'ProductAdvertisingAPI'
@@ -28,32 +27,31 @@ module Vacuum
       @marketplace = marketplace
     end
 
-    def get_browse_nodes(browse_node_ids:,
-                         languages_of_preference: nil,
-                         marketplace: nil)
-      @res = ['BrowseNodes.Ancestor', 'BrowseNodes.Children']
-      @marketplace = marketplace if marketplace
+    BROWSE_NODES_RESORCES = [
+      'BrowseNodes.Ancestor',
+      'BrowseNodes.Children'
+    ].freeze
 
-      body = {}.tap do |hsh|
-        hsh[:BrowseNodeIds] = Array(browse_node_ids)
-        if languages_of_preference
-          hsh[:LanguagesOfPreference] = languages_of_preference
-        end
-      end.to_json
+    def get_browse_nodes(browse_node_ids:, **options)
+      @marketplace = options[:marketplace] if options[:marketplace]
+      body = param_builder(
+        { BrowseNodeIds: Array(browse_node_ids) },
+        options.merge(resources: BROWSE_NODES_RESORCES)
+      )
 
       request('GetBrowseNodes', body)
     end
 
-    def get_items(item_ids:, marketplace: nil, **options)
-      @marketplace = marketplace if marketplace
-      body = enhance_body({ ItemIds: Array(item_ids) }, options)
+    def get_items(item_ids:, **options)
+      @marketplace = options[:marketplace] if options[:marketplace]
+      body = param_builder({ ItemIds: Array(item_ids) }, options)
 
       request('GetItems', body)
     end
 
-    def get_variations(asin:, marketplace: nil, **options)
-      @marketplace = marketplace if marketplace
-      body = enhance_body({ ASIN: asin }, options)
+    def get_variations(asin:, **options)
+      @marketplace = options[:marketplace] if options[:marketplace]
+      body = param_builder({ ASIN: asin }, options)
 
       request('GetVariations', body)
     end
@@ -110,26 +108,16 @@ module Vacuum
       )
     end
 
-    OPTIONAL_OPTIONS = {
-      condition: 'Condition',
-      currency_of_preference: 'CurrencyOfPreference',
-      languages_of_preference: 'LanguagesOfPreference',
-      offer_count: 'OfferCount',
-      # ONLY FOR GET_VARIATIONS
-      variation_count: 'VariationCount',
-      variation_page: 'VariationPage'
-    }.freeze
-
-    def enhance_body(body, options)
+    def param_builder(body, params)
       body.tap do |hsh|
         # REQUIRED
-        hsh[:PartnerTag] = options[:partner_tag] || partner_tag
-        hsh[:PartnerType] = options[:partner_type] || partner_type
+        hsh[:PartnerTag] = params[:partner_tag] || partner_tag
+        hsh[:PartnerType] = params[:partner_type] || partner_type
         hsh[:Marketplace] = market.site
-        hsh[:Resources] = options[:resources] || res
+        hsh[:Resources] = params[:resources] || res
 
-        OPTIONAL_OPTIONS.keys.each do |key|
-          hsh[OPTIONAL_OPTIONS[key]] = options[key] if options[key]
+        OPTIONAL_PARAMS.keys.each do |key|
+          hsh[OPTIONAL_PARAMS[key]] = params[key] if params[key]
         end
       end.to_json
     end
