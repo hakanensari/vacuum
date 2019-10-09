@@ -61,8 +61,6 @@ module Vacuum
     private
 
     def request(operation, body)
-      raise ArgumentError unless OPERATIONS.include?(operation)
-
       signature = sign(operation, body)
 
       Response.new Adapter.post(
