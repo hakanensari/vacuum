@@ -44,6 +44,18 @@ class VacuumTest < Minitest::Test
     assert_equal(['ItemsResult'], response.to_h.keys)
   end
 
+  def test_get_items_with_options
+    response = client.get_items(
+      item_ids: ['B07212L4G2'],
+      resources: ['BrowseNodeInfo.WebsiteSalesRank'],
+      languages_of_preference: 'fr_CA',
+      offer_count: '10'
+    )
+
+    assert_equal '200', response.code
+    assert_equal(['ItemsResult'], response.to_h.keys)
+  end
+
   def test_get_variations
     response = client.get_variations(
       asin: 'B07212L4G2',
