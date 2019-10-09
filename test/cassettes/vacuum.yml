@@ -275,4 +275,61 @@ http_interactions:
         Family Life Books","DisplayName":"Family Life","Id":"3045","IsRoot":false}]}}'
     http_version: 
   recorded_at: Tue, 08 Oct 2019 17:46:58 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.co.uk/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.co.uk","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"],"ItemIds":["B07212L4G2"],"LanguagesOfPreference":"fr_CA","OfferCount":"10"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - webservices.amazon.co.uk
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<KEY>/20191009/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=cef4ab6412330ef0f6b0c14b9b2beedd761bc1b2903c7d1fa93f372d576d43ae
+      X-Amz-Content-Sha256:
+      - c38140bb5229dadef4c8ea0302878cc6d435dc1a203ea87e624b19d0ddf27363
+      X-Amz-Date:
+      - 20191009T145534Z
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Server:
+      - Server
+      Date:
+      - Wed, 09 Oct 2019 14:55:36 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '151'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - f8fb3515-610a-45c3-b7e1-5341bc9fa9e4
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - HRK30WAN9H35S3AGKEJ1
+    body:
+      encoding: ASCII-8BIT
+      string: '{"__type":"com.amazon.coral.service#InternalFailure","message":"The
+        request processing has failed due to some unknown error, exception or failure.
+        Please retry again."}'
+    http_version: 
+  recorded_at: Wed, 09 Oct 2019 14:55:36 GMT
 recorded_with: VCR 5.0.0

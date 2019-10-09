@@ -2,17 +2,17 @@
 
 require 'vacuum/response'
 require 'vacuum/adapter'
-require 'net/http'
-require 'uri'
 require 'aws-sigv4'
 
 module Vacuum
+  BadLocale = Class.new(ArgumentError)
   # An Amazon Product Advertising API request.
   class Request
     SERVICE = 'ProductAdvertisingAPI'
 
     attr_accessor :res
-    attr_reader :access_key, :secret_key, :marketplace, :partner_tag, :partner_type
+    attr_reader :access_key, :secret_key, :marketplace,
+                :partner_tag, :partner_type
 
     def initialize(access_key:,
                    secret_key:,
@@ -39,61 +39,21 @@ module Vacuum
         if languages_of_preference
           hsh[:LanguagesOfPreference] = languages_of_preference
         end
-      end
+      end.to_json
 
       request('GetBrowseNodes', body)
     end
 
-    def get_items(item_ids:,
-                  resources: nil,
-                  condition: nil,
-                  currency_of_preference: nil,
-                  languages_of_preference: nil,
-                  marketplace: nil,
-                  offer_count: nil)
-      @res = resources if resources
+    def get_items(item_ids:, marketplace: nil, **options)
       @marketplace = marketplace if marketplace
-
-      body = {}.tap do |hsh|
-        hsh[:ItemIds] = Array(item_ids)
-        hsh[:Condition] = condition if condition
-        if currency_of_preference
-          hsh[:CurrencyOfPreference] = currency_of_preference
-        end
-        if languages_of_preference
-          hsh[:LanguagesOfPreference] = languages_of_preference
-        end
-        hsh[:OfferCount] = offer_count if offer_count
-      end
+      body = enhance_body({ ItemIds: Array(item_ids) }, options)
 
       request('GetItems', body)
     end
 
-    def get_variations(asin:,
-                       resources: nil,
-                       condition: nil,
-                       currency_of_preference: nil,
-                       languages_of_preference: nil,
-                       marketplace: nil,
-                       offer_count: nil,
-                       variation_count: nil,
-                       variation_page: nil)
-      @res = resources if resources
+    def get_variations(asin:, marketplace: nil, **options)
       @marketplace = marketplace if marketplace
-
-      body = {}.tap do |hsh|
-        hsh[:ASIN] = asin
-        hsh[:Condition] = condition if condition
-        if currency_of_preference
-          hsh[:CurrencyOfPreference] = currency_of_preference
-        end
-        if languages_of_preference
-          hsh[:LanguagesOfPreference] = languages_of_preference
-        end
-        hsh[:OfferCount] = offer_count if offer_count
-        hsh[:VariationCount] = variation_count if variation_count
-        hsh[:VariationPage] = variation_page if variation_page
-      end
+      body = enhance_body({ ASIN: asin }, options)
 
       request('GetVariations', body)
     end
@@ -103,7 +63,6 @@ module Vacuum
     def request(operation, body)
       raise ArgumentError unless OPERATIONS.include?(operation)
 
-      body = default_body.merge(body).to_json
       signature = sign(operation, body)
 
       Response.new Adapter.post(
@@ -122,17 +81,8 @@ module Vacuum
       )
     end
 
-    def default_body
-      {
-        'PartnerTag' => partner_tag,
-        'PartnerType' => partner_type,
-        'Marketplace' => market.site,
-        'Resources' => res
-      }
-    end
-
     def market
-      MARKETPLACES[marketplace]
+      MARKETPLACES.fetch(marketplace.downcase.to_sym) { |_| raise BadLocale }
     end
 
     def request_headers(operation, signature)
@@ -160,6 +110,33 @@ module Vacuum
         http_method: 'POST',
         endpoint: market.host
       )
+    end
+
+    def enhance_body(body, options)
+      body.tap do |hsh|
+        # REQUIRED
+        hsh[:PartnerTag] = options[:partner_tag] || partner_tag
+        hsh[:PartnerType] = options[:partner_type] || partner_type
+        hsh[:Marketplace] = market.site
+        hsh[:Resources] = options[:resources] || res
+
+        # NOT-REQUIRED FOR ALL
+        hsh[:Condition] = options[:condition] if options[:condition]
+        if options[:currency_of_preference]
+          hsh[:CurrencyOfPreference] = options[:currency_of_preference]
+        end
+        if options[:languages_of_preference]
+          hsh[:LanguagesOfPreference] = options[:languages_of_preference]
+        end
+        hsh[:OfferCount] = options[:offer_count] if options[:offer_count]
+        # NOT REQUIRED - ONLY FOR GET_VARIATIONS
+        if options[:variation_count]
+          hsh[:VariationCount] = options[:variation_count]
+        end
+        if options[:variation_page]
+          hsh[:VariationPage] = options[:variation_page]
+        end
+      end.to_json
     end
   end
 end
