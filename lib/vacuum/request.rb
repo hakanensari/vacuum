@@ -110,6 +110,16 @@ module Vacuum
       )
     end
 
+    OPTIONAL_OPTIONS = {
+      condition: 'Condition',
+      currency_of_preference: 'CurrencyOfPreference',
+      languages_of_preference: 'LanguagesOfPreference',
+      offer_count: 'OfferCount',
+      # ONLY FOR GET_VARIATIONS
+      variation_count: 'VariationCount',
+      variation_page: 'VariationPage'
+    }.freeze
+
     def enhance_body(body, options)
       body.tap do |hsh|
         # REQUIRED
@@ -118,21 +128,8 @@ module Vacuum
         hsh[:Marketplace] = market.site
         hsh[:Resources] = options[:resources] || res
 
-        # NOT-REQUIRED FOR ALL
-        hsh[:Condition] = options[:condition] if options[:condition]
-        if options[:currency_of_preference]
-          hsh[:CurrencyOfPreference] = options[:currency_of_preference]
-        end
-        if options[:languages_of_preference]
-          hsh[:LanguagesOfPreference] = options[:languages_of_preference]
-        end
-        hsh[:OfferCount] = options[:offer_count] if options[:offer_count]
-        # NOT REQUIRED - ONLY FOR GET_VARIATIONS
-        if options[:variation_count]
-          hsh[:VariationCount] = options[:variation_count]
-        end
-        if options[:variation_page]
-          hsh[:VariationPage] = options[:variation_page]
+        OPTIONAL_OPTIONS.keys.each do |key|
+          hsh[OPTIONAL_OPTIONS[key]] = options[key] if options[key]
         end
       end.to_json
     end
