@@ -12,6 +12,8 @@ module Vacuum
     def_delegator Vacuum::Request, :new
   end
 
+  BadLocale = Class.new(ArgumentError)
+
   Market = Struct.new(:host, :region) do
     def site
       host.sub('webservices', 'www')
@@ -37,5 +39,15 @@ module Vacuum
     ae: Market.new('webservices.amazon.ae',     'eu-west-1'),
     uk: Market.new('webservices.amazon.co.uk',  'eu-west-1'),
     us: Market.new('webservices.amazon.com',    'us-east-1')
+  }.freeze
+
+  OPTIONAL_PARAMS = {
+    condition: 'Condition',
+    currency_of_preference: 'CurrencyOfPreference',
+    languages_of_preference: 'LanguagesOfPreference',
+    offer_count: 'OfferCount',
+    # ONLY FOR GET_VARIATIONS
+    variation_count: 'VariationCount',
+    variation_page: 'VariationPage'
   }.freeze
 end
