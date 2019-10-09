@@ -38,11 +38,4 @@ module Vacuum
     uk: Market.new('webservices.amazon.co.uk',  'eu-west-1'),
     us: Market.new('webservices.amazon.com',    'us-east-1')
   }.freeze
-
-  OPERATIONS = %w[
-    GetBrowseNodes
-    GetItems
-    GetVariations
-    SearchItems
-  ].freeze
 end
