@@ -4,6 +4,7 @@ require 'net/http'
 require 'uri'
 
 module Vacuum
+  # Just a simple adapter for Net::HTTP class
   class Adapter
     def self.post(url:, body:, headers:)
       uri = URI.parse(url)
