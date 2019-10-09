@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'vacuum/response'
+require 'vacuum/adapter'
 require 'net/http'
 require 'uri'
 require 'aws-sigv4'
@@ -104,23 +105,12 @@ module Vacuum
 
       body = default_body.merge(body).to_json
       signature = sign(operation, body)
-      uri = URI.parse(market.endpoint(operation))
-      request = Net::HTTP::Post.new(uri)
-      request.content_type = 'application/json; charset=UTF-8'
-      request_headers(operation, signature).each do |key, value|
-        request[key] = value
-      end
-      request.body = body
 
-      req_options = {
-        use_ssl: uri.scheme == 'https'
-      }
-
-      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-      end
-
-      Response.new response
+      Response.new Adapter.post(
+        url: market.endpoint(operation),
+        body: body,
+        headers: request_headers(operation, signature)
+      )
     end
 
     def sign(operation, body)
