@@ -1,0 +1,9 @@
+Metrics/AbcSize:
+  Exclude:
+    - test/**/*
+Metrics/LineLength:
+  Exclude:
+    - test/**/*
+Style/Documentation:
+  Exclude:
+    - test/**/*
