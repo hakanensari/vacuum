@@ -2,7 +2,6 @@
 
 require 'minitest/autorun'
 require 'vcr'
-require 'pry'
 require_relative '../lib/vacuum'
 
 ACCESS_KEY = 'key'
