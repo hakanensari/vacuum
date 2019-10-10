@@ -1,5 +1,4 @@
 AllCops:
-  TargetRubyVersion: 2.3
 Metrics/AbcSize:
   Exclude:
     - test/**/*
@@ -9,3 +8,4 @@ Metrics/LineLength:
 Style/Documentation:
   Exclude:
     - test/**/*
+  TargetRubyVersion: 2.4
