@@ -1,11 +1,4 @@
+inherit_from: ".rubocop_todo.yml"
+
 AllCops:
-Metrics/AbcSize:
-  Exclude:
-    - test/**/*
-Metrics/LineLength:
-  Exclude:
-    - test/**/*
-Style/Documentation:
-  Exclude:
-    - test/**/*
   TargetRubyVersion: 2.4
