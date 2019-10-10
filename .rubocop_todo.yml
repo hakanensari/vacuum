@@ -1,9 +1,13 @@
 Metrics/AbcSize:
   Exclude:
     - test/**/*
+  Max: 16.31
 Metrics/LineLength:
   Exclude:
     - test/**/*
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
 Style/Documentation:
   Exclude:
     - test/**/*
