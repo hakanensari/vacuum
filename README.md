@@ -1,5 +1,5 @@
 # Vacuum
-[![Travis](https://travis-ci.org/hakanensari/vacuum.svg)](https://travis-ci.org/hakanensari/vacuum)
+[![CircleCI](https://circleci.com/gh/hakanensari/vacuum.svg?style=svg)](https://circleci.com/gh/hakanensari/vacuum)
 
 Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html).
 

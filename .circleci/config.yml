@@ -1,0 +1,29 @@
+version: 2.1
+
+defaults: &defaults
+  steps:
+    - checkout
+    - run: bundle install
+    - run: bundle exec rake
+
+jobs:
+  ruby-24:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.4
+  ruby-25:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+  ruby-26:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.6
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - ruby-24
+      - ruby-25
+      - ruby-26
