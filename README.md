@@ -3,6 +3,8 @@
 
 Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html).
 
+Work on **Product Advertising API 5.0** is currently ongoing in [v5](https://github.com/hakanensari/vacuum/tree/v5) branch.
+
 ![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
 
 ## Usage
