@@ -111,14 +111,18 @@ module Vacuum
     def param_builder(body, params)
       body.tap do |hsh|
         # REQUIRED
-        hsh[:PartnerTag] = params[:partner_tag] || partner_tag
-        hsh[:PartnerType] = params[:partner_type] || partner_type
-        hsh[:Marketplace] = market.site
-        hsh[:Resources] = params[:resources] || res
+        hsh['PartnerTag'] = params[:partner_tag] || partner_tag
+        hsh['PartnerType'] = params[:partner_type] || partner_type
+        hsh['Marketplace'] = market.site
+        hsh['Resources'] = params[:resources] || res
 
-        OPTIONAL_PARAMS.keys.each do |key|
-          hsh[OPTIONAL_PARAMS[key]] = params[key] if params[key]
+        params.each do |key, val|
+          hsh[key.to_s.split('_').map(&:capitalize).join] = val
         end
+
+        # OPTIONAL_PARAMS.keys.each do |key|
+        #   hsh[OPTIONAL_PARAMS[key]] = params[key] if params[key]
+        # end
       end.to_json
     end
   end
