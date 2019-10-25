@@ -56,6 +56,13 @@ module Vacuum
       request('GetVariations', body)
     end
 
+    def search_items(**options)
+      @marketplace = options[:marketplace] if options[:marketplace]
+      body = param_builder({}, options)
+
+      request('SearchItems', body)
+    end
+
     private
 
     def request(operation, body)

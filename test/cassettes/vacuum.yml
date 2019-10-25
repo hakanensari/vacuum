@@ -332,4 +332,61 @@ http_interactions:
         Please retry again."}'
     http_version: 
   recorded_at: Wed, 09 Oct 2019 14:55:36 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.de/paapi5/searchitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.de","Resources":null,"Keywords":"Harry
+        Potter"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - webservices.amazon.de
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
+      Content-Encoding:
+      - amz-1.0
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<KEY>/20191025/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=fd596061aaaca77217c0e8e913a3433c05074da851efea353beaad823546c96a
+      X-Amz-Content-Sha256:
+      - 9d409090422b8d302df249b7d7e04ac47ed9c9f131dc4f9412723ee5813b73ee
+      X-Amz-Date:
+      - 20191025T204521Z
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Fri, 25 Oct 2019 20:45:21 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '604'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - ca18a326-7df7-42a6-8789-42fda3f5d843
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 3FT3FY98BWQTS5QCNMKK
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTZWFyY2hSZXN1bHQiOnsiSXRlbXMiOlt7IkFTSU4iOiJCMDBKR1YzOFdHIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBKR1YzOFdHP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkZXIgU3RlaW4gZGVyIFdlaXNlbiBbZHQuL09WXSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9ERSJ9fX0seyJBU0lOIjoiQjAwUllFTlE3TyIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwUllFTlE3Tz90YWc9PFBBUlRORVJfVEFHPiZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGVyIE9yZGVuIGRlcyBQaMO2bml4IFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBJS0JWV0FTIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBJS0JWV0FTP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkaWUgSGVpbGlndHXMiG1lciBkZXMgVG9kZXMsIFRlaWwgMiBbZHQuL09WXSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9ERSJ9fX0seyJBU0lOIjoiQjAwSFgySjM5VyIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwSFgySjM5Vz90YWc9PFBBUlRORVJfVEFHPiZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGllIEthbW1lciBkZXMgU2NocmVja2VucyIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9ERSJ9fX0seyJBU0lOIjoiQjAwSDNBTzJZQSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwSDNBTzJZQT90YWc9PFBBUlRORVJfVEFHPiZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGVyIEhhbGJibHV0cHJpbnogW2R0Li9PVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfREUifX19LHsiQVNJTiI6IkIwMEVWQVUyOUUiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwL0IwMEVWQVUyOUU/dGFnPTxQQVJUTkVSX1RBRz4mbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgdW5kIGRlciBGZXVlcmtlbGNoIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBJS0VUWVRRIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBJS0VUWVRRP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkaWUgSGVpbGlndMO8bWVyIGRlcyBUb2RlcywgVGVpbCAxIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBIM0FSNU9FIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBIM0FSNU9FP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkZXIgR2VmYW5nZW5lIHZvbiBBc2thYmFuIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBLN0FZSzFJIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBLN0FZSzFJP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIGFuZCB0aGUgQ2hhbWJlciBvZiBTZWNyZXRzIFtPVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfREUifX19LHsiQVNJTiI6IjM1NTE1NTc0MDMiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwLzM1NTE1NTc0MDM/dGFnPTxQQVJUTkVSX1RBRz4mbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXI6IEJhbmQgMS03IGltIFNjaHViZXIg4oCTIG1pdCBleGtsdXNpdmVtIEV4dHJhISAoSGFycnkgUG90dGVyICkiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfREUifX19XSwiU2VhcmNoVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL3M/az1IYXJyeStQb3R0ZXImcmg9cF9uX2F2YWlsYWJpbGl0eSUzQS0xJnRhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSIsIlRvdGFsUmVzdWx0Q291bnQiOjE0Nn19
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 20:45:21 GMT
 recorded_with: VCR 5.0.0
