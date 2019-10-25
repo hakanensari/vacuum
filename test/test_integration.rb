@@ -65,4 +65,13 @@ class VacuumTest < Minitest::Test
     assert_equal '200', response.code
     assert_equal(['VariationsResult'], response.to_h.keys)
   end
+
+  def test_search_items
+    response = client(:de).search_items(
+      keywords: 'Harry Potter'
+    )
+
+    assert_equal '200', response.code
+    assert_equal(['SearchResult'], response.to_h.keys)
+  end
 end
