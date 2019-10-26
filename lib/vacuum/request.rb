@@ -34,7 +34,6 @@ module Vacuum
     ].freeze
 
     def get_browse_nodes(browse_node_ids:, **options)
-      @marketplace = options[:marketplace] if options[:marketplace]
       body = param_builder(
         { BrowseNodeIds: Array(browse_node_ids) },
         options.merge(resources: BROWSE_NODES_RESORCES)
@@ -44,23 +43,17 @@ module Vacuum
     end
 
     def get_items(item_ids:, **options)
-      @marketplace = options[:marketplace] if options[:marketplace]
       body = param_builder({ ItemIds: Array(item_ids) }, options)
-
       request('GetItems', body)
     end
 
     def get_variations(asin:, **options)
-      @marketplace = options[:marketplace] if options[:marketplace]
       body = param_builder({ ASIN: asin }, options)
-
       request('GetVariations', body)
     end
 
     def search_items(**options)
-      @marketplace = options[:marketplace] if options[:marketplace]
       body = param_builder({}, options)
-
       request('SearchItems', body)
     end
 
