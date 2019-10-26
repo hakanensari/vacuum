@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'vacuum/locale'
 require 'vacuum/response'
 require 'vacuum/adapter'
 require 'aws-sigv4'
@@ -69,7 +70,7 @@ module Vacuum
       signature = sign(operation, body)
 
       Response.new Adapter.post(
-        url: market.endpoint(operation),
+        url: locale.build_url(operation),
         body: body,
         headers: request_headers(operation, signature)
       )
@@ -78,14 +79,14 @@ module Vacuum
     def sign(operation, body)
       signer.sign_request(
         http_method: 'POST',
-        url: market.endpoint(operation),
+        url: locale.build_url(operation),
         headers: headers(operation),
         body: body
       )
     end
 
-    def market
-      MARKETPLACES.fetch(marketplace.downcase.to_sym) { |_| raise BadLocale }
+    def locale
+      Locale.find(marketplace)
     end
 
     def request_headers(operation, signature)
@@ -93,7 +94,7 @@ module Vacuum
         'Authorization' => signature.headers['authorization'],
         'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
         'X-Amz-Date' => signature.headers['x-amz-date'],
-        'Host' => market.host
+        'Host' => locale.endpoint
       )
     end
 
@@ -107,11 +108,11 @@ module Vacuum
     def signer
       Aws::Sigv4::Signer.new(
         service: SERVICE,
-        region: market.region,
+        region: locale.region,
         access_key_id: access_key,
         secret_access_key: secret_key,
         http_method: 'POST',
-        endpoint: market.host
+        endpoint: locale.endpoint
       )
     end
 
@@ -120,7 +121,7 @@ module Vacuum
         # REQUIRED
         hsh['PartnerTag'] = params[:partner_tag] || partner_tag
         hsh['PartnerType'] = params[:partner_type] || partner_type
-        hsh['Marketplace'] = market.site
+        hsh['Marketplace'] = locale.marketplace
         hsh['Resources'] = params[:resources] || res
 
         params.each do |key, val|

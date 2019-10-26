@@ -19,14 +19,6 @@ class VacuumResponseTest < Minitest::Test
     assert_equal(['Items'], res.dig('ItemsResult').keys)
   end
 
-  def test_bad_locale
-    assert_raises(Vacuum::BadLocale) do
-      client.get_items(item_ids: ['B07212L4G2'],
-                       resources: RESOURCES,
-                       marketplace: :zz)
-    end
-  end
-
   private
 
   MockResponse = Struct.new(:body)
