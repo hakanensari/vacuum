@@ -14,7 +14,7 @@ module Vacuum
 
     attr_reader :access_key, :secret_key, :locale, :partner_tag, :partner_type
 
-    def initialize(marketplace: 'US', access_key:, secret_key:, partner_tag:,
+    def initialize(marketplace: :us, access_key:, secret_key:, partner_tag:,
                    partner_type: 'Associates')
       @locale = Locale.find(marketplace)
       @access_key = access_key
