@@ -2,33 +2,33 @@
 http_interactions:
 - request:
     method: post
-    uri: https://webservices.amazon.com/paapi5/getitems
+    uri: https://webservices.amazon.de/paapi5/getbrowsenodes
     body:
       encoding: UTF-8
-      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.com","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"],"ItemIds":["B07212L4G2"]}'
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","BrowseNodeIds":["3045"]}'
     headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=a7ff1b08620a6046d5287df1d349e3fb1f87aedadbe1cee9d5b75ce3c0930f9b
+      X-Amz-Content-Sha256:
+      - 80f18813d8969918115794be097bf57deb3ac1e1446b10a5a11c886217e02e20
+      X-Amz-Date:
+      - 20191027T170436Z
+      Host:
+      - webservices.amazon.de
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
       - Ruby
-      Host:
-      - webservices.amazon.com
-      Content-Type:
-      - application/json; charset=UTF-8
-      X-Amz-Target:
-      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
-      Content-Encoding:
-      - amz-1.0
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=<KEY>/20191008/us-east-1/ProductAdvertisingAPI/aws4_request,
-        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=a66f646a247e44bcd8b73ecff945ca6c1a20ca7c90c1946213cbd91fc7590af1
-      X-Amz-Content-Sha256:
-      - 779db2da98aff2eb96aba6332a3885a50013f3796bf56c146090a0a8af519fca
-      X-Amz-Date:
-      - 20191008T174654Z
   response:
     status:
       code: 200
@@ -37,201 +37,54 @@ http_interactions:
       Server:
       - Server
       Date:
-      - Tue, 08 Oct 2019 17:46:55 GMT
+      - Sun, 27 Oct 2019 17:04:36 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1051'
+      - '153'
       Connection:
       - keep-alive
       X-Amzn-Requestid:
-      - 9f3d6bf1-9a51-4dac-9a8f-116728d116fe
+      - 81a3d9a3-945e-4bc4-8d62-8ec14f30ed48
       Vary:
       - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
       X-Amz-Rid:
-      - W9YJ50YY59C06MFZP50Q
+      - FKB9REEEZ8E1QWBRPRKF
     body:
       encoding: ASCII-8BIT
-      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.com/dp/B07212L4G2?tag=<PARTNER_TAG>&linkCode=ogi&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"T-shirt","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129406"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129406"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals 3-Stripes Tee Intense Lemons MD","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"mNHWaSggDzIiWxfHa1H6Xuwa69zYfIQ9Ms%2F1ucYKiBAtdJ6zpAAwc4OcIKo7a64T0mJuQxvNfya%2FNwi%2FrD6yLR9E73X10KWUCjqL%2B2uS0guLkToa5jxVCSshEQaD6JTgeOpZHMZH3UgGuHzB8Ms1Zw%3D%3D","Price":{"Amount":29.99,"Currency":"USD","DisplayAmount":"$29.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L"}]}}'
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"InvalidParameterValue","Message":"The
+        BrowseNodeId 3045 provided in the request is invalid."}]}'
     http_version: 
-  recorded_at: Tue, 08 Oct 2019 17:46:55 GMT
-- request:
-    method: post
-    uri: https://webservices.amazon.com/paapi5/getvariations
-    body:
-      encoding: UTF-8
-      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.com","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"],"ASIN":"B07212L4G2"}'
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - webservices.amazon.com
-      Content-Type:
-      - application/json; charset=UTF-8
-      X-Amz-Target:
-      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
-      Content-Encoding:
-      - amz-1.0
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=<KEY>/20191008/us-east-1/ProductAdvertisingAPI/aws4_request,
-        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=d3076ba9c02f07c365c096bb4199ad52f49c284badb777749f003c1c6433383a
-      X-Amz-Content-Sha256:
-      - 7dae12e0c5c19243d01790a4c34185ccdc68e5ef6206adc01c36e136c25a6661
-      X-Amz-Date:
-      - 20191008T174655Z
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - Server
-      Date:
-      - Tue, 08 Oct 2019 17:46:57 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      X-Amzn-Requestid:
-      - 999b9c0f-713a-4337-b3b6-2be14e2d759c
-      Vary:
-      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
-      X-Amz-Rid:
-      - 7PPKQN80F79V2AQMA88Q
-    body:
-      encoding: ASCII-8BIT
-      string: '{"VariationsResult":{"Items":[{"ASIN":"B071G3GFYP","DetailPageURL":"https://www.amazon.com/dp/B071G3GFYP?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129437"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129437"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.5,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVuSWtbTsp4OM41a2twheWgGFoFSzlUgeYwF9LnOPNPh7IQA4AKkyVr6CyW%2Bq3zaPVxxjr%2BBq43FQIsWXfx6TTZytay0GUYnkIzPvGcMuNqJ9xWqkmsPztXTWFw58R5%2BlQA%3D%3D","Price":{"Amount":60.21,"Currency":"USD","DisplayAmount":"$60.21"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B071JPD1TG","DetailPageURL":"https://www.amazon.com/dp/B071JPD1TG?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129352"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129352"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"Size":{"DisplayValue":"XX-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons XX-Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVoRoiu17%2BEMtmT56zc753yUwHS4Dmc1h8eYJranZi9fNWeK7VNcqT9sxV6M2WkXWNOJVQeuxevKe4CBy%2Fc7NsGOca4xYaMdDhFnu136Q8leKWINYXqzARyAuX5ov5nX45Q%3D%3D","Price":{"Amount":25.99,"Currency":"USD","DisplayAmount":"$25.99","Savings":{"Amount":9.01,"Currency":"USD","DisplayAmount":"$9.01
-        (26%)","Percentage":26}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"XX-Large"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B071G3G2JF","DetailPageURL":"https://www.amazon.com/dp/B071G3G2JF?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/41PUG+spC-L.jpg","Width":461}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027116147"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027116147"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1205-400-M","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1205","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Collegiate
-        Royal","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Men''s Originals 3 Stripes Tee, Collegiate Royal, M","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVli%2FI8N39cZ5XtUbMevjp%2F6r1qLRqoDOFXlIN%2BTzWWJVqqChYzNe%2BYw%2BUDvc9q6zH4xFn330QST2n%2Bqr7SIOLwhdcUanmixTPX64Vmfs35OP8IlBiM3eQiI2ymQ%2F0DSHcFdyLJjzXe%2BS","Price":{"Amount":48.13,"Currency":"USD","DisplayAmount":"$48.13"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Collegiate
-        Royal"}]},{"ASIN":"B07212K481","DetailPageURL":"https://www.amazon.com/dp/B07212K481?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129468"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129468"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.5,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"X-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons X-Large","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVo37vcAWkjpHJQae5dbnkcw9y3EeOUnV%2BirBpf8Rj75zT0HwM4zksp7zwRFF51V5z5GXvyswWnCJAq36hwk1Aprrekl7ThejiEHic8txeveGAGUpXvrf9AWdHPttcghZ8A%3D%3D","Price":{"Amount":25.99,"Currency":"USD","DisplayAmount":"$25.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B07212KJ34","DetailPageURL":"https://www.amazon.com/dp/B07212KJ34?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004666"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004666"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-S","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
-        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Small","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, S","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVhy04B42Jjb%2Fq4X6JEKZUvJeCwXVW5eT9Vxzaw5rrB%2Fb%2FfEd56czfIPQIvInNyXl4cK9wh17HS%2BHtrAXa%2BinfbjXNFzdGSJr5nw5SGXJoLsevHfDuOFoTscPdxtJtjf5T6lIwP8QKorG","Price":{"Amount":60.21,"Currency":"USD","DisplayAmount":"$60.21"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Trace
-        Scarlet"}]},{"ASIN":"B071G3FR4M","DetailPageURL":"https://www.amazon.com/dp/B071G3FR4M?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004680"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004680"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-XL","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
-        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"X-Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, XL","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVme3nARQqTe3vVSO%2BSg93uUZJZc1pmtilKSuTBSBPo1gmBd%2FvoJ5eR%2BEQvylDUc%2Bcw70B9z86nk9lEmLjQb95gd1MkOWb1kDB4qlG61fXAjyC3vm4kY2XygLWhh4RZhHU7wGZpLf6EgA","Price":{"Amount":32.27,"Currency":"USD","DisplayAmount":"$32.27","Savings":{"Amount":2.73,"Currency":"USD","DisplayAmount":"$2.73
-        (8%)","Percentage":8}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Trace
-        Scarlet"}]},{"ASIN":"B07212L2BM","DetailPageURL":"https://www.amazon.com/dp/B07212L2BM?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/51LPeU4GZiL.jpg","Width":444}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027004741"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027004741"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1204-632-L","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1204","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Trace
-        Scarlet","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Men''s Originals 3 Stripes Tee, Trace Scarlet, L","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVjUdvKz6xw%2FUmgawlMTW33qm%2Fmy7d0jLdwGvISHOfXE%2BW5x%2BFPujB9t1KYyZpqqN1RIojdWiTbx6oKoOsYmF9qLeaQxqMi7dwA%3D%3D","Price":{"Amount":18.0,"Currency":"USD","DisplayAmount":"$18.00","Savings":{"Amount":17.0,"Currency":"USD","DisplayAmount":"$17.00
-        (49%)","Percentage":49}},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Trace
-        Scarlet"}]},{"ASIN":"B07212KSMC","DetailPageURL":"https://www.amazon.com/dp/B07212KSMC?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":432,"URL":"https://m.media-amazon.com/images/I/41OmiwuvQeL.jpg","Width":500}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027129383"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027129383"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["adidas
-        Clothing Size Guide","It''s like a baseball tee, but cooler!","Regular fit
-        is eased, but not sloppy, and perfect for any activity.","Crew neckline.","Short
-        raglan sleeves. \nIconic three-stripes down sleeves and a Trefoil logo at
-        left chest. \nStraight hemline. \n100% cotton.\nMachine wash, tumble dry.\nImported.\nMeasurements:\n\n     Length:
-        29 in\n    \n\nProduct measurements were taken using size MD. Please note
-        that measurements may vary by size."],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1207-700","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1207","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Intense
-        Lemons","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.4,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Small","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s 3-Stripes Tee Intense Lemons Small","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVv4qSnwkNM206LcIRz7Y0F2KQy8RVMPB5lddEEFE957bo%2Bg7lyE0DqBsP0%2FhMyHvY8yOUcDHABt4xJgsHrCo03P6ZGM%2FTON%2BtBajpA3kjExKTRTbx4SC2MM%2BF%2FdZedSsQ2EP%2BzC%2Ba5nJ","Price":{"Amount":45.96,"Currency":"USD","DisplayAmount":"$45.96"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Intense
-        Lemons"}]},{"ASIN":"B07212L479","DetailPageURL":"https://www.amazon.com/dp/B07212L479?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/41pIhtuvZIL.jpg","Width":468}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027031679"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027031679"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CV6000-650-L","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CV6000","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Dust
-        Pink","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Large","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Men''s Originals 3 Stripes Tee, Dust Pink, L","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVlC52KLMPGiwA7ZJ6jN42CFyv2mCvKioeEYsbjr%2FfkdWuqIwE4lVDJcay69wQ0Swv7HOsKNAZe1xU5Y%2BQCcUU2687NORu9JL5bm153gbRd4iNdQBj%2BgIM3n6q1gmpbRQiVmOMPzdXuOW","Price":{"Amount":29.99,"Currency":"USD","DisplayAmount":"$29.99"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Dust
-        Pink"}]},{"ASIN":"B071JPCVMM","DetailPageURL":"https://www.amazon.com/dp/B071JPCVMM?tag=<PARTNER_TAG>&linkCode=ogv&th=1&psc=1","Images":{"Primary":{"Large":{"Height":500,"URL":"https://m.media-amazon.com/images/I/414nIoLXyzL.jpg","Width":458}}},"ItemInfo":{"ByLineInfo":{"Brand":{"DisplayValue":"adidas
-        Originals","Label":"Brand","Locale":"en_US"},"Manufacturer":{"DisplayValue":"adidas
-        Originals","Label":"Manufacturer","Locale":"en_US"}},"Classifications":{"Binding":{"DisplayValue":"Apparel","Label":"Binding","Locale":"en_US"},"ProductGroup":{"DisplayValue":"Apparel","Label":"ProductGroup","Locale":"en_US"}},"ExternalIds":{"EANs":{"DisplayValues":["0191027099259"],"Label":"EAN","Locale":"en_US"},"UPCs":{"DisplayValues":["191027099259"],"Label":"UPC","Locale":"en_US"}},"Features":{"DisplayValues":["Slim
-        fitting","3 stripes raglan sleeves"],"Label":"Features","Locale":"en_US"},"ManufactureInfo":{"ItemPartNumber":{"DisplayValue":"CW1206-305-M","Label":"PartNumber","Locale":"en_US"},"Model":{"DisplayValue":"CW1206","Label":"Model","Locale":"en_US"}},"ProductInfo":{"Color":{"DisplayValue":"Collegiate
-        Green","Label":"Color","Locale":"en_US"},"IsAdultProduct":{"DisplayValue":false,"Label":"IsAdultProduct","Locale":"en_US"},"ItemDimensions":{"Weight":{"DisplayValue":0.00220462262,"Label":"Weight","Locale":"en_US","Unit":"Pounds"}},"Size":{"DisplayValue":"Medium","Label":"Size","Locale":"en_US"}},"Title":{"DisplayValue":"adidas
-        Originals Men''s Originals 3 Stripes Tee, Collegiate Green, M","Label":"Title","Locale":"en_US"}},"Offers":{"Listings":[{"Id":"m94gviS%2FhYDakfM5uZpSVvuuCqYHoR8YE3FpnHcyhRWnq1QcWlrPrTYEPTvCxPqb9wcl%2FD82mQmKzFHb3vBlEz%2Bu0XcVNItv4SDNN2afAHMYJSjY48UY4Bu1Bx2NSE9gAk%2FiR6I0TY7B4vwg78l5ZncSYxbJ1B%2F0","Price":{"Amount":47.59,"Currency":"USD","DisplayAmount":"$47.59"},"ViolatesMAP":false}]},"ParentASIN":"B071K31B2L","VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Collegiate
-        Green"}]}],"VariationSummary":{"PageCount":2,"VariationCount":16}}}'
-    http_version: 
-  recorded_at: Tue, 08 Oct 2019 17:46:57 GMT
+  recorded_at: Sun, 27 Oct 2019 17:04:36 GMT
 - request:
     method: post
     uri: https://webservices.amazon.com/paapi5/getbrowsenodes
     body:
       encoding: UTF-8
-      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.com","Resources":["BrowseNodes.Ancestor","BrowseNodes.Children"],"BrowseNodeIds":["3045"]}'
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","BrowseNodeIds":["3045"]}'
     headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=5ea0368fb057b2d7cf502a9af751e98b4ebda9f6e92d1be80314d9bbb7c8929d
+      X-Amz-Content-Sha256:
+      - e5524602b0f499110fa0e9c3fdb79245a8851c828b023a674dfdd8ea7b5dfe7c
+      X-Amz-Date:
+      - 20191027T170436Z
+      Host:
+      - webservices.amazon.com
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
       - Ruby
-      Host:
-      - webservices.amazon.com
-      Content-Type:
-      - application/json; charset=UTF-8
-      X-Amz-Target:
-      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
-      Content-Encoding:
-      - amz-1.0
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=<KEY>/20191008/us-east-1/ProductAdvertisingAPI/aws4_request,
-        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=b4d8c81ef166c04ce7a571416ea0daa8296ea0052ad7ad831eea056f5c946fa0
-      X-Amz-Content-Sha256:
-      - 2ba033827cd47da82995f86843d01364fcff20cf01c80b95049851f8e38876ca
-      X-Amz-Date:
-      - 20191008T174657Z
   response:
     status:
       code: 200
@@ -240,128 +93,692 @@ http_interactions:
       Server:
       - Server
       Date:
-      - Tue, 08 Oct 2019 17:46:58 GMT
+      - Sun, 27 Oct 2019 17:04:36 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '469'
+      - '135'
       Connection:
       - keep-alive
       X-Amzn-Requestid:
-      - c3507c66-6900-444d-b07d-5164cb96883b
+      - 810ff8a4-0f49-4d7d-ae9a-136aca82938e
       Vary:
       - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
       X-Amz-Rid:
-      - TSKEJ79B83PS0ENEBCFC
+      - Y4QPDWGH92VDXV32HDDX
     body:
       encoding: ASCII-8BIT
-      string: '{"BrowseNodesResult":{"BrowseNodes":[{"Ancestor":{"Ancestor":{"Ancestor":{"Ancestor":{"ContextFreeName":"Books","DisplayName":"Books","Id":"283155"},"ContextFreeName":"Subjects","DisplayName":"Subjects","Id":"1000"},"ContextFreeName":"Children''s
-        Books","DisplayName":"Children''s Books","Id":"4"},"ContextFreeName":"Children''s
-        Growing Up & Facts of Life Books","DisplayName":"Growing Up & Facts of Life","Id":"1084192"},"Children":[{"ContextFreeName":"Children''s
-        Adoption Books","DisplayName":"Adoption","Id":"3046"},{"ContextFreeName":"Children''s
-        Babysitting Books","DisplayName":"Babysitting","Id":"1084232"},{"ContextFreeName":"Children''s
-        Marriage & Divorce Books","DisplayName":"Marriage & Divorce","Id":"3050"},{"ContextFreeName":"Children''s
-        Money","DisplayName":"Money","Id":"15356841"},{"ContextFreeName":"Children''s
-        Moving","DisplayName":"Moving","Id":"1084194"},{"ContextFreeName":"Children''s
-        Multigenerational Family Life","DisplayName":"Multigenerational","Id":"3053"},{"ContextFreeName":"Children''s
-        New Baby Books","DisplayName":"New Baby","Id":"3056"},{"ContextFreeName":"Children''s
-        New Experiences Books","DisplayName":"New Experiences","Id":"3059"},{"ContextFreeName":"Children''s
-        Orphans & Foster Homes Books","DisplayName":"Orphans & Foster Homes","Id":"3060"},{"ContextFreeName":"Children''s
-        Parents Books","DisplayName":"Parents","Id":"3061"},{"ContextFreeName":"Children''s
-        Siblings Books","DisplayName":"Siblings","Id":"3064"},{"ContextFreeName":"Children''s
-        Sleep Issues","DisplayName":"Sleep","Id":"1084248"},{"ContextFreeName":"Children''s
-        Stepfamilies Books","DisplayName":"Stepfamilies","Id":"3067"},{"ContextFreeName":"Children''s
-        Values Books","DisplayName":"Values","Id":"3163"}],"ContextFreeName":"Children''s
+      string: '{"BrowseNodesResult":{"BrowseNodes":[{"ContextFreeName":"Children''s
         Family Life Books","DisplayName":"Family Life","Id":"3045","IsRoot":false}]}}'
     http_version: 
-  recorded_at: Tue, 08 Oct 2019 17:46:58 GMT
+  recorded_at: Sun, 27 Oct 2019 17:04:36 GMT
 - request:
     method: post
-    uri: https://webservices.amazon.co.uk/paapi5/getitems
+    uri: https://webservices.amazon.es/paapi5/getbrowsenodes
     body:
       encoding: UTF-8
-      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.co.uk","Resources":["BrowseNodeInfo.WebsiteSalesRank","Images.Primary.Large","ItemInfo.ByLineInfo","ItemInfo.ContentInfo","ItemInfo.ContentRating","ItemInfo.Classifications","ItemInfo.ExternalIds","ItemInfo.Features","ItemInfo.ManufactureInfo","ItemInfo.ProductInfo","ItemInfo.TechnicalInfo","ItemInfo.Title","ItemInfo.TradeInInfo","Offers.Listings.Price","ParentASIN"],"ItemIds":["B07212L4G2"],"LanguagesOfPreference":"fr_CA","OfferCount":"10"}'
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","BrowseNodeIds":["3045"]}'
     headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=62b4f1414f19bd15749f229e6bca2984ba9013c8b1e157c6f7535f088ff4bf2e
+      X-Amz-Content-Sha256:
+      - f984a5e561aa60be52aaa4404b1a626e386f5a597db891d02d2b1804bc6bbd69
+      X-Amz-Date:
+      - 20191027T170436Z
+      Host:
+      - webservices.amazon.es
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
       - Ruby
-      Host:
-      - webservices.amazon.co.uk
-      Content-Type:
-      - application/json; charset=UTF-8
-      X-Amz-Target:
-      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
-      Content-Encoding:
-      - amz-1.0
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=<KEY>/20191009/eu-west-1/ProductAdvertisingAPI/aws4_request,
-        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=cef4ab6412330ef0f6b0c14b9b2beedd761bc1b2903c7d1fa93f372d576d43ae
-      X-Amz-Content-Sha256:
-      - c38140bb5229dadef4c8ea0302878cc6d435dc1a203ea87e624b19d0ddf27363
-      X-Amz-Date:
-      - 20191009T145534Z
   response:
     status:
-      code: 500
-      message: Internal Server Error
+      code: 200
+      message: OK
     headers:
       Server:
       - Server
       Date:
-      - Wed, 09 Oct 2019 14:55:36 GMT
+      - Sun, 27 Oct 2019 17:04:36 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '151'
+      - '153'
       Connection:
       - keep-alive
       X-Amzn-Requestid:
-      - f8fb3515-610a-45c3-b7e1-5341bc9fa9e4
+      - 2643def3-655e-4f78-9638-a615831a824c
       Vary:
       - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
       X-Amz-Rid:
-      - HRK30WAN9H35S3AGKEJ1
+      - P4P3QH295QKRN3S3B9TP
     body:
       encoding: ASCII-8BIT
-      string: '{"__type":"com.amazon.coral.service#InternalFailure","message":"The
-        request processing has failed due to some unknown error, exception or failure.
-        Please retry again."}'
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"InvalidParameterValue","Message":"The
+        BrowseNodeId 3045 provided in the request is invalid."}]}'
     http_version: 
-  recorded_at: Wed, 09 Oct 2019 14:55:36 GMT
+  recorded_at: Sun, 27 Oct 2019 17:04:36 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.de/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"],"Resources":["BrowseNodeInfo.BrowseNodes"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=4c31e19e34857cb20550e81a364b6fbb95181d95ea2f050f937e02282582ed68
+      X-Amz-Content-Sha256:
+      - 6232507d1ab261a04939579bb4560a2ed4b65f9d349fbf6bd4e3f2ac2fb903a1
+      X-Amz-Date:
+      - 20191027T170437Z
+      Host:
+      - webservices.amazon.de
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '248'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 7ce97403-0064-44a1-af7b-cd0f34271de9
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 4BT3Z68Q4QAV4AM4HTFS
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJJdGVtc1Jlc3VsdCI6eyJJdGVtcyI6W3siQVNJTiI6IkIwNzIxMkw0RzIiLCJCcm93c2VOb2RlSW5mbyI6eyJCcm93c2VOb2RlcyI6W3siQ29udGV4dEZyZWVOYW1lIjoiVG9wcywgVC1TaGlydHMgJiBIZW1kZW4gZsO8ciBIZXJyZW4iLCJEaXNwbGF5TmFtZSI6IlRvcHMsIFQtU2hpcnRzICYgSGVtZGVuIiwiSWQiOiIxOTgxMzk0MDMxIiwiSXNSb290IjpmYWxzZX1dfSwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDcyMTJMNEcyP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vZ2kmdGg9MSZwc2M9MSJ9XX19
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:37 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.es/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"],"Resources":["BrowseNodeInfo.BrowseNodes"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=34991df44c4f09f52a6c842966b4fc3ad9f7a6788995ce6ea803931ebcffe4d6
+      X-Amz-Content-Sha256:
+      - 5042063280ec4b48be29011a1b840e8d7da9e1b3a5710e4e38651ef6e290d622
+      X-Amz-Date:
+      - 20191027T170437Z
+      Host:
+      - webservices.amazon.es
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '242'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 6eae2bca-4dc9-4122-94bb-723345272e8f
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 69QVHDR3GVVY2ZBB858W
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","BrowseNodeInfo":{"BrowseNodes":[{"ContextFreeName":"Camisetas,
+        polos y camisas para hombre","DisplayName":"Camisetas, polos y camisas","Id":"3074036031","IsRoot":false}]},"DetailPageURL":"https://www.amazon.es/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1"}]}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:37 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.com/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"],"Resources":["BrowseNodeInfo.BrowseNodes"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=6b89cc4940add9fcdacb7e22c953770056fd374fa0a1f14fba5c8194998819b1
+      X-Amz-Content-Sha256:
+      - de68cc2b2c26cc47c2989735562f2769e4dbc3fb23e57e785271cc4ec6e79c2b
+      X-Amz-Date:
+      - 20191027T170437Z
+      Host:
+      - webservices.amazon.com
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '281'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 51ab4d93-48e4-475b-885b-b6dff8263058
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 61J0DSWSXSRTHYVVEE0W
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","BrowseNodeInfo":{"BrowseNodes":[{"ContextFreeName":"Categories","DisplayName":"Categories","Id":"3375301","IsRoot":false},{"ContextFreeName":"Men''s
+        Athletic Shirts & Tees","DisplayName":"Active Shirts & Tees","Id":"1046648","IsRoot":false},{"ContextFreeName":"Men''s
+        Shops","DisplayName":"Shops","Id":"7581669011","IsRoot":false}]},"DetailPageURL":"https://www.amazon.com/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1"}]}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:37 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.com/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=2e1feb16e1ec8db281ad6b1de9e2e9fe4a1f8119103c2ec0c36097e766c3fe39
+      X-Amz-Content-Sha256:
+      - 9b01dbedb9e7c21afbc90e01bc761c5513a3499fee8d3608cd505065fb0d84ba
+      X-Amz-Date:
+      - 20191027T170437Z
+      Host:
+      - webservices.amazon.com
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '232'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - e99e1833-085d-4edd-8138-eab2ee4406bf
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - A0CA19T6WBA3CYK9RZJ5
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.com/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals 3-Stripes Tee Intense Lemons MD","Label":"Title","Locale":"en_MARKETPLACE"}}}]}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:37 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.de/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=00fef942c79dfd37c7851d07d242ddac257ba23f504d6a1aef24f9ad1bf7ccec
+      X-Amz-Content-Sha256:
+      - ca15e04eb0f17777f19aa0a05381c2b46dafd007d82312f73049e98b033f1406
+      X-Amz-Date:
+      - 20191027T170437Z
+      Host:
+      - webservices.amazon.de
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '240'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 13ad1a84-5cc7-4a54-b74f-17c504362de2
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 32KWSCHCSNNZ0HNRHKA8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.de/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Medium","Label":"Title","Locale":"de_MARKETPLACE"}}}]}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:38 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.es/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=fc0afd7e34652a7d4f5030147c90d0b79dc41292a2d037c441f125261f1afe21
+      X-Amz-Content-Sha256:
+      - f62468f10008d0d38d2dc0e46d9dfac15d62494b125d5eb00ecb294212b027ef
+      X-Amz-Date:
+      - 20191027T170438Z
+      Host:
+      - webservices.amazon.es
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '240'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - e2cbf9b9-e844-44cf-9e8a-fa418776eb7c
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 5YSHTZJ59VQGQJ4WZQRZ
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.es/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Medium","Label":"Title","Locale":"es_MARKETPLACE"}}}]}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:38 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.de/paapi5/getvariations
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ASIN":"B07212L4G2"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=0ba7087dd8b4cb3b3a4d3b25bfa2d5e4cd4ac6be6eee179c2bb58314f4530daf
+      X-Amz-Content-Sha256:
+      - 38dff74d256560ffc32fe803a7ca97286ed0a0075deee7ddfb31a36a76d72f4d
+      X-Amz-Date:
+      - 20191027T170438Z
+      Host:
+      - webservices.amazon.de
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '118'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 951d95f0-d4e3-48c4-ba83-a44d728302bb
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - S3N35Y5T26MKVWZV679M
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"NoResults","Message":"No
+        results found for your request."}]}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:38 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.es/paapi5/getvariations
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ASIN":"B07212L4G2"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=ad5bc036f51bfc821dec7220f3a9b36382a9f93b0923f3f617a651b7d0512c57
+      X-Amz-Content-Sha256:
+      - dda8029a74698583735f751293719242c022682625a266fb54f76c35a689ad3c
+      X-Amz-Date:
+      - 20191027T170438Z
+      Host:
+      - webservices.amazon.es
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '118'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - b6a3f115-8734-4612-acac-1f910f318292
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - FWQ8G38K12WWE53K3Z78
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"NoResults","Message":"No
+        results found for your request."}]}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:38 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.com/paapi5/getvariations
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ASIN":"B07212L4G2"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=4b2e9633ec5b9a5e7611f7b525dbb77803905ff2c3dcfa54248c0b499a0ad3a0
+      X-Amz-Content-Sha256:
+      - 6e7805a3da3922d7d9bab4626d0e2323b5a511973ccaba4053801a755389f84b
+      X-Amz-Date:
+      - 20191027T170438Z
+      Host:
+      - webservices.amazon.com
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '542'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 34450a6f-bfff-4abd-b1e8-3241cc68dbaa
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - YE7ADT6X34RJNNZF2EGQ
+    body:
+      encoding: ASCII-8BIT
+      string: '{"VariationsResult":{"Items":[{"ASIN":"B071G3FR4M","DetailPageURL":"https://www.amazon.com/dp/B071G3FR4M?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, XL","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B07212KJ34","DetailPageURL":"https://www.amazon.com/dp/B07212KJ34?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s Originals 3 Stripes Tee, Trace Scarlet, S","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B071JPD1TG","DetailPageURL":"https://www.amazon.com/dp/B071JPD1TG?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons XX-Large","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"XX-Large"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B07212KSMC","DetailPageURL":"https://www.amazon.com/dp/B07212KSMC?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Small","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"Small"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B07212L479","DetailPageURL":"https://www.amazon.com/dp/B07212L479?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Men''s Originals 3 Stripes Tee, Dust Pink, L","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Dust
+        Pink"}]},{"ASIN":"B07212K481","DetailPageURL":"https://www.amazon.com/dp/B07212K481?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons X-Large","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"X-Large"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.com/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals 3-Stripes Tee Intense Lemons MD","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"Medium"},{"Name":"color_name","Value":"Intense
+        Lemons"}]},{"ASIN":"B07212L2BM","DetailPageURL":"https://www.amazon.com/dp/B07212L2BM?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Men''s Originals 3 Stripes Tee, Trace Scarlet, L","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B072JWSMLM","DetailPageURL":"https://www.amazon.com/dp/B072JWSMLM?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Men''s Originals 3 Stripes Tee, Trace Scarlet, 2XL","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"XX-Large"},{"Name":"color_name","Value":"Trace
+        Scarlet"}]},{"ASIN":"B071G3GFYP","DetailPageURL":"https://www.amazon.com/dp/B071G3GFYP?tag=PARTNER_TAG&linkCode=ogv&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Large","Label":"Title","Locale":"en_MARKETPLACE"}},"VariationAttributes":[{"Name":"size_name","Value":"Large"},{"Name":"color_name","Value":"Intense
+        Lemons"}]}],"VariationSummary":{"PageCount":2,"VariationCount":13}}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:38 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.es/paapi5/searchitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Keywords":"Harry
+        Potter"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=7a9f7f23b1d39ab8747e1c9807d4105875737f2c42f347398d49a77fdb6fae62
+      X-Amz-Content-Sha256:
+      - 0fab97a8003683671d31fca9e67f1f9871ace2bbf8ddb50ab4e5edf4ee96dfc2
+      X-Amz-Date:
+      - 20191027T170438Z
+      Host:
+      - webservices.amazon.es
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:39 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '780'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - ad9b4a06-cdff-446a-8f26-74b9f2074061
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - HH14K7RAJPTPA0QY1WSR
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTZWFyY2hSZXN1bHQiOnsiSXRlbXMiOlt7IkFTSU4iOiJCMDdGM1RUNk5MIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5lcy9kcC9CMDdGM1RUNk5MP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkZ1bm1vIC0gUHVybyBNYW5vIGNsw6FzaWNvIEhhcnJ5IFBvdHRlciBDYWphIGRlIG3DunNpY2EgQ2FqYSBkZSBtw7pzaWNhIGRlIE1hZGVyYSBhIE1hbm8gYXJ0ZXNhbsOtYXMgZGUgTWFkZXJhIENyZWF0aXZhIE1lam9yZXMgUmVnYWxvcyIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlc19NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjA3QjJZMURaNiIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZXMvZHAvQjA3QjJZMURaNj90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgTMOhbXBhcmEgU25pdGNoIERvcmFkYSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlc19NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiODQ3ODg4NDQ1OSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZXMvZHAvODQ3ODg4NDQ1OT90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgeSBsYSBQaWVkcmEgRmlsb3NvZmFsOiAxIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImVzX01BUktFVFBMQUNFIn19fSx7IkFTSU4iOiJCMDBER1ExSzhRIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5lcy9kcC9CMDBER1ExSzhRP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6Ik1hZ2ljIFdhbmQgTm90ZXBhZCIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlc19NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjA3OTlHNjJRSiIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZXMvZHAvQjA3OTlHNjJRSj90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJGdW5tbyAtIFB1cmUgaGFuZC1jbGFzc2ljYWwgXCJoYXJyeSBwb3R0ZXIgXCIgbXVzaWMgYm94IGhhbmQtd29vZGVuIG11c2ljIGJveCBjcmVhdGl2ZSB3b29kZW4gY3JhZnRzIGJlc3QgR2lmdHMiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZXNfTUFSS0VUUExBQ0UifX19LHsiQVNJTiI6IkIwMFRRNlJPUlEiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmVzL2RwL0IwMFRRNlJPUlE/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiRnVua28gLSBQb3AhIFZpbmlsbyBDb2xlY2Npw7NuIEhhcnJ5IFBvdHRlciAtIEZpZ3VyYSBIYXJyeSBQb3R0ZXIgKDU4NTgpIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImVzX01BUktFVFBMQUNFIn19fSx7IkFTSU4iOiJCMDdMNUs2Q0NXIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5lcy9kcC9CMDdMNUs2Q0NXP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhBUlJZIFBPVFRFUiBUcml2aWFsIEJpdGUgKDEwMjkyKSwgbXVsdGljb2xvciAoRUxFVkVOIEZPUkNFIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImVzX01BUktFVFBMQUNFIn19fSx7IkFTSU4iOiIwNzYyNDU5NDVYIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5lcy9kcC8wNzYyNDU5NDVYP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlci4gQ29sbGVjdGlibGUgUXVpZGRpdGNoIFNldCIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlc19NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjA3SDc0R1hMOSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZXMvZHAvQjA3SDc0R1hMOT90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgLSBBYmFsb3JpbyBSZXZlcnNpYmxlLCBkaXNlw7FvLCBlZHJlZMOzbiBwYXJhIENhbWEgSW5kaXZpZHVhbCIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlc19NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjA3TlFLNlpDNSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZXMvZHAvQjA3TlFLNlpDNT90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJUaGUgTm9ibGUgQ29sbGVjdGlvbiBIYXJyeSBQb3R0ZXIgUFZDIFdhbmQgeSBQcmlzbWF0aWMgQm9va21hcmsiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZXNfTUFSS0VUUExBQ0UifX19XSwiU2VhcmNoVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmVzL3M/az1IYXJyeStQb3R0ZXImcmg9cF9uX2F2YWlsYWJpbGl0eSUzQS0xJnRhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kiLCJUb3RhbFJlc3VsdENvdW50IjoxNDZ9fQ==
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:39 GMT
 - request:
     method: post
     uri: https://webservices.amazon.de/paapi5/searchitems
     body:
       encoding: UTF-8
-      string: '{"PartnerTag":"<PARTNER_TAG>","PartnerType":"Associates","Marketplace":"www.amazon.de","Resources":null,"Keywords":"Harry
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Keywords":"Harry
         Potter"}'
     headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=28670fe739c2a525d0be833de516f667272c15c9e845fdca95158555a4d6d7c8
+      X-Amz-Content-Sha256:
+      - 30ede98ec7c31b1de292a5d70af184b37b8c106ba8d7968aff35253d54ad83ba
+      X-Amz-Date:
+      - 20191027T170439Z
+      Host:
+      - webservices.amazon.de
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
       User-Agent:
       - Ruby
-      Host:
-      - webservices.amazon.de
-      Content-Type:
-      - application/json; charset=UTF-8
-      X-Amz-Target:
-      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
-      Content-Encoding:
-      - amz-1.0
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=<KEY>/20191025/eu-west-1/ProductAdvertisingAPI/aws4_request,
-        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
-        Signature=fd596061aaaca77217c0e8e913a3433c05074da851efea353beaad823546c96a
-      X-Amz-Content-Sha256:
-      - 9d409090422b8d302df249b7d7e04ac47ed9c9f131dc4f9412723ee5813b73ee
-      X-Amz-Date:
-      - 20191025T204521Z
   response:
     status:
       code: 200
@@ -370,23 +787,89 @@ http_interactions:
       Server:
       - Server
       Date:
-      - Fri, 25 Oct 2019 20:45:21 GMT
+      - Sun, 27 Oct 2019 17:04:39 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '604'
+      - '598'
       Connection:
       - keep-alive
       X-Amzn-Requestid:
-      - ca18a326-7df7-42a6-8789-42fda3f5d843
+      - af9f459c-85e5-4d08-a86d-6cb18488d911
       Vary:
       - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
       X-Amz-Rid:
-      - 3FT3FY98BWQTS5QCNMKK
+      - MGNV901CAHP7JRMHM09S
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJTZWFyY2hSZXN1bHQiOnsiSXRlbXMiOlt7IkFTSU4iOiJCMDBKR1YzOFdHIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBKR1YzOFdHP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkZXIgU3RlaW4gZGVyIFdlaXNlbiBbZHQuL09WXSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9ERSJ9fX0seyJBU0lOIjoiQjAwUllFTlE3TyIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwUllFTlE3Tz90YWc9PFBBUlRORVJfVEFHPiZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGVyIE9yZGVuIGRlcyBQaMO2bml4IFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBJS0JWV0FTIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBJS0JWV0FTP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkaWUgSGVpbGlndHXMiG1lciBkZXMgVG9kZXMsIFRlaWwgMiBbZHQuL09WXSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9ERSJ9fX0seyJBU0lOIjoiQjAwSFgySjM5VyIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwSFgySjM5Vz90YWc9PFBBUlRORVJfVEFHPiZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGllIEthbW1lciBkZXMgU2NocmVja2VucyIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9ERSJ9fX0seyJBU0lOIjoiQjAwSDNBTzJZQSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwSDNBTzJZQT90YWc9PFBBUlRORVJfVEFHPiZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGVyIEhhbGJibHV0cHJpbnogW2R0Li9PVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfREUifX19LHsiQVNJTiI6IkIwMEVWQVUyOUUiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwL0IwMEVWQVUyOUU/dGFnPTxQQVJUTkVSX1RBRz4mbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgdW5kIGRlciBGZXVlcmtlbGNoIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBJS0VUWVRRIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBJS0VUWVRRP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkaWUgSGVpbGlndMO8bWVyIGRlcyBUb2RlcywgVGVpbCAxIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBIM0FSNU9FIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBIM0FSNU9FP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkZXIgR2VmYW5nZW5lIHZvbiBBc2thYmFuIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX0RFIn19fSx7IkFTSU4iOiJCMDBLN0FZSzFJIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBLN0FZSzFJP3RhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIGFuZCB0aGUgQ2hhbWJlciBvZiBTZWNyZXRzIFtPVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfREUifX19LHsiQVNJTiI6IjM1NTE1NTc0MDMiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwLzM1NTE1NTc0MDM/dGFnPTxQQVJUTkVSX1RBRz4mbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXI6IEJhbmQgMS03IGltIFNjaHViZXIg4oCTIG1pdCBleGtsdXNpdmVtIEV4dHJhISAoSGFycnkgUG90dGVyICkiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfREUifX19XSwiU2VhcmNoVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL3M/az1IYXJyeStQb3R0ZXImcmg9cF9uX2F2YWlsYWJpbGl0eSUzQS0xJnRhZz08UEFSVE5FUl9UQUc+JmxpbmtDb2RlPW9zaSIsIlRvdGFsUmVzdWx0Q291bnQiOjE0Nn19
+        eyJTZWFyY2hSZXN1bHQiOnsiSXRlbXMiOlt7IkFTSU4iOiJCMDBKR1YzOFdHIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBKR1YzOFdHP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGVyIFN0ZWluIGRlciBXZWlzZW4gW2R0Li9PVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfTUFSS0VUUExBQ0UifX19LHsiQVNJTiI6IkIwMFJZRU5RN08iLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwL0IwMFJZRU5RN08/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkZXIgT3JkZW4gZGVzIFBow7ZuaXggW2R0Li9PVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfTUFSS0VUUExBQ0UifX19LHsiQVNJTiI6IkIwMElLQlZXQVMiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwL0IwMElLQlZXQVM/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIHVuZCBkaWUgSGVpbGlndHXMiG1lciBkZXMgVG9kZXMsIFRlaWwgMiBbZHQuL09WXSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjAwSDNBTzJZQSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwSDNBTzJZQT90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgdW5kIGRlciBIYWxiYmx1dHByaW56IFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX01BUktFVFBMQUNFIn19fSx7IkFTSU4iOiJCMDBIWDJKMzlXIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBIWDJKMzlXP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGllIEthbW1lciBkZXMgU2NocmVja2VucyIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjAwRVZBVTI5RSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwRVZBVTI5RT90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgdW5kIGRlciBGZXVlcmtlbGNoIFtkdC4vT1ZdIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX01BUktFVFBMQUNFIn19fSx7IkFTSU4iOiJCMDBJS0VUWVRRIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9kcC9CMDBJS0VUWVRRP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciB1bmQgZGllIEhlaWxpZ3TDvG1lciBkZXMgVG9kZXMsIFRlaWwgMSBbZHQuL09WXSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJkZV9NQVJLRVRQTEFDRSJ9fX0seyJBU0lOIjoiQjAwSDNBUjVPRSIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uZGUvZHAvQjAwSDNBUjVPRT90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJIYXJyeSBQb3R0ZXIgdW5kIGRlciBHZWZhbmdlbmUgdm9uIEFza2FiYW4gW2R0Li9PVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfTUFSS0VUUExBQ0UifX19LHsiQVNJTiI6IkIwMEs3QVlLMUkiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwL0IwMEs3QVlLMUk/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIGFuZCB0aGUgQ2hhbWJlciBvZiBTZWNyZXRzIFtPVl0iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZGVfTUFSS0VUUExBQ0UifX19LHsiQVNJTiI6IjM1NTE1NTc0MDMiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmRlL2RwLzM1NTE1NTc0MDM/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyOiBCYW5kIDEtNyBpbSBTY2h1YmVyIOKAkyBtaXQgZXhrbHVzaXZlbSBFeHRyYSEgKEhhcnJ5IFBvdHRlciApIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImRlX01BUktFVFBMQUNFIn19fV0sIlNlYXJjaFVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5kZS9zP2s9SGFycnkrUG90dGVyJnJoPXBfbl9hdmFpbGFiaWxpdHklM0EtMSZ0YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpIiwiVG90YWxSZXN1bHRDb3VudCI6MTQ2fX0=
     http_version: 
-  recorded_at: Fri, 25 Oct 2019 20:45:21 GMT
+  recorded_at: Sun, 27 Oct 2019 17:04:39 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.com/paapi5/searchitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Keywords":"Harry
+        Potter"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=d0e18c6432f33046490c337dec056961ab1f84ab0b17da5865021ffacd0b9d60
+      X-Amz-Content-Sha256:
+      - efd8fa8fd376b1ae1e5e4cb4acdea07fbf23f8f2ef586267e9549f77b392bbf1
+      X-Amz-Date:
+      - 20191027T170439Z
+      Host:
+      - webservices.amazon.com
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sun, 27 Oct 2019 17:04:40 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '603'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - c2bdcd47-13cc-4e23-8a66-58e60e339a61
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - MQBC0TWZ71QYQ9EBSBM1
+    body:
+      encoding: ASCII-8BIT
+      string: '{"SearchResult":{"Items":[{"ASIN":"B0011AQLZQ","DetailPageURL":"https://www.amazon.com/dp/B0011AQLZQ?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Sorcerer''s Stone","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B017V4IMVQ","DetailPageURL":"https://www.amazon.com/dp/B017V4IMVQ?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Sorcerer''s Stone, Book 1","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B004MPEFBE","DetailPageURL":"https://www.amazon.com/dp/B004MPEFBE?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Deathly Hallows: Part 1","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B0026YWQ4Q","DetailPageURL":"https://www.amazon.com/dp/B0026YWQ4Q?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Prisoner of Azkaban","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"0545791421","DetailPageURL":"https://www.amazon.com/dp/0545791421?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Goblet of Fire: The Illustrated Edition","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B0094M2YL8","DetailPageURL":"https://www.amazon.com/dp/B0094M2YL8?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Order of the Phoenix","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B07NRSY3RW","DetailPageURL":"https://www.amazon.com/dp/B07NRSY3RW?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"LEGO
+        Harry Potter Advent Calendar 75964 Building Kit, New 2019 (305 Pieces)","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B017V4IPPO","DetailPageURL":"https://www.amazon.com/dp/B017V4IPPO?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Chamber of Secrets, Book 2","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B002RVCD46","DetailPageURL":"https://www.amazon.com/dp/B002RVCD46?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Half Blood Prince","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"0545162076","DetailPageURL":"https://www.amazon.com/dp/0545162076?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter Paperback Box Set (Books 1-7)","Label":"Title","Locale":"en_MARKETPLACE"}}}],"SearchURL":"https://www.amazon.com/s?k=Harry+Potter&rh=p_n_availability%3A-1&tag=PARTNER_TAG&linkCode=osi","TotalResultCount":146}}'
+    http_version: 
+  recorded_at: Sun, 27 Oct 2019 17:04:40 GMT
 recorded_with: VCR 5.0.0

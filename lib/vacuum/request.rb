@@ -1,72 +1,57 @@
 # frozen_string_literal: true
 
+require 'aws-sigv4'
+require 'httpi'
+require 'json'
+
 require 'vacuum/locale'
 require 'vacuum/response'
-require 'vacuum/adapter'
-require 'aws-sigv4'
 
 module Vacuum
-  # An Amazon Product Advertising API request.
+  # A request to the API
   class Request
     SERVICE = 'ProductAdvertisingAPI'
 
-    attr_accessor :res
-    attr_reader :access_key, :secret_key, :marketplace,
-                :partner_tag, :partner_type
+    attr_reader :access_key, :secret_key, :locale, :partner_tag, :partner_type
 
-    def initialize(access_key:,
-                   secret_key:,
-                   partner_tag:,
-                   marketplace: :us,
-                   partner_type: 'Associates',
-                   resources: nil)
-      @res = resources if resources
+    def initialize(marketplace: 'US', access_key:, secret_key:, partner_tag:,
+                   partner_type: 'Associates')
+      @locale = Locale.find(marketplace)
       @access_key = access_key
       @secret_key = secret_key
       @partner_tag = partner_tag
       @partner_type = partner_type
-      @marketplace = marketplace
     end
 
-    BROWSE_NODES_RESORCES = [
-      'BrowseNodes.Ancestor',
-      'BrowseNodes.Children'
-    ].freeze
-
-    def get_browse_nodes(browse_node_ids:, **options)
-      body = param_builder(
-        { BrowseNodeIds: Array(browse_node_ids) },
-        options.merge(resources: BROWSE_NODES_RESORCES)
-      )
-
-      request('GetBrowseNodes', body)
+    def get_browse_nodes(**params)
+      request('GetBrowseNodes', params)
     end
 
-    def get_items(item_ids:, **options)
-      body = param_builder({ ItemIds: Array(item_ids) }, options)
-      request('GetItems', body)
+    def get_items(**params)
+      request('GetItems', params)
     end
 
-    def get_variations(asin:, **options)
-      body = param_builder({ ASIN: asin }, options)
-      request('GetVariations', body)
+    def get_variations(**params)
+      request('GetVariations', params)
     end
 
-    def search_items(**options)
-      body = param_builder({}, options)
-      request('SearchItems', body)
+    def search_items(**params)
+      request('SearchItems', params)
     end
 
     private
 
-    def request(operation, body)
+    def request(operation, params)
+      body = build_body(params)
       signature = sign(operation, body)
 
-      Response.new Adapter.post(
+      request = HTTPI::Request.new(
+        headers: request_headers(operation, signature),
         url: locale.build_url(operation),
-        body: body,
-        headers: request_headers(operation, signature)
+        body: body
       )
+
+      Response.new(HTTPI.post(request))
     end
 
     def sign(operation, body)
@@ -78,12 +63,9 @@ module Vacuum
       )
     end
 
-    def locale
-      Locale.find(marketplace)
-    end
-
     def request_headers(operation, signature)
       headers(operation).merge(
+        'Content-Type' => 'application/json; charset=utf-8',
         'Authorization' => signature.headers['authorization'],
         'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
         'X-Amz-Date' => signature.headers['x-amz-date'],
@@ -99,7 +81,7 @@ module Vacuum
     end
 
     def signer
-      Aws::Sigv4::Signer.new(
+      ::Aws::Sigv4::Signer.new(
         service: SERVICE,
         region: locale.region,
         access_key_id: access_key,
@@ -109,22 +91,17 @@ module Vacuum
       )
     end
 
-    def param_builder(body, params)
-      body.tap do |hsh|
-        # REQUIRED
-        hsh['PartnerTag'] = params[:partner_tag] || partner_tag
-        hsh['PartnerType'] = params[:partner_type] || partner_type
-        hsh['Marketplace'] = locale.marketplace
-        hsh['Resources'] = params[:resources] || res
+    def build_body(params)
+      hsh = { 'PartnerTag' => partner_tag,
+              'PartnerType' => partner_type }
 
-        params.each do |key, val|
-          hsh[key.to_s.split('_').map(&:capitalize).join] = val
-        end
+      params.each do |key, val|
+        key = key.to_s.split('_')
+                 .map { |word| word == 'asin' ? 'ASIN' : word.capitalize }.join
+        hsh[key] = val
+      end
 
-        # OPTIONAL_PARAMS.keys.each do |key|
-        #   hsh[OPTIONAL_PARAMS[key]] = params[key] if params[key]
-        # end
-      end.to_json
+      JSON.generate(hsh)
     end
   end
 end

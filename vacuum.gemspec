@@ -18,7 +18,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = Dir.glob('test/**/*')
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'aws-sigv4'
+  gem.add_dependency 'aws-sigv4', '~> 1.0'
+  gem.add_dependency 'httpi', '~> 2.0'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rubocop'

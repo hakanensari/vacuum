@@ -1,4 +1,4 @@
-.env
 Gemfile.lock
-coverage
+locales.yml
 pkg
+
