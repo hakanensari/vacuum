@@ -81,7 +81,7 @@ module Vacuum
     end
 
     def signer
-      ::Aws::Sigv4::Signer.new(
+      Aws::Sigv4::Signer.new(
         service: SERVICE,
         region: locale.region,
         access_key_id: access_key,
