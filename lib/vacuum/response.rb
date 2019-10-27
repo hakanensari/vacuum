@@ -5,7 +5,7 @@ require 'forwardable'
 require 'json'
 
 module Vacuum
-  # A wrapper around the Amazon Product Advertising API response.
+  # A wrapper around the API response
   class Response < SimpleDelegator
     extend Forwardable
 
