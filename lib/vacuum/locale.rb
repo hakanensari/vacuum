@@ -8,8 +8,8 @@ module Vacuum
     attr_reader :code, :host, :region
 
     def self.find(code)
-      code = code.to_s.upcase
-      code = 'GB' if code == 'UK'
+      code = code.to_sym.downcase
+      code = :gb if code == :uk
 
       @all.find { |locale| locale.code == code } || raise(NotFound)
     end
@@ -33,20 +33,20 @@ module Vacuum
     end
 
     @all = [
-      %w[AU amazon.com.au us-west-2],
-      %w[BR amazon.com.br us-east-1],
-      %w[CA amazon.ca us-east-1],
-      %w[FR amazon.fr eu-west-1],
-      %w[DE amazon.de eu-west-1],
-      %w[IN amazon.in eu-west-1],
-      %w[IT amazon.it eu-west-1],
-      %w[JP amazon.co.jp us-west-2],
-      %w[MX amazon.com.mx us-east-1],
-      %w[ES amazon.es eu-west-1],
-      %w[TR amazon.com.tr eu-west-1],
-      %w[AE amazon.ae eu-west-1],
-      %w[GB amazon.co.uk eu-west-1],
-      %w[US amazon.com us-east-1]
+      [:au, 'amazon.com.au', 'us-west-2'],
+      [:br, 'amazon.com.br', 'us-east-1'],
+      [:ca, 'amazon.ca', 'us-east-1'],
+      [:fr, 'amazon.fr', 'eu-west-1'],
+      [:de, 'amazon.de', 'eu-west-1'],
+      [:in, 'amazon.in', 'eu-west-1'],
+      [:it, 'amazon.it', 'eu-west-1'],
+      [:jp, 'amazon.co.jp', 'us-west-2'],
+      [:mx, 'amazon.com.mx', 'us-east-1'],
+      [:es, 'amazon.es', 'eu-west-1'],
+      [:tr, 'amazon.com.tr', 'eu-west-1'],
+      [:ae, 'amazon.ae', 'eu-west-1'],
+      [:gb, 'amazon.co.uk', 'eu-west-1'],
+      [:us, 'amazon.com', 'us-east-1']
     ].map { |attributes| new(*attributes) }
   end
 end
