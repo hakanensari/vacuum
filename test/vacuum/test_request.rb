@@ -22,7 +22,7 @@ module Vacuum
 
     def test_get_items_with_options
       requests.each do |request|
-        response = request.get_items(item_ids: ['B07212L4G2'],
+        response = request.get_items(item_ids: 'B07212L4G2',
                                      resources: ['BrowseNodeInfo.BrowseNodes'])
         item = response.dig('ItemsResult', 'Items').first
         assert item.key?('BrowseNodeInfo')
