@@ -23,11 +23,13 @@ module Vacuum
       @partner_type = partner_type
     end
 
-    def get_browse_nodes(**params)
+    def get_browse_nodes(browse_node_ids:, **params)
+      params.update(browse_node_ids: Array(browse_node_ids))
       request('GetBrowseNodes', params)
     end
 
-    def get_items(**params)
+    def get_items(item_ids:, **params)
+      params.update(item_ids: Array(item_ids))
       request('GetItems', params)
     end
 
