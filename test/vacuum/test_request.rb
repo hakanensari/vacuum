@@ -13,9 +13,7 @@ module Vacuum
 
     def test_get_items
       requests.each do |request|
-        response = request.get_items(
-          item_ids: ['B07212L4G2']
-        )
+        response = request.get_items(item_ids: ['B07212L4G2'])
         refute response.error?
       end
     end

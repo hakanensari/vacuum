@@ -6,15 +6,15 @@ require 'vacuum/locale'
 module Vacuum
   class TestLocale < Minitest::Test
     def test_find
-      assert_kind_of Locale, Locale.find('US')
-    end
-
-    def test_find_lowercase_sym
       assert_kind_of Locale, Locale.find(:us)
     end
 
+    def test_find_uppercase_string
+      assert_kind_of Locale, Locale.find('US')
+    end
+
     def test_find_uk
-      assert_equal Locale.find('GB'), Locale.find('UK')
+      assert_equal :gb, Locale.find('UK').code
     end
 
     def test_raise_if_not_found
