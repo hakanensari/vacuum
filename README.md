@@ -1,179 +1,81 @@
 # Vacuum
-[![CircleCI](https://circleci.com/gh/hakanensari/vacuum/tree/v5.svg?style=svg)](https://circleci.com/gh/hakanensari/vacuum/tree/v5)
 
-Vacuum is a fast, light-weight Ruby wrapper to the [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html).
+[![CircleCI](https://circleci.com/gh/hakanensari/vacuum/tree/master.svg?style=svg)](https://circleci.com/gh/hakanensari/vacuum/tree/master)
 
-Work on **Product Advertising API 5.0** is currently ongoing in [v5](https://github.com/hakanensari/vacuum/tree/v5) branch.
+Vacuum is a light-weight Ruby wrapper to [Amazon Product Advertising API 5.0](https://webservices.amazon.com/paapi5/documentation/).
+
+The Product Advertising API provides programmatic access to search and get detailed product information on the Amazon marketplaces. Users can get detailed information about products such as product title, description, image urls, prices, similar products, prime eligibility, offers and many other details that can be used to monetise their websites by giving recommendations and promoting the products.
+
+You need to [register as an affiliate](https://affiliate-program.amazon.com) on each individual marketplace to access its API.
 
 ![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
 
 ## Usage
 
-Refer to the [API docs](https://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_ApiReference.html) as necessary.
+Vacuum follows the nomenclature of the Product Advertising API. The examples below are based on examples in the [Amazon docs](https://webservices.amazon.com/paapi5/documentation/).
 
-### Prerequisite
+### Getting Started
 
-You must [register as an affiliate](https://affiliate-program.amazon.com) to access the API. Amazon will issue your AWS credentials when you register.
-
-### Setup
-
-Create a request:
+Create a request with your marketplace credentials.
 
 ```ruby
-request = Vacuum.new
+request = Vacuum.new(marketplace: 'US',
+                     access_key: '123456',
+                     secret_key: '
+                     ',
+                     partner_tag: 'xyz-20')
 ```
 
-The locale will default to the US. To use another locale, reference its two-letter country code:
+Vacuum uses [HTTPI](https://github.com/savonrb/httpi) under the hood. You can swap the HTTP library it uses if you prefer an alternative for speed or introspection.
 
 ```ruby
-request = Vacuum.new('GB')
-```
+HTTPI.adapter = :http
+end
 
-Configure the request credentials:
+### Operations
+
+#### GetBrowseNodes
+
+Given a BrowseNodeId, the `GetBrowseNodes` operation returns details about the specified browse node like name, children and ancestors depending on the resources specified in the request. The names and browse node IDs of the children and ancestor browse nodes are also returned. `GetBrowseNodes` enables you to traverse the browse node hierarchy to find a browse node.
 
 ```ruby
-request.configure(
-  aws_access_key_id: 'key',
-  aws_secret_access_key: 'secret',
-  associate_tag: 'tag'
+request.get_browse_nodes(
+  browse_node_ids: ['283155', '3040'],
+  resources: ['BrowseNodes.Ancestor', 'BrowseNodes.Children']
 )
 ```
 
-You can omit the above if you set your key and secret as environment variables:
+#### GetItems
 
-```sh
-export AWS_ACCESS_KEY_ID=key
-export AWS_SECRET_ACCESS_KEY=secret
-```
-
-You will still need to set an associate tag:
+Given an Item identifier, the `GetItems` operation returns the item attributes, based on the resources specified in the request.
 
 ```ruby
-request.associate_tag = 'tag'
-```
-
-Provided you are looking to earn commission, you have to register independently with each locale you query. Otherwise, you may reuse any dummy associate tag.
-
-The API version defaults to `2013-08-01`. To use another version, reference its date string:
-
-```ruby
-request.version = '2011-08-01'
-```
-
-### Request
-
-#### Browse Node Lookup
-
-**BrowseNodeLookup** returns a specified browse node’s name and ancestors:
-
-```ruby
-response = request.browse_node_lookup(
-  query: {
-    'BrowseNodeId' => 123
-  }
+request.get_items(
+  item_ids: ['B0199980K4', 'B000HZD168', 'B01180YUXS', 'B00BKQTA4A'],
+  resources: ['Images.Primary.Small', 'ItemInfo.Title', 'ItemInfo.Features',
+              'Offers.Summaries.HighestPrice' , 'ParentASIN']
 )
 ```
 
-#### Cart Operations
+#### GetVariations
 
-The **CartCreate** operation creates a remote shopping cart:
+Given an ASIN, the `GetVariations` operation returns a set of items that are the same product, but differ according to a consistent theme, for example size and color. These items which differ according to a consistent theme are called variations. A variation is a child ASIN. The parent ASIN is an abstraction of the children items. For example, a shirt is a parent ASIN and parent ASINs cannot be sold. A child ASIN would be a blue shirt, size 16, sold by MyApparelStore. This child ASIN is one of potentially many variations. The ways in which variations differ are called dimensions.
 
 ```ruby
-response = request.cart_create(
-  query: {
-    'HMAC' => 'secret',
-    'Item.1.OfferListingId' => '123',
-    'Item.1.Quantity' => 1
-  }
+request.get_variations(
+  asin: 'B00422MCUS',
+  resources: ['ItemInfo.Title', 'VariationSummary.Price.HighestPrice',
+              'VariationSummary.Price.LowestPrice',
+              'VariationSummary.VariationDimension']
 )
 ```
 
-The **CartAdd** operation adds items to an existing remote shopping cart:
+#### SearchItems
+
+The `SearchItems` operation searches for items on Amazon based on a search query. The Amazon Product Advertising API returns up to ten items per search request.
 
 ```ruby
-response = request.cart_add(
-  query: {
-    'CartId' => '123',
-    'HMAC' => 'secret',
-    'Item.1.OfferListingId' => '123',
-    'Item.1.Quantity' => 1
-  }
-)
-```
-
-The **CartClear** operation removes all of the items in a remote shopping cart:
-
-```ruby
-response = request.cart_clear(
-  query: {
-    'CartId' => '123',
-    'HMAC' => 'secret'
-  }
-)
-```
-
-The **CartGet** operation retrieves the IDs, quantities, and prices of the items, including SavedForLater ones, in a remote shopping cart:
-
-```ruby
-response = request.cart_get(
-  query: {
-    'CartId' => '123',
-    'HMAC' => 'secret',
-    'CartItemId' => '123'
-  }
-)
-```
-
-#### Item Lookup
-
-The **ItemLookup** operation returns some or all of the attributes of an item, depending on the response group specified in the request. By default, the operation returns an item’s ASIN, manufacturer, product group, and title.
-
-```ruby
-response = request.item_lookup(
-  query: {
-    'ItemId' => '0679753354'
-  }
-)
-```
-
-#### Item Search
-
-The **ItemSearch** operation returns items that satisfy the search criteria, including one or more search indices.
-
-```ruby
-response = request.item_search(
-  query: {
-    'Keywords' => 'Architecture',
-    'SearchIndex' => 'Books'
-  }
-)
-```
-
-#### Similarity Lookup
-
-The **SimilarityLookup** operation returns up to ten products per page that are similar to one or more items specified in the request. This operation is typically used to pique a customer’s interest in buying something similar to what they’ve already ordered.
-
-```ruby
-response = request.similarity_lookup(
-  query: {
-    'ItemId' => '0679753354'
-  }
-)
-```
-
-#### Configuring a request
-
-Vacuum wraps [Excon](https://github.com/geemus/excon). Use the latter's API to tweak your request.
-
-For example, to use a persistent connection:
-
-```ruby
-response = request.item_search(
-  query: {
-    'ItemId' => '0679753354'
-  },
-  persistent: true
-)
+request.search_items(keywords: 'harry potter')
 ```
 
 ### Response
@@ -184,30 +86,38 @@ The quick and dirty way to consume a response is to parse into a Ruby hash:
 response.to_h
 ```
 
-You can also `#dig` into returned Hash:
+You can also `#dig` into the returned Hash:
 
 ```ruby
-response.dig('ItemSearchResponse', 'Items', 'Item')
+response.dig('ItemsResult', 'Items')
 ```
 
-In production, you may prefer to use a custom parser to do some XML heavy-lifting:
+You can easily extend Vacuum with a custom parser. Just swap the original with a class or module that responds to `.parse`.
 
 ```ruby
-class MyParser
-  # A parser has to respond to this.
-  def self.parse(body)
-    new(body)
-  end
-
-  def initialize(body)
-    @body = body
-  end
-
-  # Implement parser here.
-end
-
 response.parser = MyParser
 response.parse
 ```
 
 If no custom parser is set, `Vacuum::Response#parse` delegates to `#to_h`.
+
+## Testing
+
+If you are using [VCR](https://github.com/vcr/vcr) to test your app, you can use Vacuum's custom matcher to stub requests to the API.
+
+```ruby
+require 'vacuum/matcher'
+
+VCR.configure do |c|
+  c.default_cassette_options = { match_requests_on: [Vacuum::Matcher] }
+end
+```
+
+If you are testing Vacuum itself and want to modify or add its integration tests, add your API credentials to a [`locales.yml`](https://github.com/hakanensari/vacuum/blob/master/test/locales.yml.example) file in the `test` directory.
+
+## Getting Help
+
+* Ask specific questions about the API on the [Amazon forum](https://forums.aws.amazon.com/forum.jspa?forumID=9).
+* Report bugs and discuss potential features in [GitHub issues](https://github.com/hakanensari/vacuum/issues).
+
+
