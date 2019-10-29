@@ -631,7 +631,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191027/us-east-1/ProductAdvertisingAPI/aws4_request,
         SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
         Signature=4b2e9633ec5b9a5e7611f7b525dbb77803905ff2c3dcfa54248c0b499a0ad3a0
       X-Amz-Content-Sha256:
@@ -707,7 +707,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
         SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
         Signature=7a9f7f23b1d39ab8747e1c9807d4105875737f2c42f347398d49a77fdb6fae62
       X-Amz-Content-Sha256:
@@ -764,7 +764,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191027/eu-west-1/ProductAdvertisingAPI/aws4_request,
         SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
         Signature=28670fe739c2a525d0be833de516f667272c15c9e845fdca95158555a4d6d7c8
       X-Amz-Content-Sha256:
@@ -1054,7 +1054,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
         SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
         Signature=691f83eb11e1b6fc8c59806cfea12562d1521fba4b78decb278acb1cfa3bb858
       X-Amz-Content-Sha256:

@@ -20,7 +20,7 @@ VCR.configure do |c|
 
   Locales.each do |record|
     record.each do |key, val|
-      next if key == :locale
+      next if key == :marketplace
 
       c.filter_sensitive_data(key.upcase) { val }
     end
