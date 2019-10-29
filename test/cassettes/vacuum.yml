@@ -872,4 +872,294 @@ http_interactions:
         Potter Paperback Box Set (Books 1-7)","Label":"Title","Locale":"en_MARKETPLACE"}}}],"SearchURL":"https://www.amazon.com/s?k=Harry+Potter&rh=p_n_availability%3A-1&tag=PARTNER_TAG&linkCode=osi","TotalResultCount":146}}'
     http_version: 
   recorded_at: Sun, 27 Oct 2019 17:04:40 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.co.uk/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=03b297bda0b64ee51228e065b2b851f2d3503708452f370c86664068edb544d2
+      X-Amz-Content-Sha256:
+      - 5b0252509e79f280d06439ba04159da204c4fcb12751a1650cf558eb203d315b
+      X-Amz-Date:
+      - 20191029T000112Z
+      Host:
+      - webservices.amazon.co.uk
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Tue, 29 Oct 2019 00:01:13 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '242'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 78aee100-195b-4982-83fe-c5f2355ce7a3
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 6W14HW95H328DGN5KSHD
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.co.uk/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Medium","Label":"Title","Locale":"en_MARKETPLACE"}}}]}}'
+    http_version: 
+  recorded_at: Tue, 29 Oct 2019 00:01:13 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.co.uk/paapi5/getbrowsenodes
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","BrowseNodeIds":["3045"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=0f0587da2442c72f2e19732b344c0d27c0422860ae1f18d9df1331efd4a31e70
+      X-Amz-Content-Sha256:
+      - e75d4cc417fa08f940145b365eb912b6bb3f4753706323e374e7c2eaad4737ea
+      X-Amz-Date:
+      - 20191029T000442Z
+      Host:
+      - webservices.amazon.co.uk
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Tue, 29 Oct 2019 00:04:42 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '153'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - a9adc4da-1cfc-43d1-a470-91dbdd7044af
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - AR67A2NPPM8QX52G5FRC
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"InvalidParameterValue","Message":"The
+        BrowseNodeId 3045 provided in the request is invalid."}]}'
+    http_version: 
+  recorded_at: Tue, 29 Oct 2019 00:04:42 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.co.uk/paapi5/getvariations
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ASIN":"B07212L4G2"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACMARKETPLACE_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=5c60e8e138a5bc62ecab760290b646179fbdb358c0897672c8a7a701e69536bd
+      X-Amz-Content-Sha256:
+      - 5459795e34fa4e129b561169337eb47d4ac7996aeabf78d1ff9e58148aeefe7e
+      X-Amz-Date:
+      - 20191029T000442Z
+      Host:
+      - webservices.amazon.co.uk
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Tue, 29 Oct 2019 00:04:42 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '118'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 2939a006-7fe6-47b7-a7c6-6eddedbf7ca4
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 6FDM1RQST64CK0BRV3P1
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"NoResults","Message":"No
+        results found for your request."}]}'
+    http_version: 
+  recorded_at: Tue, 29 Oct 2019 00:04:42 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.co.uk/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Resources":["BrowseNodeInfo.BrowseNodes"],"ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCMARKETPLACES_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=691f83eb11e1b6fc8c59806cfea12562d1521fba4b78decb278acb1cfa3bb858
+      X-Amz-Content-Sha256:
+      - 54d73240c9003f9cdf7741775c14a3226166ec71a4668cd39916dd373ceb68a1
+      X-Amz-Date:
+      - 20191029T000442Z
+      Host:
+      - webservices.amazon.co.uk
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Tue, 29 Oct 2019 00:04:42 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '242'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 3dea026f-b91a-4585-ad1b-b291cdeec94a
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - PYN9BY1Q9YKWQD1YT28K
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","BrowseNodeInfo":{"BrowseNodes":[{"ContextFreeName":"Men''s
+        Tops, T-Shirts & Shirts","DisplayName":"Tops, T-Shirts & Shirts","Id":"1731025031","IsRoot":false}]},"DetailPageURL":"https://www.amazon.co.uk/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1"}]}}'
+    http_version: 
+  recorded_at: Tue, 29 Oct 2019 00:04:42 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.co.uk/paapi5/searchitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Keywords":"Harry
+        Potter"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191029/eu-west-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=6f29cc145997c368e93a7492d08de9fe7ef9590c47a3256acbd73045cac528fb
+      X-Amz-Content-Sha256:
+      - 3d6848b9770b9ed48c5b53930747c2a86aef41007894fdb88d27fcd3263af260
+      X-Amz-Date:
+      - 20191029T000442Z
+      Host:
+      - webservices.amazon.co.uk
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Tue, 29 Oct 2019 00:04:43 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '611'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - d87e9eef-45f2-4cff-9667-42a7fdc73f3d
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - FCXCRMRT23VFVA2GCZ4X
+    body:
+      encoding: ASCII-8BIT
+      string: '{"SearchResult":{"Items":[{"ASIN":"B00FFMG4VM","DetailPageURL":"https://www.amazon.co.uk/dp/B00FFMG4VM?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Philosopher''s Stone","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B07TCCLRND","DetailPageURL":"https://www.amazon.co.uk/dp/B07TCCLRND?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Asmodee
+        Harry Potter Dobble Card Game","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B00FYNJ43W","DetailPageURL":"https://www.amazon.co.uk/dp/B00FYNJ43W?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Prisoner of Azkaban","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"1408856778","DetailPageURL":"https://www.amazon.co.uk/dp/1408856778?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter Children''s Collection","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B019PIOJYU","DetailPageURL":"https://www.amazon.co.uk/dp/B019PIOJYU?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Philosopher''s Stone","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B00H37RB9G","DetailPageURL":"https://www.amazon.co.uk/dp/B00H37RB9G?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Goblet of Fire","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B07KX54VHF","DetailPageURL":"https://www.amazon.co.uk/dp/B07KX54VHF?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"LEGO
+        75957 Harry Potter Knight Bus Toy, Triple-decker Collectible Set with Minifigures","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B00FFTGOM4","DetailPageURL":"https://www.amazon.co.uk/dp/B00FFTGOM4?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter and the Chamber of Secrets","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B07B2Y1DZ6","DetailPageURL":"https://www.amazon.co.uk/dp/B07B2Y1DZ6?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter Golden Snitch Light, 2.5 W, Multi-Colour","Label":"Title","Locale":"en_MARKETPLACE"}}},{"ASIN":"B06WRT14S5","DetailPageURL":"https://www.amazon.co.uk/dp/B06WRT14S5?tag=PARTNER_TAG&linkCode=osi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"Harry
+        Potter Top Trumps Match Board Game","Label":"Title","Locale":"en_MARKETPLACE"}}}],"SearchURL":"https://www.amazon.co.uk/s?k=Harry+Potter&rh=p_n_availability%3A-1&tag=PARTNER_TAG&linkCode=osi","TotalResultCount":146}}'
+    http_version: 
+  recorded_at: Tue, 29 Oct 2019 00:04:43 GMT
 recorded_with: VCR 5.0.0
