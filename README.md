@@ -20,17 +20,16 @@ Create a request with your marketplace credentials.
 
 ```ruby
 request = Vacuum.new(marketplace: 'US',
-                     access_key: '123456',
-                     secret_key: '
-                     ',
-                     partner_tag: 'xyz-20')
+                     access_key: '<ACCESS_KEY>',
+                     secret_key: '<SECRET_KEY>',
+                     partner_tag: '<PARTNER_TAG>')
 ```
 
 Vacuum uses [HTTPI](https://github.com/savonrb/httpi) under the hood. You can swap the HTTP library it uses if you prefer an alternative for speed or introspection.
 
 ```ruby
 HTTPI.adapter = :http
-end
+```
 
 ### Operations
 
@@ -92,7 +91,7 @@ You can also `#dig` into the returned Hash:
 response.dig('ItemsResult', 'Items')
 ```
 
-You can easily extend Vacuum with a custom parser. Just swap the original with a class or module that responds to `.parse`.
+You can extend Vacuum with a custom parser. Just swap the original with a class or module that responds to `.parse`.
 
 ```ruby
 response.parser = MyParser
