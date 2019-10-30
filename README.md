@@ -2,11 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/hakanensari/vacuum/tree/master.svg?style=svg)](https://circleci.com/gh/hakanensari/vacuum/tree/master)
 
-Vacuum is a light-weight Ruby wrapper to [Amazon Product Advertising API 5.0](https://webservices.amazon.com/paapi5/documentation/).
-
-The Product Advertising API provides programmatic access to search and get detailed product information on the Amazon marketplaces. Users can get detailed information about products such as product title, description, image urls, prices, similar products, prime eligibility, offers and many other details that can be used to monetise their websites by giving recommendations and promoting the products.
-
-You need to [register as an affiliate](https://affiliate-program.amazon.com) on each individual marketplace to access its API.
+Vacuum is a light-weight Ruby wrapper to [Amazon Product Advertising API 5.0](https://webservices.amazon.com/paapi5/documentation/). The API provides programmatic access to search and get detailed product information on the Amazon marketplaces.
 
 ![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
 
@@ -16,7 +12,9 @@ Vacuum follows the nomenclature of the Product Advertising API. The examples bel
 
 ### Getting Started
 
-Create a request with your marketplace credentials.
+You need to [register as an affiliate](https://affiliate-program.amazon.com) and [apply for API access](https://affiliate-program.amazon.com/assoc_credentials/home) on each marketplace you want to query product information.
+
+Create a request with your marketplace credentials, passing the two-letter country code of the marketplace.
 
 ```ruby
 request = Vacuum.new(marketplace: 'US',
@@ -25,7 +23,7 @@ request = Vacuum.new(marketplace: 'US',
                      partner_tag: '<PARTNER_TAG>')
 ```
 
-Vacuum uses [HTTPI](https://github.com/savonrb/httpi) under the hood. You can swap the HTTP library it uses if you prefer an alternative for speed or introspection.
+Vacuum uses [HTTPI](https://github.com/savonrb/httpi) under the hood. You can swap the HTTP library it uses if you prefer an alternative one for speed or introspection.
 
 ```ruby
 HTTPI.adapter = :http
@@ -100,19 +98,37 @@ response.parse
 
 If no custom parser is set, `Vacuum::Response#parse` delegates to `#to_h`.
 
-## Testing
+### VCR Support
 
-If you are using [VCR](https://github.com/vcr/vcr) to test your app, you can use Vacuum's custom matcher to stub requests to the API.
+If you are using [VCR](https://github.com/vcr/vcr) to test an app that accesses the Product Advertising API, you can use the custom VCR matcher of Vacuum to stub requests.
 
 ```ruby
 require 'vacuum/matcher'
 
-VCR.configure do |c|
-  c.default_cassette_options = { match_requests_on: [Vacuum::Matcher] }
-end
+VCR.insert_cassette('paapi', match_requests_on: [Vacuum::Matcher])
 ```
 
-If you are testing Vacuum itself and want to modify or add its integration tests, add your API credentials to a [`locales.yml`](https://github.com/hakanensari/vacuum/blob/master/test/locales.yml.example) file in the `test` directory.
+## Testing
+
+Tests should pass as-is once you install dependencies.
+
+```sh
+bundle exec rake
+```
+
+By default, all requests are stubbed. Use the `RECORD` env var to record new or modified interactions.
+
+```sh
+bundle exec RECORD=true rake
+```
+
+You can also run tests against live data.
+
+```shell
+bundle exec LIVE=true rake
+```
+
+In either case, you will want to add actual API credentials to a [`locales.yml`](https://github.com/hakanensari/vacuum/blob/master/test/locales.yml.example) file in the `test` directory.
 
 ## Getting Help
 
