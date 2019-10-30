@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module Vacuum
   # Custom VCR matcher for stubbing calls to the Product Advertising API
   # @api private

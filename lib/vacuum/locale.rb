@@ -4,9 +4,9 @@ module Vacuum
   # The target Amazon locale
   # @api private
   class Locale
-    NotFound = Class.new(ArgumentError)
+    class NotFound < ArgumentError; end
 
-    attr_reader :code, :host, :region
+    attr_reader :code, :domain, :region
 
     def self.find(code)
       code = code.to_sym.downcase
@@ -15,18 +15,18 @@ module Vacuum
       @all.find { |locale| locale.code == code } || raise(NotFound)
     end
 
-    def initialize(code, host, region)
+    def initialize(code, domain, region)
       @code = code
-      @host = host
+      @domain = domain
       @region = region
     end
 
     def endpoint
-      "webservices.#{host}"
+      "webservices.#{domain}"
     end
 
     def marketplace
-      "www.#{host}"
+      "www.#{domain}"
     end
 
     def build_url(operation)
