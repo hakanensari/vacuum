@@ -11,10 +11,6 @@ module Vacuum
       @response = Response.new(mock)
     end
 
-    def test_parse
-      assert @response.parse
-    end
-
     def test_cast_to_hash
       assert_kind_of Hash, @response.to_h
     end
