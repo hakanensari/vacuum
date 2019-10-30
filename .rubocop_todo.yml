@@ -5,6 +5,7 @@ Metrics/AbcSize:
 Metrics/LineLength:
   Exclude:
     - test/**/*
+  IgnoredPatterns: ['\A\s*# @overload']
 Metrics/ParameterLists:
   CountKeywordArgs: false
 

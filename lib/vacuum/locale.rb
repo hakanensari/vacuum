@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Vacuum
-  # The target Amazon Locale
+  # The target Amazon locale
+  # @api private
   class Locale
     NotFound = Class.new(ArgumentError)
 

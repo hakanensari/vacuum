@@ -1,4 +1,6 @@
 Gemfile.lock
+.yardoc
+doc
 locales.yml
 pkg
 

@@ -2,6 +2,7 @@
 
 module Vacuum
   # Custom VCR matcher for stubbing calls to the Product Advertising API
+  # @api private
   class Matcher
     IGNORED_KEYS = %w[PartnerTag].freeze
 
