@@ -1,3 +1,7 @@
+- :marketplace: CA
+  :access_key: access_key
+  :secret_key: secret_key
+  :partner_tag: partner_tag
 - :marketplace: ES
   :access_key: access_key
   :secret_key: secret_key

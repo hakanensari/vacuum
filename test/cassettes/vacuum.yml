@@ -1162,4 +1162,285 @@ http_interactions:
         Potter Top Trumps Match Board Game","Label":"Title","Locale":"en_MARKETPLACE"}}}],"SearchURL":"https://www.amazon.co.uk/s?k=Harry+Potter&rh=p_n_availability%3A-1&tag=PARTNER_TAG&linkCode=osi","TotalResultCount":146}}'
     http_version: 
   recorded_at: Tue, 29 Oct 2019 00:04:43 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.ca/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191030/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=94cead7e0073e0ffcb7c9ab4cb273b00d117b6286a735e9e4c66e07cd08daf26
+      X-Amz-Content-Sha256:
+      - aacb1ea27232f96173084e5d7a527afef9525cfac35f8d7f0f297249dd11492e
+      X-Amz-Date:
+      - 20191030T190213Z
+      Host:
+      - webservices.amazon.ca
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Wed, 30 Oct 2019 19:02:16 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '239'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 8286393c-3eec-44bc-b612-946be2cf9778
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 7EDAGXQZ66XXMY1GQRZG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","DetailPageURL":"https://www.amazon.ca/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1","ItemInfo":{"Title":{"DisplayValue":"adidas
+        Originals Men''s 3-Stripes Tee Intense Lemons Medium","Label":"Title","Locale":"en_CA"}}}]}}'
+    http_version: 
+  recorded_at: Wed, 30 Oct 2019 19:02:16 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.ca/paapi5/searchitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Keywords":"Harry
+        Potter"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191030/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=11a2dee7ddeab3e1b8a29ed753ebb2449f69a2da5e8699d1d527e5d1975591cb
+      X-Amz-Content-Sha256:
+      - 26d99093d2002f0f4ea0e7e5e4adc049ce8fcf896e5eac403ede66abdfad316f
+      X-Amz-Date:
+      - 20191030T190217Z
+      Host:
+      - webservices.amazon.ca
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Wed, 30 Oct 2019 19:02:18 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '890'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 0e5a6f58-e1a4-493c-b90b-6c5de749be0a
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - EARHMY7R5T2XJD1PSP7S
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJTZWFyY2hSZXN1bHQiOnsiSXRlbXMiOlt7IkFTSU4iOiIxNDA4ODU2Nzc4IiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5jYS9kcC8xNDA4ODU2Nzc4P3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciBCb3ggU2V0OiBUaGUgQ29tcGxldGUgQ29sbGVjdGlvbiAoQ2hpbGRyZW7igJlzIFBhcGVyYmFjaykiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZW5fQ0EifX19LHsiQVNJTiI6IkIwMUIxUk1JQlkiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmNhL2RwL0IwMUIxUk1JQlk/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiRC1Gb2tlcyAzIFBDUyBIYXJyeSBQb3R0ZXIgTmVja2xhY2UgU2V0IC0gVGltZSBUdXJuZXIsIERlYXRobHkgSGFsbG93cywgR29sZGVuIFNuaXRjaCBOZWNrbGFjZSBmb3IgSGFycnkgUG90dGVyIEZhbnMgR2lmdHMgQ29sbGVjdGlvbiBvciBEZWNvcmF0aW9ucyBNYWdpY2FsIENvc3BsYXkgQ29zdHVtZSBKZXdlbHJ5IEdpZnQiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZW5fQ0EifX19LHsiQVNJTiI6IkIwNlkyQlNCOUIiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmNhL2RwL0IwNlkyQlNCOUI/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIGFuZCB0aGUgU29yY2VyZXIncyBTdG9uZSwgQm9vayAxIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImVuX0NBIn19fSx7IkFTSU4iOiJCMDE2TUpBOTc2IiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5jYS9kcC9CMDE2TUpBOTc2P3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlciBUaWUgQ29zdHVtZSBBY2Nlc3NvcnkgKEdyeWZmaW5kb3ItcmVkKSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlbl9DQSJ9fX0seyJBU0lOIjoiMTQ0MDUwMzI1NyIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uY2EvZHAvMTQ0MDUwMzI1Nz90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJUaGUgVW5vZmZpY2lhbCBIYXJyeSBQb3R0ZXIgQ29va2Jvb2s6IEZyb20gQ2F1bGRyb24gQ2FrZXMgdG8gS25pY2tlcmJvY2tlciBHbG9yeS0tTW9yZSBUaGFuIDE1MCBNYWdpY2FsIFJlY2lwZXMgZm9yIFdpemFyZHMgYW5kIE5vbi1XaXphcmRzIEFsaWtlIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImVuX0NBIn19fSx7IkFTSU4iOiJCMDdOUlNZM1JXIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5jYS9kcC9CMDdOUlNZM1JXP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkxFR08gSGFycnkgUG90dGVyQWR2ZW50IENhbGVuZGFyIDc1OTY0IEJ1aWxkaW5nIEtpdCAoMzA1IFBpZWNlKSIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlbl9DQSJ9fX0seyJBU0lOIjoiQjA3RkpXTTMyViIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uY2EvZHAvQjA3RkpXTTMyVj90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJMZXZhbmNvIFVwZ3JhZGUgSGFycnkgUG90dGVyIE11c2ljIEJveCBDYXJ2ZWQgV29vZGVuIE11c2ljIEJveCBBbnRpcXVlIENhcnZlZCBNdXNpYyBCb3ggQ3JhZnRzKEhhcnJ5IFBvdHRlciBNZWxvZHkpIiwiTGFiZWwiOiJUaXRsZSIsIkxvY2FsZSI6ImVuX0NBIn19fSx7IkFTSU4iOiIxMzM4MDI5OTkxIiwiRGV0YWlsUGFnZVVSTCI6Imh0dHBzOi8vd3d3LmFtYXpvbi5jYS9kcC8xMzM4MDI5OTkxP3RhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kmdGg9MSZwc2M9MSIsIkl0ZW1JbmZvIjp7IlRpdGxlIjp7IkRpc3BsYXlWYWx1ZSI6IkhhcnJ5IFBvdHRlcjogQ29sb3JpbmcgQm9vayIsIkxhYmVsIjoiVGl0bGUiLCJMb2NhbGUiOiJlbl9DQSJ9fX0seyJBU0lOIjoiQjA3QktQS1QyWCIsIkRldGFpbFBhZ2VVUkwiOiJodHRwczovL3d3dy5hbWF6b24uY2EvZHAvQjA3QktQS1QyWD90YWc9UEFSVE5FUl9UQUcmbGlua0NvZGU9b3NpJnRoPTEmcHNjPTEiLCJJdGVtSW5mbyI6eyJUaXRsZSI6eyJEaXNwbGF5VmFsdWUiOiJMRUdPIEhhcnJ5IFBvdHRlciBIb2d3YXJ0cyBHcmVhdCBIYWxsIDc1OTU0IEJ1aWxkaW5nIEtpdCBhbmQgTWFnaWMgQ2FzdGxlIFRveSwgRmFudGFzeSBDcmVhdHVyZXMsIEhlcm1pb25lIEdyYW5nZXIiLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZW5fQ0EifX19LHsiQVNJTiI6IjE0MDg4NDU2NzkiLCJEZXRhaWxQYWdlVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmNhL2RwLzE0MDg4NDU2Nzk/dGFnPVBBUlRORVJfVEFHJmxpbmtDb2RlPW9zaSZ0aD0xJnBzYz0xIiwiSXRlbUluZm8iOnsiVGl0bGUiOnsiRGlzcGxheVZhbHVlIjoiSGFycnkgUG90dGVyIGFuZCB0aGUgR29ibGV0IG9mIEZpcmU6IElsbHVzdHJhdGVkIEVkaXRpb24iLCJMYWJlbCI6IlRpdGxlIiwiTG9jYWxlIjoiZW5fQ0EifX19XSwiU2VhcmNoVVJMIjoiaHR0cHM6Ly93d3cuYW1hem9uLmNhL3M/az1IYXJyeStQb3R0ZXImcmg9cF9uX2F2YWlsYWJpbGl0eSUzQS0xJnRhZz1QQVJUTkVSX1RBRyZsaW5rQ29kZT1vc2kiLCJUb3RhbFJlc3VsdENvdW50IjoxNDZ9fQ==
+    http_version: 
+  recorded_at: Wed, 30 Oct 2019 19:02:18 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.ca/paapi5/getbrowsenodes
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","BrowseNodeIds":["3045"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetBrowseNodes
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191030/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=3da3e6ff31f50a77e714680295402f83257f4029c1fa7f4a9ee9886148968d89
+      X-Amz-Content-Sha256:
+      - 4c2a6764cc659f0a43913e82556156f7960ed4e8f6fcebb2e572d523d20962bc
+      X-Amz-Date:
+      - 20191030T190218Z
+      Host:
+      - webservices.amazon.ca
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Wed, 30 Oct 2019 19:02:18 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '153'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 5508ece0-62fc-4611-afc7-b72bf4d34bc6
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 5TZVG0JT93J4SGS68VVP
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"InvalidParameterValue","Message":"The
+        BrowseNodeId 3045 provided in the request is invalid."}]}'
+    http_version: 
+  recorded_at: Wed, 30 Oct 2019 19:02:18 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.ca/paapi5/getitems
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","Resources":["BrowseNodeInfo.BrowseNodes"],"ItemIds":["B07212L4G2"]}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191030/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=fdbacb11864cadb05dde6c7c44f73260e99f8a9b203a278cc0791b2eac82e4a5
+      X-Amz-Content-Sha256:
+      - eb42acfc6efb023fcb5df461e4efb342b6bd258a720780526dee42f9ec672cc7
+      X-Amz-Date:
+      - 20191030T190515Z
+      Host:
+      - webservices.amazon.ca
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Wed, 30 Oct 2019 19:05:16 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '240'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - e8532b33-cd97-4275-9d6a-05494ab3a45d
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - 24E53BTKKYXRKG0E4QZM
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ItemsResult":{"Items":[{"ASIN":"B07212L4G2","BrowseNodeInfo":{"BrowseNodes":[{"ContextFreeName":"Men''s
+        Athletic Shirts & Tees","DisplayName":"Shirts & Tees","Id":"8794294011","IsRoot":false}]},"DetailPageURL":"https://www.amazon.ca/dp/B07212L4G2?tag=PARTNER_TAG&linkCode=ogi&th=1&psc=1"}]}}'
+    http_version: 
+  recorded_at: Wed, 30 Oct 2019 19:05:16 GMT
+- request:
+    method: post
+    uri: https://webservices.amazon.ca/paapi5/getvariations
+    body:
+      encoding: UTF-8
+      string: '{"PartnerTag":"PARTNER_TAG","PartnerType":"Associates","ASIN":"B07212L4G2"}'
+    headers:
+      X-Amz-Target:
+      - com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetVariations
+      Content-Encoding:
+      - amz-1.0
+      Content-Type:
+      - application/json; charset=utf-8
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ACCESS_KEY/20191030/us-east-1/ProductAdvertisingAPI/aws4_request,
+        SignedHeaders=content-encoding;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=9dfe727d357f970bdd557bce98c3c09b9f3602f4bb9dcc445b87a2b9501d2286
+      X-Amz-Content-Sha256:
+      - 53972766500c61955dfe2acfa4c097b51749a1305779daa92987fadfae868fc0
+      X-Amz-Date:
+      - 20191030T190516Z
+      Host:
+      - webservices.amazon.ca
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Wed, 30 Oct 2019 19:05:17 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '118'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 76308451-9894-4c93-a3bf-3f1ad824080a
+      Vary:
+      - Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+      X-Amz-Rid:
+      - VX4AYCDMYNDB2TBZJAEM
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Errors":[{"__type":"com.amazon.paapi5#ErrorData","Code":"NoResults","Message":"No
+        results found for your request."}]}'
+    http_version: 
+  recorded_at: Wed, 30 Oct 2019 19:05:17 GMT
 recorded_with: VCR 5.0.0
