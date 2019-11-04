@@ -27,9 +27,5 @@ module Vacuum
       assert_equal 'https://webservices.amazon.com/paapi5/foo',
                    Locale.find('US').build_url('Foo')
     end
-
-    def test_marketplace
-      assert_equal 'www.amazon.com', Locale.find('US').marketplace
-    end
   end
 end

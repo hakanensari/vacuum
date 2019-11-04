@@ -149,7 +149,7 @@ module Vacuum
         'Authorization' => signature.headers['authorization'],
         'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
         'X-Amz-Date' => signature.headers['x-amz-date'],
-        'Host' => locale.endpoint
+        'Host' => locale.host
       )
     end
 
@@ -167,7 +167,7 @@ module Vacuum
         access_key_id: access_key,
         secret_access_key: secret_key,
         http_method: 'POST',
-        endpoint: locale.endpoint
+        endpoint: locale.host
       )
     end
 

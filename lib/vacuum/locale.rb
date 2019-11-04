@@ -6,7 +6,7 @@ module Vacuum
   class Locale
     class NotFound < ArgumentError; end
 
-    attr_reader :code, :domain, :region
+    attr_reader :code, :host, :region
 
     def self.find(code)
       code = code.to_sym.downcase
@@ -15,39 +15,32 @@ module Vacuum
       @all.find { |locale| locale.code == code } || raise(NotFound)
     end
 
-    def initialize(code, domain, region)
+    def initialize(code, host, region)
       @code = code
-      @domain = domain
+      @host = host
       @region = region
     end
 
-    def endpoint
-      "webservices.#{domain}"
-    end
-
-    def marketplace
-      "www.#{domain}"
-    end
-
     def build_url(operation)
-      "https://#{endpoint}/paapi5/#{operation.downcase}"
+      "https://#{host}/paapi5/#{operation.downcase}"
     end
 
+    # https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
     @all = [
-      [:au, 'amazon.com.au', 'us-west-2'],
-      [:br, 'amazon.com.br', 'us-east-1'],
-      [:ca, 'amazon.ca', 'us-east-1'],
-      [:fr, 'amazon.fr', 'eu-west-1'],
-      [:de, 'amazon.de', 'eu-west-1'],
-      [:in, 'amazon.in', 'eu-west-1'],
-      [:it, 'amazon.it', 'eu-west-1'],
-      [:jp, 'amazon.co.jp', 'us-west-2'],
-      [:mx, 'amazon.com.mx', 'us-east-1'],
-      [:es, 'amazon.es', 'eu-west-1'],
-      [:tr, 'amazon.com.tr', 'eu-west-1'],
-      [:ae, 'amazon.ae', 'eu-west-1'],
-      [:gb, 'amazon.co.uk', 'eu-west-1'],
-      [:us, 'amazon.com', 'us-east-1']
+      [:au, 'webservices.amazon.com.au', 'us-west-2'],
+      [:br, 'webservices.amazon.com.br', 'us-east-1'],
+      [:ca, 'webservices.amazon.ca', 'us-east-1'],
+      [:fr, 'webservices.amazon.fr', 'eu-west-1'],
+      [:de, 'webservices.amazon.de', 'eu-west-1'],
+      [:in, 'webservices.amazon.in', 'eu-west-1'],
+      [:it, 'webservices.amazon.it', 'eu-west-1'],
+      [:jp, 'webservices.amazon.co.jp', 'us-west-2'],
+      [:mx, 'webservices.amazon.com.mx', 'us-east-1'],
+      [:es, 'webservices.amazon.es', 'eu-west-1'],
+      [:tr, 'webservices.amazon.com.tr', 'eu-west-1'],
+      [:ae, 'webservices.amazon.ae', 'eu-west-1'],
+      [:gb, 'webservices.amazon.co.uk', 'eu-west-1'],
+      [:us, 'webservices.amazon.com', 'us-east-1']
     ].map { |attributes| new(*attributes) }
   end
 end
