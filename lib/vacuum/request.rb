@@ -119,19 +119,24 @@ module Vacuum
       request('SearchItems', params)
     end
 
+    # The underlying HTTP request
+    #
+    # @return [HTTPI::Request]
+    def http
+      @http ||= HTTPI::Request.new
+    end
+
     private
 
     def request(operation, params)
       body = build_body(params)
       signature = sign(operation, body)
 
-      request = HTTPI::Request.new(
-        headers: build_headers(operation, signature),
-        url: locale.build_url(operation),
-        body: body
-      )
+      http.headers = build_headers(operation, signature)
+      http.url = locale.build_url(operation)
+      http.body = body
 
-      Response.new(HTTPI.post(request))
+      Response.new(HTTPI.post(http))
     end
 
     def sign(operation, body)
