@@ -126,7 +126,7 @@ module Vacuum
       signature = sign(operation, body)
 
       request = HTTPI::Request.new(
-        headers: request_headers(operation, signature),
+        headers: build_headers(operation, signature),
         url: locale.build_url(operation),
         body: body
       )
@@ -138,26 +138,17 @@ module Vacuum
       signer.sign_request(
         http_method: 'POST',
         url: locale.build_url(operation),
-        headers: headers(operation),
         body: body
       )
     end
 
-    def request_headers(operation, signature)
-      headers(operation).merge(
-        'Content-Type' => 'application/json; charset=utf-8',
-        'Authorization' => signature.headers['authorization'],
-        'X-Amz-Content-Sha256' => signature.headers['x-amz-content-sha256'],
-        'X-Amz-Date' => signature.headers['x-amz-date'],
-        'Host' => locale.host
+    def build_headers(operation, signature)
+      signature.headers.merge(
+        'x-amz-target' =>
+          "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.#{operation}",
+        'content-encoding' => 'amz-1.0',
+        'content-type' => 'application/json; charset=utf-8'
       )
-    end
-
-    def headers(operation)
-      {
-        'X-Amz-Target' => "com.amazon.paapi5.v1.#{SERVICE}v1.#{operation}",
-        'Content-Encoding' => 'amz-1.0'
-      }
     end
 
     def signer
