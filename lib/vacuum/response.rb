@@ -13,7 +13,7 @@ module Vacuum
     #   Delegates to {Response#to_h} to extract a nested value specified by the
     #     sequence of keys
     #   @param [String] key
-    #   @see Hash#dig
+    #   @see https://ruby-doc.org/core/Hash.html#method-i-dig
     def_delegator :to_h, :dig
 
     # Casts body to Hash

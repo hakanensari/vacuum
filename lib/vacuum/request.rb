@@ -1,35 +1,32 @@
 # frozen_string_literal: true
 
-require 'aws-sigv4'
 require 'httpi'
-require 'json'
 
 require 'vacuum/locale'
+require 'vacuum/operation'
 require 'vacuum/response'
 
 module Vacuum
   # A request to the Amazon Product Advertising API
   class Request
-    SERVICE = 'ProductAdvertisingAPI'
-    private_constant :SERVICE
 
-    # @api private
-    attr_reader :access_key, :secret_key, :locale, :partner_tag, :partner_type
+    # @return [Locale]
+    attr_reader :locale
+
+    # @return [Operation]
+    attr_reader :operation
 
     # Creates a new request
-    # @param [Symbol,String] marketplace the two-letter country code of the
-    #   target Amazon locale
-    # @param [String] access_key your access key
-    # @param [String] secret_key your secret key
-    # @param [String] partner_tag your partner tag
-    # @param [String] partner_type your partner type
-    def initialize(marketplace: :us, access_key:, secret_key:, partner_tag:,
-                   partner_type: 'Associates')
-      @locale = Locale.find(marketplace)
-      @access_key = access_key
-      @secret_key = secret_key
-      @partner_tag = partner_tag
-      @partner_type = partner_type
+    #
+    # @overload initialize(marketplace: :us, access_key:, secret_key:, partner_tag:, partner_type:)
+    #   @param [Symbol,String] marketplace
+    #   @param [String] access_key
+    #   @param [String] secret_key
+    #   @param [String] partner_tag
+    #   @param [String] partner_type
+    #   @raise [Locale::NotFound] if marketplace is not found
+    def initialize(marketplace: :us, **args)
+      @locale = Locale.new(marketplace, args)
     end
 
     # Returns details about specified browse nodes
@@ -128,56 +125,17 @@ module Vacuum
 
     private
 
-    def request(operation, params)
-      body = build_body(params)
-      signature = sign(operation, body)
-
-      http.headers = build_headers(operation, signature)
-      http.url = locale.build_url(operation)
-      http.body = body
+    def request(operation_name, params)
+      @operation = Operation.new(operation_name, params: params, locale: locale)
+      http.headers = operation.headers
+      http.url = operation.url
+      http.body = operation.body
 
       Response.new(HTTPI.post(http))
-    end
+      # response = client.headers(operation.headers)
+      #                  .post(operation.url, body: operation.body)
 
-    def sign(operation, body)
-      signer.sign_request(
-        http_method: 'POST',
-        url: locale.build_url(operation),
-        body: body
-      )
-    end
-
-    def build_headers(operation, signature)
-      signature.headers.merge(
-        'x-amz-target' =>
-          "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.#{operation}",
-        'content-encoding' => 'amz-1.0',
-        'content-type' => 'application/json; charset=utf-8'
-      )
-    end
-
-    def signer
-      Aws::Sigv4::Signer.new(
-        service: SERVICE,
-        region: locale.region,
-        access_key_id: access_key,
-        secret_access_key: secret_key,
-        http_method: 'POST',
-        endpoint: locale.host
-      )
-    end
-
-    def build_body(params)
-      hsh = { 'PartnerTag' => partner_tag,
-              'PartnerType' => partner_type }
-
-      params.each do |key, val|
-        key = key.to_s.split('_')
-                 .map { |word| word == 'asin' ? 'ASIN' : word.capitalize }.join
-        hsh[key] = val
-      end
-
-      JSON.generate(hsh)
+      # Response.new(response)
     end
   end
 end

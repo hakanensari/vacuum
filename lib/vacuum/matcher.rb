@@ -4,20 +4,35 @@ require 'json'
 
 module Vacuum
   # Custom VCR matcher for stubbing calls to the Product Advertising API
-  # @api private
+  #
+  # The matcher is not required by default.
+  #
+  # @example
+  #    require 'vacuum/matcher'
+  #
+  #    # in your test
+  #    VCR.insert_cassette('cassette_name',
+  #                        match_requests_on: [Vacuum::Matcher])
+  #
+  # @see https://relishapp.com/vcr/vcr/v/5-0-0/docs/request-matching/register-and-use-a-custom-matcher
   class Matcher
     IGNORED_KEYS = %w[PartnerTag].freeze
+    private_constant :IGNORED_KEYS
 
+    # @!visibility private
     attr_reader :requests
 
+    # @!visibility private
     def self.call(*requests)
       new(*requests).compare
     end
 
+    # @!visibility private
     def initialize(*requests)
       @requests = requests
     end
 
+    # @!visibility private
     def compare
       uris.reduce(:==) && bodies.reduce(:==)
     end

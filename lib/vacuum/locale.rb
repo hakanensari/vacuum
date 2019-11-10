@@ -1,46 +1,62 @@
 # frozen_string_literal: true
 
 module Vacuum
-  # The target Amazon locale
-  # @api private
+  # The target locale
+  #
+  # @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
   class Locale
-    class NotFound < ArgumentError; end
+    # Raised when the provided marketplace does not correspond to an existing
+    # Amazon locale
+    class NotFound < KeyError; end
 
-    attr_reader :code, :host, :region
+    # @!visibility private
+    HOSTS_AND_REGIONS = {
+      au: ['webservices.amazon.com.au', 'us-west-2'],
+      br: ['webservices.amazon.com.br', 'us-east-1'],
+      ca: ['webservices.amazon.ca', 'us-east-1'],
+      fr: ['webservices.amazon.fr', 'eu-west-1'],
+      de: ['webservices.amazon.de', 'eu-west-1'],
+      in: ['webservices.amazon.in', 'eu-west-1'],
+      it: ['webservices.amazon.it', 'eu-west-1'],
+      jp: ['webservices.amazon.co.jp', 'us-west-2'],
+      mx: ['webservices.amazon.com.mx', 'us-east-1'],
+      es: ['webservices.amazon.es', 'eu-west-1'],
+      tr: ['webservices.amazon.com.tr', 'eu-west-1'],
+      ae: ['webservices.amazon.ae', 'eu-west-1'],
+      gb: ['webservices.amazon.co.uk', 'eu-west-1'],
+      us: ['webservices.amazon.com', 'us-east-1']
+    }.freeze
 
-    def self.find(code)
-      code = code.to_sym.downcase
-      code = :gb if code == :uk
+    # @return [String]
+    attr_reader :host, :region, :access_key, :secret_key, :partner_tag,
+                :partner_type
 
-      @all.find { |locale| locale.code == code } || raise(NotFound)
+    # Creates a locale
+    #
+    # @param [Symbol,String] marketplace
+    # @param [String] access_key
+    # @param [String] secret_key
+    # @param [String] partner_tag
+    # @param [String] partner_type
+    # @raise [NotFound] if marketplace is not found
+    def initialize(marketplace, access_key:, secret_key:, partner_tag:,
+                   partner_type: 'Associates')
+      @host, @region = find_host_and_region(marketplace)
+      @access_key = access_key
+      @secret_key = secret_key
+      @partner_tag = partner_tag
+      @partner_type = partner_type
     end
 
-    def initialize(code, host, region)
-      @code = code
-      @host = host
-      @region = region
-    end
+    private
 
-    def build_url(operation)
-      "https://#{host}/paapi5/#{operation.downcase}"
-    end
+    def find_host_and_region(marketplace)
+      marketplace = marketplace.to_sym.downcase
+      marketplace = :gb if marketplace == :uk
 
-    # https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
-    @all = [
-      [:au, 'webservices.amazon.com.au', 'us-west-2'],
-      [:br, 'webservices.amazon.com.br', 'us-east-1'],
-      [:ca, 'webservices.amazon.ca', 'us-east-1'],
-      [:fr, 'webservices.amazon.fr', 'eu-west-1'],
-      [:de, 'webservices.amazon.de', 'eu-west-1'],
-      [:in, 'webservices.amazon.in', 'eu-west-1'],
-      [:it, 'webservices.amazon.it', 'eu-west-1'],
-      [:jp, 'webservices.amazon.co.jp', 'us-west-2'],
-      [:mx, 'webservices.amazon.com.mx', 'us-east-1'],
-      [:es, 'webservices.amazon.es', 'eu-west-1'],
-      [:tr, 'webservices.amazon.com.tr', 'eu-west-1'],
-      [:ae, 'webservices.amazon.ae', 'eu-west-1'],
-      [:gb, 'webservices.amazon.co.uk', 'eu-west-1'],
-      [:us, 'webservices.amazon.com', 'us-east-1']
-    ].map { |attributes| new(*attributes) }
+      HOSTS_AND_REGIONS.fetch(marketplace)
+    rescue KeyError
+      raise NotFound, "marketplace not found: :#{marketplace}"
+    end
   end
 end
