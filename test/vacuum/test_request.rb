@@ -41,6 +41,13 @@ module Vacuum
       end
     end
 
+    def test_persistent
+      request = requests.sample
+      refute request.client.persistent?
+      request.persistent
+      assert request.client.persistent?
+    end
+
     ALL_RESOURCES =
       %w[BrowseNodeInfo.BrowseNodes BrowseNodeInfo.BrowseNodes.Ancestor
          BrowseNodeInfo.BrowseNodes.SalesRank BrowseNodeInfo.WebsiteSalesRank

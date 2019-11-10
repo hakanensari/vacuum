@@ -119,7 +119,13 @@ module Vacuum
       request('SearchItems', params)
     end
 
+    # Creates a persistent connection for multiple requests
     #
+    # @return [self]
+    def persistent
+      @client = client.persistent("https://#{locale.host}")
+      self
+    end
 
     private
 

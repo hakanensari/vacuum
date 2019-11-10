@@ -23,6 +23,12 @@ request = Vacuum.new(marketplace: 'US',
                      partner_tag: '<PARTNER_TAG>')
 ```
 
+Create a persistent connection to make multiple requests.
+
+```ruby
+request.persistent
+```
+
 ### Operations
 
 #### GetBrowseNodes
