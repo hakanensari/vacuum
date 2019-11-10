@@ -27,8 +27,6 @@ VCR.configure do |c|
   end
 end
 
-HTTPI.log = false
-
 module Vacuum
   class IntegrationTest < Minitest::Test
     def setup

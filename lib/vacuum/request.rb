@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'httpi'
+require 'http'
 
 require 'vacuum/locale'
 require 'vacuum/operation'
@@ -9,6 +9,8 @@ require 'vacuum/response'
 module Vacuum
   # A request to the Amazon Product Advertising API
   class Request
+    # @return [HTTP::Client]
+    attr_reader :client
 
     # @return [Locale]
     attr_reader :locale
@@ -27,6 +29,7 @@ module Vacuum
     #   @raise [Locale::NotFound] if marketplace is not found
     def initialize(marketplace: :us, **args)
       @locale = Locale.new(marketplace, args)
+      @client = HTTP::Client.new
     end
 
     # Returns details about specified browse nodes
@@ -116,26 +119,16 @@ module Vacuum
       request('SearchItems', params)
     end
 
-    # The underlying HTTP request
     #
-    # @return [HTTPI::Request]
-    def http
-      @http ||= HTTPI::Request.new
-    end
 
     private
 
     def request(operation_name, params)
       @operation = Operation.new(operation_name, params: params, locale: locale)
-      http.headers = operation.headers
-      http.url = operation.url
-      http.body = operation.body
+      response = client.headers(operation.headers)
+                       .post(operation.url, body: operation.body)
 
-      Response.new(HTTPI.post(http))
-      # response = client.headers(operation.headers)
-      #                  .post(operation.url, body: operation.body)
-
-      # Response.new(response)
+      Response.new(response)
     end
   end
 end

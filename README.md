@@ -23,12 +23,6 @@ request = Vacuum.new(marketplace: 'US',
                      partner_tag: '<PARTNER_TAG>')
 ```
 
-Vacuum uses [HTTPI](https://github.com/savonrb/httpi) under the hood. You can swap the HTTP library it uses if you prefer an alternative one for speed or introspection.
-
-```ruby
-HTTPI.adapter = :http
-```
-
 ### Operations
 
 #### GetBrowseNodes
