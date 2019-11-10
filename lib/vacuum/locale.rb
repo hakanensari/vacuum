@@ -9,7 +9,6 @@ module Vacuum
     # Amazon locale
     class NotFound < KeyError; end
 
-    # @!visibility private
     HOSTS_AND_REGIONS = {
       au: ['webservices.amazon.com.au', 'us-west-2'],
       br: ['webservices.amazon.com.br', 'us-east-1'],
@@ -26,6 +25,7 @@ module Vacuum
       gb: ['webservices.amazon.co.uk', 'eu-west-1'],
       us: ['webservices.amazon.com', 'us-east-1']
     }.freeze
+    private_constant :HOSTS_AND_REGIONS
 
     # @return [String]
     attr_reader :host, :region, :access_key, :secret_key, :partner_tag,
