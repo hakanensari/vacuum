@@ -98,12 +98,13 @@ response.dig('ItemsResult', 'Items')
 
 ### Troubleshooting
 
-In addition to the response payload, the following attributes help you introspect a request.
+In addition to the response payload, the following attributes may help you introspect an executed request.
 
 ```ruby
-request.body
-request.headers
-request.url
+operation = request.operation
+operation.body
+operation.headers
+operation.url
 ```
 
 ### VCR
