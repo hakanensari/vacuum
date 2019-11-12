@@ -16,6 +16,22 @@ module Vacuum
     #   @see https://ruby-doc.org/core/Hash.html#method-i-dig
     def_delegator :to_h, :dig
 
+    class << self
+      attr_accessor :parser
+    end
+
+    def_delegator :to_h, :dig
+
+    attr_writer :parser
+
+    def parser
+      @parser || self.class.parser
+    end
+
+    def parse
+      parser ? parser.parse(body) : to_h
+    end
+
     # Casts body to Hash
     # @return [Hash]
     def to_h
