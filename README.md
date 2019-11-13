@@ -107,6 +107,16 @@ operation.headers
 operation.url
 ```
 
+### Bring your parser
+You can extend Vacuum with a custom parser. Just swap the original with a class or module that responds to `.parse`.
+
+```ruby
+response.parser = MyParser
+response.parse
+```
+
+If no custom parser is set, `Vacuum::Response#parse` delegates to `#to_h`.
+
 ### VCR
 
 If you are using [VCR](https://github.com/vcr/vcr) to test an app that accesses the API, you can use the custom VCR matcher of Vacuum to stub requests.
