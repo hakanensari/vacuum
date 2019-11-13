@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.2.0] - 2019-11-13
+
+### Added
+- bring your own parser for Vacuum::Response
+
 ## [3.1.0] - 2019-11-10
 
 ### Changed
