@@ -1,6 +1,8 @@
 # Vacuum
 
 [![Build](https://github.com/hakanensari/vacuum/workflows/build/badge.svg)](https://github.com/hakanensari/vacuum/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ffbab4aa5fedf5780332/maintainability)](https://codeclimate.com/github/hakanensari/vacuum/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ffbab4aa5fedf5780332/test_coverage)](https://codeclimate.com/github/hakanensari/vacuum/test_coverage)
 
 Vacuum is a Ruby wrapper to [Amazon Product Advertising API 5.0](https://webservices.amazon.com/paapi5/documentation/). The API provides programmatic access to query product information on the Amazon marketplaces.
 
