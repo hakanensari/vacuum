@@ -4,20 +4,19 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        ruby: [2.4.x, 2.5.x, 2.6.x]
+        ruby: [2.4, 2.5, 2.6, 2.7]
+
+    container:
+      image: ruby:${{ matrix.ruby }}
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-    - name: Build and test with Rake
+
+    - name: Run tests
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3

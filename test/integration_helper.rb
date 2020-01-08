@@ -45,7 +45,7 @@ module Vacuum
     private
 
     def requests
-      Locales.map { |credentials| Vacuum.new(credentials) }.shuffle
+      Locales.map { |credentials| Vacuum.new(**credentials) }.shuffle
     end
   end
 end

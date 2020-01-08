@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- Support Ruby 2.7
+
 ## [3.2.0] - 2019-11-13
 
 ### Added

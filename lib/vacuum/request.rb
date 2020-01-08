@@ -28,7 +28,7 @@ module Vacuum
     #   @param [String] partner_type
     #   @raise [Locale::NotFound] if marketplace is not found
     def initialize(marketplace: :us, **args)
-      @locale = Locale.new(marketplace, args)
+      @locale = Locale.new(marketplace, **args)
       @client = HTTP::Client.new
     end
 
