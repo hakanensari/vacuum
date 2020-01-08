@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
+require 'helper'
 require 'vacuum/response'
 
 module Vacuum
