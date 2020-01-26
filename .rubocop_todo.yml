@@ -1,11 +1,12 @@
+Layout/LineLength:
+  Exclude:
+    - test/**/*
+  IgnoredPatterns: ['\A\s*# @overload']
+
 Metrics/AbcSize:
   Exclude:
     - test/**/*
   Max: 16.31
-Metrics/LineLength:
-  Exclude:
-    - test/**/*
-  IgnoredPatterns: ['\A\s*# @overload']
 Metrics/ParameterLists:
   CountKeywordArgs: false
 
