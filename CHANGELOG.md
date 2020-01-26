@@ -33,7 +33,7 @@ This is a major version release. It's a backward-incompatible rewrite following 
 - Migrate to Product Advertising API version 5
 
 [Unreleased]: https://github.com/hakanensari/vacuum/compare/v3.3.0...HEAD
-[3.2.0]: https://github.com/hakanensari/vacuum/compare/v3.2.0...v3.3.0
+[3.3.0]: https://github.com/hakanensari/vacuum/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/hakanensari/vacuum/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/hakanensari/vacuum/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/hakanensari/vacuum/compare/v2.2.0...v3.0.0
