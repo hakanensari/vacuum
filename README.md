@@ -6,7 +6,7 @@
 
 Vacuum is a Ruby wrapper to [Amazon Product Advertising API 5.0](https://webservices.amazon.com/paapi5/documentation/). The API provides programmatic access to query product information on the Amazon marketplaces.
 
-Cart Form functionality is not covered by his gem, but is a primary focus on [carriage gem](https://github.com/skatkov/carriage)
+Cart Form functionality is not covered by this gem but is a primary focus on [carriage gem](https://github.com/skatkov/carriage)
 
 You need to [register first](https://webservices.amazon.com/paapi5/documentation/register-for-pa-api.html) to use the API.
 
