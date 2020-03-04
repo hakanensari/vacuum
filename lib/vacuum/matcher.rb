@@ -53,3 +53,19 @@ module Vacuum
     end
   end
 end
+
+if defined?(RSpec)
+  RSpec.configure do |config|
+    config.around do |example|
+      if example.metadata[:paapi]
+        metadata = example.metadata[:paapi]
+        metadata = {} if metadata == true
+        example.metadata[:vcr] = metadata.merge(
+          match_requests_on: [Vacuum::Matcher]
+        )
+      end
+
+      example.run
+    end
+  end
+end

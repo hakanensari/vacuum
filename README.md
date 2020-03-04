@@ -133,24 +133,10 @@ VCR.insert_cassette('cassette_name',
                     match_requests_on: [Vacuum::Matcher])
 ```
 
-In RSpec, consider using custom metadata.
+In RSpec, use the `:paapi` metadata.
 
 ```ruby
 require 'vacuum/matcher'
-
-RSpec.configure do |config|
-  config.around do |example|
-    if example.metadata[:paapi]
-      metadata = example.metadata[:paapi]
-      metadata = {} if metadata == true
-      example.metadata[:vcr] = metadata.merge(
-        match_requests_on: [Vacuum::Matcher]
-      )
-    end
-
-    example.run
-  end
-end
 
 # in your test
 it 'queries Amazon', :paapi do
