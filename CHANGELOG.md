@@ -5,8 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
-- Add validation for resources
-- Add validation for keywords for Request#item_search
+- Add validation for resources attribute
+- Add validation for keywords attribute in Request#item_search
 - Add support for EditorConfig
 - Add support for RSpec
 - Expose the chainable methods of HTTP to allow logging and other potentially useful features
