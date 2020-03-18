@@ -63,6 +63,7 @@ module Vacuum
     #   @param [Array<String>,nil] resources
     # @return [Response]
     def get_items(item_ids:, **params)
+      validate(params)
       params.update(item_ids: Array(item_ids))
       request('GetItems', params)
     end
@@ -85,6 +86,7 @@ module Vacuum
     #   @param [Integer,nil] variation_page
     #   @return [Response]
     def get_variations(**params)
+      validate(params)
       request('GetVariations', params)
     end
 
@@ -116,15 +118,7 @@ module Vacuum
     #   @param [String,nil] title
     # @return [Response]
     def search_items(**params)
-      if params[:keywords] && !params[:keywords].is_a?(String)
-        raise ArgumentError.new(":keyword argument expects a String")
-      end
-
-      if params[:resources] && params[:resources].respond_to?(:each)
-        params[:resources].each do |resource|
-          raise ArgumentError.new("There is not such resource: #{resource}") if !ALL_RESOURCES.include?(resource)
-        end
-      end
+      validate(params)
       request('SearchItems', params)
     end
 
@@ -222,6 +216,20 @@ module Vacuum
         "VariationSummary.VariationDimension",
         "SearchRefinements"
     ].freeze
+
+    def validate(params)
+      if params[:keywords] && !params[:keywords].is_a?(String)
+        raise ArgumentError.new(":keyword argument expects a String")
+      end
+
+      if params[:resources] && params[:resources].respond_to?(:each)
+        params[:resources].each do |resource|
+          if !ALL_RESOURCES.include?(resource)
+            raise ArgumentError.new("There is not such resource: #{resource}")
+          end
+        end
+      end
+    end
 
     def request(operation_name, params)
       @operation = Operation.new(operation_name, params: params, locale: locale)

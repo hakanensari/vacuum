@@ -18,6 +18,27 @@ module Vacuum
 			assert_equal 'There is not such resource: Offer.Listings.Price', err.message
 		end
 
+		def test_get_items_wrong_resource
+			err = assert_raises(ArgumentError) do
+				api.get_items(
+						item_ids: 'B07212L4G2',
+						resources: %w[BrowseNodeInfo.BrowseNodes BrowseNodeInfo.BrowseNodes.Ancestor
+         BrowseNodeInfo.BrowseNode.SalesRank])
+			end
+
+			assert_equal 'There is not such resource: BrowseNodeInfo.BrowseNode.SalesRank', err.message
+		end
+
+		def test_get_variations_wrong_resource
+			err = assert_raises(ArgumentError) do
+				api.get_variations(
+						asin: 'B07212L4G2',
+						resources: %w[BrowseNodeInfo.BrowseNode.SalesRank])
+			end
+
+			assert_equal 'There is not such resource: BrowseNodeInfo.BrowseNode.SalesRank', err.message
+		end
+
 		def api
 			@api ||= Vacuum.new(Locales.first)
 		end
