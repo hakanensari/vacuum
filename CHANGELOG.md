@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
+- Add support for EditorConfig
 - Add support for RSpec
 
 ## [3.3.0] - 2020-01-26
