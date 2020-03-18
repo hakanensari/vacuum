@@ -116,6 +116,9 @@ module Vacuum
     #   @param [String,nil] title
     # @return [Response]
     def search_items(**params)
+      if params[:keywords] && !params[:keywords].is_a?(String)
+        raise ArgumentError.new(":keyword argument expects a String")
+      end
       request('SearchItems', params)
     end
 
