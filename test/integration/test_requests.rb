@@ -3,7 +3,7 @@
 require 'integration_helper'
 
 module Vacuum
-  class TestRequest < IntegrationTest
+  class TestRequests < IntegrationTest
     def test_get_browse_nodes
       requests.each do |request|
         response = request.get_browse_nodes(browse_node_ids: ['3045'])
