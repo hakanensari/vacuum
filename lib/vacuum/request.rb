@@ -198,6 +198,7 @@ module Vacuum
         raise ArgumentError, ':keyword argument expects a String'
       end
 
+      # rubocop:disable Style/GuardClause
       if params[:resources]&.respond_to?(:each)
         params[:resources].each do |resource|
           unless ALL_RESOURCES.include?(resource)
@@ -205,6 +206,7 @@ module Vacuum
           end
         end
       end
+      # rubocop:enable Style/GuardClause
     end
 
     def request(operation_name, params)
