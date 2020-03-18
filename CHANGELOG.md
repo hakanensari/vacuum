@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add support for EditorConfig
 - Add support for RSpec
+- Expose the chainable methods of HTTP to allow logging and other potentially useful features
 
 ## [3.3.0] - 2020-01-26
 

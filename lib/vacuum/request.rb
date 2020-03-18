@@ -119,12 +119,33 @@ module Vacuum
       request('SearchItems', params)
     end
 
-    # Creates a persistent connection for multiple requests
+    # Flags as persistent
     #
+    # @param [Integer] timeout
     # @return [self]
-    def persistent
-      @client = client.persistent("https://#{locale.host}")
+    def persistent(timeout: 5)
+      host = "https://#{locale.host}"
+      @client = client.persistent(host, timeout: timeout)
+
       self
+    end
+
+    # @!method use(*features)
+    #   Turn on {https://github.com/httprb/http HTTP} features
+    #
+    #   @param features
+    #   @return [self]
+    #
+    # @!method via(*proxy)
+    #   Make a request through an HTTP proxy
+    #
+    #   @param [Array] proxy
+    #   @raise [HTTP::Request::Error] if HTTP proxy is invalid
+    #   @return [self]
+    %i[timeout via through headers use].each do |method_name|
+      define_method(method_name) do |*args, &block|
+        @client = client.send(method_name, *args, &block)
+      end
     end
 
     private

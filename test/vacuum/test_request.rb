@@ -48,6 +48,16 @@ module Vacuum
       assert request.client.persistent?
     end
 
+    def test_logging
+      require 'logger'
+      logdev = StringIO.new
+      logger = Logger.new(logdev)
+      request = requests.sample
+      request.use(logging: { logger: logger })
+      request.search_items(keywords: 'Harry Potter')
+      refute_empty logdev.string
+    end
+
     ALL_RESOURCES = %w[BrowseNodeInfo.BrowseNodes
                        BrowseNodeInfo.BrowseNodes.Ancestor
                        BrowseNodeInfo.BrowseNodes.SalesRank

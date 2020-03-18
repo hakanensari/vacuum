@@ -100,15 +100,15 @@ You can also `#dig` into this hash.
 response.dig('ItemsResult', 'Items')
 ```
 
-### Troubleshooting
+### Logging
 
-In addition to the response payload, the following attributes may help you introspect an executed request.
+Write requests and reponses to a logger using the logging feature of the [HTTP gem](https://github.com/httprb/http) under the hood:
 
 ```ruby
-operation = request.operation
-operation.body
-operation.headers
-operation.url
+require 'logger'
+
+logger = Logger.new(STDOUT)
+request.use(logging: {logger: logger})
 ```
 
 ### Bring your parser
