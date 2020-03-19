@@ -63,7 +63,6 @@ module Vacuum
     #   @param [Array<String>,nil] resources
     # @return [Response]
     def get_items(item_ids:, **params)
-      validate(params)
       params.update(item_ids: Array(item_ids))
       request('GetItems', params)
     end
@@ -86,7 +85,6 @@ module Vacuum
     #   @param [Integer,nil] variation_page
     #   @return [Response]
     def get_variations(**params)
-      validate(params)
       request('GetVariations', params)
     end
 
@@ -118,7 +116,6 @@ module Vacuum
     #   @param [String,nil] title
     # @return [Response]
     def search_items(**params)
-      validate(params)
       request('SearchItems', params)
     end
 
@@ -194,22 +191,33 @@ module Vacuum
     ].freeze
 
     def validate(params)
-      if params[:keywords] && !params[:keywords].is_a?(String)
-        raise ArgumentError, ':keyword argument expects a String'
+      validate_keywords(params)
+      validate_resources(params)
+    end
+
+    def validate_keywords(params)
+      return unless params[:keywords]
+      return if params[:keywords].is_a?(String)
+
+      raise ArgumentError, ':keyword argument expects a String'
+    end
+
+    def validate_resources(params)
+      return unless params[:resources]
+
+      unless params[:resources].is_a?(Array)
+        raise ArgumentError, ':resources argument expects an Array'
       end
 
-      # rubocop:disable Style/GuardClause
-      if params[:resources]&.respond_to?(:each)
-        params[:resources].each do |resource|
-          unless ALL_RESOURCES.include?(resource)
-            raise ArgumentError, "There is not such resource: #{resource}"
-          end
+      params[:resources].each do |resource|
+        unless ALL_RESOURCES.include?(resource)
+          raise ArgumentError, "There is not such resource: #{resource}"
         end
       end
-      # rubocop:enable Style/GuardClause
     end
 
     def request(operation_name, params)
+      validate(params)
       @operation = Operation.new(operation_name, params: params, locale: locale)
       response = client.headers(operation.headers)
                        .post(operation.url, body: operation.body)
