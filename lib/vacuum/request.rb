@@ -33,6 +33,7 @@ module Vacuum
     end
 
     # Returns details about specified browse nodes
+    #
     # @see https://webservices.amazon.com/paapi5/documentation/getbrowsenodes.html
     # @overload get_browse_nodes(browse_node_ids:, languages_of_preference: nil, marketplace: nil, partner_tag: nil, partner_type: nil, resources: nil)
     #   @param [Array<String,Integer>,String,Integer] browse_node_ids
@@ -48,6 +49,7 @@ module Vacuum
     end
 
     # Returns the attributes of one or more items
+    #
     # @see https://webservices.amazon.com/paapi5/documentation/get-items.html
     # @overload get_items(condition: nil, currency_of_preference: nil, item_id_type: nil, item_ids:, languages_of_preference: nil, marketplace: nil, merchant: nil, offer_count: nil, partner_tag: nil, partner_type: nil, resources: nil)
     #   @param [String,nil] condition
@@ -69,6 +71,7 @@ module Vacuum
 
     # Returns a set of items that are the same product, but differ according to
     # a consistent theme
+    #
     # @see https://webservices.amazon.com/paapi5/documentation/get-variations.html
     # @overload get_variations(asin:, condition: nil, currency_of_preference: nil, languages_of_preference: nil, marketplace: nil, merchant: nil, offer_count: nil, partner_tag: nil, partner_type: nil, resources: nil, variation_count: nil, variation_page: nil)
     #   @param [String] asin
@@ -89,6 +92,7 @@ module Vacuum
     end
 
     # Searches for items on Amazon based on a search query
+    #
     # @see https://webservices.amazon.com/paapi5/documentation/search-items.html
     # @overload search_items(actor: nil, artist: nil, author: nil, availability: nil, brand: nil, browse_node_id: nil, condition: nil, currency_of_preference: nil, delivery_flags: nil, item_count: nil, item_page: nil, keywords: nil, languages_of_preference: nil, marketplace: nil, max_price: nil, merchant: nil, min_price: nil, min_reviews_rating: nil, min_savings_percent: nil, offer_count: nil, partner_tag: nil, partner_type: nil, resources: nil, search_index: nil, sort_by: nil, title: nil)
     #   @param [String,nil] actor

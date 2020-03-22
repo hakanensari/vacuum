@@ -12,6 +12,7 @@ module Vacuum
     # @!method dig(*key)
     #   Delegates to the Hash returned by {Response#to_h} to extract a nested
     #   value specified by the sequence of keys
+    #
     #   @param [String] key one or more keys
     #   @see https://ruby-doc.org/core/Hash.html#method-i-dig
     def_delegator :to_h, :dig
@@ -38,6 +39,7 @@ module Vacuum
     end
 
     # Casts body to Hash
+    #
     # @return [Hash]
     def to_h
       JSON.parse(body)
