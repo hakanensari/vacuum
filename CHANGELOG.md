@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add support for RSpec
 - Expose the chainable methods of HTTP to allow logging and other potentially useful features
 
+### Removed
+- Remove support for end-of-life'd Ruby 2.4
+
 ## [3.3.0] - 2020-01-26
 
 ### Added

@@ -27,5 +27,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'vcr'
   gem.add_development_dependency 'webmock'
   gem.add_development_dependency 'yard'
-  gem.required_ruby_version = '>= 2.4'
+  gem.required_ruby_version = '>= 2.5'
 end
