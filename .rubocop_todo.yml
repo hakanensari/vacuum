@@ -1,11 +1,2 @@
 Layout/LineLength:
-  Exclude:
-    - test/**/*
   IgnoredPatterns: ['\A\s*# @overload']
-
-Style/HashEachMethods:
-  Enabled: true
-Style/HashTransformKeys:
-  Enabled: true
-Style/HashTransformValues:
-  Enabled: true

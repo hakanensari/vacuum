@@ -170,14 +170,10 @@ module Vacuum
     def validate_resources(params)
       return unless params[:resources]
 
-      unless params[:resources].is_a?(Array)
-        raise ArgumentError, ':resources argument expects an Array'
-      end
+      raise ArgumentError, ':resources argument expects an Array' unless params[:resources].is_a?(Array)
 
       params[:resources].each do |resource|
-        unless Resource.valid?(resource)
-          raise ArgumentError, "There is not such resource: #{resource}"
-        end
+        raise ArgumentError, "There is not such resource: #{resource}" unless Resource.valid?(resource)
       end
     end
 
