@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add support for EditorConfig
 - Add support for RSpec
 - Expose the chainable methods of HTTP to allow logging and other potentially useful features
+- Add Netherlands
 
 ### Removed
 - Remove support for end-of-life'd Ruby 2.4
