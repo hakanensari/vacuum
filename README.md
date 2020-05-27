@@ -145,22 +145,28 @@ end
 
 ## Development
 
-Clone the repo and install dependencies. Tests should pass as-is.
+Clone the repo and install dependencies.
+
+```sh
+bundle install
+```
+
+Tests and Rubocop should now pass as-is.
 
 ```sh
 bundle exec rake
 ```
 
-By default, all requests are stubbed. Use the `RECORD` env var to record new interactions.
+By default, the tests stub requests. Use the `RECORD` env var to record new interactions.
 
 ```sh
-bundle exec RECORD=true rake
+RECORD=true bundle exec rake test
 ```
 
-You can also run tests against live data.
+You can set the `LIVE` env var to run all tests against live data.
 
-```shell
-bundle exec LIVE=true rake
+```sh
+LIVE=true bundle exec rake test
 ```
 
 In either case, add actual API credentials to a [`locales.yml`](https://github.com/hakanensari/vacuum/blob/master/test/locales.yml.example) file under `test`.
