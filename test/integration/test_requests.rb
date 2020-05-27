@@ -22,6 +22,7 @@ module Vacuum
       requests.each do |request|
         response = request.get_items(item_ids: 'B07212L4G2',
                                      resources: Resource.all)
+        assert_equal 200, response.status
         item = response.dig('ItemsResult', 'Items').first
         assert item.key?('BrowseNodeInfo')
       end
