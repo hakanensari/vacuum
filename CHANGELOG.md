@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.4.0] - 2020-05-27
+
 ### Added
 - Add validation for resources attribute
 - Add validation for keywords attribute in Request#item_search
@@ -43,7 +45,8 @@ This is a major version release. It's a backward-incompatible rewrite following 
 ### Changed
 - Migrate to Product Advertising API version 5
 
-[Unreleased]: https://github.com/hakanensari/vacuum/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/hakanensari/vacuum/compare/v3.4.0...HEAD
+[3.4.0]: https://github.com/hakanensari/vacuum/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/hakanensari/vacuum/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/hakanensari/vacuum/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/hakanensari/vacuum/compare/v3.0.0...v3.1.0
