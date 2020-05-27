@@ -54,6 +54,7 @@ module Vacuum
   end
 end
 
+# :nocov:
 if defined?(RSpec)
   RSpec.configure do |config|
     config.around do |example|
@@ -69,3 +70,4 @@ if defined?(RSpec)
     end
   end
 end
+# :nocov:
