@@ -4,7 +4,6 @@ require 'http'
 
 require 'vacuum/locale'
 require 'vacuum/operation'
-require 'vacuum/resource'
 require 'vacuum/response'
 
 module Vacuum
@@ -155,11 +154,6 @@ module Vacuum
 
     private
 
-    def validate(params)
-      validate_keywords(params)
-      validate_resources(params)
-    end
-
     def validate_keywords(params)
       return unless params[:keywords]
       return if params[:keywords].is_a?(String)
@@ -167,18 +161,8 @@ module Vacuum
       raise ArgumentError, ':keyword argument expects a String'
     end
 
-    def validate_resources(params)
-      return unless params[:resources]
-
-      raise ArgumentError, ':resources argument expects an Array' unless params[:resources].is_a?(Array)
-
-      params[:resources].each do |resource|
-        raise ArgumentError, "There is not such resource: #{resource}" unless Resource.valid?(resource)
-      end
-    end
-
     def request(operation_name, params)
-      validate(params)
+      validate_keywords(params)
       @operation = Operation.new(operation_name, params: params, locale: locale)
       response = client.headers(operation.headers)
                        .post(operation.url, body: operation.body)
