@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.4.1] - 2020-07-10
+
+### Removed
+- Remove validation for resource attribute
+
 ## [3.4.0] - 2020-05-27
 
 ### Added
