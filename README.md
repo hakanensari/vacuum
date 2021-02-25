@@ -10,7 +10,7 @@ Cart Form functionality is not covered by this gem but is a primary focus on [ca
 
 You need to [register first](https://webservices.amazon.com/paapi5/documentation/register-for-pa-api.html) to use the API.
 
-![vacuum](http://f.cl.ly/items/2k2X0e2u0G3k1c260D2u/vacuum.png)
+![vacuum](https://github.com/hakanensari/vacuum/blob/main/images/vacuum.jpg?raw=true)
 
 ## Usage
 
