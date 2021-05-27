@@ -174,6 +174,7 @@ In either case, add actual API credentials to a [`locales.yml`](https://github.c
 ## Getting Help
 
 * Ask specific questions about the API on the [Amazon forum](https://forums.aws.amazon.com/forum.jspa?forumID=9).
-* Report bugs and discuss potential features in [GitHub issues](https://github.com/hakanensari/vacuum/issues).
+* Report bugs in [GitHub issues](https://github.com/hakanensari/vacuum/issues).
+* Discuss potential features in [GitHub Discussions](https://github.com/hakanensari/vacuum/discussions).
 
 

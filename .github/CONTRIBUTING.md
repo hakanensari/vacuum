@@ -16,4 +16,3 @@ New contributors are always welcome. When it doubt, ask questions. Please be nic
 
 * Offer feedback on open issues.
 * Write and help edit documentation.
-* Discuss other ideas for contribution with [Hakan](mailto:hakanensari+github@gmail.com).
