@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'aws-sigv4', '~> 1.0'
-  gem.add_dependency 'http', '~> 4.0'
+  gem.add_dependency 'http', '>= 4.0', '< 6.0'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rubocop'

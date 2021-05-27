@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Relax version requirement on the HTTP gem
+
 ## [3.4.1] - 2020-07-10
 
 ### Removed
