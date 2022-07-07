@@ -1,2 +1,2 @@
 Layout/LineLength:
-  IgnoredPatterns: ['\A\s*# @overload']
+  AllowedPatterns: ['\A\s*# @overload']

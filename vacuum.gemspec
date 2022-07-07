@@ -15,7 +15,6 @@ Gem::Specification.new do |gem|
   gem.license     = 'MIT'
 
   gem.files         = Dir.glob('lib/**/*') + %w[LICENSE README.md]
-  gem.test_files    = Dir.glob('test/**/*')
   gem.require_paths = ['lib']
 
   gem.add_dependency 'aws-sigv4', '~> 1.0'
@@ -29,5 +28,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'vcr'
   gem.add_development_dependency 'webmock'
   gem.add_development_dependency 'yard'
-  gem.required_ruby_version = '>= 2.6'
+  gem.required_ruby_version = '>= 2.7'
+  gem.metadata['rubygems_mfa_required'] = 'true'
 end

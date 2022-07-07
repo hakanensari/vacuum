@@ -87,9 +87,9 @@ module Vacuum
 
     def test_persistent
       request = requests.sample
-      refute request.client.persistent?
+      refute_predicate request.client, :persistent?
       request.persistent
-      assert request.client.persistent?
+      assert_predicate request.client, :persistent?
     end
 
     def test_logging
