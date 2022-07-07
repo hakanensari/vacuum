@@ -22,5 +22,12 @@ module Vacuum
     def test_dig
       assert @response.dig('ItemsResult', 'Items')
     end
+
+    def test_parser
+      @response.parser = Class.new
+      @response.parser.define_singleton_method(:parse) { |_| 'foo' }
+
+      refute_empty @response.parse
+    end
   end
 end

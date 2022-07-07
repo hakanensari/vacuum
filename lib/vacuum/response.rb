@@ -35,7 +35,7 @@ module Vacuum
     #
     # @note Delegates to {#to_h} if no custom parser is set
     def parse
-      parser ? parser.parse(body) : to_h
+      parser&.parse(body) || to_h
     end
 
     # Casts body to Hash
