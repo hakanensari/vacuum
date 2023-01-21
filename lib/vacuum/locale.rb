@@ -25,7 +25,11 @@ module Vacuum
       tr: ['webservices.amazon.com.tr', 'eu-west-1'],
       ae: ['webservices.amazon.ae', 'eu-west-1'],
       gb: ['webservices.amazon.co.uk', 'eu-west-1'],
-      us: ['webservices.amazon.com', 'us-east-1']
+      us: ['webservices.amazon.com', 'us-east-1'],
+      eg: ['webservices.amazon.eg', 'eu-west-1'],
+      pl: ['webservices.amazon.pl', 'eu-west-1'],
+      sa: ['webservices.amazon.sa', 'eu-west-1'],
+      se: ['webservices.amazon.se', 'eu-west-1']
     }.freeze
     private_constant :HOSTS_AND_REGIONS
 
