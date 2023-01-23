@@ -7,6 +7,7 @@ module Vacuum
     def test_get_browse_nodes
       requests.each do |request|
         response = request.get_browse_nodes(browse_node_ids: ['3045'])
+
         assert_equal 200, response.status
       end
     end
@@ -14,6 +15,7 @@ module Vacuum
     def test_get_items
       requests.each do |request|
         response = request.get_items(item_ids: ['B07212L4G2'])
+
         assert_equal 200, response.status
       end
     end
@@ -65,8 +67,10 @@ module Vacuum
       requests.each do |request|
         response = request.get_items(item_ids: 'B07212L4G2',
                                      resources: RESOURCE_ALL)
+
         assert_equal 200, response.status
         item = response.dig('ItemsResult', 'Items').first
+
         assert item.key?('BrowseNodeInfo')
       end
     end
@@ -74,6 +78,7 @@ module Vacuum
     def test_get_variations
       requests.each do |request|
         response = request.get_variations(asin: 'B07212L4G2')
+
         assert_equal 200, response.status
       end
     end
@@ -81,14 +86,17 @@ module Vacuum
     def test_search_items
       requests.each do |request|
         response = request.search_items(keywords: 'Harry Potter')
+
         assert_equal 200, response.status
       end
     end
 
     def test_persistent
       request = requests.sample
+
       refute_predicate request.client, :persistent?
       request.persistent
+
       assert_predicate request.client, :persistent?
     end
 
@@ -99,6 +107,7 @@ module Vacuum
       request = requests.sample
       request.use(logging: { logger: logger })
       request.search_items(keywords: 'Harry Potter')
+
       refute_empty logdev.string
     end
   end

@@ -7,16 +7,19 @@ module Vacuum
   class TestLocale < Minitest::Test
     def test_host
       locale = Locale.new(:us, **credentials)
+
       assert locale.host
     end
 
     def test_region
       locale = Locale.new(:us, **credentials)
+
       assert locale.region
     end
 
     def test_partner_type_default
       locale = Locale.new(:us, **credentials)
+
       assert locale.partner_type
     end
 

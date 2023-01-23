@@ -1,2 +1,6 @@
 Layout/LineLength:
   AllowedPatterns: ['\A\s*# @overload']
+
+Minitest/TestFileName:
+  Exclude:
+    - test/integration_helper.rb

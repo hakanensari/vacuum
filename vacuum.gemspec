@@ -19,16 +19,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'aws-sigv4', '~> 1.0'
   gem.add_dependency 'http', '>= 4.0', '< 6.0'
-  gem.add_development_dependency 'minitest'
-  gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'rubocop'
-  gem.add_development_dependency 'rubocop-minitest'
-  gem.add_development_dependency 'rubocop-rake'
-  gem.add_development_dependency 'ruby-lsp'
-  gem.add_development_dependency 'simplecov', '0.17.1'
-  gem.add_development_dependency 'vcr'
-  gem.add_development_dependency 'webmock'
-  gem.add_development_dependency 'yard'
   gem.required_ruby_version = '>= 2.7'
   gem.metadata['rubygems_mfa_required'] = 'true'
 end
