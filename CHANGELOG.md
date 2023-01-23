@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.1.0] - 2023-01-23
+
+### Added
+- Support EG, PL, SA, SE regions
+
 ## [4.0.0] - 2021-05-27
 
 ### Changed
