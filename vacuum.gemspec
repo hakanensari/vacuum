@@ -24,6 +24,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubocop'
   gem.add_development_dependency 'rubocop-minitest'
   gem.add_development_dependency 'rubocop-rake'
+  gem.add_development_dependency 'ruby-lsp'
   gem.add_development_dependency 'simplecov', '0.17.1'
   gem.add_development_dependency 'vcr'
   gem.add_development_dependency 'webmock'
