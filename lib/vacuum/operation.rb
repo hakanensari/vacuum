@@ -61,7 +61,7 @@ module Vacuum
     end
 
     def signature
-      signer.sign_request(http_method: 'POST', url: url, body: body)
+      signer.sign_request(http_method: 'POST', url:, body:)
     end
 
     def signer

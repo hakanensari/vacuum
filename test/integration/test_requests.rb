@@ -105,7 +105,7 @@ module Vacuum
       logdev = StringIO.new
       logger = Logger.new(logdev)
       request = requests.sample
-      request.use(logging: { logger: logger })
+      request.use(logging: { logger: })
       request.search_items(keywords: 'Harry Potter')
 
       refute_empty logdev.string

@@ -7,7 +7,7 @@ require 'vacuum/operation'
 module Vacuum
   class TestOperation < Minitest::Test
     def setup
-      @operation = Operation.new('Action', params: { foo: 1 }, locale: locale)
+      @operation = Operation.new('Action', params: { foo: 1 }, locale:)
     end
 
     def test_body

@@ -129,7 +129,7 @@ module Vacuum
     # @return [self]
     def persistent(timeout: 5)
       host = "https://#{locale.host}"
-      @client = client.persistent(host, timeout: timeout)
+      @client = client.persistent(host, timeout:)
 
       self
     end
@@ -163,7 +163,7 @@ module Vacuum
 
     def request(operation_name, params)
       validate_keywords(params)
-      @operation = Operation.new(operation_name, params: params, locale: locale)
+      @operation = Operation.new(operation_name, params:, locale:)
       response = client.headers(operation.headers)
                        .post(operation.url, body: operation.body)
 
