@@ -18,6 +18,7 @@ module Vacuum
       fr: ['webservices.amazon.fr', 'eu-west-1'],
       de: ['webservices.amazon.de', 'eu-west-1'],
       in: ['webservices.amazon.in', 'eu-west-1'],
+      ie: ['webservices.amazon.ie', 'eu-west-1'],
       it: ['webservices.amazon.it', 'eu-west-1'],
       jp: ['webservices.amazon.co.jp', 'us-west-2'],
       mx: ['webservices.amazon.com.mx', 'us-east-1'],
