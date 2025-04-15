@@ -32,12 +32,6 @@ response = request.search_items(title: 'lean startup')
 puts response.to_h
 ```
 
-Create a persistent connection to make multiple requests.
-
-```ruby
-request.persistent
-```
-
 ### Operations
 
 Refer to the [API docs](https://webservices.amazon.com/paapi5/documentation/) for more detailed information.
@@ -112,6 +106,7 @@ request.use(logging: {logger: logger})
 ```
 
 ### Bring your parser
+
 You can extend Vacuum with a custom parser. Just swap the original with a class or module that responds to `.parse`.
 
 ```ruby
@@ -173,8 +168,6 @@ In either case, add actual API credentials to a [`locales.yml`](https://github.c
 
 ## Getting Help
 
-* Ask specific questions about the API on the [Amazon forum](https://forums.aws.amazon.com/forum.jspa?forumID=9).
-* Report bugs in [GitHub issues](https://github.com/hakanensari/vacuum/issues).
-* Discuss potential features in [GitHub Discussions](https://github.com/hakanensari/vacuum/discussions).
-
-
+- Ask specific questions about the API on the [Amazon forum](https://forums.aws.amazon.com/forum.jspa?forumID=9).
+- Report bugs in [GitHub issues](https://github.com/hakanensari/vacuum/issues).
+- Discuss potential features in [GitHub Discussions](https://github.com/hakanensari/vacuum/discussions).
