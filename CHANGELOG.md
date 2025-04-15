@@ -29,7 +29,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Support Egypt, Polan, Saudi Arabia, and Sweden
+- Support Egypt, Poland, Saudi Arabia, and Sweden
 
 ## [4.0.0] - 2021-05-27
 
