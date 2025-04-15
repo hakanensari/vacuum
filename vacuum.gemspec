@@ -19,6 +19,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'aws-sigv4', '~> 1.0'
   gem.add_dependency 'http', '>= 4.0', '< 6.0'
-  gem.required_ruby_version = '>= 3.1'
+  gem.required_ruby_version = '>= 3.2'
   gem.metadata['rubygems_mfa_required'] = 'true'
 end
