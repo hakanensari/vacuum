@@ -6,8 +6,6 @@ require "json"
 module Vacuum
   # A request to the Amazon Creators API
   class Request
-    API_HOST = "creatorsapi.amazon"
-
     # @return [HTTP::Client]
     attr_reader :http
 
@@ -127,7 +125,7 @@ module Vacuum
     def url(operation_name)
       # GetItems -> getItems
       name = operation_name[0].downcase + operation_name[1..]
-      "https://#{API_HOST}/catalog/v1/#{name}"
+      "https://creatorsapi.amazon/catalog/v1/#{name}"
     end
 
     def body(params)
