@@ -1,9 +1,9 @@
-inherit_from: ".rubocop_todo.yml"
+inherit_gem:
+  rubocop-shopify: rubocop.yml
 
 plugins:
   - rubocop-minitest
   - rubocop-rake
 
 AllCops:
-  NewCops: enable
   TargetRubyVersion: 3.2

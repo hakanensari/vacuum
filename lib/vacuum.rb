@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
-require 'vacuum/request'
-require 'vacuum/version'
+require "vacuum/auth"
+require "vacuum/request"
+require "vacuum/version"
 
-# Ruby wrapper to the Amazon Product Advertising API
+# Ruby wrapper to the Amazon Creators API
 module Vacuum
   class << self
     extend Forwardable
@@ -15,6 +16,6 @@ module Vacuum
     #
     #   @return [Request]
     #   @see Request#initialize
-    def_delegator 'Vacuum::Request', :new
+    def_delegator "Vacuum::Request", :new
   end
 end

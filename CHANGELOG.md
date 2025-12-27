@@ -5,6 +5,27 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+This is a major version release. It's a backward-incompatible rewrite following the roll-out of the [Amazon Creators API](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/).
+
+### Changed
+
+- Migrate from PA-API 5.0 to Amazon Creators API
+- Replace AWS SigV4 authentication with OAuth 2.0
+- Use marketplace domain strings instead of locale symbols
+- Return HTTP gem response directly (use `response.parse` instead of `response.to_h`)
+
+### Added
+
+- `Vacuum::Auth` for OAuth token acquisition
+
+### Removed
+
+- `aws-sigv4` dependency
+- `Vacuum::Locale` class
+- `Vacuum::Response` wrapper
+- Custom parser support
+- Built-in HTTP client configuration (pass configured `http:` client instead)
+
 ## [4.3.0] - 2025-04-15
 
 ### Added
@@ -92,7 +113,8 @@ This is a major version release. It's a backward-incompatible rewrite following 
 
 - Migrate to Product Advertising API version 5
 
-[Unreleased]: https://github.com/hakanensari/vacuum/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/hakanensari/vacuum/compare/v5.0.0...HEAD
+[5.0.0]: https://github.com/hakanensari/vacuum/compare/v4.3.0...v5.0.0
 [4.3.0]: https://github.com/hakanensari/vacuum/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/hakanensari/vacuum/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/hakanensari/vacuum/compare/v4.0.0...v4.1.0

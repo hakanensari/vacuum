@@ -1,57 +1,51 @@
 # frozen_string_literal: true
 
-require 'http'
-
-require 'vacuum/locale'
-require 'vacuum/operation'
-require 'vacuum/response'
+require "http"
+require "json"
 
 module Vacuum
-  # A request to the Amazon Product Advertising API
+  # A request to the Amazon Creators API
   class Request
+    API_HOST = "creatorsapi.amazon"
+
     # @return [HTTP::Client]
-    attr_reader :client
+    attr_reader :http
 
-    # @return [Locale]
-    attr_reader :locale
-
-    # @return [Operation]
-    attr_reader :operation
+    # @return [String]
+    attr_reader :marketplace, :access_token, :version, :partner_tag
 
     # Creates a new request
     #
-    # @overload initialize(marketplace: :us, access_key:, secret_key:, partner_tag:, partner_type:)
-    #   @param [Symbol,String] marketplace
-    #   @param [String] access_key
-    #   @param [String] secret_key
-    #   @param [String] partner_tag
-    #   @param [String] partner_type
-    #   @raise [Locale::NotFound] if marketplace is not found
-    def initialize(marketplace: :us, **args)
-      @locale = Locale.new(marketplace, **args)
-      @client = HTTP::Client.new
+    # @param [String] marketplace The marketplace domain (e.g. www.amazon.com)
+    # @param [String] access_token
+    # @param [String] version
+    # @param [String] partner_tag
+    # @param [HTTP::Client] http
+    def initialize(marketplace:, access_token:, version:, partner_tag:, http: HTTP)
+      @marketplace = marketplace
+      @access_token = access_token
+      @version = version
+      @partner_tag = partner_tag
+      @http = http
     end
 
     # Returns details about specified browse nodes
     #
-    # @see https://webservices.amazon.com/paapi5/documentation/getbrowsenodes.html
-    # @overload get_browse_nodes(browse_node_ids:, languages_of_preference: nil, marketplace: nil, partner_tag: nil, partner_type: nil, resources: nil)
+    # @overload get_browse_nodes(browse_node_ids:, languages_of_preference: nil, marketplace: nil, partner_tag: nil, resources: nil)
     #   @param [Array<String,Integer>,String,Integer] browse_node_ids
     #   @param [Array<String>,nil] languages_of_preference
     #   @param [String,nil] marketplace
     #   @param [String,nil] partner_tag
-    #   @param [String,nil] partner_type
     #   @param [Array<String>,nil] resources
     # @return [Response]
     def get_browse_nodes(browse_node_ids:, **params)
       params.update(browse_node_ids: Array(browse_node_ids))
-      request('GetBrowseNodes', params)
+      request("GetBrowseNodes", params)
     end
 
     # Returns the attributes of one or more items
     #
-    # @see https://webservices.amazon.com/paapi5/documentation/get-items.html
-    # @overload get_items(condition: nil, currency_of_preference: nil, item_id_type: nil, item_ids:, languages_of_preference: nil, marketplace: nil, merchant: nil, offer_count: nil, partner_tag: nil, partner_type: nil, resources: nil)
+    # @overload get_items(condition: nil, currency_of_preference: nil, item_id_type: nil, item_ids:, languages_of_preference: nil, marketplace: nil, merchant: nil, partner_tag: nil, resources: nil)
     #   @param [String,nil] condition
     #   @param [String,nil] currency_of_preference
     #   @param [String,nil] item_id_type
@@ -59,42 +53,36 @@ module Vacuum
     #   @param [Array<String>,nil] languages_of_preference
     #   @param [String,nil] marketplace
     #   @param [String,nil] merchant
-    #   @param [Integer,nil] offer_count
     #   @param [String,nil] partner_tag
-    #   @param [String,nil] partner_type
     #   @param [Array<String>,nil] resources
     # @return [Response]
     def get_items(item_ids:, **params)
       params.update(item_ids: Array(item_ids))
-      request('GetItems', params)
+      request("GetItems", params)
     end
 
     # Returns a set of items that are the same product, but differ according to
     # a consistent theme
     #
-    # @see https://webservices.amazon.com/paapi5/documentation/get-variations.html
-    # @overload get_variations(asin:, condition: nil, currency_of_preference: nil, languages_of_preference: nil, marketplace: nil, merchant: nil, offer_count: nil, partner_tag: nil, partner_type: nil, resources: nil, variation_count: nil, variation_page: nil)
+    # @overload get_variations(asin:, condition: nil, currency_of_preference: nil, languages_of_preference: nil, marketplace: nil, merchant: nil, partner_tag: nil, resources: nil, variation_count: nil, variation_page: nil)
     #   @param [String] asin
     #   @param [String,nil] condition
     #   @param [String,nil] currency_of_preference
     #   @param [Array<String>,nil] languages_of_preference
     #   @param [String,nil] marketplace
     #   @param [String,nil] merchant
-    #   @param [Integer,nil] offer_count
     #   @param [String,nil] partner_tag
-    #   @param [String,nil] partner_type
     #   @param [Array<String>,nil] resources
     #   @param [Integer,nil] variation_count
     #   @param [Integer,nil] variation_page
     #   @return [Response]
     def get_variations(**params)
-      request('GetVariations', params)
+      request("GetVariations", params)
     end
 
     # Searches for items on Amazon based on a search query
     #
-    # @see https://webservices.amazon.com/paapi5/documentation/search-items.html
-    # @overload search_items(actor: nil, artist: nil, author: nil, availability: nil, brand: nil, browse_node_id: nil, condition: nil, currency_of_preference: nil, delivery_flags: nil, item_count: nil, item_page: nil, keywords: nil, languages_of_preference: nil, marketplace: nil, max_price: nil, merchant: nil, min_price: nil, min_reviews_rating: nil, min_savings_percent: nil, offer_count: nil, partner_tag: nil, partner_type: nil, resources: nil, search_index: nil, sort_by: nil, title: nil)
+    # @overload search_items(actor: nil, artist: nil, author: nil, availability: nil, brand: nil, browse_node_id: nil, condition: nil, currency_of_preference: nil, delivery_flags: nil, item_count: nil, item_page: nil, keywords: nil, languages_of_preference: nil, marketplace: nil, max_price: nil, merchant: nil, min_price: nil, min_reviews_rating: nil, min_savings_percent: nil, partner_tag: nil, resources: nil, search_index: nil, sort_by: nil, title: nil)
     #   @param [String,nil] actor
     #   @param [String,nil] artist
     #   @param [String,nil] availability
@@ -112,7 +100,6 @@ module Vacuum
     #   @param [Integer,nil] min_price
     #   @param [Integer,nil] min_reviews_rating
     #   @param [Integer,nil] min_savings_percent
-    #   @param [Integer,nil] offer_count
     #   @param [Hash,nil] properties
     #   @param [Array<String>,nil] resources
     #   @param [String,nil] search_index
@@ -120,54 +107,38 @@ module Vacuum
     #   @param [String,nil] title
     # @return [Response]
     def search_items(**params)
-      request('SearchItems', params)
-    end
-
-    # Flags as persistent
-    #
-    # @param [Integer] timeout
-    # @return [self]
-    def persistent(timeout: 5)
-      host = "https://#{locale.host}"
-      @client = client.persistent(host, timeout:)
-
-      self
-    end
-
-    # @!method use(*features)
-    #   Turn on {https://github.com/httprb/http HTTP} features
-    #
-    #   @param features
-    #   @return [self]
-    #
-    # @!method via(*proxy)
-    #   Make a request through an HTTP proxy
-    #
-    #   @param [Array] proxy
-    #   @raise [HTTP::Request::Error] if HTTP proxy is invalid
-    #   @return [self]
-    %i[timeout via through headers use].each do |method_name|
-      define_method(method_name) do |*args, &block|
-        @client = client.send(method_name, *args, &block)
-      end
+      request("SearchItems", params)
     end
 
     private
 
-    def validate_keywords(params)
-      return unless params[:keywords]
-      return if params[:keywords].is_a?(String)
-
-      raise ArgumentError, ':keyword argument expects a String'
+    def request(operation_name, params)
+      http.headers(headers).post(url(operation_name), body: body(params))
     end
 
-    def request(operation_name, params)
-      validate_keywords(params)
-      @operation = Operation.new(operation_name, params:, locale:)
-      response = client.headers(operation.headers)
-                       .post(operation.url, body: operation.body)
+    def headers
+      {
+        "Authorization" => "Bearer #{access_token}, Version #{version}",
+        "Content-Type" => "application/json",
+        "x-marketplace" => marketplace,
+      }
+    end
 
-      Response.new(response)
+    def url(operation_name)
+      # GetItems -> getItems
+      name = operation_name[0].downcase + operation_name[1..]
+      "https://#{API_HOST}/catalog/v1/#{name}"
+    end
+
+    def body(params)
+      hsh = { "partnerTag" => partner_tag, "marketplace" => marketplace }
+
+      params.each do |key, val|
+        camel_key = key.to_s.gsub(/_([a-z])/) { ::Regexp.last_match(1).upcase }
+        hsh[camel_key] = val
+      end
+
+      JSON.generate(hsh)
     end
   end
 end
