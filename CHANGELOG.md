@@ -14,10 +14,6 @@ This is a major version release. It's a backward-incompatible rewrite following 
 - Use marketplace domain strings instead of locale symbols
 - Return HTTP gem response directly (use `response.parse` instead of `response.to_h`)
 
-### Added
-
-- `Vacuum::Auth` for OAuth token acquisition
-
 ### Removed
 
 - `aws-sigv4` dependency

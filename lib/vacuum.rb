@@ -2,8 +2,7 @@
 
 require "forwardable"
 
-require "vacuum/auth"
-require "vacuum/request"
+require "vacuum/client"
 require "vacuum/version"
 
 # Ruby wrapper to the Amazon Creators API
@@ -12,10 +11,10 @@ module Vacuum
     extend Forwardable
 
     # @!method new
-    #   Delegates to {Request} to create a new request
+    #   Delegates to {Client} to create a new client
     #
-    #   @return [Request]
-    #   @see Request#initialize
-    def_delegator "Vacuum::Request", :new
+    #   @return [Client]
+    #   @see Client#initialize
+    def_delegator "Vacuum::Client", :new
   end
 end

@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
+  gem "irb"
   gem "logger"
   gem "minitest"
   gem "minitest-mock"

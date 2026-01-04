@@ -2,4 +2,4 @@ Gemfile.lock
 .yardoc
 doc
 pkg
-
+*.csv
