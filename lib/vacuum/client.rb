@@ -42,8 +42,8 @@ module Vacuum
     # @param credential_id [String] Your Creators API credential ID
     # @param credential_secret [String] Your Creators API credential secret
     # @param version [String] API version ("2.1", "2.2", or "2.3")
-    # @param cache [#fetch] Optional cache store (e.g., Rails.cache)
-    # @param http [HTTP::Client] HTTP client (for testing)
+    # @param cache [#fetch] Optional cache store
+    # @param http [HTTP::Client]
     def initialize(version:, credential_id:, credential_secret:, cache: nil, http: HTTP)
       @version = version
       @auth_url = AUTH_URLS.fetch(version) do
@@ -109,7 +109,7 @@ module Vacuum
     end
 
     def camelize_keys(**params)
-      params.transform_keys { |key| key.to_s.gsub(/_([a-z])/) { ::Regexp.last_match(1).upcase } }
+      params.transform_keys { |key| key.to_s.gsub(/_([a-z])/) { Regexp.last_match(1).upcase } }
     end
 
     def access_token
@@ -126,7 +126,7 @@ module Vacuum
     end
 
     def token_expired?
-      @access_token.nil? || @token_expires_at.nil? || Time.now >= @token_expires_at
+      @access_token.nil? || Time.now >= @token_expires_at
     end
 
     def fetch_token

@@ -1,7 +1,5 @@
 # Vacuum
 
-[![Build](https://github.com/hakanensari/vacuum/workflows/build/badge.svg)](https://github.com/hakanensari/vacuum/actions)
-
 Vacuum is a Ruby wrapper to the [Amazon Creators API](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/). The API provides programmatic access to product information on the Amazon marketplaces.
 
 ![vacuum](https://github.com/hakanensari/vacuum/blob/main/images/vacuum.jpg?raw=true)
@@ -148,3 +146,9 @@ CREATORS_API_PARTNER_TAG=yourtag-20 \
 CREATORS_API_MARKETPLACE=www.amazon.com \
 bundle exec rake test
 ```
+
+---
+
+> Amazon is a $250 billion dollar company that reacts to you buying a vacuum by going THIS GUY LOVES BUYING VACUUMS HERE ARE SOME MORE VACUUMS
+
+— [@kibblesmith](https://web.archive.org/web/2017/https://twitter.com/kibblesmith/status/724817086309142529)
