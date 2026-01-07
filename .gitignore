@@ -3,3 +3,4 @@ Gemfile.lock
 doc
 pkg
 *.csv
+spec/credentials.yml
