@@ -136,16 +136,7 @@ Run tests and Rubocop.
 bundle exec rake
 ```
 
-To run live API tests, set your credentials and run tests.
-
-```sh
-CREATORS_API_CREDENTIAL_ID=... \
-CREATORS_API_CREDENTIAL_SECRET=... \
-CREATORS_API_VERSION=2.1 \
-CREATORS_API_PARTNER_TAG=yourtag-20 \
-CREATORS_API_MARKETPLACE=www.amazon.com \
-bundle exec rake test
-```
+To run API tests, copy `spec/credentials.yml.example` to `spec/credentials.yml` and fill in your credentials.
 
 ---
 

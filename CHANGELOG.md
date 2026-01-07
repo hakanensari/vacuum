@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [5.0.0] - 2025-01-07
+
 This is a major version release. It's a backward-incompatible rewrite following the roll-out of the [Amazon Creators API](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/).
 
 ### Changed
