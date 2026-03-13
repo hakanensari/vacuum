@@ -7,16 +7,18 @@ module Vacuum
   #
   # Handles authentication automatically and caches access tokens.
   #
-  # @example Basic usage
+  # @example Basic usage (v2.x)
   #   client = Vacuum::Client.new(
   #     credential_id: "YOUR_CREDENTIAL_ID",
   #     credential_secret: "YOUR_CREDENTIAL_SECRET",
   #     version: "2.1"
   #   )
-  #   response = client.search_items(
-  #     marketplace: "www.amazon.com",
-  #     partner_tag: "yourtag-20",
-  #     keywords: "ruby programming"
+  #
+  # @example Basic usage (v3.x)
+  #   client = Vacuum::Client.new(
+  #     credential_id: "YOUR_CREDENTIAL_ID",
+  #     credential_secret: "YOUR_CREDENTIAL_SECRET",
+  #     version: "3.3"
   #   )
   #
   # @example With shared cache (for multi-process environments like Rails)
@@ -31,6 +33,9 @@ module Vacuum
       "2.1" => "https://creatorsapi.auth.us-east-1.amazoncognito.com/oauth2/token",
       "2.2" => "https://creatorsapi.auth.eu-south-2.amazoncognito.com/oauth2/token",
       "2.3" => "https://creatorsapi.auth.us-west-2.amazoncognito.com/oauth2/token",
+      "3.1" => "https://api.amazon.com/auth/o2/token",
+      "3.2" => "https://api.amazon.co.uk/auth/o2/token",
+      "3.3" => "https://api.amazon.co.jp/auth/o2/token",
     }.freeze
 
     API_URL = "https://creatorsapi.amazon/catalog/v1"
@@ -41,7 +46,7 @@ module Vacuum
     #
     # @param credential_id [String] Your Creators API credential ID
     # @param credential_secret [String] Your Creators API credential secret
-    # @param version [String] API version ("2.1", "2.2", or "2.3")
+    # @param version [String] API version ("2.1"-"2.3" for Cognito, "3.1"-"3.3" for LwA)
     # @param cache [#fetch] Optional cache store
     # @param http [HTTP::Client]
     def initialize(version:, credential_id:, credential_secret:, cache: nil, http: HTTP)
@@ -99,10 +104,20 @@ module Vacuum
 
     private
 
+    def v3?
+      @version.start_with?("3.")
+    end
+
     def request(operation, marketplace:, partner_tag:, **params)
+      auth_header = if v3?
+        "Bearer #{access_token}"
+      else
+        "Bearer #{access_token}, Version #{@version}"
+      end
+
       @http
         .headers(
-          "Authorization" => "Bearer #{access_token}, Version #{@version}",
+          "Authorization" => auth_header,
           "x-marketplace" => marketplace,
         )
         .post("#{API_URL}/#{operation}", json: camelize_keys(marketplace:, partner_tag:, **params))
@@ -130,16 +145,36 @@ module Vacuum
     end
 
     def fetch_token
-      response = @http
+      response = if v3?
+        fetch_token_lwa
+      else
+        fetch_token_cognito
+      end
+
+      data = response.parse
+      @token_expires_at = Time.now + TOKEN_TTL
+      @access_token = data["access_token"]
+    end
+
+    # v2.x: Cognito with Basic Auth and form-encoded body
+    def fetch_token_cognito
+      @http
         .basic_auth(user: @credential_id, pass: @credential_secret)
         .post(@auth_url, form: {
           grant_type: "client_credentials",
           scope: "creatorsapi/default",
         })
+    end
 
-      data = response.parse
-      @token_expires_at = Time.now + TOKEN_TTL
-      @access_token = data["access_token"]
+    # v3.x: Login with Amazon (LwA) with JSON body
+    def fetch_token_lwa
+      @http
+        .post(@auth_url, json: {
+          grant_type: "client_credentials",
+          client_id: @credential_id,
+          client_secret: @credential_secret,
+          scope: "creatorsapi::default",
+        })
     end
   end
 end
