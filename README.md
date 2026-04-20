@@ -33,13 +33,16 @@ response.parse
 
 ### Versions and Marketplaces
 
-The `version` determines which authentication endpoint to use:
+The `version` determines which authentication endpoint to use. Versions `2.x` use Amazon Cognito; versions `3.x` use Login with Amazon (LwA).
 
 | Version | Region |
 |---------|--------|
 | `"2.1"` | North America |
 | `"2.2"` | Europe |
 | `"2.3"` | Far East |
+| `"3.1"` | North America |
+| `"3.2"` | Europe |
+| `"3.3"` | Far East |
 
 ### Operations
 
