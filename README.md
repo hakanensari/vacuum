@@ -20,6 +20,8 @@ client = Vacuum.new(
 
 The client handles authentication automatically and caches access tokens for one hour.
 
+To check your credentials outside of your code, you can run a test request in [AMZ Scratchpad](https://amzscratchpad.com/), a free browser tool for the Creators API.
+
 You can now access the API using the available operations.
 
 ```ruby
